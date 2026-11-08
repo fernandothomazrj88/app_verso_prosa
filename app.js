@@ -1,75 +1,43 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-
   const login = document.getElementById('login');
   const app = document.getElementById('app');
   const loginForm = document.getElementById('loginForm');
+  const forgotPassword = document.getElementById('forgotPassword');
 
-  // LOGIN DEMONSTRATIVO
-  // A autenticação real será conectada ao backend posteriormente.
+  // Acesso demonstrativo. Ainda não autentica nem protege dados.
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
     login.classList.add('hidden');
     app.classList.remove('hidden');
-
     abrirPagina('inicio');
   });
 
-  // NAVEGAÇÃO ENTRE TELAS
   function abrirPagina(id) {
-    document.querySelectorAll('.page').forEach(pagina => {
-      pagina.classList.remove('active');
+    document.querySelectorAll('.page').forEach((pagina) => {
+      pagina.classList.toggle('active', pagina.id === id);
     });
-
-    const paginaSelecionada = document.getElementById(id);
-
-    if (paginaSelecionada) {
-      paginaSelecionada.classList.add('active');
-    }
-
-    document.querySelectorAll('.nav-item').forEach(botao => {
-      botao.classList.remove('active');
+    document.querySelectorAll('.nav-item[data-page]').forEach((botao) => {
+      botao.classList.toggle('active', botao.dataset.page === id);
     });
-
-    const botaoAtivo = document.querySelector(
-      `.nav-item[data-page="${id}"]`
-    );
-
-    if (botaoAtivo) {
-      botaoAtivo.classList.add('active');
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // BOTÕES DOS ATALHOS E MENU INFERIOR
   document.addEventListener('click', (event) => {
     const botao = event.target.closest('[data-page]');
-
-    if (!botao) return;
-
-    const destino = botao.dataset.page;
-
-    if (destino) {
-      abrirPagina(destino);
-    }
+    if (botao) abrirPagina(botao.dataset.page);
   });
-
-  // RECUPERAÇÃO DE SENHA
-  const forgotPassword = document.getElementById('forgotPassword');
 
   if (forgotPassword) {
     forgotPassword.addEventListener('click', (event) => {
       event.preventDefault();
-
-      alert(
-        'A recuperação de senha será disponibilizada quando conectarmos a autenticação.'
-      );
+      window.alert('A recuperação de senha será disponibilizada quando conectarmos a autenticação.');
     });
   }
 
+  document.querySelectorAll('.filter-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach((item) => item.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
 });
