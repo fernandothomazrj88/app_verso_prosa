@@ -11,131 +11,109 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
-<meta name="description" content="Verso & Prosa — Livros que leio. Pensamentos que ficam.">
+<meta name="description" content="Verso & Prosa — uma biblioteca para duas jornadas de leitura.">
 <title>Verso &amp; Prosa</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<section id="login" class="login">
-  <div class="login-content">
-    <div class="logo-icon" aria-hidden="true">♧</div>
+<section id="login" class="login-screen">
+  <div class="login-panel">
+    <img class="brand-mark" src="./assets/logo-livro-pena.png" alt="Livro aberto com pena, símbolo Verso & Prosa">
     <h1>Verso <span>&amp;</span> Prosa</h1>
-    <p>Sua jornada literária em um só lugar.</p>
-    <form id="loginForm" autocomplete="off">
-      <input class="field" type="email" name="email" placeholder="E-mail" autocomplete="off" autocapitalize="none" spellcheck="false" required>
-      <input class="field" type="password" name="senha" placeholder="Senha" autocomplete="new-password" required>
+    <p class="tagline">Uma biblioteca para duas jornadas.</p>
+    <form id="loginForm">
+      <label class="sr-only" for="email">E-mail</label>
+      <input class="field" id="email" type="email" placeholder="E-mail" autocomplete="username" required>
+      <label class="sr-only" for="senha">Senha</label>
+      <input class="field" id="senha" type="password" placeholder="Senha" autocomplete="current-password" required>
       <button class="primary" type="submit">Entrar</button>
     </form>
-    <a href="#" id="forgotPassword">Esqueceu sua senha?</a>
-    <p class="login-note">Acesso pessoal • Sua biblioteca literária</p>
+    <button class="text-button" id="forgotPassword" type="button">Esqueceu sua senha?</button>
+    <p class="login-foot">Acesso pessoal · Sua biblioteca literária</p>
   </div>
 </section>
 
-<section id="app" class="hidden">
+<section id="app" class="app-shell hidden">
   <header class="topbar">
-    <div class="small-brand">Verso <span>&amp;</span> Prosa</div>
-    <button class="icon-button" type="button" aria-label="Notificações">♧</button>
+    <div class="brand-small"><img src="./assets/logo-livro-pena.png" alt=""><span>Verso <b>&amp;</b> Prosa</span></div>
+    <div class="top-actions"><span id="profileLabel">Fernando</span><button class="round-btn" id="profileSwitch" aria-label="Trocar perfil">F</button></div>
   </header>
   <main>
     <section id="inicio" class="page active">
-      <h2>Olá, Letícia! 👋</h2>
-      <p class="muted">Pronta para mais uma boa leitura?</p>
-      <h3>Seu espaço literário</h3>
-      <div class="grid">
-        <button class="tile" type="button" data-page="estante"><span>▤</span>Minha Estante</button>
-        <button class="tile" type="button" data-page="adicionar"><span>＋</span>Adicionar Livro</button>
-        <button class="tile" type="button" data-page="anotacoes"><span>✎</span>Anotações e Resenhas</button>
-        <button class="tile" type="button" data-page="calendario"><span>▦</span>Planejamento de Leituras</button>
+      <div class="welcome-row"><div><p class="eyebrow">SEU CANTINHO LITERÁRIO</p><h2>Olá, <span id="welcomeName">Fernando</span> <span class="wave">✦</span></h2><p class="muted">Que história vamos viver hoje?</p></div><button class="bell" aria-label="Notificações">♧</button></div>
+      <div class="hero-card"><div><p class="eyebrow">CONTINUE DE ONDE PAROU</p><h3>Uma página de cada vez.</h3><p>Seu próximo capítulo começa aqui.</p><button class="outline-button" data-page="estante">Abrir minha estante <span>→</span></button></div><div class="hero-symbol">✧</div></div>
+      <div class="section-heading"><h3>Seu espaço</h3><span>Explore</span></div>
+      <div class="home-grid">
+        <button class="feature-tile" data-page="estante"><i>▤</i><b>Minha estante</b><small>Seus livros</small></button>
+        <button class="feature-tile" data-page="adicionar"><i>＋</i><b>Adicionar livro</b><small>Nova leitura</small></button>
+        <button class="feature-tile" data-page="anotacoes"><i>✎</i><b>Anotações</b><small>Ideias e trechos</small></button>
+        <button class="feature-tile" data-page="estudio"><i>✧</i><b>Estúdio literário</b><small>Crie e compartilhe</small></button>
       </div>
-      <h3>Leitura atual</h3>
-      <div class="reading-card">
-        <div class="book-placeholder" aria-hidden="true">📖</div>
-        <div class="reading-info">
-          <strong>Exemplo de livro</strong>
-          <p class="muted">Autor será exibido aqui</p>
-          <strong class="purple">Exemplo de progresso</strong>
-          <div class="progress"><div></div></div>
-        </div>
-      </div>
-      <p class="muted helper-note">Este cartão é demonstrativo. Os livros reais serão carregados do banco de dados após a integração.</p>
+      <div class="section-heading"><h3>Minha leitura atual</h3><button class="link-button" data-page="estante">Ver estante</button></div>
+      <div class="reading-empty"><div class="mini-book">V<span>&amp;</span>P</div><div><b>Sua próxima leitura começa aqui</b><p>Adicione um livro e acompanhe seu progresso.</p><button class="link-button" data-page="adicionar">Adicionar primeiro livro →</button></div></div>
+      <div class="section-heading"><h3>Atalhos da jornada</h3></div>
+      <div class="quick-row"><button data-page="descobrir"><i>⌕</i>Descobrir livros</button><button data-page="calendario"><i>▦</i>Planejar leituras</button></div>
     </section>
 
     <section id="estante" class="page">
-      <h2>Minha Estante</h2>
-      <p class="muted">Todos os livros da sua jornada literária.</p>
-      <input class="field search-field" type="search" id="buscarLivro" placeholder="Buscar por título ou autor..." aria-label="Buscar livros">
-      <div class="filter-row" aria-label="Filtros de leitura">
-        <button class="filter-chip active" type="button" data-filter="todos">Todos</button>
-        <button class="filter-chip" type="button" data-filter="quero-ler">Quero ler</button>
-        <button class="filter-chip" type="button" data-filter="lendo">Lendo</button>
-        <button class="filter-chip" type="button" data-filter="lidos">Lidos</button>
-      </div>
-      <div id="listaLivros">
-        <div class="empty-state">
-          <span>▤</span><strong>Sua estante começa aqui</strong>
-          <p>Quando conectarmos o banco de dados, seus livros aparecerão nesta tela.</p>
-          <button class="secondary-button" type="button" data-page="adicionar">Adicionar primeiro livro</button>
-        </div>
-      </div>
+      <div class="page-heading"><p class="eyebrow">SEU ACERVO PESSOAL</p><h2>Minha Estante</h2><p class="muted">Cada livro guarda uma parte da sua história.</p></div>
+      <input class="field search" id="buscarLivro" type="search" placeholder="⌕  Buscar título ou autor...">
+      <div class="filter-row"><button class="filter-chip active" data-filter="todos">Todos</button><button class="filter-chip" data-filter="lendo">Lendo</button><button class="filter-chip" data-filter="lidos">Lidos</button><button class="filter-chip" data-filter="quero-ler">Quero ler</button></div>
+      <div class="book-grid" id="listaLivros"><div class="empty-state"><span>▤</span><b>Sua estante está esperando</b><p>Cadastre seus livros para montar sua biblioteca pessoal.</p><button class="primary compact" data-page="adicionar">Adicionar livro</button></div></div>
     </section>
 
     <section id="adicionar" class="page">
-      <h2>Adicionar Livro</h2><p class="muted">Um novo livro, uma nova jornada.</p>
-      <div class="simple-card feature-card">
-        <span class="feature-icon">＋</span><h3>Novo livro</h3>
-        <p class="muted">Aqui teremos pesquisa automática, cadastro manual, capa, autor, editora e informações da leitura.</p>
-        <p class="helper-note">O formulário será conectado ao Google Sheets na próxima etapa.</p>
-      </div>
+      <div class="page-heading"><p class="eyebrow">NOVO CAPÍTULO</p><h2>Adicionar Livro</h2><p class="muted">Registre os detalhes da sua próxima leitura.</p></div>
+      <form id="bookForm" class="form-card">
+        <label>Título do livro<input class="field" name="titulo" placeholder="Ex.: Os Irmãos Karamázov" required></label>
+        <label>Autor<input class="field" name="autor" placeholder="Nome do autor"></label>
+        <div class="form-two"><label>Editora<input class="field" name="editora" placeholder="Editora"></label><label>Gênero<input class="field" name="genero" placeholder="Romance, fantasia..."></label></div>
+        <div class="form-two"><label>Páginas<input class="field" name="paginas" type="number" min="1" placeholder="Nº"></label><label>ISBN<input class="field" name="isbn" placeholder="ISBN"></label></div>
+        <label>Link da capa (opcional)<input class="field" name="capa" type="url" placeholder="https://..."></label>
+        <label>Status da leitura<select class="field" name="status"><option value="Quero ler">Quero ler</option><option value="Lendo">Lendo</option><option value="Lido">Lido</option></select></label>
+        <button class="primary" type="submit">Salvar na minha estante</button>
+        <p class="helper">Nesta etapa, o cadastro fica salvo neste navegador. A integração com Google Sheets será feita depois.</p>
+      </form>
     </section>
 
     <section id="anotacoes" class="page">
-      <h2>Anotações e Resenhas</h2><p class="muted">Pensamentos que merecem permanecer.</p>
-      <div class="simple-card"><span class="feature-icon">✎</span><h3>Minhas anotações</h3><p class="muted">Registre pensamentos, trechos importantes, reflexões e observações durante suas leituras.</p></div>
-      <div class="simple-card"><span class="feature-icon">✧</span><h3>Minhas resenhas</h3><p class="muted">Escreva suas análises completas e organize seus documentos no Google Docs.</p></div>
+      <div class="page-heading"><p class="eyebrow">IDEIAS QUE FICAM</p><h2>Anotações &amp; Resenhas</h2><p class="muted">Guarde pensamentos, passagens e impressões de leitura.</p></div>
+      <div class="form-card"><label>Livro relacionado<input class="field" id="noteBook" placeholder="Título do livro"></label><label>Sua anotação<textarea class="field" id="noteText" rows="5" placeholder="O que essa leitura despertou em você?"></textarea></label><button class="primary" id="saveNote">Guardar anotação</button></div>
+      <div class="section-heading"><h3>Minhas anotações</h3></div><div id="notesList" class="notes-list"><p class="muted">Suas anotações aparecerão aqui.</p></div>
     </section>
 
     <section id="descobrir" class="page">
-      <h2>Descobrir</h2><p class="muted">Novas histórias estão esperando por você.</p>
-      <div class="simple-card"><h3>Recomendações literárias</h3><p class="muted">Descubra novos livros de acordo com seus interesses e leituras anteriores.</p></div>
-      <div class="simple-card"><h3>Autores</h3><p class="muted">Explore autores clássicos e contemporâneos.</p></div>
-      <div class="simple-card"><h3>Gêneros literários</h3><p class="muted">Romance, filosofia, literatura russa, fantasia e muito mais.</p></div>
+      <div class="page-heading"><p class="eyebrow">NOVAS DESCOBERTAS</p><h2>Descobrir</h2><p class="muted">Encontre sua próxima grande leitura.</p></div>
+      <div class="discover-card"><span>✦</span><div><b>Clássicos que atravessam gerações</b><p>Explore histórias, ideias e autores que continuam inspirando leitores.</p></div></div>
+      <div class="section-heading"><h3>Explore por caminhos</h3></div>
+      <div class="topic-list"><button>Literatura russa <span>→</span></button><button>Romance clássico <span>→</span></button><button>Filosofia e pensamento <span>→</span></button><button>Fantasia e mundos épicos <span>→</span></button></div>
+      <p class="helper">As recomendações personalizadas serão ativadas quando conectarmos o catálogo literário.</p>
     </section>
 
-    <section id="mais" class="page">
-      <h2>Mais</h2><p class="muted">Seu universo literário.</p>
-      <button class="menu-card" type="button">Meu Perfil <span>›</span></button>
-      <button class="menu-card" type="button">Estatísticas de Leitura <span>›</span></button>
-      <button class="menu-card" type="button">Metas e Desafios <span>›</span></button>
-      <button class="menu-card" type="button" data-page="calendario">Calendário Literário <span>›</span></button>
-      <button class="menu-card" type="button">Estúdio Literário <span>›</span></button>
-      <button class="menu-card" type="button">Configurações <span>›</span></button>
+    <section id="estudio" class="page">
+      <div class="page-heading"><p class="eyebrow">SUA VOZ SOBRE AS LEITURAS</p><h2>Estúdio Literário</h2><p class="muted">Transforme suas leituras em conteúdo para compartilhar.</p></div>
+      <div class="studio-list"><button><i>◎</i><span><b>Post para Instagram</b><small>Arte e legenda para sua resenha</small></span><strong>→</strong></button><button><i>▤</i><span><b>Carrossel literário</b><small>Ideias organizadas em páginas</small></span><strong>→</strong></button><button><i>▷</i><span><b>Roteiro para vídeo</b><small>Resenha para Reels ou YouTube</small></span><strong>→</strong></button><button><i>♫</i><span><b>Comentário em áudio</b><small>Registre sua impressão falada</small></span><strong>→</strong></button></div>
     </section>
 
     <section id="calendario" class="page">
-      <h2>Planejamento de Leituras</h2><p class="muted">Organize seu tempo e suas próximas leituras.</p>
-      <div class="simple-card"><h3>Meu calendário</h3><p class="muted">Aqui teremos metas, datas de leitura, compromissos literários e acompanhamento de progresso.</p></div>
+      <div class="page-heading"><p class="eyebrow">RITMO DE LEITURA</p><h2>Planejamento</h2><p class="muted">Pequenos momentos constroem grandes jornadas.</p></div>
+      <div class="form-card"><label>Meta de leitura<input class="field" id="readingGoal" type="number" min="1" placeholder="Ex.: 20 páginas por dia"></label><label>Livro da vez<input class="field" id="goalBook" placeholder="Qual livro você quer priorizar?"></label><button class="primary" id="saveGoal">Salvar planejamento</button><p class="helper" id="goalSaved"></p></div>
+      <div class="simple-panel"><span>✧</span><b>Leia no seu próprio ritmo.</b><p>O importante é manter viva a curiosidade, uma página de cada vez.</p></div>
+    </section>
+
+    <section id="mais" class="page">
+      <div class="page-heading"><p class="eyebrow">SEU PERFIL</p><h2>Mais</h2><p class="muted">Personalize sua experiência literária.</p></div>
+      <div class="profile-card"><div class="avatar" id="profileAvatar">F</div><div><b id="profileName">Fernando</b><p class="muted">Leitor do Verso &amp; Prosa</p></div><button class="link-button" id="changeProfile">Trocar</button></div>
+      <div class="topic-list"><button>Meu perfil <span>→</span></button><button>Estatísticas de leitura <span>→</span></button><button>Metas e desafios <span>→</span></button><button data-page="calendario">Calendário literário <span>→</span></button><button data-page="estudio">Estúdio literário <span>→</span></button><button>Configurações <span>→</span></button></div>
+      <button class="text-button logout" id="logout">Sair do aplicativo</button>
     </section>
   </main>
-
   <nav class="bottom-nav" aria-label="Menu principal">
-    <button class="nav-item active" type="button" data-page="inicio"><span>⌂</span>Início</button>
-    <button class="nav-item" type="button" data-page="estante"><span>▤</span>Estante</button>
-    <button class="nav-item nav-add" type="button" data-page="adicionar" aria-label="Adicionar livro"><span>＋</span><small>Adicionar</small></button>
-    <button class="nav-item" type="button" data-page="descobrir"><span>⌕</span>Descobrir</button>
-    <button class="nav-item" type="button" data-page="mais"><span>☰</span>Mais</button>
+    <button class="nav-item active" data-page="inicio"><span>⌂</span>Início</button><button class="nav-item" data-page="estante"><span>▤</span>Estante</button><button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><span>＋</span></button><button class="nav-item" data-page="descobrir"><span>⌕</span>Descobrir</button><button class="nav-item" data-page="mais"><span>☰</span>Mais</button>
   </nav>
 </section>
-<script src="app.js"></script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch((error) => {
-        console.error('Falha ao registrar o service worker:', error);
-      });
-    });
-  }
-</script>
-
+<div id="toast" class="toast" role="status"></div>
+<script src="./app.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>
