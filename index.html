@@ -36,7 +36,7 @@
 <section id="app" class="app-shell hidden">
   <header class="topbar">
     <div class="brand-small"><img src="./assets/logo-livro-pena.png" alt=""><span>Verso <b>&amp;</b> Prosa</span></div>
-    <div class="top-actions"><span id="profileLabel">Fernando</span><button class="round-btn" id="profileSwitch" aria-label="Trocar perfil">F</button></div>
+    <div class="top-actions"><span id="profileLabel">Fernando</span><button class="round-btn" id="profileSwitch" aria-label="Sair e trocar de conta">↪</button></div>
   </header>
   <main>
     <section id="inicio" class="page active">
@@ -72,7 +72,7 @@
         <label>Link da capa (opcional)<input class="field" name="capa" type="url" placeholder="https://..."></label>
         <label>Status da leitura<select class="field" name="status"><option value="Quero ler">Quero ler</option><option value="Lendo">Lendo</option><option value="Lido">Lido</option></select></label>
         <button class="primary" type="submit">Salvar na minha estante</button>
-        <p class="helper">Nesta etapa, o cadastro fica salvo neste navegador. A integração com Google Sheets será feita depois.</p>
+        <p class="helper">Seus livros serão sincronizados com sua conta e ficarão separados do outro perfil.</p>
       </form>
     </section>
 
@@ -103,7 +103,7 @@
 
     <section id="mais" class="page">
       <div class="page-heading"><p class="eyebrow">SEU PERFIL</p><h2>Mais</h2><p class="muted">Personalize sua experiência literária.</p></div>
-      <div class="profile-card"><div class="avatar" id="profileAvatar">F</div><div><b id="profileName">Fernando</b><p class="muted">Leitor do Verso &amp; Prosa</p></div><button class="link-button" id="changeProfile">Trocar</button></div>
+      <div class="profile-card"><div class="avatar" id="profileAvatar">F</div><div><b id="profileName">Fernando</b><p class="muted">Leitor do Verso &amp; Prosa</p></div><button class="link-button" id="changeProfile">Trocar conta</button></div>
       <div class="topic-list"><button>Meu perfil <span>→</span></button><button>Estatísticas de leitura <span>→</span></button><button>Metas e desafios <span>→</span></button><button data-page="calendario">Calendário literário <span>→</span></button><button data-page="estudio">Estúdio literário <span>→</span></button><button>Configurações <span>→</span></button></div>
       <button class="text-button logout" id="logout">Sair do aplicativo</button>
     </section>
