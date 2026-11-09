@@ -1,11 +1,5 @@
-# Verso & Prosa — Interface v3
+# Verso & Prosa — Interface responsiva
 
-Frontend PWA do Verso & Prosa. Publicação prevista no GitHub Pages (raiz do repositório).
+Atualização de responsividade para desktop, tablet e celular. Login centralizado, grades fluidas, conteúdo adaptável e navegação inferior com largura ajustada para telas maiores. PWA preservado com manifest.json e sw.js.
 
-- `index.html`, `style.css`, `app.js`: interface.
-- `manifest.json`: instalação PWA.
-- `sw.js`: cache do aplicativo.
-- `assets/`: logo e ícones.
-- `Code.gs`: backend Apps Script existente, preservado sem alterações.
-
-**Importante:** login é demonstrativo. Cadastros, anotações e planejamento desta versão ficam apenas no armazenamento local do navegador e são separados por perfil. Não há ainda autenticação real nem sincronização com Google Sheets/Docs/Drive.
+A autenticação ainda é demonstrativa. Os dados ficam neste navegador e separados por perfil.
