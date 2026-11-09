@@ -1,15 +1,15 @@
 {
   "id": "./",
-  "name": "Verso & Prosa",
+  "name": "Verso & Prosa — Biblioteca Literária",
   "short_name": "Verso & Prosa",
-  "description": "Uma biblioteca particular para duas jornadas de leitura, com estantes, cadernos e descobertas.",
+  "description": "Uma biblioteca particular para duas jornadas de leitura.",
   "lang": "pt-BR",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#21170f",
-  "theme_color": "#21170f",
+  "background_color": "#120f0b",
+  "theme_color": "#120f0b",
   "icons": [
     {
       "src": "assets/icons/icon-192.png",

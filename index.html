@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#21170f">
+<meta name="theme-color" content="#120f0b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,14 +12,42 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
 <meta name="description" content="Verso & Prosa — uma biblioteca particular para duas jornadas de leitura.">
-<title>Verso &amp; Prosa — Biblioteca particular</title>
-<link rel="stylesheet" href="./style.css">
+<title>Verso &amp; Prosa — Biblioteca Literária</title>
+<link rel="stylesheet" href="./style.css?v=2.0.0">
 </head>
 <body>
-<section id="login" class="login-screen">
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="vp-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/><path d="M9 21v-7h6v7"/></symbol>
+  <symbol id="vp-shelf" viewBox="0 0 24 24"><path d="M3 4h18v16H3zM8 4v16m8-16v16M5 8h1m9 4h1"/><path d="M5 4v16m14-16v16"/></symbol>
+  <symbol id="vp-book" viewBox="0 0 24 24"><path d="M12 7v14M12 7C9 4 5 4 2 5v14c4-1 7-1 10 2m0-14c3-3 7-3 10-2v14c-4-1-7-1-10 2"/><path d="M5 9c2-.5 4 0 5 1m9-1c-2-.5-4 0-5 1"/></symbol>
+  <symbol id="vp-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="vp-pen" viewBox="0 0 24 24"><path d="m4 20 4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11Z"/><path d="m14.5 6.5 3 3M4 20l1-4"/></symbol>
+  <symbol id="vp-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+  <symbol id="vp-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 3v4m10-4v4M3 10h18M8 14h2m4 0h2m-8 3h2"/></symbol>
+  <symbol id="vp-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></symbol>
+  <symbol id="vp-feather" viewBox="0 0 24 24"><path d="M20.5 3.5C13 2 6 8 6 15l-3 6 6-3c7 0 13-7 11.5-14.5Z"/><path d="m4 20 11-11m-5 5-1-4m5 0-1-3"/></symbol>
+  <symbol id="vp-chart" viewBox="0 0 24 24"><path d="M4 20V12h4v8m4 0V5h4v15m4 0V9h4v11"/><path d="M2 21h21"/></symbol>
+  <symbol id="vp-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1 1.9-2 2-1.9-1.1-.2.1a7.6 7.6 0 0 1-1.7.7l-.5 2.2h-2.8l-.5-2.2a7.6 7.6 0 0 1-1.7-.7l-.2-.1-1.9 1.1-2-2 1.1-1.9-.1-.2a7.6 7.6 0 0 1-.7-1.7L3 12.7V9.9l2.2-.5a7.6 7.6 0 0 1 .7-1.7l.1-.2L4.9 5.6l2-2 1.9 1.1.2-.1a7.6 7.6 0 0 1 1.7-.7L11.2 1h2.8l.5 2.2a7.6 7.6 0 0 1 1.7.7l.2.1 1.9-1.1 2 2-1.1 1.9.1.2a7.6 7.6 0 0 1 .7 1.7l2.2.5v2.8l-2.2.5a7.6 7.6 0 0 1-.7 1.7Z"/></symbol>
+  <symbol id="vp-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z"/></symbol>
+  <symbol id="vp-quote" viewBox="0 0 24 24"><path d="M9 11H4a5 5 0 0 1 5-5v5Zm11 0h-5a5 5 0 0 1 5-5v5ZM4 11v7h5v-7m6 0v7h5v-7"/></symbol>
+  <symbol id="vp-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+</svg>
+<section id="welcome" class="welcome-screen">
+  <div class="welcome-arch" aria-hidden="true"><div class="welcome-shelves left"></div><div class="welcome-shelves right"></div><div class="welcome-glow"></div><div class="welcome-carpet"></div></div>
+  <div class="welcome-content">
+    <div class="welcome-logo-seal"><img src="./assets/brand/verso-emblema.svg" alt="Livro aberto e pena em dourado"></div>
+    <h1>Verso <span>&amp;</span> Prosa</h1>
+    <p class="welcome-subtitle">Biblioteca Literária</p>
+    <div class="welcome-divider"><span>❧</span></div>
+    <p class="welcome-motto">Uma biblioteca para<br>duas jornadas.</p>
+    <button class="primary welcome-enter" id="enterLibrary" type="button">Entrar na biblioteca <span>→</span></button>
+  </div>
+  <div class="welcome-foot">UM LUGAR PARA HISTÓRIAS, IDEIAS E DESCOBERTAS</div>
+</section>
+<section id="login" class="login-screen hidden">
   <div class="login-backdrop" aria-hidden="true"></div>
   <div class="login-panel">
-    <div class="login-emblem"><img class="brand-mark" src="./assets/logo-livro-pena.png" alt="Livro aberto com pena"></div>
+    <div class="login-emblem"><img class="brand-mark" src="./assets/brand/verso-emblema.svg" alt="Livro aberto com pena"></div>
     <p class="login-kicker">UMA BIBLIOTECA PARTICULAR</p>
     <h1>Verso <span>&amp;</span> Prosa</h1>
     <p class="tagline">Entre. Escolha um livro. Fique o quanto quiser.</p>
@@ -40,7 +68,7 @@
 <section id="app" class="app-shell hidden">
   <header class="topbar">
     <div class="brand-small">
-      <span class="brand-seal"><img src="./assets/logo-livro-pena.png" alt=""></span>
+      <span class="brand-seal"><img src="./assets/brand/verso-emblema.svg" alt=""></span>
       <span class="brand-name">Verso <b>&amp;</b> Prosa <small>Biblioteca particular</small></span>
     </div>
     <div class="top-actions"><span class="online-mark" aria-hidden="true"></span><span id="profileLabel">Leitor</span><button class="round-btn" id="profileSwitch" aria-label="Sair e trocar de conta">↪</button></div>
@@ -50,13 +78,13 @@
     <aside class="library-sidebar" aria-label="Navegação da biblioteca">
       <div class="sidebar-caption">SUA BIBLIOTECA</div>
       <nav class="sidebar-nav">
-        <button class="nav-item active" data-page="inicio"><span>⌂</span>Salão principal</button>
-        <button class="nav-item" data-page="estante"><span>▤</span>Minhas estantes</button>
-        <button class="nav-item" data-page="adicionar"><span>＋</span>Adicionar exemplar</button>
-        <button class="nav-item" data-page="anotacoes"><span>✎</span>Caderno de leitura</button>
-        <button class="nav-item" data-page="descobrir"><span>⌕</span>Novas descobertas</button>
-        <button class="nav-item" data-page="estudio"><span>✧</span>Ateliê literário</button>
-        <button class="nav-item" data-page="calendario"><span>▦</span>Agenda de leitura</button>
+        <button class="nav-item active" data-page="inicio"><span class="nav-glyph"><svg><use href="#vp-home"/></svg></span>Salão principal</button>
+        <button class="nav-item" data-page="estante"><span class="nav-glyph"><svg><use href="#vp-shelf"/></svg></span>Minhas estantes</button>
+        <button class="nav-item" data-page="adicionar"><span class="nav-glyph"><svg><use href="#vp-plus"/></svg></span>Adicionar exemplar</button>
+        <button class="nav-item" data-page="anotacoes"><span class="nav-glyph"><svg><use href="#vp-pen"/></svg></span>Caderno de leitura</button>
+        <button class="nav-item" data-page="descobrir"><span class="nav-glyph"><svg><use href="#vp-compass"/></svg></span>Novas descobertas</button>
+        <button class="nav-item" data-page="estudio"><span class="nav-glyph"><svg><use href="#vp-feather"/></svg></span>Ateliê literário</button>
+        <button class="nav-item" data-page="calendario"><span class="nav-glyph"><svg><use href="#vp-calendar"/></svg></span>Agenda de leitura</button>
       </nav>
       <div class="sidebar-quote"><span>“</span><p>Um livro é um sonho que seguramos nas mãos.</p><small>— Neil Gaiman</small></div>
       <div class="sidebar-profile"><div class="avatar" id="sidebarAvatar">L</div><div><b id="sidebarName">Leitor</b><small>Acervo pessoal</small></div></div>
@@ -84,10 +112,10 @@
         </div>
         <div class="section-heading"><div><p class="eyebrow">CAMINHOS DA CASA</p><h3>Explore a biblioteca</h3></div></div>
         <div class="home-grid">
-          <button class="feature-tile" data-page="estante"><span class="tile-icon">▤</span><b>Minhas estantes</b><small>Seu acervo organizado</small></button>
-          <button class="feature-tile" data-page="adicionar"><span class="tile-icon">＋</span><b>Adicionar exemplar</b><small>Um novo título na coleção</small></button>
-          <button class="feature-tile" data-page="anotacoes"><span class="tile-icon">✎</span><b>Caderno de leitura</b><small>Trechos e pensamentos</small></button>
-          <button class="feature-tile" data-page="descobrir"><span class="tile-icon">⌕</span><b>Novas descobertas</b><small>Autores e caminhos</small></button>
+          <button class="feature-tile" data-page="estante"><span class="tile-icon"><svg><use href="#vp-shelf"/></svg></span><b>Minhas estantes</b><small>Seu acervo organizado</small></button>
+          <button class="feature-tile" data-page="adicionar"><span class="tile-icon"><svg><use href="#vp-plus"/></svg></span><b>Adicionar exemplar</b><small>Um novo título na coleção</small></button>
+          <button class="feature-tile" data-page="anotacoes"><span class="tile-icon"><svg><use href="#vp-pen"/></svg></span><b>Caderno de leitura</b><small>Trechos e pensamentos</small></button>
+          <button class="feature-tile" data-page="descobrir"><span class="tile-icon"><svg><use href="#vp-search"/></svg></span><b>Novas descobertas</b><small>Autores e caminhos</small></button>
         </div>
         <div class="reading-motto"><span>✦</span> “Ler é viajar sem sair do lugar.” <span>✦</span></div>
       </section>
@@ -155,7 +183,7 @@
   </div>
 
   <nav class="bottom-nav" aria-label="Menu principal">
-    <button class="nav-item active" data-page="inicio"><span>⌂</span>Início</button><button class="nav-item" data-page="estante"><span>▤</span>Estante</button><button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><span>＋</span></button><button class="nav-item" data-page="descobrir"><span>⌕</span>Descobrir</button><button class="nav-item" data-page="mais"><span>☰</span>Mais</button>
+    <button class="nav-item active" data-page="inicio"><span class="nav-glyph"><svg><use href="#vp-home"/></svg></span>Início</button><button class="nav-item" data-page="estante"><span class="nav-glyph"><svg><use href="#vp-shelf"/></svg></span>Estante</button><button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><span class="nav-glyph nav-add-glyph"><svg><use href="#vp-plus"/></svg></span></button><button class="nav-item" data-page="descobrir"><span class="nav-glyph"><svg><use href="#vp-compass"/></svg></span>Descobrir</button><button class="nav-item" data-page="mais"><span class="nav-glyph"><svg><use href="#vp-settings"/></svg></span>Mais</button>
   </nav>
 </section>
 

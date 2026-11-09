@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const welcome = $('#welcome');
   const login = $('#login');
   const app = $('#app');
   const API_URL = 'https://script.google.com/macros/s/AKfycbzIEdph3F_aJ33J3Z7IgqhvfDcOP4tmMtKzw3ENT7aC5ptzfK1OcPdlYmlsbnPlkm3F/exec';
@@ -136,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function enterApp() {
+    welcome.classList.add('hidden');
     login.classList.add('hidden');
     app.classList.remove('hidden');
     renderProfile();
@@ -153,13 +155,111 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  function nomesLegadosDoPerfil(nome) {
+    const original = String(nome || '').trim().toLowerCase();
+    const nomes = [original];
+    if (original.includes('fern')) nomes.push('fernando');
+    if (original.includes('let')) nomes.push('letícia', 'leticia');
+    return [...new Set(nomes.filter(Boolean))];
+  }
+
+  function lerListaLegada(chave) {
+    try {
+      const valor = JSON.parse(localStorage.getItem(chave) || '[]');
+      return Array.isArray(valor) ? valor : [];
+    } catch (_) { return []; }
+  }
+
+  function salvarListaLegada(chave, lista) {
+    localStorage.setItem(chave, JSON.stringify(lista));
+  }
+
+  function novoIdLegado() {
+    return (window.crypto && crypto.randomUUID)
+      ? 'legado-' + crypto.randomUUID()
+      : 'legado-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+  }
+
+  async function migrarDadosLocais() {
+    // Mantém a cópia local intacta. Os IDs são gravados nela antes do envio,
+    // para que uma tentativa repetida atualize o mesmo registro sem duplicá-lo.
+    const marcador = 'vp_cloud_migrated_v2_' + String(session.email || '').toLowerCase();
+    if (localStorage.getItem(marcador) === '1') return { livros: 0, anotacoes: 0, pendencias: 0 };
+
+    let livrosMigrados = 0, anotacoesMigradas = 0, pendencias = 0;
+    const nomes = nomesLegadosDoPerfil(session.name);
+
+    for (const nome of nomes) {
+      const chaveLivros = 'vp_' + nome + '_books';
+      const livros = lerListaLegada(chaveLivros);
+      let livrosAlterados = false;
+      for (const livro of livros) {
+        if (!livro || !String(livro.titulo || '').trim()) continue;
+        if (!livro.id) { livro.id = novoIdLegado(); livrosAlterados = true; }
+        if (cloud.books.some(b => String(b.id) === String(livro.id))) continue;
+        try {
+          const result = await api('saveBook', { token: session.token, book: {
+            id: livro.id, titulo: livro.titulo, autor: livro.autor || '', editora: livro.editora || '',
+            genero: livro.genero || '', paginas: livro.paginas || '', isbn: livro.isbn || '',
+            capa: livro.capa || '', status: livro.status || 'Quero ler'
+          }});
+          cloud.books.unshift(result.book);
+          livrosMigrados++;
+        } catch (err) { pendencias++; }
+      }
+      if (livrosAlterados) salvarListaLegada(chaveLivros, livros);
+
+      const chaveNotas = 'vp_' + nome + '_notes';
+      const notas = lerListaLegada(chaveNotas);
+      let notasAlteradas = false;
+      for (const nota of notas) {
+        if (!nota || !String(nota.text || '').trim()) continue;
+        if (!nota.id) { nota.id = novoIdLegado(); notasAlteradas = true; }
+        if (cloud.notes.some(n => String(n.id) === String(nota.id))) continue;
+        try {
+          const result = await api('saveNote', { token: session.token, note: {
+            id: nota.id, book: nota.book || 'Anotação livre', text: nota.text
+          }});
+          cloud.notes.unshift(result.note);
+          anotacoesMigradas++;
+        } catch (err) { pendencias++; }
+      }
+      if (notasAlteradas) salvarListaLegada(chaveNotas, notas);
+
+      const chaveMeta = 'vp_' + nome + '_goal';
+      const meta = (() => { try { return JSON.parse(localStorage.getItem(chaveMeta) || 'null'); } catch (_) { return null; } })();
+      if (meta && (String(meta.goal || '').trim() || String(meta.book || '').trim())) {
+        try {
+          const result = await api('saveGoal', { token: session.token, goal: { goal: meta.goal || '', book: meta.book || '' } });
+          cloud.goal = result.goal;
+        } catch (err) { pendencias++; }
+      }
+    }
+
+    if (pendencias === 0) localStorage.setItem(marcador, '1');
+    return { livros: livrosMigrados, anotacoes: anotacoesMigradas, pendencias };
+  }
+
+  function mensagemAposMigracao(resultado) {
+    if (!resultado) return;
+    const total = resultado.livros + resultado.anotacoes;
+    if (total > 0) {
+      toast(resultado.pendencias
+        ? `Importados ${resultado.livros} livro(s) e ${resultado.anotacoes} anotação(ões). Algumas informações precisam ser reenviadas.`
+        : `Dados anteriores importados: ${resultado.livros} livro(s) e ${resultado.anotacoes} anotação(ões).`);
+    } else if (resultado.pendencias > 0) {
+      toast('A conta entrou, mas alguns dados locais ainda não foram sincronizados.');
+    }
+  }
   async function loginWith(email, senha) {
     const result = await api('login', { email, senha });
     if (!result.token || !result.user) throw new Error('O servidor não retornou uma sessão válida.');
     saveSession({ token: result.token, name: result.user.name, email: result.user.email });
     await loadCloudData();
+    const migracao = await migrarDadosLocais();
     enterApp();
-    toast('Bem-vindo(a), ' + session.name + '. Sua biblioteca está aberta.');
+    if (migracao.livros || migracao.anotacoes || migracao.pendencias) mensagemAposMigracao(migracao);
+    else toast('Bem-vindo(a), ' + session.name + '. Sua biblioteca está aberta.');
   }
 
   async function restoreSession() {
@@ -168,9 +268,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!saved?.token) return;
       session = saved;
       await loadCloudData();
+      const migracao = await migrarDadosLocais();
       enterApp();
+      mensagemAposMigracao(migracao);
     } catch (_) {
       saveSession(null);
+      welcome.classList.remove('hidden');
+      login.classList.add('hidden');
       showLoginError('Sua sessão expirou. Entre novamente com seu e-mail e senha.');
     }
   }
@@ -179,7 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
     saveSession(null);
     cloud = { books: [], notes: [], goal: null };
     app.classList.add('hidden');
-    login.classList.remove('hidden');
+    login.classList.add('hidden');
+    welcome.classList.remove('hidden');
     $('#loginForm').reset();
     showLoginError('');
     toast('Você saiu da sua biblioteca.');
@@ -215,6 +320,12 @@ document.addEventListener('DOMContentLoaded', () => {
       action.dataset.openCurrentBook = '';
     }
   }
+
+  $('#enterLibrary').addEventListener('click', () => {
+    welcome.classList.add('hidden');
+    login.classList.remove('hidden');
+    window.setTimeout(() => $('#email').focus(), 120);
+  });
 
   $('#loginForm').addEventListener('submit', async event => {
     event.preventDefault();
