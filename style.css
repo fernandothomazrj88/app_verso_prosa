@@ -356,3 +356,87 @@ main{max-width:1500px;padding:36px clamp(20px,3.8vw,56px) 64px;background:linear
 
 @media (prefers-reduced-motion:reduce){.page.active{animation:none}.shelf-book,.primary{transition:none}}
 .reading-progress-wrap[hidden]{display:none!important}
+
+
+/* V4 — aplicação fiel ao mockup aprovado pelo usuário */
+:root{
+ --vp-ink:#120b07;--vp-wood:#28140d;--vp-wine:#7a1730;--vp-gold:#d4a64f;--vp-cream:#f4e4c4;
+ --vp-scene-entry:url('./assets/scenes/entrance-room.webp');
+ --vp-scene-lamp:url('./assets/scenes/lamp-books.webp');
+ --vp-scene-shelf:url('./assets/scenes/shelf-wall.webp');
+ --vp-scene-type:url('./assets/scenes/typewriter-desk.webp');
+ --vp-scene-open:url('./assets/scenes/open-book.webp');
+ --vp-scene-discover:url('./assets/scenes/discover-authors.webp');
+ --vp-scene-stack:url('./assets/scenes/lamp-stack.webp');
+}
+body{background:#100904;color:var(--vp-cream)}
+/* Entrada: a fotografia da porta aberta ocupa a tela; o painel é uma placa de biblioteca */
+.welcome-screen{background-image:linear-gradient(180deg,rgba(12,6,3,.24),rgba(12,6,3,.55)),var(--vp-scene-entry);background-position:center 52%;background-size:cover;background-repeat:no-repeat}
+.welcome-screen:before{background:linear-gradient(90deg,rgba(10,5,3,.16),transparent 50%,rgba(10,5,3,.25)),linear-gradient(0deg,rgba(8,4,2,.66),transparent 45%)}
+.welcome-content{border:1px solid #d6a64f;background:linear-gradient(145deg,rgba(37,19,11,.92),rgba(17,9,5,.94));box-shadow:0 22px 60px #000c,inset 0 0 0 4px rgba(212,166,79,.08);backdrop-filter:blur(2px)}
+.welcome-logo-seal{background:radial-gradient(circle,#5c211c,#2a0e0b);border-color:#e3b85f}
+.welcome-content h1{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:-1.2px}
+.welcome-subtitle{font-family:'Lora',Georgia,serif;letter-spacing:2.2px}
+.welcome-divider{background:linear-gradient(90deg,transparent,#e4bd6e,transparent)}
+.welcome-enter,.primary{background:linear-gradient(180deg,#9a263e,#681327 75%,#4a101c);border:1px solid #e4b65b;color:#fff1d6;box-shadow:inset 0 1px rgba(255,255,255,.12),0 5px 16px #0008}
+/* Login: cenário de porta + mesa de livros e luminária do mockup */
+.login-screen{background-image:linear-gradient(180deg,rgba(10,5,3,.38),rgba(10,5,3,.66)),var(--vp-scene-entry);background-position:center;background-size:cover}
+.login-backdrop{background:linear-gradient(90deg,rgba(10,5,3,.32),rgba(10,5,3,.48))}
+.login-panel{position:relative;overflow:hidden;border:1px solid #d4a64f;background:linear-gradient(145deg,rgba(35,18,11,.95),rgba(15,8,5,.96));box-shadow:0 22px 65px #000c,inset 0 0 0 4px rgba(212,166,79,.06)}
+.login-panel:after{content:"";display:block;height:105px;margin:16px -28px -24px;background:linear-gradient(0deg,rgba(15,8,5,.08),rgba(15,8,5,.12)),var(--vp-scene-lamp) center 56%/cover no-repeat;opacity:.92;pointer-events:none}
+.login-emblem{background:radial-gradient(circle,#5a211a,#260e0a);border-color:#e1b65d}
+.login-panel h1,.page-heading h2,.home-welcome h2{font-family:'Cormorant Garamond',Georgia,serif}
+.login-panel .field{background:rgba(13,8,5,.88);border:1px solid rgba(212,166,79,.72);color:#fff1d6}
+/* Marca redonda conforme o selo bordô/dourado da prancha */
+.brand-seal,.welcome-logo-seal,.login-emblem{border-color:#d8aa59;background:radial-gradient(circle,#692b23,#2a100d);box-shadow:0 0 0 4px rgba(212,166,79,.10),0 8px 20px #0008}
+.brand-seal img{filter:none}
+/* Home: conteúdo sobre cenário de biblioteca, com a mesa/luminária na leitura atual */
+.app-shell{background:#130a06}
+.app-shell:before{background:linear-gradient(90deg,rgba(13,7,4,.86),rgba(18,9,5,.75) 50%,rgba(13,7,4,.86)),var(--vp-scene-shelf) center/cover fixed;opacity:.98}
+.topbar{background:linear-gradient(90deg,rgba(25,12,7,.97),rgba(49,23,13,.94),rgba(25,12,7,.97));border-bottom:1px solid rgba(215,170,89,.58)}
+.library-sidebar{background:linear-gradient(180deg,rgba(35,17,10,.95),rgba(18,9,5,.96)),var(--vp-scene-shelf) center/cover;border-right:1px solid rgba(212,166,79,.5)}
+main{background:linear-gradient(180deg,rgba(17,8,4,.16),rgba(13,6,3,.56))}
+.home-welcome{align-items:center}
+.quote-plaque{background:linear-gradient(135deg,#f2d18c,#c58b42 50%,#f0d49b);border:2px solid #e5bd70;color:#2b170c;box-shadow:0 8px 24px #0009,inset 0 0 0 4px rgba(78,42,17,.16)}
+.home-reading-card{background:linear-gradient(90deg,rgba(24,10,6,.95),rgba(24,10,6,.66)),var(--vp-scene-lamp) center 55%/cover;border:1px solid rgba(218,171,83,.8);box-shadow:0 14px 30px #0008}
+.home-reading-scene{display:none}
+.home-reading-content{position:relative;z-index:1}
+.home-stat-card,.home-panel,.notebook-card,.form-card,.profile-card,.discover-feature{background:linear-gradient(145deg,rgba(43,22,13,.92),rgba(18,9,5,.94));border:1px solid rgba(211,164,78,.55);box-shadow:0 8px 22px #0006,inset 0 1px rgba(255,255,255,.04)}
+.home-stat-card small,.eyebrow{color:#e3b866}
+/* Estante: a própria prateleira fotografada da referência recebe os livros reais cadastrados */
+#estante{position:relative}
+#estante:before{content:"";display:block;height:clamp(125px,22vw,220px);margin:-5px 0 20px;border:1px solid rgba(215,170,89,.65);border-radius:5px;background:linear-gradient(180deg,rgba(15,7,4,.06),rgba(15,7,4,.22)),var(--vp-scene-shelf) center 47%/cover no-repeat;box-shadow:0 12px 26px #0009}
+.shelf-toolbar{margin-top:12px}
+.bookcase-shelf{background:linear-gradient(180deg,rgba(35,16,9,.12),rgba(19,9,5,.22));border-radius:4px;padding-top:10px}
+.shelf-plank{height:13px;background:linear-gradient(180deg,#c38b4a,#74421f 45%,#3a1d10);border:1px solid #d4a64f;box-shadow:0 6px 12px #0009}
+.shelf-book{background:rgba(25,11,6,.72);border:1px solid rgba(212,166,79,.35);border-radius:4px;padding:6px}
+.book-jacket{border:1px solid #d4a64f;box-shadow:0 5px 12px #0009}
+/* Páginas secundárias com pequenos cenários fotográficos do mesmo mockup */
+#anotacoes:after,#estudio:after,#calendario:after,#mais:after{content:"";display:block;height:clamp(105px,18vw,170px);margin:24px 0 4px;border:1px solid rgba(212,166,79,.55);border-radius:5px;box-shadow:0 10px 24px #0008}
+#anotacoes:after{background:var(--vp-scene-type) center 48%/cover}
+#estudio:after{background:var(--vp-scene-lamp) center 55%/cover}
+#calendario:after{background:var(--vp-scene-open) center 55%/cover}
+#mais:after{background:var(--vp-scene-stack) center 55%/cover}
+#descobrir .discover-feature{background:linear-gradient(90deg,rgba(20,9,5,.94),rgba(20,9,5,.48)),var(--vp-scene-discover) center/cover}
+.collection-card,.studio-list button{background:linear-gradient(100deg,rgba(52,24,13,.94),rgba(24,10,6,.96));border:1px solid rgba(212,166,79,.58)}
+.bottom-nav{background:linear-gradient(180deg,rgba(24,11,7,.96),rgba(12,6,4,.99));border-top:1px solid rgba(212,166,79,.55)}
+.bottom-nav .nav-add .nav-add-glyph{background:linear-gradient(160deg,#9a263e,#551222);border-color:#e1b65d}
+/* Diálogo da ficha como um livro aberto sobre couro */
+.book-dialog{background:linear-gradient(145deg,#351b11,#150a06);border:1px solid #d4a64f;color:#f4e4c4;box-shadow:0 20px 70px #000d}
+.book-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(4px)}
+.detail-cover,.reading-cover{border:1px solid #d4a64f;box-shadow:0 8px 18px #0009}
+/* Mobile: preserva composição e torna os ambientes menos altos */
+@media(max-width:680px){
+ .welcome-screen{background-position:center center}
+ .welcome-content{width:min(92vw,430px);padding:27px 22px 25px}
+ .login-screen{padding:16px 12px}
+ .login-panel{width:min(100%,430px);padding:27px 22px 24px}
+ .login-panel:after{height:78px;margin:12px -22px -18px}
+ .home-welcome{display:block}
+ .quote-plaque{margin:16px 0 0;max-width:none;min-height:66px}
+ #estante:before{height:142px;margin-bottom:14px;background-position:center}
+ .home-reading-card{background-position:center}
+ #anotacoes:after,#estudio:after,#calendario:after,#mais:after{height:105px}
+ main{padding-top:20px}
+}
+@media(max-width:390px){.welcome-content h1{font-size:36px}.welcome-motto{font-size:19px}.login-panel h1{font-size:35px}}
