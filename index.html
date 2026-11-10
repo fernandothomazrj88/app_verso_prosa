@@ -13,7 +13,10 @@
 <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
 <meta name="description" content="Verso & Prosa — uma biblioteca particular para duas jornadas de leitura.">
 <title>Verso &amp; Prosa — Biblioteca Literária</title>
-<link rel="stylesheet" href="./style.css?v=2.0.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css?v=3.1.0">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -48,7 +51,7 @@
   <div class="login-backdrop" aria-hidden="true"></div>
   <div class="login-panel">
     <div class="login-emblem"><img class="brand-mark" src="./assets/brand/verso-emblema.svg" alt="Livro aberto com pena"></div>
-    <p class="login-kicker">UMA BIBLIOTECA PARTICULAR</p>
+    <p class="login-kicker">BIBLIOTECA LITERÁRIA</p>
     <h1>Verso <span>&amp;</span> Prosa</h1>
     <p class="tagline">Entre. Escolha um livro. Fique o quanto quiser.</p>
     <form id="loginForm">
@@ -69,7 +72,7 @@
   <header class="topbar">
     <div class="brand-small">
       <span class="brand-seal"><img src="./assets/brand/verso-emblema.svg" alt=""></span>
-      <span class="brand-name">Verso <b>&amp;</b> Prosa <small>Biblioteca particular</small></span>
+      <span class="brand-name">Verso <b>&amp;</b> Prosa <small>Biblioteca Literária</small></span>
     </div>
     <div class="top-actions"><span class="online-mark" aria-hidden="true"></span><span id="profileLabel">Leitor</span><button class="round-btn" id="profileSwitch" aria-label="Sair e trocar de conta">↪</button></div>
   </header>
@@ -91,33 +94,64 @@
     </aside>
 
     <main>
-      <section id="inicio" class="page active">
-        <div class="welcome-row">
-          <div><p class="eyebrow">PORTAS ABERTAS</p><h2>Bem-vindo de volta, <span id="welcomeName">Leitor</span>.</h2><p class="muted">Há sempre uma boa história esperando por você.</p></div>
-          <div class="welcome-stamp" aria-hidden="true"><span>V&amp;P</span><small>EST. 2026</small></div>
+      <section id="inicio" class="page active home-library">
+        <div class="home-welcome">
+          <div class="home-welcome-copy">
+            <p class="eyebrow">AS PORTAS ESTÃO ABERTAS</p>
+            <h2>Bem-vindo de volta, <span id="welcomeName">Leitor</span>.</h2>
+            <p class="muted">Há sempre uma boa história esperando por você.</p>
+          </div>
+          <div class="quote-plaque" aria-label="Uma frase para acompanhar a leitura">
+            <span class="quote-mark">“</span>
+            <p>Uma boa história sempre deixa uma porta aberta.</p>
+            <small>Verso &amp; Prosa</small>
+          </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-copy"><p class="eyebrow">A SALA DE LEITURA</p><h3>O silêncio, uma poltrona e um bom livro.</h3><p>Escolha por onde sua próxima jornada começa.</p><button class="outline-button" data-page="estante">Percorrer minhas estantes <span>→</span></button></div>
-          <div class="hero-library" aria-hidden="true"><div class="hero-books"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-shelf"></div><div class="hero-lamp">✦</div></div>
+
+        <section class="home-reading-card" id="homeReading" aria-label="Leitura atual">
+          <div class="home-reading-scene" aria-hidden="true"></div>
+          <div class="home-reading-content">
+            <div class="reading-cover home-reading-cover" id="homeReadingCover"><span>V&amp;P</span></div>
+            <div class="home-reading-info">
+              <p class="eyebrow"><span class="tiny-book">▤</span> SUA LEITURA ATUAL</p>
+              <h3 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h3>
+              <p id="homeReadingAuthor">Escolha um título na sua estante ou adicione um novo exemplar.</p>
+              <div class="home-reading-meta" id="homeReadingMeta"><span>Seu próximo capítulo começa aqui.</span></div>
+              <div class="reading-progress-wrap" id="homeProgressWrap" hidden>
+                <div class="reading-progress-track"><span id="homeProgressBar"></span></div>
+                <small id="homeProgressLabel">Progresso registrado</small>
+              </div>
+              <button class="primary home-reading-action" id="homeReadingAction" data-page="adicionar">Escolher um livro <span>→</span></button>
+            </div>
+          </div>
+        </section>
+
+        <div class="home-stat-grid" aria-label="Resumo do acervo">
+          <div class="home-stat-card"><span class="home-stat-icon">▥</span><div><small>VOLUMES NO ACERVO</small><b id="statBooks">0</b></div></div>
+          <div class="home-stat-card"><span class="home-stat-icon">▤</span><div><small>EM LEITURA</small><b id="statReading">0</b></div></div>
+          <div class="home-stat-card"><span class="home-stat-icon">✦</span><div><small>JÁ LIDOS</small><b id="statFinished">0</b></div></div>
+          <div class="home-stat-card"><span class="home-stat-icon">⚑</span><div><small>QUERO LER</small><b id="statWantRead">0</b></div></div>
         </div>
-        <div class="stat-row">
-          <div class="stat-card"><span>VOLUMES NO ACERVO</span><b id="statBooks">0</b></div>
-          <div class="stat-card"><span>EM LEITURA</span><b id="statReading">0</b></div>
-          <div class="stat-card"><span>JÁ LIDOS</span><b id="statFinished">0</b></div>
+
+        <div class="home-lower-grid">
+          <section class="home-panel acquisitions-panel">
+            <div class="home-panel-heading"><div><p class="eyebrow">RECÉM-CHEGADOS</p><h3>Novas aquisições</h3></div><button class="link-button" data-page="estante">Ver acervo →</button></div>
+            <div class="acquisition-grid" id="homeRecentBooks">
+              <div class="acquisition-empty"><span>✧</span><b>Sua próxima descoberta começa aqui.</b><button class="outline-button" data-page="adicionar">Adicionar primeiro livro →</button></div>
+            </div>
+          </section>
+
+          <section class="home-panel collections-panel">
+            <div class="home-panel-heading"><div><p class="eyebrow">CAMINHOS DE LEITURA</p><h3>Estantes em destaque</h3></div></div>
+            <div class="featured-shelves">
+              <button class="featured-shelf" data-collection="Literatura russa"><span class="featured-shelf-image russian"></span><span><b>Clássicos russos</b><small>Dostoiévski, Tolstói, Tchékhov…</small></span><strong>›</strong></button>
+              <button class="featured-shelf" data-collection="Romance clássico"><span class="featured-shelf-image romance"></span><span><b>Romances clássicos</b><small>Austen, Brontë, Dickens…</small></span><strong>›</strong></button>
+              <button class="featured-shelf" data-collection="Literatura e fé"><span class="featured-shelf-image faith"></span><span><b>Literatura e fé</b><small>Obras que dialogam com a vida espiritual.</small></span><strong>›</strong></button>
+            </div>
+          </section>
         </div>
-        <div class="section-heading"><div><p class="eyebrow">SUA LEITURA ATUAL</p><h3>Sobre a mesa</h3></div><button class="link-button" data-page="estante">Ver acervo →</button></div>
-        <div class="reading-feature" id="homeReading">
-          <div class="reading-cover" id="homeReadingCover"><span>V&amp;P</span></div>
-          <div class="reading-info"><span class="status-label" id="homeReadingStatus">PRÓXIMA LEITURA</span><h4 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h4><p id="homeReadingAuthor">Escolha um título na sua estante ou adicione um novo exemplar.</p><button class="small-action" id="homeReadingAction" data-page="adicionar">Escolher um livro <span>→</span></button></div>
-        </div>
-        <div class="section-heading"><div><p class="eyebrow">CAMINHOS DA CASA</p><h3>Explore a biblioteca</h3></div></div>
-        <div class="home-grid">
-          <button class="feature-tile" data-page="estante"><span class="tile-icon"><svg><use href="#vp-shelf"/></svg></span><b>Minhas estantes</b><small>Seu acervo organizado</small></button>
-          <button class="feature-tile" data-page="adicionar"><span class="tile-icon"><svg><use href="#vp-plus"/></svg></span><b>Adicionar exemplar</b><small>Um novo título na coleção</small></button>
-          <button class="feature-tile" data-page="anotacoes"><span class="tile-icon"><svg><use href="#vp-pen"/></svg></span><b>Caderno de leitura</b><small>Trechos e pensamentos</small></button>
-          <button class="feature-tile" data-page="descobrir"><span class="tile-icon"><svg><use href="#vp-search"/></svg></span><b>Novas descobertas</b><small>Autores e caminhos</small></button>
-        </div>
-        <div class="reading-motto"><span>✦</span> “Ler é viajar sem sair do lugar.” <span>✦</span></div>
+
+        <div class="daily-reading-quote"><span class="quote-feather">❧</span><div><small>UMA IDEIA PARA LEVAR CONSIGO</small><p>“A leitura é uma conversa silenciosa entre duas almas.”</p></div></div>
       </section>
 
       <section id="estante" class="page">

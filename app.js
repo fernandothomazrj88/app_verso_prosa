@@ -292,32 +292,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderHome() {
     const books = Array.isArray(cloud.books) ? cloud.books : [];
-    const reading = books.find(book => String(book.status || '').toLowerCase() === 'lendo');
-    const finished = books.filter(book => String(book.status || '').toLowerCase() === 'lido').length;
+    const normalizedStatus = book => String(book.status || '').trim().toLocaleLowerCase('pt-BR');
+    const readingBooks = books.filter(book => normalizedStatus(book) === 'lendo');
+    const reading = readingBooks[0] || null;
+    const finished = books.filter(book => normalizedStatus(book) === 'lido').length;
+    const wantRead = books.filter(book => normalizedStatus(book) === 'quero ler').length;
+
     $('#statBooks').textContent = String(books.length);
-    $('#statReading').textContent = String(books.filter(book => String(book.status || '').toLowerCase() === 'lendo').length);
+    $('#statReading').textContent = String(readingBooks.length);
     $('#statFinished').textContent = String(finished);
+    $('#statWantRead').textContent = String(wantRead);
 
     const cover = $('#homeReadingCover');
     const title = $('#homeReadingTitle');
     const author = $('#homeReadingAuthor');
-    const status = $('#homeReadingStatus');
+    const meta = $('#homeReadingMeta');
     const action = $('#homeReadingAction');
+    const progressWrap = $('#homeProgressWrap');
+    const progressBar = $('#homeProgressBar');
+    const progressLabel = $('#homeProgressLabel');
+
     if (reading) {
       const image = safeImageUrl(reading.capa);
-      cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(reading.titulo)}">` : '<span>V&amp;P</span>';
+      cover.innerHTML = image
+        ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(reading.titulo || 'livro')}">`
+        : `<span class="fallback-cover-title">${escapeHtml(reading.titulo || 'V&amp;P')}</span>`;
       title.textContent = reading.titulo || 'Livro em leitura';
       author.textContent = reading.autor || 'Autor não informado';
-      status.textContent = 'EM LEITURA';
+      const pages = Number(reading.paginas || 0);
+      meta.innerHTML = pages > 0
+        ? `<span>◫ ${pages.toLocaleString('pt-BR')} páginas</span><span>• Em leitura</span>`
+        : '<span>Um capítulo de cada vez.</span>';
+      const progress = Number(reading.progresso ?? reading.PROGRESSO ?? 0);
+      if (Number.isFinite(progress) && progress > 0) {
+        const percent = Math.max(0, Math.min(100, progress));
+        progressWrap.hidden = false;
+        progressBar.style.width = `${percent}%`;
+        progressLabel.textContent = `${Math.round(percent)}% concluído`;
+      } else {
+        progressWrap.hidden = true;
+        progressBar.style.width = '0%';
+      }
       action.textContent = 'Abrir ficha do livro →';
       action.dataset.openCurrentBook = 'true';
+      action.dataset.page = '';
     } else {
-      cover.innerHTML = '<span>V&amp;P</span>';
+      cover.innerHTML = '<span class="fallback-cover-title">V&amp;P</span>';
       title.textContent = books.length ? 'Escolha o próximo volume' : 'Ainda não há um livro sobre a mesa';
-      author.textContent = books.length ? 'Sua biblioteca está pronta para a próxima jornada.' : 'Escolha um título na sua estante ou adicione um novo exemplar.';
-      status.textContent = books.length ? 'PRÓXIMA LEITURA' : 'SUA BIBLIOTECA COMEÇA AQUI';
-      action.textContent = books.length ? 'Percorrer estante →' : 'Escolher um livro →';
+      author.textContent = books.length
+        ? 'Sua biblioteca está pronta para a próxima jornada.'
+        : 'Adicione um exemplar e prepare o lugar para sua próxima leitura.';
+      meta.innerHTML = books.length
+        ? `<span>${books.length} ${books.length === 1 ? 'volume' : 'volumes'} no acervo</span>`
+        : '<span>Sua próxima história começa aqui.</span>';
+      progressWrap.hidden = true;
+      progressBar.style.width = '0%';
+      action.textContent = books.length ? 'Percorrer minhas estantes →' : 'Adicionar primeiro exemplar →';
       action.dataset.openCurrentBook = '';
+      action.dataset.page = books.length ? 'estante' : 'adicionar';
+    }
+
+    const recentTarget = $('#homeRecentBooks');
+    if (recentTarget) {
+      const recent = books.slice(0, 3);
+      if (!recent.length) {
+        recentTarget.innerHTML = '<div class="acquisition-empty"><span>✧</span><b>Sua próxima descoberta começa aqui.</b><button class="outline-button" data-page="adicionar">Adicionar primeiro livro →</button></div>';
+      } else {
+        recentTarget.innerHTML = recent.map((book, index) => {
+          const originalIndex = books.indexOf(book);
+          const image = safeImageUrl(book.capa);
+          const coverHtml = image
+            ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}" loading="lazy">`
+            : `<span>${escapeHtml(book.titulo || 'V&amp;P')}</span>`;
+          return `<button type="button" class="acquisition-book" data-home-book-index="${originalIndex}" aria-label="Abrir ${escapeHtml(book.titulo || 'livro')}">
+            <span class="acquisition-cover">${coverHtml}</span>
+            <span class="acquisition-title">${escapeHtml(book.titulo || 'Sem título')}</span>
+            <span class="acquisition-author">${escapeHtml(book.autor || 'Autor não informado')}</span>
+          </button>`;
+        }).join('');
+      }
     }
   }
 
@@ -429,6 +482,13 @@ document.addEventListener('DOMContentLoaded', () => {
     else dialog.setAttribute('open', 'open');
   }
 
+  $('#homeRecentBooks').addEventListener('click', event => {
+    const button = event.target.closest('[data-home-book-index]');
+    if (!button) return;
+    const index = Number(button.dataset.homeBookIndex);
+    openBook(Number.isInteger(index) ? cloud.books[index] : null);
+  });
+
   $('#listaLivros').addEventListener('click', event => {
     const button = event.target.closest('[data-book-index]');
     if (!button) return;
@@ -537,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   $('#saveGoal').addEventListener('click', saveGoal);
 
-  $$('.collection-card[data-collection]').forEach(button => button.addEventListener('click', () => {
+  $$('[data-collection]').forEach(button => button.addEventListener('click', () => {
     $('#buscarLivro').value = '';
     filter = 'todos';
     $$('.filter-chip').forEach(chip => chip.classList.toggle('active', chip.dataset.filter === 'todos'));
