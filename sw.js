@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-abertura-v1';
+const CACHE_NAME = 'verso-prosa-abertura-v2';
 const APP_FILES = [
  './','./index.html','./style.css?v=4.0.0','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png',
