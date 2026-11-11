@@ -42,27 +42,21 @@
   <button class="welcome-enter-hitarea" id="enterLibrary" type="button"
     aria-label="Entrar na Biblioteca"></button>
 </section>
-<section id="login" class="login-screen hidden">
-  <div class="login-backdrop" aria-hidden="true"></div>
-  <div class="login-panel">
-    <div class="login-emblem"><img class="brand-mark" src="./assets/brand/verso-emblema.svg" alt="Livro aberto com pena"></div>
-    <p class="login-kicker">BIBLIOTECA LITERÁRIA</p>
-    <h1>Verso <span>&amp;</span> Prosa</h1>
-    <p class="tagline">Entre. Escolha um livro. Fique o quanto quiser.</p>
-    <form id="loginForm">
+<section id="login" class="login-screen hidden" aria-label="Entrar na biblioteca Verso & Prosa">
+  <div class="login-mockup" role="region" aria-label="Tela de login">
+    <img class="login-mockup-art" src="./assets/scenes/login-mockup-approved.webp" alt="Tela de entrada da biblioteca Verso & Prosa, com livros, luminária e identidade visual dourada">
+    <form id="loginForm" class="login-hotspots" autocomplete="on">
       <label class="sr-only" for="email">E-mail</label>
-      <input class="field" id="email" type="email" placeholder="Seu e-mail" autocomplete="username" required>
+      <input class="login-input login-email" id="email" name="email" type="email" autocomplete="username" aria-label="E-mail" required>
       <label class="sr-only" for="senha">Senha</label>
-      <input class="field" id="senha" type="password" placeholder="Sua senha" autocomplete="current-password" required>
-      <button class="primary" type="submit">Entrar na biblioteca</button>
+      <input class="login-input login-password" id="senha" name="password" type="password" autocomplete="current-password" aria-label="Senha" required>
+      <button class="login-eye" id="togglePassword" type="button" aria-label="Mostrar senha" title="Mostrar senha"></button>
+      <button class="login-submit" type="submit" aria-label="Entrar na biblioteca"></button>
     </form>
+    <button class="login-forgot" id="forgotPassword" type="button">Esqueceu sua senha?</button>
     <p id="loginError" class="login-error" role="alert" aria-live="polite"></p>
-    <button class="text-button" id="forgotPassword" type="button">Esqueceu sua senha?</button>
-    <div class="login-rule"><span>✦</span></div>
-    <p class="login-foot">Um lugar para guardar histórias, ideias e descobertas.</p>
   </div>
 </section>
-
 <section id="app" class="app-shell hidden">
   <header class="topbar">
     <div class="brand-small">

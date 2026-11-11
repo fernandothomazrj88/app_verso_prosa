@@ -380,6 +380,15 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => $('#email').focus(), 120);
   });
 
+  $('#togglePassword').addEventListener('click', () => {
+    const password = $('#senha');
+    const showing = password.type === 'text';
+    password.type = showing ? 'password' : 'text';
+    const label = showing ? 'Mostrar senha' : 'Ocultar senha';
+    $('#togglePassword').setAttribute('aria-label', label);
+    $('#togglePassword').setAttribute('title', label);
+  });
+
   $('#loginForm').addEventListener('submit', async event => {
     event.preventDefault();
     showLoginError('');
