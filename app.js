@@ -387,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const label = showing ? 'Mostrar senha' : 'Ocultar senha';
     $('#togglePassword').setAttribute('aria-label', label);
     $('#togglePassword').setAttribute('title', label);
+    $('#togglePassword').dataset.visible = String(!showing);
   });
 
   $('#loginForm').addEventListener('submit', async event => {

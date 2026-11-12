@@ -15,3 +15,7 @@ Pacote de frontend construído sobre o mockup enviado por Fernando. As imagens d
 
 ## Nota sobre a referência
 Os cenários são recortes de ambiente da imagem de referência do usuário, usados como fundos decorativos. Capas cadastradas e componentes interativos continuam sendo HTML real e clicável.
+
+
+## Login v3 (11/11/2026)
+A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo não é mais usado como interface. Marca, campos, ícones, botão, ornamentos e moldura são componentes independentes; a imagem `assets/scenes/lamp-books.webp` é usada apenas como detalhe decorativo inferior. A autenticação e a chamada atual ao Apps Script foram preservadas.
