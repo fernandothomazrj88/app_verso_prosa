@@ -671,3 +671,86 @@ main{background:linear-gradient(180deg,rgba(17,8,4,.16),rgba(13,6,3,.56))}
 @media(max-width:350px){
   .login-brand h1{font-size:25px}.login-field{min-height:38px;padding:0 9px}.login-field input{font-size:12px!important}
 }
+
+
+/* LOGIN V4 — tela real em tela cheia, sem moldura/simulador de celular */
+#login.login-screen{
+  position:relative;isolation:isolate;display:flex;justify-content:center;align-items:stretch;
+  width:100%;min-height:100svh;height:100svh;overflow-x:hidden;overflow-y:auto;
+  padding:0;margin:0;background:#100804;
+}
+#login .login-layout{
+  position:relative;isolation:isolate;flex:0 0 auto;width:min(100%,520px);min-height:100svh;height:100svh;
+  margin:0 auto;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;
+}
+#login .login-canvas{
+  position:relative;isolation:isolate;width:100%;height:100%;min-height:100svh;overflow:hidden;
+  border:0;border-radius:0;background:#160b06;box-shadow:none;
+}
+#login .login-canvas::before,#login .login-canvas::after{content:none!important;display:none!important}
+#login .login-library-atmosphere{
+  position:absolute;inset:0;z-index:0;opacity:1;pointer-events:none;transform:none;
+  background-image:linear-gradient(180deg,rgba(10,5,3,.30) 0%,rgba(12,6,3,.40) 48%,rgba(10,5,3,.86) 100%),url('./assets/scenes/login-library-bg.webp');
+  background-position:center,center top;background-size:100% 100%,cover;background-repeat:no-repeat;
+}
+
+#login .login-bottom-scene{
+  position:absolute;z-index:1;left:0;right:0;bottom:0;width:100%;height:31%;pointer-events:none;
+  background-image:linear-gradient(180deg,rgba(16,8,4,.08) 0%,rgba(16,8,4,0) 22%,rgba(8,4,2,.12) 100%),url('./assets/scenes/lamp-books.webp');
+  background-size:100% 100%,cover;background-position:center,center 53%;background-repeat:no-repeat;
+  opacity:1;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 12%);mask-image:linear-gradient(180deg,transparent 0%,#000 12%);
+}
+#login .login-brand{
+  z-index:2;top:4.2%;left:6%;right:6%;
+}
+#login .login-brand-mark{
+  width:clamp(72px,19vw,94px);height:auto;aspect-ratio:1;object-fit:contain;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.88));
+}
+#login .login-brand h1{
+  margin:-4px 0 0;font-size:clamp(30px,7.8vw,40px);line-height:.98;letter-spacing:-.75px;
+}
+#login .login-brand>p{margin:5px 0 0;font-size:clamp(16px,4.1vw,21px);line-height:1.05;}
+#login .login-brand-ornament{width:72%;margin-top:8px;}
+#login .login-form{
+  position:absolute;z-index:3;inset:0 auto auto 50%;width:min(84%,430px);height:100%;margin:0;padding:0;
+  transform:translateX(-50%);border:0;background:transparent;
+}
+#login .login-fields{top:36.5%;left:0;right:0;gap:9px;}
+#login .login-field{
+  height:clamp(43px,7svh,52px);min-height:42px;padding:0 10px;border:1px solid #b88e48;border-radius:12px;
+  background:rgba(20,10,5,.78);box-shadow:inset 0 1px 3px rgba(0,0,0,.78),0 2px 6px rgba(0,0,0,.35);
+}
+#login .login-field:focus-within{border-color:#e8c77e;box-shadow:inset 0 1px 3px #000,0 0 0 2px rgba(222,178,95,.17),0 0 12px rgba(222,178,95,.12);}
+#login .login-field input:focus,#login .login-field input:focus-visible{outline:0!important;box-shadow:none!important;}
+#login .login-field input{font-size:14px!important;}
+#login .login-field-icon{width:19px;height:19px;flex-basis:19px;}
+#login .login-submit{
+  top:55.35%;left:0;right:0;width:100%;height:7.8%;min-height:46px;border-radius:999px;
+  font-size:clamp(20px,5vw,25px);letter-spacing:.1px;
+}
+#login .login-forgot{
+  top:65.1%;left:0;width:100%;height:4.5%;font-size:clamp(12px,3.2vw,15px);
+}
+#login .login-error{top:70.2%;left:2%;width:96%;}
+#login .login-eye{cursor:pointer;}
+@media(max-width:380px){
+  #login .login-brand{top:3.8%;}
+  #login .login-brand-mark{width:clamp(68px,20vw,82px);}
+  #login .login-brand h1{font-size:clamp(28px,8vw,34px);}
+  #login .login-fields{top:36%;}
+  #login .login-submit{top:55%;}
+}
+@media(max-height:620px) and (orientation:landscape){
+  #login.login-screen{height:auto;min-height:100svh;overflow-y:auto;}
+  #login .login-layout,#login .login-canvas{height:100svh;min-height:560px;}
+  #login .login-brand{top:2.5%;}
+  #login .login-brand-mark{width:64px;}
+  #login .login-brand h1{font-size:28px;}
+  #login .login-brand>p{font-size:15px;margin-top:2px;}
+  #login .login-brand-ornament{margin-top:4px;}
+  #login .login-fields{top:34%;}
+  #login .login-submit{top:54%;height:8%;}
+  #login .login-forgot{top:64%;}
+  #login .login-bottom-scene{height:27%;}
+}
