@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-login-translucido-v8';
+const CACHE_NAME = 'verso-prosa-home-mockup-v1';
 const APP_FILES = [
  './','./index.html','./style.css?v=6.2.0','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png',

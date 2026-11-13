@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=8.0.0">
+<link rel="stylesheet" href="./style.css?v=home-1.0.0">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -103,66 +103,77 @@
     </aside>
 
     <main>
-      <section id="inicio" class="page active home-library">
-        <div class="home-welcome">
-          <div class="home-welcome-copy">
-            <p class="eyebrow">AS PORTAS ESTÃO ABERTAS</p>
-            <h2>Bem-vindo de volta, <span id="welcomeName">Leitor</span>.</h2>
-            <p class="muted">Há sempre uma boa história esperando por você.</p>
+      <section id="inicio" class="page active home-mockup">
+  <header class="mock-home-header">
+    <button class="mock-menu-button" id="homeMenuToggle" type="button" aria-label="Abrir menu">☰</button>
+    <div class="mock-home-brand">Verso &amp; Prosa</div>
+    <button class="mock-profile-button" id="homeProfileButton" type="button" aria-label="Sair e trocar de perfil"><span id="homeAvatar">F</span></button>
+  </header>
+
+  <div class="mock-home-body">
+    <section class="mock-greeting">
+      <div class="mock-user-avatar" id="homeUserAvatar">F</div>
+      <div class="mock-greeting-copy">
+        <h2>Olá, <span id="homeGreetingName">Fernando</span>!</h2>
+        <p>Seja bem-vindo à sua biblioteca.</p>
+      </div>
+    </section>
+
+    <section class="mock-quote-card">
+      <p>“Ler é habitar outros<br class="quote-mobile-break"> mundos sem sair do lugar.”</p>
+      <small>C. S. Lewis</small>
+    </section>
+
+    <nav class="mock-shortcuts" aria-label="Acessos rápidos">
+      <button class="mock-shortcut" data-page="estante">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 12c8-3 14-1 19 4v25c-5-5-11-7-19-4zM43 12c-8-3-14-1-19 4v25c5-5 11-7 19-4zM24 16v25"/></svg>
+        <span>Minha<br>Estante</span>
+      </button>
+      <button class="mock-shortcut" data-page="adicionar">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34 32 10l7 7-24 24-9 2zM28 14l7 7M8 34l7 7M31 7l5-4 8 8-4 5M25 38h17M34 30v16"/></svg>
+        <span>Adicionar<br>Livro</span>
+      </button>
+      <button class="mock-shortcut" data-page="anotacoes">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="m8 36 4-11L34 3l10 10-22 22-11 4zM28 9l10 10M8 36l11-3"/></svg>
+        <span>Anotações<br>e Resenhas</span>
+      </button>
+      <button class="mock-shortcut" data-page="calendario">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="34" rx="3"/><path d="M14 4v10M34 4v10M5 19h38M14 27h5m7 0h5m-17 8h5m7 0h5"/></svg>
+        <span>Planejamento<br>de Leituras</span>
+      </button>
+    </nav>
+
+    <section class="mock-current-reading" aria-label="Leitura atual">
+      <h3>Leitura Atual</h3>
+      <div class="mock-reading-row">
+        <div class="mock-reading-cover" id="homeReadingCover"><span>V&amp;P</span></div>
+        <div class="mock-reading-details">
+          <h4 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h4>
+          <p id="homeReadingAuthor">Escolha um título na sua estante.</p>
+          <div class="mock-reading-progress">
+            <div class="mock-progress-track" id="homeProgressWrap" hidden><span id="homeProgressBar"></span></div>
+            <small id="homeProgressLabel">Sua próxima leitura começa aqui.</small>
           </div>
-          <div class="quote-plaque" aria-label="Uma frase para acompanhar a leitura">
-            <span class="quote-mark">“</span>
-            <p>Uma boa história sempre deixa uma porta aberta.</p>
-            <small>Verso &amp; Prosa</small>
-          </div>
+          <div id="homeReadingMeta" class="mock-reading-meta" hidden></div>
+          <button id="homeReadingAction" class="mock-reading-open" data-page="adicionar">Escolher um livro</button>
         </div>
+      </div>
+    </section>
 
-        <section class="home-reading-card" id="homeReading" aria-label="Leitura atual">
-          <div class="home-reading-scene" aria-hidden="true"></div>
-          <div class="home-reading-content">
-            <div class="reading-cover home-reading-cover" id="homeReadingCover"><span>V&amp;P</span></div>
-            <div class="home-reading-info">
-              <p class="eyebrow"><span class="tiny-book">▤</span> SUA LEITURA ATUAL</p>
-              <h3 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h3>
-              <p id="homeReadingAuthor">Escolha um título na sua estante ou adicione um novo exemplar.</p>
-              <div class="home-reading-meta" id="homeReadingMeta"><span>Seu próximo capítulo começa aqui.</span></div>
-              <div class="reading-progress-wrap" id="homeProgressWrap" hidden>
-                <div class="reading-progress-track"><span id="homeProgressBar"></span></div>
-                <small id="homeProgressLabel">Progresso registrado</small>
-              </div>
-              <button class="primary home-reading-action" id="homeReadingAction" data-page="adicionar">Escolher um livro <span>→</span></button>
-            </div>
-          </div>
-        </section>
+    <div class="mock-hidden-data" aria-hidden="true">
+      <span id="statBooks">0</span><span id="statReading">0</span><span id="statFinished">0</span><span id="statWantRead">0</span>
+      <div id="homeRecentBooks"></div>
+    </div>
+  </div>
 
-        <div class="home-stat-grid" aria-label="Resumo do acervo">
-          <div class="home-stat-card"><span class="home-stat-icon">▥</span><div><small>VOLUMES NO ACERVO</small><b id="statBooks">0</b></div></div>
-          <div class="home-stat-card"><span class="home-stat-icon">▤</span><div><small>EM LEITURA</small><b id="statReading">0</b></div></div>
-          <div class="home-stat-card"><span class="home-stat-icon">✦</span><div><small>JÁ LIDOS</small><b id="statFinished">0</b></div></div>
-          <div class="home-stat-card"><span class="home-stat-icon">⚑</span><div><small>QUERO LER</small><b id="statWantRead">0</b></div></div>
-        </div>
-
-        <div class="home-lower-grid">
-          <section class="home-panel acquisitions-panel">
-            <div class="home-panel-heading"><div><p class="eyebrow">RECÉM-CHEGADOS</p><h3>Novas aquisições</h3></div><button class="link-button" data-page="estante">Ver acervo →</button></div>
-            <div class="acquisition-grid" id="homeRecentBooks">
-              <div class="acquisition-empty"><span>✧</span><b>Sua próxima descoberta começa aqui.</b><button class="outline-button" data-page="adicionar">Adicionar primeiro livro →</button></div>
-            </div>
-          </section>
-
-          <section class="home-panel collections-panel">
-            <div class="home-panel-heading"><div><p class="eyebrow">CAMINHOS DE LEITURA</p><h3>Estantes em destaque</h3></div></div>
-            <div class="featured-shelves">
-              <button class="featured-shelf" data-collection="Literatura russa"><span class="featured-shelf-image russian"></span><span><b>Clássicos russos</b><small>Dostoiévski, Tolstói, Tchékhov…</small></span><strong>›</strong></button>
-              <button class="featured-shelf" data-collection="Romance clássico"><span class="featured-shelf-image romance"></span><span><b>Romances clássicos</b><small>Austen, Brontë, Dickens…</small></span><strong>›</strong></button>
-              <button class="featured-shelf" data-collection="Literatura e fé"><span class="featured-shelf-image faith"></span><span><b>Literatura e fé</b><small>Obras que dialogam com a vida espiritual.</small></span><strong>›</strong></button>
-            </div>
-          </section>
-        </div>
-
-        <div class="daily-reading-quote"><span class="quote-feather">❧</span><div><small>UMA IDEIA PARA LEVAR CONSIGO</small><p>“A leitura é uma conversa silenciosa entre duas almas.”</p></div></div>
-      </section>
-
+  <nav class="mock-bottom-nav" aria-label="Navegação principal">
+    <button class="active" data-page="inicio"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg><span>Início</span></button>
+    <button data-page="estante"><svg viewBox="0 0 24 24"><path d="M2 5c4-2 7-1 10 2 3-3 6-4 10-2v14c-4-2-7-1-10 2-3-3-6-4-10-2zM12 7v14"/></svg><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><span>＋</span></button>
+    <button data-page="descobrir"><svg viewBox="0 0 24 24"><path d="m4 20 5-1 10-10a3 3 0 0 0-4-4L5 15zM4 20l1-5"/></svg><span>Descobrir</span></button>
+    <button data-page="estudio"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16M7 3v6m10 0v6m-7 0v6"/></svg><span>Mais</span></button>
+  </nav>
+</section>
       <section id="estante" class="page">
         <div class="page-heading"><p class="eyebrow">O SEU ACERVO PARTICULAR</p><h2>Minhas estantes</h2><p class="muted">Cada lombada guarda uma história. Toque em um livro para abrir sua ficha de leitura.</p></div>
         <div class="shelf-toolbar"><input class="field search" id="buscarLivro" type="search" placeholder="⌕  Procurar por título ou autor..."><button class="shelf-add" data-page="adicionar">＋ Novo exemplar</button></div>

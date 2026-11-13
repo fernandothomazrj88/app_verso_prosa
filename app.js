@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const first = name.trim().charAt(0).toUpperCase() || 'L';
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
+    $('#homeGreetingName').textContent = name.split(' ')[0] || name;
+    $('#homeAvatar').textContent = first;
+    $('#homeUserAvatar').textContent = first;
     $('#profileName').textContent = name;
     $('#profileAvatar').textContent = first;
     $('#sidebarName').textContent = name;
@@ -129,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!$('#' + id)) return;
     $$('.page').forEach(page => page.classList.toggle('active', page.id === id));
     $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === id));
+    $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === id));
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (id === 'inicio') renderHome();
     if (id === 'estante') renderBooks();
@@ -427,10 +431,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       openPage(nav.dataset.page);
+      document.body.classList.remove('library-menu-open');
     }
   });
 
   $('#profileSwitch').addEventListener('click', logout);
+  $('#homeProfileButton')?.addEventListener('click', logout);
+  $('#homeMenuToggle')?.addEventListener('click', () => {
+    document.body.classList.toggle('library-menu-open');
+  });
   $('#changeProfile').addEventListener('click', logout);
   $('#logout').addEventListener('click', logout);
 
