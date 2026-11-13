@@ -1102,3 +1102,52 @@ body.auth-flow {
     overflow-y: auto !important;
   }
 }
+
+
+/* LOGIN V8 — composição mais compacta e fundo da biblioteca visível */
+#login.login-screen:not(.hidden) {
+  background: #100602 !important;
+}
+#login .login-layout,
+#login .login-canvas {
+  background: transparent !important;
+}
+#login .login-library-atmosphere {
+  background-image:
+    linear-gradient(180deg, rgba(9,3,1,.04) 0%, rgba(9,3,1,.02) 54%, rgba(9,3,1,.18) 100%),
+    url('./assets/scenes/login-library-bg-v8.webp') !important;
+  background-position: center center, center center !important;
+  background-size: 100% 100%, 100% 100% !important;
+  background-repeat: no-repeat !important;
+}
+#login .login-fields {
+  top: 33.2% !important;
+  gap: 1.05svh !important;
+}
+#login .login-field {
+  background: linear-gradient(180deg, rgba(25,13,7,.61), rgba(14,7,4,.64)) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+}
+#login .login-field:focus-within {
+  background: linear-gradient(180deg, rgba(25,13,7,.70), rgba(14,7,4,.72)) !important;
+}
+#login .login-submit {
+  top: 52.2% !important;
+}
+#login .login-forgot {
+  top: 62.2% !important;
+}
+#login .login-error {
+  top: 67.5% !important;
+}
+@media (max-width: 390px) {
+  #login .login-fields { top: 33.2% !important; }
+  #login .login-submit { top: 52.2% !important; }
+  #login .login-forgot { top: 62.2% !important; }
+}
+@media (max-height: 680px) {
+  #login .login-fields { top: 32.8% !important; }
+  #login .login-submit { top: 51.8% !important; }
+  #login .login-forgot { top: 61.8% !important; }
+}
