@@ -754,3 +754,137 @@ main{background:linear-gradient(180deg,rgba(17,8,4,.16),rgba(13,6,3,.56))}
   #login .login-forgot{top:64%;}
   #login .login-bottom-scene{height:27%;}
 }
+
+/* LOGIN V5 — referência oficial Biblioteca Dourada: composição do mockup sem moldura */
+#login.login-screen{
+  position:relative;isolation:isolate;display:flex;align-items:stretch;justify-content:center;
+  width:100%;height:100svh;min-height:680px;overflow-x:hidden;overflow-y:auto;
+  margin:0;padding:0;background:#100703;
+}
+#login .login-layout{
+  position:relative;isolation:isolate;flex:0 0 auto;width:min(100%,560px);height:100svh;min-height:680px;
+  margin:0 auto;padding:0;border:0;border-radius:0;background:#160904;box-shadow:none;
+}
+#login .login-canvas{
+  position:relative;isolation:isolate;width:100%;height:100%;min-height:680px;overflow:hidden;
+  border:0;border-radius:0;background:#170904;box-shadow:none;
+}
+#login .login-canvas::before,#login .login-canvas::after{content:none!important;display:none!important}
+#login .login-library-atmosphere{
+  position:absolute;inset:0;z-index:0;opacity:1;pointer-events:none;transform:none;filter:none;
+  background-image:
+    radial-gradient(ellipse at 50% 27%,rgba(83,37,13,.18),transparent 48%),
+    linear-gradient(180deg,rgba(7,3,1,.05) 0%,rgba(10,4,2,.06) 54%,rgba(10,4,2,.45) 100%),
+    url('./assets/scenes/login-library-bg-v5.webp');
+  background-position:center,center,center top;background-size:100% 100%,100% 100%,100% 100%;background-repeat:no-repeat;
+}
+#login .login-bottom-scene{
+  position:absolute;z-index:1;left:0;right:0;bottom:0;width:100%;height:38.5%;pointer-events:none;
+  background-image:linear-gradient(180deg,rgba(15,7,3,.02) 0%,rgba(15,7,3,0) 18%,rgba(8,4,2,.07) 100%),url('./assets/scenes/lamp-books.webp');
+  background-size:100% 100%,cover;background-position:center,center center;background-repeat:no-repeat;
+  opacity:1;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 8%);mask-image:linear-gradient(180deg,transparent 0%,#000 8%);
+}
+#login .login-brand{
+  position:absolute;z-index:2;top:2.35%;left:5%;right:5%;display:flex;flex-direction:column;
+  align-items:center;text-align:center;color:#f8edda;
+}
+#login .login-brand-mark{
+  display:block;width:clamp(188px,42vw,238px);height:auto;max-height:15.5svh;aspect-ratio:402/216;object-fit:contain;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.22));
+}
+#login .login-brand h1{
+  margin:3px 0 0;color:#fff0d9;font:500 clamp(36px,7.2vw,48px)/.98 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:-.9px;text-shadow:0 2px 5px #080402,0 0 16px rgba(217,167,89,.18);
+}
+#login .login-brand>p{
+  margin:7px 0 0;color:#f0c85e;font:500 clamp(20px,4.6vw,27px)/1.02 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:.5px;text-shadow:0 2px 4px #080402;
+}
+#login .login-brand-ornament{
+  display:flex;align-items:center;justify-content:center;gap:6px;width:76%;margin-top:8px;color:#e5b84c;line-height:1;
+}
+#login .login-brand-ornament span{height:2px;flex:1;background:linear-gradient(90deg,transparent,#e3b44d 28%,#f4d77b 50%,#d6a13e)}
+#login .login-brand-ornament span:last-child{transform:scaleX(-1)}
+#login .login-brand-ornament b{font:20px Georgia,serif;text-shadow:0 0 8px rgba(232,191,106,.62)}
+#login .login-form{
+  position:absolute;z-index:3;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:transparent;
+}
+#login .login-fields{
+  position:absolute;top:36.25%;left:8.55%;right:8.55%;display:grid;gap:14px;
+}
+#login .login-field{
+  width:100%;height:clamp(54px,6.9svh,66px);min-height:52px;position:relative;display:flex;align-items:center;gap:0;
+  padding:0 17px;border:2px solid #d6a947;border-radius:20px;
+  background:linear-gradient(180deg,rgba(21,10,4,.94),rgba(15,7,3,.95));
+  box-shadow:inset 0 1px 4px rgba(0,0,0,.88),inset 0 0 0 1px rgba(255,225,166,.16),0 3px 8px rgba(0,0,0,.44);
+}
+#login .login-field:focus-within{
+  border-color:#f0c65f;box-shadow:inset 0 1px 4px #000,0 0 0 2px rgba(232,185,79,.16),0 0 14px rgba(222,178,95,.13);
+}
+#login .login-field-icon{width:25px;height:25px;flex:0 0 25px;fill:none;stroke:#f2c349;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px #000)}
+#login .login-lock-icon{width:25px;height:25px;flex-basis:25px;fill:#dcb24c;stroke:#e7bd58;stroke-width:1.6}
+#login .login-field input{
+  display:block;min-width:0;flex:1;height:100%;margin:0!important;padding:0 17px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;outline:0!important;
+  color:#fff4e5!important;font:500 clamp(16px,3.9vw,19px)/1.2 Arial,sans-serif!important;letter-spacing:.05px;
+  box-shadow:none!important;text-shadow:0 1px 2px #000;caret-color:#f1c45b;
+}
+#login .login-field input::placeholder{color:#f4ead9;opacity:1}
+#login .login-field input:-webkit-autofill,#login .login-field input:-webkit-autofill:hover,#login .login-field input:-webkit-autofill:focus{
+  -webkit-text-fill-color:#fff4e5!important;caret-color:#f1c45b!important;
+  -webkit-box-shadow:0 0 0 1000px rgba(21,10,4,.94) inset!important;transition:background-color 9999s ease-out 0s;
+}
+#login .login-eye{
+  width:34px;height:36px;flex:0 0 34px;display:grid;place-items:center;padding:0;border:0;
+  background:transparent;color:#f1e8d9;border-radius:8px;cursor:pointer;
+}
+#login .login-eye svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#login .login-submit{
+  position:absolute;top:54.05%;left:8.55%;right:8.55%;width:82.9%;height:7.9%;min-height:60px;
+  display:flex;align-items:center;justify-content:center;padding:0 14px;border:2px solid #d7a848;border-radius:999px;
+  background:linear-gradient(180deg,#c5263b 0%,#a40d2b 43%,#72091e 100%);
+  color:#fff3e6;font:700 clamp(25px,5.4vw,34px)/1 'Cormorant Garamond',Georgia,serif;text-shadow:0 1px 2px #42040d;
+  box-shadow:inset 0 2px 3px rgba(255,225,195,.26),inset 0 -4px 7px rgba(0,0,0,.38),0 4px 12px rgba(0,0,0,.62);
+  cursor:pointer;transition:filter .16s,transform .16s,box-shadow .16s;
+}
+#login .login-submit:hover{filter:brightness(1.12);box-shadow:inset 0 2px 3px rgba(255,225,195,.3),0 0 18px rgba(209,151,53,.22),0 4px 12px rgba(0,0,0,.62)}
+#login .login-submit:active{transform:translateY(2px)}
+#login .login-submit:disabled{cursor:wait;opacity:.72}
+#login .login-forgot{
+  position:absolute;top:64.2%;left:15%;width:70%;height:4.5%;padding:0;border:0;background:transparent;
+  color:#fff0d8;font:600 clamp(15px,3.5vw,19px)/1 Georgia,serif;text-decoration:underline;
+  text-decoration-color:#f0c45e;text-decoration-thickness:1.5px;text-underline-offset:4px;text-shadow:0 2px 4px #000;cursor:pointer;
+}
+#login .login-error{
+  position:absolute;top:69.1%;left:8%;width:84%;min-height:0;margin:0;padding:0;color:#ffd6c9;
+  text-align:center;font:600 12px/1.35 Arial,sans-serif;text-shadow:0 1px 3px #000;pointer-events:none;
+}
+#login .login-error:not(:empty){padding:7px 9px;border:1px solid rgba(222,160,90,.72);border-radius:8px;background:rgba(20,8,5,.93)}
+#login .login-field input:focus-visible,#login .login-eye:focus-visible,#login .login-submit:focus-visible,#login .login-forgot:focus-visible{outline:2px solid #f4c968!important;outline-offset:3px}
+@media(max-width:390px){
+  #login .login-brand{top:2.6%}
+  #login .login-brand-mark{width:clamp(175px,46vw,205px);max-height:14svh}
+  #login .login-brand h1{font-size:clamp(34px,8.2vw,39px)}
+  #login .login-brand>p{font-size:clamp(18px,4.8vw,22px)}
+  #login .login-fields{top:36.5%;left:8%;right:8%;gap:1.6%}
+  #login .login-field{height:clamp(48px,7svh,58px);padding:0 13px;border-radius:17px}
+  #login .login-field input{padding:0 12px!important;font-size:16px!important}
+  #login .login-submit{left:8%;width:84%;top:54.8%;height:7.7%;min-height:54px}
+  #login .login-forgot{top:64.5%;font-size:15px}
+  #login .login-bottom-scene{height:37%}
+}
+@media(max-height:720px){
+  #login.login-screen{min-height:620px;height:auto}
+  #login .login-layout,#login .login-canvas{height:100svh;min-height:620px}
+  #login .login-brand{top:1.3%}
+  #login .login-brand-mark{width:clamp(160px,36vw,205px);max-height:13svh}
+  #login .login-brand h1{font-size:clamp(31px,6vw,40px)}
+  #login .login-brand>p{font-size:clamp(17px,3.8vw,22px);margin-top:4px}
+  #login .login-fields{top:35.5%}
+  #login .login-submit{top:53.7%;height:8%;min-height:50px}
+  #login .login-forgot{top:64%}
+}
+@media(max-height:560px) and (orientation:landscape){
+  #login.login-screen{height:auto;min-height:620px;overflow-y:auto}
+  #login .login-layout,#login .login-canvas{height:620px;min-height:620px}
+}
