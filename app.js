@@ -377,7 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#enterLibrary').addEventListener('click', () => {
     welcome.classList.add('hidden');
     login.classList.remove('hidden');
-    window.setTimeout(() => $('#email').focus(), 120);
   });
 
   $('#togglePassword').addEventListener('click', () => {
