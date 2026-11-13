@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function enterApp() {
+    document.body.classList.remove('auth-flow');
     welcome.classList.add('hidden');
     login.classList.add('hidden');
     app.classList.remove('hidden');
@@ -273,6 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mensagemAposMigracao(migracao);
     } catch (_) {
       saveSession(null);
+      document.body.classList.remove('auth-flow');
       welcome.classList.remove('hidden');
       login.classList.add('hidden');
       showLoginError('Sua sessão expirou. Entre novamente com seu e-mail e senha.');
@@ -283,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveSession(null);
     cloud = { books: [], notes: [], goal: null };
     app.classList.add('hidden');
+    document.body.classList.remove('auth-flow');
     login.classList.add('hidden');
     welcome.classList.remove('hidden');
     $('#loginForm').reset();
@@ -375,8 +378,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   $('#enterLibrary').addEventListener('click', () => {
+    // A abertura e o login são telas independentes, nunca seções empilhadas.
+    document.body.classList.add('auth-flow');
     welcome.classList.add('hidden');
     login.classList.remove('hidden');
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    $('#email')?.focus({ preventScroll: true });
   });
 
   $('#togglePassword').addEventListener('click', () => {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-login-biblioteca-dourada-v6';
+const CACHE_NAME = 'verso-prosa-telas-exclusivas-v7';
 const APP_FILES = [
  './','./index.html','./style.css?v=6.2.0','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png',

@@ -1060,3 +1060,45 @@ main{background:linear-gradient(180deg,rgba(17,8,4,.16),rgba(13,6,3,.56))}
   #login.login-screen{height:auto!important;min-height:640px!important;overflow-y:auto!important}
   #login .login-layout,#login .login-canvas{height:640px!important;min-height:640px!important}
 }
+
+
+/* LOGIN V7 — transição entre abertura e login como telas exclusivas.
+   Corrige a especificidade do display:flex!important da tela de login,
+   que fazia o .hidden ser ignorado e empilhava as duas telas. */
+#welcome.hidden,
+#login.hidden,
+#app.hidden {
+  display: none !important;
+}
+body.auth-flow {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+#login.login-screen:not(.hidden) {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch;
+}
+#login .login-layout {
+  width: min(100%, 560px) !important;
+  height: 100dvh !important;
+  min-height: 640px !important;
+}
+#login .login-canvas {
+  height: 100% !important;
+  min-height: 640px !important;
+}
+@media (max-height: 680px) {
+  #login.login-screen:not(.hidden) {
+    overflow-y: auto !important;
+  }
+}
