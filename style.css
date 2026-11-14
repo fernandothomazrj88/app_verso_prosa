@@ -1776,8 +1776,6 @@ body {background:#100804 !important;}
 #inicio .mock-bottom-nav {height:55px;}
 /* Prevent the welcome artwork from occupying document flow after authentication. */
 #welcome.hidden, #login.hidden, #app.hidden {display:none !important;}
-body:not(.auth-flow) #welcome,
-body:not(.auth-flow) #login {display:none !important;}
 @media(min-width:681px) {
   #inicio .mock-greeting.home-hero-banner {height:205px;max-height:205px;}
   #inicio .home-hero-banner .mock-greeting-copy {padding-left:24px;}

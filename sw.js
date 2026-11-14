@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-home-banner-lefe-v6';
+const CACHE_NAME = 'verso-prosa-home-fix-clean-package-v8';
 const APP_FILES = [
  './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-6.0.0','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png',
