@@ -166,6 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
     welcome.classList.add('hidden');
     login.classList.add('hidden');
     app.classList.remove('hidden');
+    // Hard separation: the splash/login screens must never remain in the Home scroll.
+    welcome.style.display = 'none';
+    login.style.display = 'none';
+    app.style.display = 'block';
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     renderProfile();
     renderHome();
     openPage('inicio');
@@ -310,9 +315,12 @@ document.addEventListener('DOMContentLoaded', () => {
     saveSession(null);
     cloud = { books: [], notes: [], goal: null };
     app.classList.add('hidden');
+    app.style.display = 'none';
     document.body.classList.remove('auth-flow');
     login.classList.add('hidden');
+    login.style.display = '';
     welcome.classList.remove('hidden');
+    welcome.style.display = '';
     $('#loginForm').reset();
     showLoginError('');
     toast('Você saiu da sua biblioteca.');

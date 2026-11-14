@@ -1650,3 +1650,137 @@ body {background:#100804 !important;}
   background:#100804 !important;
   background-image:none !important;
 }
+
+
+/* HOME 6.0 — banner horizontal no padrão do LeFe Home */
+#inicio.home-mockup {
+  min-height:0 !important;
+  height:auto !important;
+  padding:0 0 58px !important;
+  overflow:visible !important;
+  background:#090503 !important;
+  background-image:none !important;
+}
+#inicio.home-mockup::before,
+#inicio.home-mockup::after {display:none !important;content:none !important;}
+#app, #app .app-shell, #app .workspace, #app main,
+#app .page, #app .page.active {
+  background-color:#090503 !important;
+  background-image:none !important;
+}
+#app .app-shell::before, #app .app-shell::after,
+#app .workspace::before, #app .workspace::after,
+#app main::before, #app main::after {
+  display:none !important;
+  content:none !important;
+  background:none !important;
+}
+#inicio .mock-home-header {
+  height:40px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:0 8px;
+  background:#080402;
+  border-bottom:1px solid rgba(203,151,55,.65);
+}
+#inicio .mock-home-brand {
+  font:600 22px/1 Georgia,"Times New Roman",serif;
+  color:#f7e8ca;
+}
+#inicio .mock-home-body {
+  padding:9px 10px 10px;
+  background:#090503 !important;
+  background-image:none !important;
+}
+#inicio .mock-greeting.home-hero-banner {
+  position:relative;
+  display:flex;
+  align-items:stretch;
+  justify-content:space-between;
+  width:100%;
+  height:clamp(150px,34vw,205px);
+  min-height:150px;
+  margin:0 0 11px;
+  padding:0;
+  overflow:hidden;
+  border:1px solid #b97827;
+  border-radius:16px;
+  background:
+    radial-gradient(ellipse at 73% 50%,rgba(121,43,13,.82),transparent 53%),
+    linear-gradient(105deg,#050302 0%,#160904 45%,#341205 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,203,103,.14),0 3px 9px #0009;
+}
+#inicio .home-hero-banner .mock-greeting-copy {
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  flex:1 1 56%;
+  min-width:0;
+  padding:16px 5px 16px 17px;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  max-width:100%;
+  margin:0;
+  color:#fff2dc;
+  font:italic 700 clamp(16px,3.8vw,22px)/1.25 Arial,sans-serif;
+  text-shadow:0 2px 4px #000,0 0 10px rgba(0,0,0,.8);
+}
+#inicio .home-hero-banner .mock-user-avatar {
+  position:relative;
+  z-index:1;
+  display:block;
+  align-self:stretch;
+  flex:0 0 46%;
+  width:46%;
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+#inicio .home-hero-banner .mock-user-avatar::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0 auto 0 0;
+  width:28%;
+  background:linear-gradient(90deg,#160904,transparent);
+  pointer-events:none;
+}
+#inicio .home-hero-banner .mock-user-avatar img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 13%;
+  border:0;
+  border-radius:0;
+  filter:drop-shadow(-4px 0 8px rgba(0,0,0,.45));
+}
+#inicio .mock-quote-card {
+  margin:0 0 10px;
+  min-height:72px;
+  background:
+    radial-gradient(ellipse at 50% 48%,#f6dca7 0%,#e8c184 72%,#b8793e 100%);
+  border:2px solid #bd813e;
+  box-shadow:inset 0 0 0 2px rgba(255,239,196,.65),inset 0 0 15px rgba(117,61,19,.28),0 3px 7px #0008;
+}
+#inicio .mock-shortcuts {margin:8px 0 7px;gap:7px 8px;}
+#inicio .mock-shortcut {min-height:74px;}
+#inicio .mock-current-reading {margin-top:7px;}
+#inicio .mock-bottom-nav {height:55px;}
+/* Prevent the welcome artwork from occupying document flow after authentication. */
+#welcome.hidden, #login.hidden, #app.hidden {display:none !important;}
+body:not(.auth-flow) #welcome,
+body:not(.auth-flow) #login {display:none !important;}
+@media(min-width:681px) {
+  #inicio .mock-greeting.home-hero-banner {height:205px;max-height:205px;}
+  #inicio .home-hero-banner .mock-greeting-copy {padding-left:24px;}
+  #inicio .home-hero-banner .mock-greeting-copy p {font-size:25px;max-width:390px;}
+  #inicio .home-hero-banner .mock-user-avatar {flex-basis:44%;width:44%;}
+}
