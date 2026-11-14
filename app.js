@@ -122,8 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
-    $('#homeGreetingName').textContent = isFernando ? 'Fernando' : (isLele ? 'Lelê' : name.split(' ')[0] || name);
-    $('#homeAvatar').textContent = first;
     $('#profileName').textContent = name;
     $('#profileAvatar').textContent = first;
     $('#sidebarName').textContent = name;
@@ -131,29 +129,22 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#profileSwitch').textContent = '↪';
 
     const portrait = $('#homeCharacterAvatar');
-    const greetingTitle = $('#homeGreetingTitle');
     const greetingMessage = $('#homeGreetingMessage');
     const avatar = $('#homeUserAvatar');
 
-    if (portrait && greetingTitle && greetingMessage && avatar) {
+    if (portrait && greetingMessage && avatar) {
       if (isFernando) {
         portrait.src = './assets/profiles/fernando-epoca.webp';
         portrait.alt = 'Retrato de época de Fernando';
-        greetingTitle.innerHTML = 'Olá, <span id="homeGreetingName">Fernando</span>!';
         greetingMessage.textContent = 'Seja bem-vindo, caro leitor! Sua biblioteca o aguarda, senhor Fernando.';
-        avatar.setAttribute('aria-label', 'Fernando em traje de época');
       } else if (isLele) {
         portrait.src = './assets/profiles/lele-epoca.webp';
         portrait.alt = 'Retrato de época de Lelê';
-        greetingTitle.innerHTML = 'Olá, <span id="homeGreetingName">Lelê</span>!';
         greetingMessage.textContent = 'Seja bem-vinda, cara leitora! Sua biblioteca a aguarda, senhora Lelê.';
-        avatar.setAttribute('aria-label', 'Lelê em traje de época');
       } else {
-        avatar.textContent = first;
-        greetingTitle.innerHTML = `Olá, <span id="homeGreetingName">${escapeHtml(name.split(' ')[0] || name)}</span>!`;
-        greetingMessage.textContent = 'Seja bem-vindo à sua biblioteca.';
         portrait.removeAttribute('src');
         portrait.alt = '';
+        greetingMessage.textContent = 'Seja bem-vindo à sua biblioteca.';
       }
     }
   }
@@ -466,10 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   $('#profileSwitch').addEventListener('click', logout);
-  $('#homeProfileButton')?.addEventListener('click', logout);
-  $('#homeMenuToggle')?.addEventListener('click', () => {
-    document.body.classList.toggle('library-menu-open');
-  });
   $('#changeProfile').addEventListener('click', logout);
   $('#logout').addEventListener('click', logout);
 
