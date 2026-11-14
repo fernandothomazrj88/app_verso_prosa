@@ -1,6 +1,6 @@
-const CACHE_NAME = 'verso-prosa-home-personagens-individuais-v3';
+const CACHE_NAME = 'verso-prosa-home-mockup-fiel-v4';
 const APP_FILES = [
- './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-2.0.0','./app.js','./manifest.json',
+ './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-4.0.0','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png',
  './assets/icons/icon-192.png','./assets/icons/icon-512.png','./assets/icons/icon-192-maskable.png','./assets/icons/icon-512-maskable.png','./assets/icons/apple-touch-icon.png',
  './assets/scenes/login-library-bg-v8.webp','./assets/scenes/entrance-room.webp','./assets/scenes/lamp-books.webp','./assets/scenes/shelf-wall.webp','./assets/scenes/typewriter-desk.webp','./assets/scenes/open-book.webp','./assets/scenes/discover-authors.webp','./assets/scenes/lamp-stack.webp','./assets/scenes/welcome-approved.webp','./assets/scenes/login-library-bg.webp','./assets/scenes/login-library-bg-v5.webp','./assets/login-emblem-gold-v5.png','./assets/login-emblem-approved-v6.png','./assets/scenes/login-bottom-approved-v6.webp'

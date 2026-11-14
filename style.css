@@ -1349,3 +1349,182 @@ body.auth-flow {
   #inicio .mock-greeting-copy h2 {font-size:21px;}
   #inicio .mock-greeting-copy p {font-size:13px;}
 }
+
+
+/* HOME 4.0 — visual fidelity pass based on the user's narrow-screen mockup */
+#inicio.home-mockup {
+  width: 100%;
+  max-width: 760px;
+  padding: 0 0 74px !important;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(112,43,12,.24), transparent 48%),
+    linear-gradient(180deg, rgba(13,5,3,.18), rgba(7,3,2,.45));
+}
+#inicio .mock-home-header {
+  height: 42px;
+  grid-template-columns: 38px 1fr 38px;
+  padding: 0 9px;
+  border-bottom: 1px solid rgba(218,164,55,.8);
+  background: linear-gradient(180deg,#1b0904 0%,#0b0402 100%);
+  box-shadow: 0 2px 7px rgba(0,0,0,.65);
+  position: relative;
+}
+#inicio .mock-home-header:after {
+  content: "◆";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  color: #d6a53c;
+  font: 9px Georgia,serif;
+  text-shadow: 0 0 5px #b97820;
+}
+#inicio .mock-menu-button {font-size:23px;color:#f2c85e;}
+#inicio .mock-home-brand {
+  font: 600 22px/1 Georgia,"Times New Roman",serif;
+  letter-spacing: -.3px;
+  color: #fff0d7;
+}
+#inicio .mock-profile-button {
+  width:31px;height:31px;
+  border:2px solid #d8a644;
+  background:linear-gradient(145deg,#a92c20,#410c08);
+  box-shadow:0 0 0 2px rgba(0,0,0,.7),0 0 8px rgba(207,137,43,.25);
+}
+#inicio .mock-home-body {padding:8px 11px 14px;}
+#inicio .mock-greeting {
+  min-height:57px;
+  padding:1px 0 8px;
+  gap:9px;
+  align-items:center;
+}
+#inicio .mock-user-avatar {
+  width:43px;height:43px;flex-basis:43px;
+  border:2px solid #e0b34f;
+  box-shadow:0 0 0 2px #64180f,0 2px 6px #000;
+}
+#inicio .mock-user-avatar img {object-position:center 18%;}
+#inicio .mock-greeting-copy h2 {
+  font:700 17px/1.05 Arial,sans-serif;
+  margin:0 0 3px;
+  color:#fff8ed;
+}
+#inicio .mock-greeting-copy p {
+  max-width:340px;
+  font:12px/1.25 Arial,sans-serif;
+  color:#f5e5d0;
+  white-space:normal;
+}
+#inicio .mock-quote-card {
+  margin:2px 0 10px;
+  min-height:70px;
+  padding:8px 12px 7px;
+  border:2px solid #a85c24;
+  border-radius:10px;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(255,226,166,.96),rgba(218,165,91,.96)),
+    repeating-linear-gradient(0deg,rgba(92,48,15,.10) 0 1px,transparent 1px 4px);
+  box-shadow:inset 0 0 0 1px rgba(255,237,184,.65),0 3px 8px rgba(0,0,0,.55);
+}
+#inicio .mock-quote-card:before,
+#inicio .mock-quote-card:after {
+  content:"❧";
+  top:2px;
+  color:#7c3615;
+  font:18px Georgia,serif;
+}
+#inicio .mock-quote-card p {
+  font:700 15px/1.15 Georgia,"Times New Roman",serif;
+  margin:0 0 3px;
+  color:#241307;
+}
+#inicio .mock-quote-card small {
+  font:13px Georgia,"Times New Roman",serif;
+  color:#2b180a;
+}
+#inicio .mock-shortcuts {
+  gap:7px 8px;
+  margin:9px 0 8px;
+}
+#inicio .mock-shortcut {
+  min-height:75px;
+  padding:6px 4px;
+  gap:2px;
+  border:1.5px solid #b54b27;
+  border-radius:13px;
+  background:
+    linear-gradient(145deg,rgba(91,22,12,.98),rgba(35,8,5,.99) 58%,rgba(13,5,3,.99));
+  box-shadow:
+    inset 0 1px 0 rgba(255,204,119,.24),
+    inset 0 -9px 15px rgba(0,0,0,.26),
+    0 2px 6px rgba(0,0,0,.62),
+    0 0 5px rgba(147,46,19,.2);
+  color:#fff7e9;
+  font:13px/1.08 Arial,sans-serif;
+}
+#inicio .mock-shortcut svg {
+  width:31px;height:31px;
+  stroke:#ffd34e;
+  stroke-width:2.35;
+  filter:drop-shadow(0 1px 2px #000) drop-shadow(0 0 3px rgba(255,190,53,.25));
+}
+#inicio .mock-current-reading {
+  margin-top:7px;
+  padding:7px 8px 8px;
+  border:1px solid rgba(192,143,58,.9);
+  border-radius:12px;
+  background:linear-gradient(145deg,rgba(27,12,6,.96),rgba(10,5,3,.98));
+  box-shadow:inset 0 1px 0 rgba(255,210,126,.1),0 3px 8px rgba(0,0,0,.55);
+}
+#inicio .mock-current-reading h3 {
+  font:600 16px/1 Arial,sans-serif;
+  margin:0 0 6px;
+}
+#inicio .mock-reading-row {gap:8px;min-height:78px;}
+#inicio .mock-reading-cover {
+  width:54px;height:73px;flex-basis:54px;
+  border:1.5px solid #d7a43b;
+  border-radius:5px;
+}
+#inicio .mock-reading-details h4 {font:700 14px/1.1 Arial,sans-serif;}
+#inicio .mock-reading-details p {font:11px/1.15 Arial,sans-serif;}
+#inicio .mock-reading-progress {gap:5px;}
+#inicio .mock-progress-track {height:8px;}
+#inicio .mock-reading-progress small {font:11px Arial,sans-serif;}
+#inicio .mock-bottom-nav {
+  height:55px;
+  padding:3px 6px max(3px,env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,#1a0b05 0%,#080302 100%);
+  border-top:1px solid rgba(213,165,65,.75);
+  box-shadow:0 -3px 12px rgba(0,0,0,.55);
+}
+#inicio .mock-bottom-nav button {
+  height:47px;
+  gap:1px;
+  font:10px Arial,sans-serif;
+  color:#e9d9b8;
+}
+#inicio .mock-bottom-nav svg {width:21px;height:21px;stroke:#f0c95d;}
+#inicio .mock-bottom-nav .mock-add-main {
+  width:39px;height:39px;
+  border:2px solid #edc04e;
+  background:radial-gradient(circle at 35% 25%,#8b3717,#240904 78%);
+  box-shadow:0 0 0 2px rgba(0,0,0,.75),0 0 8px rgba(230,177,65,.35);
+}
+#inicio .mock-bottom-nav .mock-add-main span {font:300 33px/34px Arial,sans-serif;}
+@media(max-width:360px) {
+  #inicio .mock-home-body {padding-left:8px;padding-right:8px;}
+  #inicio .mock-greeting-copy p {font-size:10px;}
+  #inicio .mock-shortcut {min-height:69px;font-size:12px;}
+}
+@media(min-width:681px) {
+  #inicio.home-mockup {padding-bottom:24px !important;}
+  #inicio .mock-home-body {padding:12px 16px 16px;}
+  #inicio .mock-greeting {min-height:64px;}
+  #inicio .mock-user-avatar {width:50px;height:50px;flex-basis:50px;}
+  #inicio .mock-quote-card {min-height:78px;}
+  #inicio .mock-shortcut {min-height:86px;font-size:14px;}
+  #inicio .mock-shortcut svg {width:34px;height:34px;}
+  #inicio .mock-current-reading {padding:8px 9px;}
+  #inicio .mock-reading-cover {width:58px;height:78px;flex-basis:58px;}
+}
