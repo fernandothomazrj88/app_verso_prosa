@@ -116,16 +116,46 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderProfile() {
     const name = session?.name || 'Leitor';
     const first = name.trim().charAt(0).toUpperCase() || 'L';
+    const normalizedName = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const isFernando = normalizedName.includes('fernando');
+    const isLele = normalizedName.includes('leticia') || normalizedName.includes('lele');
+
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
-    $('#homeGreetingName').textContent = name.split(' ')[0] || name;
+    $('#homeGreetingName').textContent = isFernando ? 'Fernando' : (isLele ? 'Lelê' : name.split(' ')[0] || name);
     $('#homeAvatar').textContent = first;
-    $('#homeUserAvatar').textContent = first;
     $('#profileName').textContent = name;
     $('#profileAvatar').textContent = first;
     $('#sidebarName').textContent = name;
     $('#sidebarAvatar').textContent = first;
     $('#profileSwitch').textContent = '↪';
+
+    const portrait = $('#homeCharacterAvatar');
+    const greetingTitle = $('#homeGreetingTitle');
+    const greetingMessage = $('#homeGreetingMessage');
+    const avatar = $('#homeUserAvatar');
+
+    if (portrait && greetingTitle && greetingMessage && avatar) {
+      if (isFernando) {
+        portrait.src = './assets/profiles/fernando-epoca.webp';
+        portrait.alt = 'Retrato de época de Fernando';
+        greetingTitle.innerHTML = 'Olá, <span id="homeGreetingName">Fernando</span>!';
+        greetingMessage.textContent = 'Seja bem-vindo, caro leitor! Sua biblioteca o aguarda, senhor Fernando.';
+        avatar.setAttribute('aria-label', 'Fernando em traje de época');
+      } else if (isLele) {
+        portrait.src = './assets/profiles/lele-epoca.webp';
+        portrait.alt = 'Retrato de época de Lelê';
+        greetingTitle.innerHTML = 'Olá, <span id="homeGreetingName">Lelê</span>!';
+        greetingMessage.textContent = 'Seja bem-vinda, cara leitora! Sua biblioteca a aguarda, senhora Lelê.';
+        avatar.setAttribute('aria-label', 'Lelê em traje de época');
+      } else {
+        avatar.textContent = first;
+        greetingTitle.innerHTML = `Olá, <span id="homeGreetingName">${escapeHtml(name.split(' ')[0] || name)}</span>!`;
+        greetingMessage.textContent = 'Seja bem-vindo à sua biblioteca.';
+        portrait.removeAttribute('src');
+        portrait.alt = '';
+      }
+    }
   }
 
   function openPage(id) {
@@ -335,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const percent = Math.max(0, Math.min(100, progress));
         progressWrap.hidden = false;
         progressBar.style.width = `${percent}%`;
-        progressLabel.textContent = `${Math.round(percent)}% concluído`;
+        progressLabel.textContent = `${Math.round(percent)}%`;
       } else {
         progressWrap.hidden = true;
         progressBar.style.width = '0%';
