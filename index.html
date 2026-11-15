@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-16.0.0">
+<link rel="stylesheet" href="./style.css?v=opening-button-17">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -39,8 +39,25 @@
   <div class="welcome-art" aria-hidden="true">
     <img src="./assets/scenes/welcome-approved.webp" alt="">
   </div>
-  <button class="welcome-enter-hitarea" id="enterLibrary" type="button"
-    aria-label="Entrar na Biblioteca"></button>
+  <button class="welcome-enter-button" id="enterLibrary" type="button"
+    aria-label="Entrar na Biblioteca">
+    <svg class="welcome-enter-icon" viewBox="0 0 64 48" aria-hidden="true" focusable="false">
+      <path d="M5 9.5C15 5 24 6 32 13v29C24 35 15 34 5 38Z"/>
+      <path d="M59 9.5C49 5 40 6 32 13v29c8-7 17-8 27-4Z"/>
+      <path d="M32 13v29"/>
+      <path d="M10 15c7-2 13-.8 18 3M10 22c7-2 13-.8 18 3M36 18c5-3 11-4 18-3M36 25c5-3 11-4 18-3"/>
+      <path d="M5 42c10-4 19-3 27 4 8-7 17-8 27-4"/>
+    </svg>
+    <span>Entrar na Biblioteca</span>
+  </button>
+  <span class="welcome-enter-ornament" aria-hidden="true">
+    <svg viewBox="0 0 180 30" focusable="false">
+      <path d="M4 15h48m76 0h48M52 15c9 0 11-10 20-10 7 0 10 6 18 10-8 4-11 10-18 10-9 0-11-10-20-10Zm76 0c-9 0-11-10-20-10-7 0-10 6-18 10 8 4 11 10 18 10 9 0 11-10 20-10Z"/>
+      <path d="M90 4c-5 5-5 17 0 22 5-5 5-17 0-22Z"/>
+      <path d="M82 15h16M90 2v26"/>
+      <circle cx="68" cy="15" r="2"/><circle cx="112" cy="15" r="2"/>
+    </svg>
+  </span>
 </section>
 <section id="login" class="login-screen hidden" aria-label="Entrar na biblioteca Verso & Prosa">
   <div class="login-layout" role="region" aria-label="Acesso à biblioteca">
