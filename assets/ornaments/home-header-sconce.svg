@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 110">
+<defs>
+ <radialGradient id="halo"><stop stop-color="#ffe8a1" stop-opacity=".95"/><stop offset=".35" stop-color="#ffb83d" stop-opacity=".62"/><stop offset="1" stop-color="#ff8a16" stop-opacity="0"/></radialGradient>
+ <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#704018"/><stop offset=".35" stop-color="#ffe39a"/><stop offset=".7" stop-color="#c17a25"/><stop offset="1" stop-color="#4c260d"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7c9"/><stop offset=".28" stop-color="#ffc75a"/><stop offset=".75" stop-color="#d9781e"/><stop offset="1" stop-color="#6b300d"/></linearGradient>
+</defs>
+<ellipse cx="40" cy="53" rx="39" ry="51" fill="url(#halo)"/>
+<path d="M40 6v20M26 19h28M34 24h12" fill="none" stroke="url(#brass)" stroke-width="4" stroke-linecap="round"/>
+<path d="M21 39Q40 27 59 39L54 52H26Z" fill="url(#brass)" stroke="#5c300f" stroke-width="2"/>
+<path d="M27 48Q40 42 53 48L50 80Q40 90 30 80Z" fill="url(#glass)" stroke="#8c4b16" stroke-width="2"/>
+<path d="M31 50Q40 45 49 50L47 76Q40 82 33 76Z" fill="#fff0a4" opacity=".62"/>
+<path d="M23 82Q40 91 57 82L61 88Q40 100 19 88Z" fill="url(#brass)" stroke="#6b3b15" stroke-width="2"/>
+<path d="M40 89v13M30 103h20" stroke="url(#brass)" stroke-width="4" stroke-linecap="round"/>
+</svg>

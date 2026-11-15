@@ -2200,3 +2200,86 @@ html:has(#inicio.active){
   #inicio .mock-current-reading{min-height:118px}
   #inicio .mock-bottom-nav{flex-basis:66px;height:66px}
 }
+
+
+/* HOME HEADER v16 — biblioteca iluminada como na arte aprovada */
+#inicio .mock-home-header {
+  position:relative;
+  isolation:isolate;
+  background:
+    linear-gradient(90deg,
+      rgba(5,2,1,.12) 0%,
+      rgba(8,3,1,.14) 20%,
+      rgba(7,3,2,.48) 47%,
+      rgba(7,3,2,.48) 53%,
+      rgba(8,3,1,.14) 80%,
+      rgba(5,2,1,.12) 100%),
+    radial-gradient(ellipse at 13% 18%,rgba(255,156,47,.18),transparent 23%),
+    radial-gradient(ellipse at 87% 18%,rgba(255,156,47,.18),transparent 23%),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat !important;
+  border-bottom:1px solid rgba(226,171,60,.82) !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.62), inset 0 -1px 0 rgba(255,226,151,.18) !important;
+}
+#inicio .mock-home-header::before,
+#inicio .mock-home-header::after {
+  content:none !important;
+  display:none !important;
+}
+#inicio .home-header-lamp {
+  position:absolute;
+  z-index:1;
+  top:2px;
+  display:block;
+  width:clamp(18px,6.6vw,32px);
+  height:clamp(26px,9.2vw,44px);
+  background:url("./assets/ornaments/home-header-sconce.svg") center / contain no-repeat;
+  filter:drop-shadow(0 0 6px rgba(255,165,45,.48));
+  opacity:.95;
+  pointer-events:none;
+}
+#inicio .home-header-lamp-left {left:5.5%;}
+#inicio .home-header-lamp-right {right:5.5%;transform:scaleX(-1);}
+#inicio .mock-home-brand {
+  position:relative;
+  z-index:2;
+  text-shadow:0 2px 5px #000,0 0 10px rgba(0,0,0,.85) !important;
+}
+#inicio .mock-home-brand strong {
+  color:#fff0cf !important;
+  text-shadow:0 2px 5px #000,0 0 9px rgba(0,0,0,.85) !important;
+}
+#inicio .mock-home-brand span {
+  color:#f1c95f !important;
+  text-shadow:0 1px 4px #000 !important;
+}
+#inicio .home-brand-rule {
+  z-index:3;
+  bottom:7px !important;
+  width:64% !important;
+  height:1px !important;
+  transform:translateX(-50%) !important;
+  border:0 !important;
+  background:linear-gradient(90deg,transparent 0%,#9f671f 7%,#efc04d 28%,#f8dc7d 50%,#efc04d 72%,#9f671f 93%,transparent 100%) !important;
+  box-shadow:0 0 5px rgba(238,179,55,.4);
+}
+#inicio .home-brand-rule::after {
+  content:"◆";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-54%);
+  padding:0 5px;
+  background:rgba(18,7,2,.96);
+  color:#edbd48;
+  font:10px/1 Georgia,serif;
+  text-shadow:0 0 5px rgba(255,194,57,.55);
+}
+@media(max-width:380px) {
+  #inicio .mock-home-header {
+    background-position:center 43% !important;
+  }
+  #inicio .home-header-lamp {
+    width:20px;
+    height:29px;
+  }
+}
