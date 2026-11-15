@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260">
+<defs>
+ <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9b1a19"/><stop offset=".55" stop-color="#610b0e"/><stop offset="1" stop-color="#260407"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0ab"/><stop offset=".5" stop-color="#e5ad32"/><stop offset="1" stop-color="#8e4a10"/></linearGradient>
+</defs>
+<rect x="3" y="3" width="174" height="254" rx="8" fill="#160302" stroke="url(#gold)" stroke-width="5"/>
+<rect x="11" y="11" width="158" height="238" rx="4" fill="url(#leather)" stroke="#f2c65b" stroke-width="2"/>
+<rect x="18" y="18" width="144" height="224" rx="2" fill="none" stroke="#d99d35" stroke-width="1"/>
+<g fill="none" stroke="url(#gold)" stroke-width="2">
+ <path d="M24 38 Q24 24 40 24 M156 38 Q156 24 140 24 M24 222 Q24 236 40 236 M156 222 Q156 236 140 236"/>
+ <path d="M78 27h24m-12-7v14 M78 230h24m-12-7v14"/>
+</g>
+<text x="90" y="112" fill="#fff0bb" text-anchor="middle" font-family="Georgia,serif" font-size="42" font-weight="bold">V&amp;P</text>
+<g fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M39 158 Q63 141 89 157 Q116 141 141 158 L141 202 Q115 187 90 202 Q64 187 39 202Z"/>
+ <path d="M90 157v45 M44 163q22-11 40 0 M96 163q20-11 40 0"/>
+</g>
+<g fill="#f1c75a"><circle cx="90" cy="29" r="4"/><circle cx="90" cy="231" r="4"/></g>
+</svg>

@@ -129,21 +129,25 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#profileSwitch').textContent = '↪';
 
     const portrait = $('#homeCharacterAvatar');
+    const greetingHeadline = $('#homeGreetingHeadline');
     const greetingMessage = $('#homeGreetingMessage');
     const avatar = $('#homeUserAvatar');
 
-    if (portrait && greetingMessage && avatar) {
+    if (portrait && greetingHeadline && greetingMessage && avatar) {
       if (isFernando) {
         portrait.src = './assets/profiles/fernando-epoca.webp';
         portrait.alt = 'Retrato de época de Fernando';
+        greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
         greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
       } else if (isLele) {
         portrait.src = './assets/profiles/lele-epoca.webp';
         portrait.alt = 'Retrato de época de Lelê';
+        greetingHeadline.innerHTML = 'Seja bem-vinda,<br>cara leitora!';
         greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Lelê.';
       } else {
         portrait.removeAttribute('src');
         portrait.alt = '';
+        greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
         greetingMessage.textContent = 'Sua biblioteca está pronta para recebê-lo.';
       }
     }
@@ -360,29 +364,28 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `<span>◫ ${pages.toLocaleString('pt-BR')} páginas</span><span>• Em leitura</span>`
         : '<span>Um capítulo de cada vez.</span>';
       const progress = Number(reading.progresso ?? reading.PROGRESSO ?? 0);
+      progressWrap.hidden = false;
       if (Number.isFinite(progress) && progress > 0) {
         const percent = Math.max(0, Math.min(100, progress));
-        progressWrap.hidden = false;
         progressBar.style.width = `${percent}%`;
         progressLabel.textContent = `${Math.round(percent)}%`;
       } else {
-        progressWrap.hidden = true;
         progressBar.style.width = '0%';
+        progressLabel.textContent = '0%';
       }
       action.textContent = 'Abrir ficha do livro →';
       action.dataset.openCurrentBook = 'true';
       action.dataset.page = '';
     } else {
       cover.innerHTML = '<span class="fallback-cover-title">V&amp;P</span>';
-      title.textContent = books.length ? 'Escolha o próximo volume' : 'Ainda não há um livro sobre a mesa';
-      author.textContent = books.length
-        ? 'Sua biblioteca está pronta para a próxima jornada.'
-        : 'Adicione um exemplar e prepare o lugar para sua próxima leitura.';
+      title.textContent = 'Escolha o próximo volume';
+      author.textContent = 'Sua biblioteca está pronta para a próxima jornada.';
       meta.innerHTML = books.length
         ? `<span>${books.length} ${books.length === 1 ? 'volume' : 'volumes'} no acervo</span>`
         : '<span>Sua próxima história começa aqui.</span>';
-      progressWrap.hidden = true;
+      progressWrap.hidden = false;
       progressBar.style.width = '0%';
+      progressLabel.textContent = 'Sua próxima leitura começa aqui.';
       action.textContent = books.length ? 'Percorrer minhas estantes →' : 'Adicionar primeiro exemplar →';
       action.dataset.openCurrentBook = '';
       action.dataset.page = books.length ? 'estante' : 'adicionar';

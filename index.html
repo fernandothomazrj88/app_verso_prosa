@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-12.0.0">
+<link rel="stylesheet" href="./style.css?v=home-final-13">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -116,17 +116,22 @@
   <div class="mock-home-body">
     <section class="mock-greeting home-hero-banner" aria-label="Boas-vindas à biblioteca">
       <div class="mock-greeting-copy">
-        <h2>Seja bem-vindo,<br>caro leitor!</h2>
+        <h2 id="homeGreetingHeadline">Seja bem-vindo,<br>caro leitor!</h2>
+        <div class="home-hero-divider" aria-hidden="true"></div>
         <p id="homeGreetingMessage">Sua biblioteca o aguarda, senhor Fernando.</p>
+        <div class="home-hero-flourish" aria-hidden="true">❧ ❖ ❧</div>
       </div>
       <div class="mock-user-avatar" id="homeUserAvatar">
         <img id="homeCharacterAvatar" src="./assets/profiles/fernando-epoca.webp" alt="Retrato de época de Fernando">
       </div>
     </section>
 
-    <section class="mock-quote-card">
-      <p>“Ler é habitar outros<br class="quote-mobile-break"> mundos sem sair do lugar.”</p>
-      <small>C. S. Lewis</small>
+    <section class="mock-quote-card" aria-label="Citação literária">
+      <img class="quote-scroll-art" src="./assets/ornaments/home-parchment.svg" alt="">
+      <div class="quote-copy">
+        <p>“Ler é habitar outros<br class="quote-mobile-break"> mundos sem sair do lugar.”</p>
+        <small>C. S. Lewis</small>
+      </div>
     </section>
 
     <nav class="mock-shortcuts" aria-label="Acessos rápidos">
