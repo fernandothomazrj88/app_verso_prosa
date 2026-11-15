@@ -2450,3 +2450,315 @@ html, body {background:#070302 !important;}
   #inicio .home-hero-banner .mock-greeting-copy h2 {font-size:36px;}
   #inicio .home-hero-banner .mock-greeting-copy p {font-size:26px;}
 }
+
+
+/* HOME 12.0 — composição fiel à referência enviada em 15/11 */
+#app.app-shell, #app .workspace, #app main,
+#app #inicio, #app #inicio.page, #app #inicio.page.active {
+  background-color:#080301 !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+#app.app-shell {
+  min-height:100svh !important;
+  height:auto !important;
+  padding-bottom:0 !important;
+}
+#app .workspace {min-height:0 !important;}
+#app main {
+  width:100% !important;
+  max-width:760px !important;
+  margin:0 auto !important;
+  padding:0 !important;
+}
+#app .workspace::before, #app .workspace::after,
+#app main::before, #app main::after,
+#inicio::before, #inicio::after {
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+#inicio.home-mockup {
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+  min-height:100svh !important;
+  height:auto !important;
+  margin:0 auto !important;
+  padding:0 0 0 !important;
+  overflow:visible !important;
+  background:#080301 !important;
+}
+#inicio .mock-home-header {
+  position:relative;
+  flex:0 0 108px;
+  height:108px;
+  padding:0 8px 7px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  gap:0;
+  border-bottom:1px solid rgba(220,166,55,.72);
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(17,40,66,.45),transparent 55%),
+    linear-gradient(180deg,#030609 0%,#090402 82%,#160802 100%);
+}
+#inicio .home-brand-emblem {
+  top:4px;
+  left:50%;
+  transform:translateX(-50%);
+  width:63px;
+  height:63px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 5px rgba(246,190,73,.55));
+}
+#inicio .mock-home-brand {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  text-align:center;
+  line-height:1;
+}
+#inicio .mock-home-brand strong {
+  font:700 29px/1 Georgia,"Times New Roman",serif;
+  letter-spacing:-.65px;
+  color:#fff0d0;
+}
+#inicio .mock-home-brand span {
+  margin-top:3px;
+  font:600 13px/1.05 Georgia,"Times New Roman",serif;
+  letter-spacing:1.2px;
+  color:#e9c36b;
+}
+#inicio .home-brand-rule {
+  bottom:-5px;
+  width:9px;height:9px;
+  background:#e7b84d;
+  box-shadow:0 0 7px rgba(255,195,65,.65);
+}
+#inicio .mock-home-body {
+  display:flex;
+  flex:0 0 auto;
+  flex-direction:column;
+  gap:7px;
+  min-height:0 !important;
+  padding:9px 9px 8px;
+  background:#080301 !important;
+  background-image:none !important;
+}
+#inicio .mock-greeting.home-hero-banner {
+  position:relative;
+  display:flex;
+  width:100%;
+  height:178px;
+  min-height:178px;
+  max-height:178px;
+  margin:0;
+  overflow:hidden;
+  border:2px solid #d99b28;
+  border-radius:17px;
+  background:
+    linear-gradient(90deg,#1b0803 0%,#230b04 43%,rgba(35,11,4,.9) 56%,rgba(16,5,2,.1) 100%),
+    url("./assets/profiles/fernando-epoca.webp") right 37%/auto 145% no-repeat,
+    #170703;
+  box-shadow:inset 0 0 0 1px rgba(255,225,145,.25),0 3px 8px #000a;
+}
+#inicio .home-hero-banner .mock-greeting-copy {
+  position:relative;
+  z-index:3;
+  flex:0 0 59%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:7px;
+  padding:12px 0 12px 14px;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 {
+  margin:0;
+  color:#fff0d7;
+  font:italic 700 clamp(21px,4.7vw,28px)/1.06 Georgia,"Times New Roman",serif;
+  text-shadow:0 2px 4px #000,0 0 7px #000;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  margin:0;
+  max-width:95%;
+  color:#fff0d7;
+  font:600 clamp(15px,3.5vw,19px)/1.12 Georgia,"Times New Roman",serif;
+  text-shadow:0 2px 4px #000,0 0 7px #000;
+}
+#inicio .home-hero-banner .mock-user-avatar {
+  position:absolute;
+  z-index:2;
+  top:0;right:0;bottom:0;
+  width:51%;
+  height:100%;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:transparent;
+  overflow:hidden;
+}
+#inicio .home-hero-banner .mock-user-avatar::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0 auto 0 0;
+  width:28%;
+  background:linear-gradient(90deg,#1b0803 0%,rgba(27,8,3,.75) 25%,transparent 100%);
+}
+#inicio .home-hero-banner .mock-user-avatar img {
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 12%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 12%,#000 34%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 12%,#000 34%);
+}
+#inicio .mock-quote-card {
+  position:relative;
+  min-height:105px;
+  margin:0;
+  padding:12px 35px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:visible;
+  border:2px solid #bd7c35;
+  border-radius:12px;
+  color:#351a08;
+  background:
+    radial-gradient(ellipse at 50% 48%,#ffe8b4 0%,#f5d18d 54%,#d99d54 100%);
+  box-shadow:inset 0 0 0 2px rgba(255,247,218,.7),inset 0 0 16px rgba(120,67,20,.22),0 3px 8px #000a;
+}
+#inicio .mock-quote-card::before,
+#inicio .mock-quote-card::after {
+  content:"";
+  position:absolute;
+  top:9px;
+  bottom:9px;
+  width:18px;
+  border:1px solid #a9682b;
+  border-radius:45% 22% 22% 45%;
+  background:linear-gradient(90deg,#a85f25 0%,#f6d49a 40%,#d18e43 100%);
+  box-shadow:inset 0 0 5px #fff0c6,0 2px 4px #542609;
+}
+#inicio .mock-quote-card::before {left:-5px;transform:rotate(-8deg);}
+#inicio .mock-quote-card::after {right:-5px;transform:scaleX(-1) rotate(-8deg);}
+#inicio .mock-quote-card p {
+  margin:0 0 4px;
+  color:#321707;
+  font:italic 700 clamp(16px,3.8vw,21px)/1.12 Georgia,"Times New Roman",serif;
+}
+#inicio .mock-quote-card small {
+  color:#351a08;
+  font:15px/1.05 Georgia,"Times New Roman",serif;
+}
+#inicio .mock-shortcuts {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px 8px;
+  margin:0;
+}
+#inicio .mock-shortcut {
+  min-height:59px;
+  padding:5px 4px;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1.5px solid #d68d24;
+  border-radius:12px;
+  background:linear-gradient(145deg,#740e0c 0%,#3a0707 100%);
+  box-shadow:inset 0 1px 0 rgba(255,224,125,.16),0 2px 5px #0008;
+  color:#fff1d6;
+  font:600 14px/1.05 Georgia,"Times New Roman",serif;
+}
+#inicio .mock-shortcut svg {
+  flex:0 0 36px;
+  width:36px;height:36px;
+  stroke:#f4c94e;
+  filter:drop-shadow(0 1px 2px #000);
+}
+#inicio .mock-current-reading {
+  margin:0;
+  padding:7px 8px 8px;
+  border:1.5px solid #d49a36;
+  border-radius:12px;
+  background:linear-gradient(145deg,#3b0807 0%,#1b0504 75%);
+  box-shadow:inset 0 1px 0 rgba(255,225,145,.14),0 3px 8px #0009;
+}
+#inicio .mock-current-reading h3 {
+  margin:0 0 5px;
+  font:700 16px/1 Georgia,"Times New Roman",serif;
+  color:#fff0d5;
+}
+#inicio .mock-reading-row {min-height:70px;gap:8px;}
+#inicio .mock-reading-cover {
+  width:49px;height:65px;flex:0 0 49px;
+  border:1.5px solid #dca83e;
+  border-radius:5px;
+}
+#inicio .mock-reading-details h4 {
+  margin:0 0 2px;
+  font:700 14px/1.1 Georgia,"Times New Roman",serif;
+  color:#fff0d7;
+}
+#inicio .mock-reading-details p {
+  margin:0 0 4px;
+  font:11px/1.15 Georgia,"Times New Roman",serif;
+  color:#f2dfc3;
+}
+#inicio .mock-reading-progress {
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+#inicio .mock-reading-progress small {
+  font:10px/1.1 Georgia,"Times New Roman",serif;
+  color:#f3dfc0;
+  white-space:nowrap;
+}
+#inicio .mock-progress-track {
+  height:7px;
+  flex:1;
+  min-width:30px;
+}
+#inicio .mock-reading-open {display:none !important;}
+#inicio .mock-bottom-nav {
+  position:sticky !important;
+  z-index:60;
+  bottom:0;
+  left:auto;right:auto;
+  flex:0 0 64px;
+  width:100%;
+  height:64px;
+  margin:0;
+  margin-top:auto;
+  border-radius:18px 18px 0 0;
+  background:linear-gradient(180deg,#210906,#090302);
+  box-shadow:0 -3px 12px #000a,inset 0 1px 0 rgba(232,176,64,.5);
+}
+@media(max-width:380px) {
+  #inicio .mock-home-header {flex-basis:94px;height:94px;}
+  #inicio .home-brand-emblem {width:58px;height:58px;}
+  #inicio .mock-home-brand strong {font-size:26px;}
+  #inicio .mock-home-brand span {font-size:11px;}
+  #inicio .mock-greeting.home-hero-banner {height:158px;min-height:158px;max-height:158px;}
+  #inicio .home-hero-banner .mock-greeting-copy {flex-basis:59%;gap:5px;padding-left:11px;}
+  #inicio .home-hero-banner .mock-greeting-copy h2 {font-size:20px;}
+  #inicio .home-hero-banner .mock-greeting-copy p {font-size:14px;}
+  #inicio .mock-quote-card {min-height:90px;padding-left:30px;padding-right:30px;}
+  #inicio .mock-shortcut {min-height:53px;gap:5px;font-size:12px;}
+  #inicio .mock-shortcut svg {flex-basis:30px;width:30px;height:30px;}
+  #inicio .mock-reading-cover {width:45px;height:60px;flex-basis:45px;}
+}
+@media(min-width:681px) {
+  #inicio .mock-home-header {flex-basis:108px;height:108px;}
+  #inicio .mock-home-brand strong {font-size:30px;}
+  #inicio .mock-greeting.home-hero-banner {height:178px;max-height:178px;}
+}
