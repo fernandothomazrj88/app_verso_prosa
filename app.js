@@ -136,15 +136,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isFernando) {
         portrait.src = './assets/profiles/fernando-epoca.webp';
         portrait.alt = 'Retrato de época de Fernando';
-        greetingMessage.textContent = 'Seja bem-vindo, caro leitor! Sua biblioteca o aguarda, senhor Fernando.';
+        greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
       } else if (isLele) {
         portrait.src = './assets/profiles/lele-epoca.webp';
         portrait.alt = 'Retrato de época de Lelê';
-        greetingMessage.textContent = 'Seja bem-vinda, cara leitora! Sua biblioteca a aguarda, senhora Lelê.';
+        greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Lelê.';
       } else {
         portrait.removeAttribute('src');
         portrait.alt = '';
-        greetingMessage.textContent = 'Seja bem-vindo à sua biblioteca.';
+        greetingMessage.textContent = 'Sua biblioteca está pronta para recebê-lo.';
       }
     }
   }
