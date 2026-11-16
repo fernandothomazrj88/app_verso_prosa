@@ -10,7 +10,6 @@
  <path d="M24 38 Q24 24 40 24 M156 38 Q156 24 140 24 M24 222 Q24 236 40 236 M156 222 Q156 236 140 236"/>
  <path d="M78 27h24m-12-7v14 M78 230h24m-12-7v14"/>
 </g>
-<text x="90" y="112" fill="#fff0bb" text-anchor="middle" font-family="Georgia,serif" font-size="42" font-weight="bold">V&amp;P</text>
 <g fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
  <path d="M39 158 Q63 141 89 157 Q116 141 141 158 L141 202 Q115 187 90 202 Q64 187 39 202Z"/>
  <path d="M90 157v45 M44 163q22-11 40 0 M96 163q20-11 40 0"/>

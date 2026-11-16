@@ -2568,3 +2568,63 @@ html:has(#inicio.active){
   #inicio .mock-shortcut .home-classic-icon {width:48px;height:48px;flex-basis:48px;}
   #inicio .mock-bottom-nav button .home-nav-icon {width:27px;height:27px;}
 }
+
+
+/* HOME v20 — refinamentos pontuais após comparação com a captura real */
+#inicio .mock-home-header {
+  flex-basis: clamp(62px, 16vw, 78px) !important;
+  height: clamp(62px, 16vw, 78px) !important;
+  min-height: 62px;
+  justify-content: center !important;
+  padding: 9px 8px 7px !important;
+}
+#inicio .mock-home-brand {
+  transform: translateY(3px);
+}
+#inicio .mock-home-brand strong {
+  line-height: 1.08 !important;
+}
+#inicio .mock-home-brand span {
+  margin-top: 3px !important;
+  line-height: 1.1 !important;
+}
+#inicio .home-brand-rule {
+  bottom: -4px;
+}
+#inicio .home-hero-banner .home-hero-flourish {
+  position: relative;
+  display: block;
+  flex: 0 0 8px;
+  width: clamp(58px, 18vw, 88px);
+  height: 8px;
+  min-height: 8px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+  background: linear-gradient(90deg, transparent, #b87a1e 18%, #f7d36d 50%, #b87a1e 82%, transparent);
+  opacity: .9;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.8));
+}
+#inicio .home-hero-banner .home-hero-flourish::after {
+  content: "◆";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-52%) scale(.72);
+  padding: 0 3px;
+  color: #f4c85a;
+  background: #2b1006;
+  font: 9px Georgia,serif;
+  text-shadow: 0 0 3px rgba(255,201,80,.6);
+}
+#inicio .mock-reading-cover .fallback-cover-title {
+  color: #fff0bb !important;
+  font: 700 clamp(9px,2.5vw,12px)/1 Georgia,"Times New Roman",serif !important;
+  text-align: left !important;
+  padding: 5px 4px !important;
+  text-shadow: 0 1px 2px #210603;
+  background-image: url("./assets/ornaments/home-cover-placeholder.svg") !important;
+  background-position: center !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+}
