@@ -2419,3 +2419,82 @@ html:has(#inicio.active){
     height:16px;
   }
 }
+
+
+/* ABERTURA v18 — alinhamento do botão HTML sobre o botão embutido na arte original */
+#welcome .welcome-enter-button {
+  left:50% !important;
+  bottom:2.2svh !important;
+  transform:translateX(-50%) !important;
+  width:min(80vw,53.33svh) !important;
+  height:min(9.7svh,72px) !important;
+  min-height:52px !important;
+  gap:clamp(9px,2.7vw,16px) !important;
+  padding:4px clamp(12px,4vw,22px) !important;
+  border:2px solid #dda52e !important;
+  border-radius:999px !important;
+  background:
+    linear-gradient(180deg,rgba(255,219,142,.12),transparent 24%),
+    linear-gradient(180deg,#8e1019 0%,#720811 49%,#4b0509 100%) !important;
+  box-shadow:
+    0 3px 7px rgba(0,0,0,.58),
+    inset 0 1px 0 rgba(255,239,185,.66),
+    inset 0 -2px 4px rgba(18,0,0,.52) !important;
+}
+#welcome .welcome-enter-button::before {
+  content:none !important;
+  display:none !important;
+}
+#welcome .welcome-enter-button:hover {
+  filter:brightness(1.08);
+  box-shadow:
+    0 3px 9px rgba(0,0,0,.62),
+    0 0 8px rgba(224,162,53,.2),
+    inset 0 1px 0 rgba(255,239,185,.72) !important;
+}
+#welcome .welcome-enter-button:active {
+  transform:translateX(-50%) translateY(1px) !important;
+}
+#welcome .welcome-enter-ornament {
+  left:50% !important;
+  bottom:.3svh !important;
+  width:clamp(108px,36vw,164px) !important;
+  height:1.55svh !important;
+  min-height:10px !important;
+  max-height:14px !important;
+  transform:translateX(-50%) !important;
+}
+#welcome .welcome-enter-ornament svg {
+  stroke-width:2.1;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.7));
+}
+@media(max-width:600px) {
+  #welcome .welcome-enter-button {
+    left:50% !important;
+    bottom:2.2svh !important;
+    width:min(80vw,53.33svh) !important;
+    height:9.7svh !important;
+    min-height:50px !important;
+    transform:translateX(-50%) !important;
+    font-size:clamp(15px,4.2vw,20px) !important;
+  }
+  #welcome .welcome-enter-ornament {
+    bottom:.3svh !important;
+    width:36vw !important;
+    height:1.55svh !important;
+    min-height:10px !important;
+    max-height:14px !important;
+  }
+}
+@media(max-height:520px) and (orientation:landscape) {
+  #welcome .welcome-enter-button {
+    bottom:3.1svh !important;
+    width:min(48svh,62vw) !important;
+    height:11svh !important;
+  }
+  #welcome .welcome-enter-ornament {
+    bottom:.3svh !important;
+    height:2svh !important;
+    max-height:12px !important;
+  }
+}
