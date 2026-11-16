@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#fff5b8"/><stop offset=".18" stop-color="#e8b94a"/>
+  <stop offset=".38" stop-color="#fff0a0"/><stop offset=".62" stop-color="#b87316"/>
+  <stop offset=".82" stop-color="#ffdf73"/><stop offset="1" stop-color="#6b390b"/>
+ </linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+  <stop stop-color="#fff6c4"/><stop offset=".48" stop-color="#d28b20"/><stop offset="1" stop-color="#603006"/>
+ </linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+  <feOffset dy="1.5" result="offset"/>
+  <feComponentTransfer><feFuncA type="linear" slope=".75"/></feComponentTransfer>
+  <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+ </filter>
+</defs><g filter="url(#shadow)"><rect x="6" y="10" width="36" height="32" rx="4" fill="url(#gold)" stroke="#5b3008" stroke-width="2.2"/><rect x="10" y="16" width="28" height="22" rx="1.5" fill="#5a2109" stroke="#ffe6a0" stroke-width="1.2"/><path d="M14 5v11M34 5v11M7 19h34" stroke="url(#edge)" stroke-width="4" stroke-linecap="round"/><path d="M16 25h4v4h-4zm9 0h4v4h-4zm9 0h3v4h-3zm-18 8h4v3h-4zm9 0h4v3h-4z" fill="#f3c85c" stroke="#a35d12" stroke-width=".7"/></g></svg>

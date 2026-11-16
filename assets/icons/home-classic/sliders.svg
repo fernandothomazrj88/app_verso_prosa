@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#fff5b8"/><stop offset=".18" stop-color="#e8b94a"/>
+  <stop offset=".38" stop-color="#fff0a0"/><stop offset=".62" stop-color="#b87316"/>
+  <stop offset=".82" stop-color="#ffdf73"/><stop offset="1" stop-color="#6b390b"/>
+ </linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+  <stop stop-color="#fff6c4"/><stop offset=".48" stop-color="#d28b20"/><stop offset="1" stop-color="#603006"/>
+ </linearGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+  <feOffset dy="1.5" result="offset"/>
+  <feComponentTransfer><feFuncA type="linear" slope=".75"/></feComponentTransfer>
+  <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+ </filter>
+</defs><g filter="url(#shadow)"><g stroke="url(#gold)" stroke-width="4" stroke-linecap="round"><path d="M7 11h34M7 24h34M7 37h34"/></g><g fill="#5b2108" stroke="#ffe9a1" stroke-width="1.7"><circle cx="16" cy="11" r="4"/><circle cx="31" cy="24" r="4"/><circle cx="21" cy="37" r="4"/></g></g></svg>
