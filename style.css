@@ -2628,3 +2628,112 @@ html:has(#inicio.active){
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
 }
+
+
+/* HOME MOBILE v21 — usa melhor a altura disponível sem deixar um vazio no rodapé */
+@media (max-width: 600px) {
+  #inicio.home-mockup.page.active {
+    min-height: 100svh !important;
+    height: 100svh !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+  #inicio .mock-home-header {
+    flex: 0 0 clamp(82px, 14.5svh, 104px) !important;
+    height: clamp(82px, 14.5svh, 104px) !important;
+    min-height: clamp(82px, 14.5svh, 104px) !important;
+  }
+  #inicio .mock-home-brand strong {
+    font-size: clamp(27px, 7.4vw, 34px) !important;
+  }
+  #inicio .mock-home-brand span {
+    font-size: clamp(13px, 3.8vw, 17px) !important;
+  }
+  #inicio .mock-home-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    justify-content: space-evenly !important;
+    gap: clamp(8px, 1.5svh, 15px) !important;
+    padding: clamp(9px, 1.7svh, 14px) clamp(10px, 3.2vw, 15px) clamp(9px, 1.5svh, 13px) !important;
+    overflow: hidden !important;
+  }
+  #inicio .mock-greeting.home-hero-banner {
+    flex: 0 0 clamp(205px, 24svh, 270px) !important;
+    height: clamp(205px, 24svh, 270px) !important;
+    min-height: clamp(205px, 24svh, 270px) !important;
+    max-height: clamp(205px, 24svh, 270px) !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy {
+    flex-basis: 60% !important;
+    padding-left: clamp(13px, 4vw, 20px) !important;
+    padding-right: 4px !important;
+    gap: clamp(5px, 1.1svh, 9px) !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2 {
+    font-size: clamp(24px, 6.6vw, 32px) !important;
+    line-height: 1.04 !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p {
+    font-size: clamp(16px, 4.5vw, 21px) !important;
+    line-height: 1.12 !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar {
+    flex-basis: 48% !important;
+    width: 48% !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar img {
+    object-position: center top !important;
+  }
+  #inicio .mock-quote-card {
+    flex: 0 0 clamp(88px, 11svh, 112px) !important;
+    height: clamp(88px, 11svh, 112px) !important;
+    min-height: clamp(88px, 11svh, 112px) !important;
+  }
+  #inicio .mock-shortcuts {
+    flex: 0 0 auto !important;
+    gap: clamp(7px, 1.2svh, 11px) !important;
+  }
+  #inicio .mock-shortcut {
+    height: clamp(66px, 8.3svh, 82px) !important;
+    min-height: clamp(66px, 8.3svh, 82px) !important;
+  }
+  #inicio .mock-current-reading {
+    flex: 0 0 auto !important;
+    min-height: clamp(142px, 17svh, 180px) !important;
+    padding: clamp(9px, 1.4svh, 13px) !important;
+  }
+  #inicio .mock-reading-cover {
+    flex-basis: clamp(66px, 19vw, 86px) !important;
+    width: clamp(66px, 19vw, 86px) !important;
+    height: clamp(94px, 26vw, 116px) !important;
+  }
+  #inicio .mock-bottom-nav {
+    flex: 0 0 clamp(76px, 9.5svh, 88px) !important;
+    height: clamp(76px, 9.5svh, 88px) !important;
+    min-height: clamp(76px, 9.5svh, 88px) !important;
+  }
+}
+
+/* A capa vazia recebe a identificação pelo HTML; o SVG fornece apenas o relevo e o livro. */
+#inicio .mock-reading-cover > span.fallback-cover-title {
+  display: block;
+  color: #fff0bb;
+  font: 700 12px/1 Georgia,"Times New Roman",serif;
+  padding: 7px 5px 0;
+  text-align: left;
+  text-shadow: 0 1px 2px #210603;
+}
+
+/* LOGIN MOBILE v21 — enquadramento completo da luminária e dos livros */
+#login .login-bottom-scene {
+  height: 38% !important;
+  background-size: 100% 100%, 100% 100% !important;
+  background-position: center, center center !important;
+}
+@media (max-width: 600px) {
+  #login .login-bottom-scene {
+    height: 38.5% !important;
+    background-size: 100% 100%, 100% 100% !important;
+    background-position: center, center center !important;
+  }
+}

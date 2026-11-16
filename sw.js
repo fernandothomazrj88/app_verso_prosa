@@ -1,6 +1,6 @@
-const CACHE_NAME = 'verso-prosa-home-refinada-v20';
+const CACHE_NAME = 'verso-prosa-mobile-home-v21';
 const APP_FILES = [
- './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-refine-v20','./app.js','./manifest.json',
+ './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=mobile-home-v21','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg',
  './assets/icons/home-classic/book-open.svg',
  './assets/icons/home-classic/book-add.svg',
