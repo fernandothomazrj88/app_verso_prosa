@@ -2873,3 +2873,282 @@ html:has(#inicio.active){
 #inicio .home-hero-banner .home-hero-flourish::after {
   content: none !important;
 }
+
+
+/* VERSÃO 23 — RESPONSIVIDADE OFICIAL: celular, tablet e desktop
+   Mantém o mesmo conteúdo e identidade; adapta composição e distribuição. */
+
+/* Base fluida: impede que a página herde larguras fixas dos módulos antigos. */
+#app, #app .workspace, #app main {
+  min-width: 0;
+  box-sizing: border-box;
+}
+#app:has(#inicio.active) .workspace,
+#app:has(#inicio.active) main {
+  width: 100% !important;
+}
+#welcome, #login, #inicio,
+#welcome *, #login *, #inicio * {
+  box-sizing: border-box;
+}
+img { max-width: 100%; }
+
+/* Tablet: mais área útil, sem transformar a interface em uma versão ampliada do celular. */
+@media (min-width: 700px) and (max-width: 1099px) {
+  #welcome .welcome-art {
+    width: min(72vw, 66.6667svh);
+    height: min(100svh, 150vw);
+  }
+  #welcome .welcome-enter-button {
+    width: min(62vw, 58.7svh) !important;
+    height: 11.8% !important;
+  }
+  #login .login-layout {
+    width: min(100%, 760px) !important;
+    height: 100dvh !important;
+    min-height: 680px !important;
+    margin-inline: auto !important;
+  }
+  #login .login-canvas {
+    width: 100% !important;
+    max-width: 760px !important;
+    min-height: 680px !important;
+    margin-inline: auto !important;
+  }
+  #login .login-library-atmosphere {
+    background-size: cover, cover !important;
+    background-position: center, center !important;
+  }
+  #login .login-bottom-scene {
+    background-size: 100% 100%, contain !important;
+    background-position: center, center bottom !important;
+  }
+
+  #app:has(#inicio.active) .workspace,
+  #app:has(#inicio.active) main {
+    max-width: none !important;
+    margin-inline: auto !important;
+  }
+  #inicio.home-mockup.page.active {
+    width: min(100%, 900px) !important;
+    max-width: 900px !important;
+    min-height: 100svh !important;
+    margin-inline: auto !important;
+  }
+  #inicio .mock-home-header {
+    flex-basis: 112px !important;
+    height: 112px !important;
+    min-height: 112px !important;
+  }
+  #inicio .mock-home-brand strong { font-size: clamp(34px, 4.2vw, 46px) !important; }
+  #inicio .mock-home-brand span { font-size: clamp(17px, 2vw, 21px) !important; }
+  #inicio .mock-home-body {
+    gap: 16px !important;
+    padding: 18px 22px 24px !important;
+    overflow: visible !important;
+  }
+  #inicio .mock-greeting.home-hero-banner {
+    width: 100% !important;
+    height: clamp(260px, 32vw, 340px) !important;
+    min-height: clamp(260px, 32vw, 340px) !important;
+    max-height: 340px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy {
+    flex-basis: 57% !important;
+    padding: 22px 12px 18px 28px !important;
+    gap: 12px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2 {
+    font-size: clamp(30px, 4vw, 42px) !important;
+    line-height: 1.08 !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p {
+    font-size: clamp(20px, 2.5vw, 26px) !important;
+    line-height: 1.2 !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar {
+    flex-basis: 45% !important;
+    width: 45% !important;
+  }
+  #inicio .mock-quote-card {
+    height: clamp(112px, 14vw, 142px) !important;
+    min-height: clamp(112px, 14vw, 142px) !important;
+  }
+  #inicio .mock-quote-card .quote-copy p { font-size: clamp(21px, 2.7vw, 29px) !important; }
+  #inicio .mock-quote-card .quote-copy small { font-size: clamp(15px, 1.8vw, 19px) !important; }
+  #inicio .mock-shortcuts { gap: 12px !important; }
+  #inicio .mock-shortcut {
+    height: clamp(90px, 11vw, 112px) !important;
+    min-height: clamp(90px, 11vw, 112px) !important;
+    gap: 14px !important;
+  }
+  #inicio .mock-shortcut span { font-size: clamp(18px, 2vw, 23px) !important; }
+  #inicio .mock-shortcut .home-classic-icon {
+    width: clamp(42px, 5vw, 54px) !important;
+    height: clamp(42px, 5vw, 54px) !important;
+    flex-basis: clamp(42px, 5vw, 54px) !important;
+  }
+  #inicio .mock-current-reading {
+    min-height: 190px !important;
+    padding: 16px !important;
+  }
+  #inicio .mock-current-reading h3 { font-size: 25px !important; }
+  #inicio .mock-reading-cover {
+    width: 100px !important; flex-basis: 100px !important; height: 138px !important;
+  }
+  #inicio .mock-reading-details h4 { font-size: 22px !important; }
+  #inicio .mock-reading-details p { font-size: 17px !important; }
+  #inicio .mock-bottom-nav {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    width: 100% !important;
+    height: 86px !important;
+    min-height: 86px !important;
+    flex-basis: 86px !important;
+  }
+}
+
+/* Desktop: composição editorial em duas colunas, centralizada e sem esticar retratos. */
+@media (min-width: 1100px) {
+  #welcome .welcome-art {
+    width: min(66.6667svh, 760px);
+    height: min(100svh, 1140px);
+  }
+  #welcome .welcome-enter-button {
+    width: min(58.7svh, 620px) !important;
+    height: 11.8% !important;
+  }
+  #login .login-layout {
+    width: min(100%, 900px) !important;
+    height: 100dvh !important;
+    min-height: 720px !important;
+    margin-inline: auto !important;
+  }
+  #login .login-canvas {
+    width: 100% !important;
+    max-width: 900px !important;
+    min-height: 720px !important;
+    margin-inline: auto !important;
+  }
+  #login .login-library-atmosphere {
+    background-size: cover, cover !important;
+    background-position: center, center !important;
+  }
+  #login .login-bottom-scene {
+    background-size: 100% 100%, contain !important;
+    background-position: center, center bottom !important;
+  }
+
+  #app:has(#inicio.active) .workspace,
+  #app:has(#inicio.active) main {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+  }
+  #inicio.home-mockup.page.active {
+    width: min(100%, 1440px) !important;
+    max-width: 1440px !important;
+    min-height: 100svh !important;
+    margin: 0 auto !important;
+  }
+  #inicio .mock-home-header {
+    flex-basis: 126px !important;
+    height: 126px !important;
+    min-height: 126px !important;
+  }
+  #inicio .mock-home-brand strong { font-size: clamp(42px, 3.3vw, 54px) !important; }
+  #inicio .mock-home-brand span { font-size: clamp(20px, 1.5vw, 25px) !important; }
+  #inicio .mock-home-body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr) !important;
+    grid-template-areas:
+      "greeting greeting"
+      "quote quote"
+      "shortcuts reading" !important;
+    align-items: stretch !important;
+    gap: 20px 24px !important;
+    padding: 26px clamp(28px, 4vw, 64px) 28px !important;
+    max-width: 1440px !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+  #inicio .mock-greeting.home-hero-banner {
+    grid-area: greeting !important;
+    height: clamp(310px, 28vw, 390px) !important;
+    min-height: clamp(310px, 28vw, 390px) !important;
+    max-height: 390px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy {
+    flex-basis: 57% !important;
+    padding: 28px 18px 24px 48px !important;
+    gap: 15px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2 {
+    font-size: clamp(38px, 3.2vw, 52px) !important;
+    line-height: 1.08 !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p {
+    font-size: clamp(25px, 2vw, 32px) !important;
+    line-height: 1.22 !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar {
+    flex-basis: 43% !important;
+    width: 43% !important;
+  }
+  #inicio .mock-quote-card {
+    grid-area: quote !important;
+    height: clamp(130px, 11vw, 158px) !important;
+    min-height: clamp(130px, 11vw, 158px) !important;
+  }
+  #inicio .mock-quote-card .quote-copy p { font-size: clamp(25px, 2.2vw, 34px) !important; }
+  #inicio .mock-quote-card .quote-copy small { font-size: clamp(18px, 1.5vw, 23px) !important; }
+  #inicio .mock-shortcuts {
+    grid-area: shortcuts !important;
+    align-content: start !important;
+    gap: 16px !important;
+  }
+  #inicio .mock-shortcut {
+    height: clamp(112px, 9vw, 138px) !important;
+    min-height: clamp(112px, 9vw, 138px) !important;
+    gap: 18px !important;
+    border-radius: 16px !important;
+  }
+  #inicio .mock-shortcut span { font-size: clamp(22px, 1.6vw, 27px) !important; }
+  #inicio .mock-shortcut .home-classic-icon {
+    width: clamp(52px, 4vw, 66px) !important;
+    height: clamp(52px, 4vw, 66px) !important;
+    flex-basis: clamp(52px, 4vw, 66px) !important;
+  }
+  #inicio .mock-current-reading {
+    grid-area: reading !important;
+    align-self: stretch !important;
+    min-height: 100% !important;
+    padding: 20px !important;
+  }
+  #inicio .mock-current-reading h3 { font-size: clamp(26px, 2vw, 32px) !important; }
+  #inicio .mock-reading-row { align-items: center !important; gap: 20px !important; }
+  #inicio .mock-reading-cover {
+    width: clamp(112px, 9vw, 142px) !important;
+    flex-basis: clamp(112px, 9vw, 142px) !important;
+    height: clamp(158px, 12vw, 194px) !important;
+  }
+  #inicio .mock-reading-details h4 { font-size: clamp(23px, 1.8vw, 29px) !important; }
+  #inicio .mock-reading-details p { font-size: clamp(18px, 1.35vw, 22px) !important; }
+  #inicio .mock-bottom-nav {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    width: min(100%, 1440px) !important;
+    height: 96px !important;
+    min-height: 96px !important;
+    flex-basis: 96px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Paisagem em tablets e notebooks menores: permite rolar sem cortar os formulários. */
+@media (min-width: 700px) and (max-height: 700px) {
+  #login.login-screen:not(.hidden) { overflow-y: auto !important; }
+  #login .login-layout, #login .login-canvas { min-height: 700px !important; }
+}
