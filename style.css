@@ -3152,3 +3152,64 @@ img { max-width: 100%; }
   #login.login-screen:not(.hidden) { overflow-y: auto !important; }
   #login .login-layout, #login .login-canvas { min-height: 700px !important; }
 }
+
+
+/* VERSÃO 24 — LOGIN: transparência restrita ao formulário.
+   O fundo da biblioteca termina antes da cena dos livros e do abajur. */
+#login .login-library-atmosphere {
+  inset: 0 0 37% 0 !important;
+  opacity: .88 !important;
+  background-image:
+    linear-gradient(180deg, rgba(8,3,1,.06) 0%, rgba(10,4,2,.12) 72%, rgba(10,4,2,.20) 100%),
+    url('./assets/scenes/login-library-bg-v8.webp') !important;
+  background-position: center top, center top !important;
+  background-size: 100% 100%, 100% 100% !important;
+  background-repeat: no-repeat !important;
+}
+/* Cartão translúcido somente atrás dos campos, botão e recuperação de senha. */
+#login .login-form::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 31.5%;
+  left: 4.5%;
+  right: 4.5%;
+  bottom: 17%;
+  border: 1px solid rgba(211,166,76,.56);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(35,15,7,.60), rgba(20,8,4,.48));
+  box-shadow: inset 0 1px 10px rgba(255,194,83,.07), 0 8px 24px rgba(0,0,0,.18);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+#login .login-form {
+  background: transparent !important;
+}
+#login .login-bottom-scene {
+  z-index: 2 !important;
+  height: 38.5% !important;
+  background-image:
+    linear-gradient(180deg, rgba(12,5,2,0) 0%, rgba(12,5,2,0) 100%),
+    url('./assets/scenes/login-bottom-approved-v6.webp') !important;
+  background-size: 100% 100%, 100% auto !important;
+  background-position: center, center bottom !important;
+  background-repeat: no-repeat !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+@media (max-width: 600px) {
+  #login .login-library-atmosphere { inset-bottom: 37% !important; }
+  #login .login-form::before {
+    left: 4%;
+    right: 4%;
+    top: 31%;
+    bottom: 16%;
+    border-radius: 20px;
+  }
+  #login .login-bottom-scene {
+    height: 38.5% !important;
+    background-size: 100% 100%, 100% auto !important;
+    background-position: center, center bottom !important;
+  }
+}
