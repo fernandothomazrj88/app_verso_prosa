@@ -3213,3 +3213,69 @@ img { max-width: 100%; }
     background-position: center, center bottom !important;
   }
 }
+
+
+/* VERSO & PROSA — ABERTURA DESKTOP RESPONSIVA
+   Arte panorâmica exclusiva para telas largas; celular/tablet preservam a arte vertical.
+   O botão permanece HTML e clicável, alinhado à placa da arte desktop. */
+@media (min-width: 900px) {
+  #welcome.welcome-screen {
+    width: 100%;
+    height: 100svh;
+    min-height: 620px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    background: #100703;
+    overflow: hidden;
+  }
+  #welcome.welcome-screen::before {
+    inset: -30px;
+    background:
+      linear-gradient(90deg, rgba(8,3,1,.24), rgba(8,3,1,0) 22%, rgba(8,3,1,0) 78%, rgba(8,3,1,.24)),
+      url("./assets/scenes/welcome-desktop-approved.webp") center/cover no-repeat;
+    filter: blur(22px) brightness(.34);
+    transform: scale(1.06);
+  }
+  #welcome .welcome-art {
+    width: min(100vw, 177.6svh);
+    height: min(100svh, 56.3vw);
+    max-width: 1800px;
+    max-height: 1012px;
+    aspect-ratio: 16 / 9;
+    overflow: visible;
+    box-shadow: 0 0 70px rgba(0,0,0,.55);
+  }
+  #welcome .welcome-art picture,
+  #welcome .welcome-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #welcome .welcome-art img {
+    object-fit: contain;
+    object-position: center;
+  }
+  #welcome .welcome-enter-button {
+    left: 50% !important;
+    bottom: 7.4% !important;
+    width: 39% !important;
+    height: 15% !important;
+    min-height: 68px !important;
+    padding: 0 !important;
+    transform: translateX(-50%) !important;
+    color: transparent !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  #welcome .welcome-enter-button span,
+  #welcome .welcome-enter-button svg {
+    opacity: 0 !important;
+  }
+  #welcome .welcome-enter-ornament { display: none !important; }
+}
+@media (min-width: 1600px) {
+  #welcome .welcome-art { width: min(100vw, 177.6svh, 1800px); }
+}
