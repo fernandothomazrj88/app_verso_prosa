@@ -2737,3 +2737,139 @@ html:has(#inicio.active){
     background-position: center, center center !important;
   }
 }
+
+
+/* VERSÃO 22 — ajustes finos a partir das capturas reais do Android */
+
+/* A arte de abertura já contém o botão desenhado: o botão HTML fica invisível,
+   mas mantém toda a área clicável exatamente sobre o botão da própria arte. */
+#welcome .welcome-enter-button {
+  left: 50% !important;
+  bottom: 7.1% !important;
+  width: min(88vw, 58.7svh) !important;
+  height: 11.8% !important;
+  min-height: 56px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transform: translateX(-50%) !important;
+}
+#welcome .welcome-enter-button .welcome-enter-icon,
+#welcome .welcome-enter-button span {
+  display: none !important;
+}
+#welcome .welcome-enter-ornament {
+  display: none !important;
+}
+@media (max-width: 600px) {
+  #welcome .welcome-enter-button {
+    left: 50% !important;
+    bottom: 7.1% !important;
+    width: 92vw !important;
+    height: 12.5% !important;
+    min-height: 58px !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* Login: preserva a proporção original do conjunto de livros e abajur.
+   A imagem é contida na área inferior, sem esticar nem cortar as peças. */
+#login .login-bottom-scene {
+  height: 38% !important;
+  background-size: 100% 100%, 100% auto !important;
+  background-position: center, center bottom !important;
+  background-repeat: no-repeat !important;
+}
+@media (max-width: 600px) {
+  #login .login-bottom-scene {
+    height: 39% !important;
+    background-size: 100% 100%, 100% auto !important;
+    background-position: center, center bottom !important;
+  }
+}
+
+/* Home: o conteúdo pode rolar por trás do menu fixo; a leitura atual
+   ganha espaço e nunca fica escondida sob a navegação inferior. */
+@media (max-width: 600px) {
+  #inicio.home-mockup.page.active {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
+  }
+  #inicio .mock-home-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+    gap: clamp(9px, 1.5svh, 14px) !important;
+    padding: 9px 10px calc(clamp(16px, 3svh, 26px) + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  #inicio .mock-home-body::-webkit-scrollbar { display:none; }
+  #inicio .mock-greeting.home-hero-banner {
+    flex: 0 0 clamp(195px, 22svh, 245px) !important;
+    height: clamp(195px, 22svh, 245px) !important;
+    min-height: clamp(195px, 22svh, 245px) !important;
+    max-height: clamp(195px, 22svh, 245px) !important;
+  }
+  #inicio .mock-quote-card {
+    flex: 0 0 clamp(88px, 10.5svh, 106px) !important;
+    height: clamp(88px, 10.5svh, 106px) !important;
+    min-height: clamp(88px, 10.5svh, 106px) !important;
+  }
+  #inicio .mock-current-reading {
+    flex: 0 0 auto !important;
+    min-height: 166px !important;
+    padding: 10px 11px 13px !important;
+    margin-bottom: 2px !important;
+  }
+  #inicio .mock-reading-row {
+    min-height: 112px !important;
+    align-items: center !important;
+  }
+  #inicio .mock-reading-cover {
+    flex-basis: 84px !important;
+    width: 84px !important;
+    height: 112px !important;
+  }
+  #inicio .mock-bottom-nav {
+    position: relative !important;
+    z-index: 20 !important;
+    flex: 0 0 clamp(74px, 9svh, 84px) !important;
+    height: clamp(74px, 9svh, 84px) !important;
+    min-height: clamp(74px, 9svh, 84px) !important;
+  }
+}
+
+/* Remove a pequena régua genérica abaixo da saudação e usa um ornamento
+   tipográfico mais rico, coerente com a moldura clássica da biblioteca. */
+#inicio .home-hero-banner .home-hero-flourish {
+  display: block !important;
+  flex: 0 0 17px !important;
+  width: 74% !important;
+  height: 17px !important;
+  min-height: 17px !important;
+  margin: 1px auto 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.85)) !important;
+  opacity: 1 !important;
+}
+#inicio .home-hero-banner .home-hero-flourish::before {
+  content: "❧  ◆  ❧";
+  display: block;
+  color: #e7b94e;
+  font: 700 15px/17px Georgia,"Times New Roman",serif;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 0 0 4px rgba(255,195,68,.58), 0 1px 2px #160601;
+}
+#inicio .home-hero-banner .home-hero-flourish::after {
+  content: none !important;
+}
