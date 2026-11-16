@@ -3279,3 +3279,37 @@ img { max-width: 100%; }
 @media (min-width: 1600px) {
   #welcome .welcome-art { width: min(100vw, 177.6svh, 1800px); }
 }
+
+
+/* HOTFIX v26 — remove a moldura translúcida residual da abertura desktop.
+   O botão da arte já contém seu próprio acabamento; este elemento é somente hit-area. */
+@media (min-width: 900px) {
+  #welcome .welcome-enter-button,
+  #welcome .welcome-enter-button:hover,
+  #welcome .welcome-enter-button:focus,
+  #welcome .welcome-enter-button:focus-visible,
+  #welcome .welcome-enter-button:active {
+    outline: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+  }
+  #welcome .welcome-enter-button::before,
+  #welcome .welcome-enter-button::after {
+    content: none !important;
+    display: none !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  #welcome .welcome-enter-ornament {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
