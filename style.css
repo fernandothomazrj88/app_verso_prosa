@@ -3485,3 +3485,45 @@ img { max-width: 100%; }
     opacity: 0 !important;
   }
 }
+
+
+/* LOGIN v30 — moldura clássica de inspiração editorial, responsiva. */
+#login .login-brand-ornament-classic { width:min(78%,430px)!important;gap:0!important;margin-top:clamp(10px,1.7vh,18px)!important;height:18px!important }
+#login .login-brand-ornament-classic span { height:2px!important;background:linear-gradient(90deg,transparent,#8e5a19 18%,#e6bd5e 50%,#8e5a19 82%,transparent)!important;box-shadow:0 0 5px rgba(226,174,67,.35) }
+#login .login-brand-ornament-classic b { display:grid!important;place-items:center!important;width:28px!important;height:24px!important;margin:0 5px!important;color:#f3ca68!important;font:700 22px/1 Georgia,serif!important;text-shadow:0 0 7px rgba(245,190,69,.65),0 1px 2px #000!important }
+#login .login-form::before { content:none!important;display:none!important }
+#login .login-form-frame {
+ position:absolute!important;z-index:0!important;top:36.5%!important;left:5.5%!important;right:5.5%!important;bottom:25.5%!important;display:block!important;
+ border:2px solid #c99536!important;border-radius:25px!important;
+ background:linear-gradient(145deg,rgba(69,12,13,.96),rgba(30,7,5,.97) 55%,rgba(67,12,12,.96))!important;
+ box-shadow:0 0 0 1px rgba(255,221,132,.45),inset 0 0 0 3px rgba(246,199,92,.16),inset 0 0 26px rgba(0,0,0,.55),0 10px 28px rgba(0,0,0,.48)!important;pointer-events:none!important
+}
+#login .login-form-frame::before,#login .login-form-frame::after { content:""!important;position:absolute!important;left:8%!important;right:8%!important;height:1px!important;background:linear-gradient(90deg,transparent,#b77b25 16%,#f3d27b 50%,#b77b25 84%,transparent)!important;box-shadow:0 0 5px rgba(245,194,83,.42)!important }
+#login .login-form-frame::before { top:15%!important } #login .login-form-frame::after { bottom:13%!important }
+#login .login-frame-corner { position:absolute!important;z-index:1!important;display:block!important;color:#e7b64d!important;font:700 clamp(25px,4.2vw,38px)/1 Georgia,serif!important;text-shadow:0 1px 3px #1a0803,0 0 7px rgba(245,190,69,.4)!important }
+#login .login-frame-corner.top-left { top:2px!important;left:7px!important;transform:rotate(-45deg)!important }
+#login .login-frame-corner.top-right { top:2px!important;right:7px!important;transform:scaleX(-1) rotate(-45deg)!important }
+#login .login-frame-corner.bottom-left { bottom:2px!important;left:7px!important;transform:scaleY(-1) rotate(-45deg)!important }
+#login .login-frame-corner.bottom-right { bottom:2px!important;right:7px!important;transform:scale(-1,-1) rotate(-45deg)!important }
+#login .login-frame-flourish { position:absolute!important;left:50%!important;z-index:2!important;transform:translateX(-50%)!important;color:#f0c45d!important;font:700 clamp(15px,2.5vw,22px)/1 Georgia,serif!important;letter-spacing:2px!important;text-shadow:0 1px 3px #210a04,0 0 8px rgba(243,191,68,.55)!important;white-space:nowrap!important }
+#login .login-frame-flourish.top { top:5.2%!important } #login .login-frame-flourish.bottom { bottom:4.2%!important }
+#login .login-fields { z-index:3!important;top:41.2%!important;left:11%!important;right:11%!important;gap:1.7svh!important }
+#login .login-field { height:clamp(46px,7.2svh,60px)!important;max-height:60px!important;border:2px solid #d9a93f!important;border-radius:18px!important;background:linear-gradient(180deg,rgba(18,8,5,.94),rgba(13,6,4,.96))!important;box-shadow:inset 0 1px 5px #000,inset 0 0 0 1px rgba(255,224,151,.12),0 2px 8px rgba(0,0,0,.38)!important }
+#login .login-submit { z-index:3!important;top:60.2%!important;left:10.5%!important;width:79%!important;height:8.3%!important;border:2px solid #e6b94d!important;background:linear-gradient(180deg,#c01d3b 0%,#920d2a 54%,#65071b 100%)!important;box-shadow:inset 0 2px 3px rgba(255,229,190,.3),inset 0 -4px 8px rgba(0,0,0,.36),0 4px 12px rgba(0,0,0,.48)!important }
+#login .login-forgot { z-index:3!important;top:70.2%!important;left:18%!important;width:64%!important;color:#fff0d8!important;text-decoration-thickness:2px!important;text-underline-offset:4px!important }
+#login .login-error { z-index:4!important;top:75.5%!important } #login .login-bottom-scene { z-index:1!important }
+@media(max-width:600px) {
+ #login .login-brand { top:3.4%!important } #login .login-brand-mark { width:clamp(92px,27vw,132px)!important }
+ #login .login-brand h1 { font-size:clamp(31px,8.2vw,42px)!important;margin-top:0!important }
+ #login .login-brand>p { font-size:clamp(17px,4.8vw,23px)!important;margin-top:4px!important }
+ #login .login-brand-ornament-classic { margin-top:8px!important }
+ #login .login-form-frame { top:37.2%!important;bottom:25.5%!important;left:5%!important;right:5%!important;border-radius:21px!important }
+ #login .login-fields { top:42.1%!important;left:12%!important;right:12%!important;gap:1.6svh!important }
+ #login .login-field { height:clamp(44px,6.9svh,55px)!important;border-radius:15px!important;padding:0 12px!important }
+ #login .login-submit { top:60.7%!important;left:11%!important;width:78%!important;height:7.8%!important;min-height:46px!important }
+ #login .login-forgot { top:70.2%!important;font-size:clamp(13px,3.6vw,16px)!important }
+ #login .login-frame-corner { font-size:27px!important } #login .login-frame-flourish.top { top:5.3%!important } #login .login-frame-flourish.bottom { bottom:4.5%!important }
+ #login .login-bottom-scene { height:38.5%!important }
+}
+@media(min-width:601px) { #login .login-form-frame { left:7%!important;right:7%!important } #login .login-fields { left:12%!important;right:12%!important } #login .login-submit { left:11.5%!important;width:77%!important } }
+@media(min-width:900px) { #login .login-layout { width:min(100%,760px)!important } #login .login-canvas { max-width:760px!important } #login .login-form-frame { top:36.5%!important;bottom:25.5%!important } }
