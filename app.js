@@ -141,9 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
         greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
       } else if (isLele) {
         portrait.src = './assets/profiles/lele-epoca.webp';
-        portrait.alt = 'Retrato de época de Lelê';
+        portrait.alt = 'Retrato clássico de Letícia';
         greetingHeadline.innerHTML = 'Seja bem-vinda,<br>cara leitora!';
-        greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Lelê.';
+        greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Letícia.';
       } else {
         portrait.removeAttribute('src');
         portrait.alt = '';

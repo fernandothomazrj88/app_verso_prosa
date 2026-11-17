@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-login-v37';
+const CACHE_NAME = 'verso-prosa-home-leticia-v38';
 const APP_FILES = [
  './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=login-crisp-fields-v36','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg','./assets/ornaments/login-brand-divider.svg','./assets/ornaments/login-frame-classic.svg',
