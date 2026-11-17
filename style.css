@@ -4687,3 +4687,86 @@ img { max-width: 100%; }
 #login .login-fields { height:12.0% !important; }
 #login .login-field { height:48.8% !important; flex:0 0 48.8% !important; }
 #login .login-eye { right:3.5% !important; }
+
+
+/* VERSO & PROSA v36 — campos realmente nítidos e funcionais.
+   A arte de fundo agora contém apenas a moldura vazia; nenhum texto/controle duplicado. */
+#login.login-screen:not(.hidden) {
+  display:flex !important; align-items:center !important; justify-content:center !important;
+  overflow:hidden !important; padding:0 !important; margin:0 !important;
+  background:#100501 !important; min-height:100dvh !important; height:100dvh !important;
+}
+#login .login-layout {
+  position:relative !important; width:min(66.6667dvh,100vw,920px) !important;
+  height:auto !important; aspect-ratio:2 / 3 !important; max-height:100dvh !important;
+  flex:0 0 auto !important; margin:auto !important; overflow:hidden !important;
+}
+#login .login-canvas { position:relative !important; width:100% !important; height:100% !important;
+  aspect-ratio:2 / 3 !important; overflow:hidden !important; background:#100501 !important; }
+#login .login-approved-master { position:absolute !important; z-index:0 !important; inset:0 !important;
+  display:block !important; width:100% !important; height:100% !important; object-fit:fill !important;
+  opacity:1 !important; filter:none !important; }
+#login .login-library-atmosphere, #login .login-bottom-scene, #login .login-brand,
+#login .login-form-frame { display:none !important; }
+#login.login-screen:not(.hidden)::before { display:none !important; content:none !important; }
+#login .login-form { position:absolute !important; inset:0 !important; z-index:2 !important;
+  width:100% !important; height:100% !important; margin:0 !important; padding:0 !important;
+  border:0 !important; background:transparent !important; }
+#login .login-form::before, #login .login-form::after { display:none !important; content:none !important; }
+#login .login-fields { position:absolute !important; top:35.9% !important; left:15.0% !important;
+  right:15.0% !important; height:13.0% !important; display:flex !important; flex-direction:column !important;
+  justify-content:space-between !important; gap:0 !important; margin:0 !important; padding:0 !important; }
+#login .login-field { position:relative !important; display:flex !important; align-items:center !important;
+  width:100% !important; height:45% !important; min-height:0 !important; max-height:none !important;
+  flex:0 0 45% !important; padding:0 3.2% !important; border:2px solid #e9b72e !important;
+  border-radius:22px !important; background:rgba(24,8,4,.82) !important;
+  box-shadow:inset 0 1px 5px rgba(0,0,0,.8),0 0 0 1px rgba(255,218,112,.22) !important; }
+#login .login-field:focus-within { border-color:#ffda67 !important;
+  box-shadow:0 0 0 2px rgba(255,207,76,.22),inset 0 1px 5px rgba(0,0,0,.8) !important; }
+#login .login-field-icon { display:block !important; position:relative !important; flex:0 0 6.5% !important;
+  width:6.5% !important; height:52% !important; margin:0 3.2% 0 0 !important;
+  fill:none !important; stroke:#f5c746 !important; stroke-width:2.2 !important; stroke-linecap:round !important;
+  stroke-linejoin:round !important; opacity:1 !important; }
+#login .login-lock-icon { fill:#e6b93e !important; stroke:#e6b93e !important; }
+#login .login-field input { position:relative !important; inset:auto !important; display:block !important;
+  flex:1 1 auto !important; width:0 !important; min-width:0 !important; height:100% !important;
+  padding:0 !important; margin:0 !important; border:0 !important; outline:0 !important;
+  color:#fff4e6 !important; -webkit-text-fill-color:#fff4e6 !important; opacity:1 !important;
+  background:transparent !important; filter:none !important; font:500 clamp(13px,2.0cqw,20px)/1.2 Arial,sans-serif !important;
+  text-shadow:0 1px 2px #000 !important; caret-color:#ffd15a !important; box-shadow:none !important; }
+#login .login-field input::placeholder { color:rgba(255,242,224,.72) !important;
+  -webkit-text-fill-color:rgba(255,242,224,.72) !important; opacity:1 !important; filter:none !important; }
+#login .login-eye { position:relative !important; inset:auto !important; display:flex !important;
+  align-items:center !important; justify-content:center !important; flex:0 0 9% !important;
+  width:9% !important; height:100% !important; margin-left:2% !important; padding:0 !important;
+  border:0 !important; background:transparent !important; color:#fff1dc !important; opacity:1 !important; }
+#login .login-eye svg { display:block !important; width:68% !important; height:68% !important;
+  fill:none !important; stroke:#fff1dc !important; stroke-width:2 !important; opacity:1 !important; }
+#login .login-submit { position:absolute !important; top:50.8% !important; left:15% !important;
+  width:70% !important; height:7.0% !important; min-height:0 !important; max-height:none !important;
+  display:flex !important; align-items:center !important; justify-content:center !important;
+  padding:0 !important; border:2px solid #efbd43 !important; border-radius:999px !important;
+  color:#fff2e4 !important; -webkit-text-fill-color:#fff2e4 !important;
+  background:linear-gradient(180deg,#d51c43 0%,#a50027 55%,#610015 100%) !important;
+  box-shadow:inset 0 2px 2px rgba(255,225,153,.55),0 4px 9px rgba(0,0,0,.62) !important;
+  font:700 clamp(17px,2.5cqw,28px)/1 Georgia,serif !important; text-shadow:0 1px 2px #43000d !important; }
+#login .login-forgot { position:absolute !important; top:59.5% !important; left:25% !important;
+  width:50% !important; height:3.5% !important; display:flex !important; align-items:center !important;
+  justify-content:center !important; padding:0 !important; border:0 !important; background:transparent !important;
+  color:#fff0df !important; -webkit-text-fill-color:#fff0df !important; font:600 clamp(12px,1.65cqw,18px)/1 Georgia,serif !important;
+  text-decoration:underline !important; text-decoration-color:#e8b83e !important; text-underline-offset:3px !important; }
+#login .login-error { position:absolute !important; top:64.2% !important; left:12% !important;
+  width:76% !important; color:#ffd7c8 !important; font-size:clamp(10px,1.25cqw,14px) !important; text-align:center !important; }
+@media (max-width:600px) {
+  #login .login-layout { width:100vw !important; height:100dvh !important; max-height:none !important; aspect-ratio:auto !important; }
+  #login .login-canvas { width:100% !important; height:100% !important; aspect-ratio:auto !important; }
+  #login .login-approved-master { object-fit:fill !important; }
+  #login .login-fields { top:35.9% !important; left:15% !important; right:15% !important; height:13% !important; }
+  #login .login-field { border-width:1.5px !important; border-radius:14px !important; }
+  #login .login-field input { font-size:clamp(12px,3.6vw,16px) !important; }
+  #login .login-submit { font-size:clamp(16px,5vw,22px) !important; }
+  #login .login-forgot { font-size:clamp(11px,3.2vw,15px) !important; }
+}
+@media (min-width:601px) and (max-width:899px) {
+  #login .login-layout { width:min(66.6667dvh,100vw) !important; height:auto !important; aspect-ratio:2/3 !important; }
+}
