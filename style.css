@@ -4323,3 +4323,174 @@ img { max-width: 100%; }
   #login .login-submit { top: 50.8% !important; height: 4.7cqh !important; min-height: 34px !important; }
   #login .login-forgot { top: 59.3% !important; }
 }
+
+
+/* VERSO & PROSA v34 — acabamento fiel ao mockup, sem faixa sobre a luminária. */
+
+/* O SVG agora desenha a moldura completa. Retiramos o contorno CSS duplicado. */
+#login .login-form-frame {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overflow: visible !important;
+}
+#login .login-frame-art {
+  opacity: 1 !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.55)) drop-shadow(0 0 2px rgba(231,180,73,.2)) !important;
+}
+
+/* A área da biblioteca termina em degradê e encontra a imagem inferior sem uma faixa reta. */
+#login .login-library-atmosphere {
+  inset: 0 0 30% 0 !important;
+  background:
+    linear-gradient(180deg,rgba(8,3,1,.02) 0%,rgba(10,4,2,.05) 72%,rgba(10,4,2,0) 100%),
+    url("./assets/scenes/login-library-bg-v8.webp") center top/100% 100% no-repeat !important;
+}
+#login .login-bottom-scene {
+  height: 34% !important;
+  background-image: url("./assets/scenes/login-bottom-approved-v6.webp") !important;
+  background-size: 100% auto !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+  background-color: #160802 !important;
+  opacity: 1 !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* Desktop: todos os tamanhos ficam relativos ao palco 2:3, nunca à largura total da janela. */
+@media (min-width: 900px) {
+  #login .login-form-frame {
+    top: 29.7% !important;
+    left: 8% !important;
+    right: 8% !important;
+    bottom: 33.2% !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #login .login-fields {
+    top: 36.1% !important;
+    left: 14.5% !important;
+    right: 14.5% !important;
+    width: auto !important;
+    transform: none !important;
+    gap: 1.25% !important;
+  }
+  #login .login-field {
+    height: 4.8cqh !important;
+    max-height: 60px !important;
+  }
+  #login .login-submit {
+    top: 51.2% !important;
+    left: 14% !important;
+    right: 14% !important;
+    width: auto !important;
+    height: 6.1cqh !important;
+    transform: none !important;
+  }
+  #login .login-forgot {
+    top: 60.3% !important;
+    left: 17% !important;
+    width: 66% !important;
+    transform: none !important;
+  }
+  #login .login-error { top: 65% !important; }
+  #login .login-bottom-scene { height: 34% !important; }
+}
+
+/* Tablet: painel acompanha o palco vertical e os elementos permanecem centralizados. */
+@media (min-width: 601px) and (max-width: 899px) {
+  #login .login-form-frame {
+    top: 29.8% !important;
+    left: 8.5% !important;
+    right: 8.5% !important;
+    bottom: 33.3% !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #login .login-fields {
+    top: 36.2% !important;
+    left: 14.5% !important;
+    right: 14.5% !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #login .login-submit {
+    top: 51.3% !important;
+    left: 14% !important;
+    width: 72% !important;
+    transform: none !important;
+  }
+  #login .login-forgot { top: 60.4% !important; transform: none !important; }
+  #login .login-bottom-scene { height: 34% !important; }
+}
+
+/* Mobile: encurta o painel e sobe os controles; a cena de livros e luminária ganha área própria. */
+@media (max-width: 600px) {
+  #login .login-library-atmosphere {
+    inset: 0 0 29% 0 !important;
+    background-size: 100% 100%,100% 100% !important;
+    background-position: center,center top !important;
+  }
+  #login .login-bottom-scene {
+    height: 29% !important;
+    background-size: 100% auto !important;
+    background-position: center bottom !important;
+    background-color: #160802 !important;
+  }
+  #login .login-brand { top: 1.8% !important; }
+  #login .login-brand-mark { width: 39% !important; }
+  #login .login-brand h1 { font-size: clamp(26px,8.2cqw,36px) !important; }
+  #login .login-brand > p { font-size: clamp(15px,4.4cqw,20px) !important; }
+  #login .login-brand-ornament-classic { width: 83% !important; height: 3.2cqh !important; margin-top: .6% !important; }
+
+  #login .login-form-frame {
+    top: 30.8% !important;
+    left: 6.5% !important;
+    right: 6.5% !important;
+    bottom: 35% !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  #login .login-fields {
+    top: 37.1% !important;
+    left: 14% !important;
+    right: 14% !important;
+    width: auto !important;
+    transform: none !important;
+    gap: 1.2% !important;
+  }
+  #login .login-field {
+    height: 5.5svh !important;
+    min-height: 37px !important;
+    max-height: 46px !important;
+    padding: 0 3% !important;
+    border-radius: 11px !important;
+  }
+  #login .login-field-icon { width: 6cqw !important; height: 6cqw !important; flex-basis: 6cqw !important; }
+  #login .login-field input { font-size: clamp(12px,3.5cqw,15px) !important; padding: 0 3% !important; }
+  #login .login-eye { width: 7cqw !important; flex-basis: 7cqw !important; }
+  #login .login-eye svg { width: 5cqw !important; height: 5cqw !important; }
+
+  #login .login-submit {
+    top: 52.2% !important;
+    left: 14% !important;
+    width: 72% !important;
+    height: 7.4svh !important;
+    min-height: 39px !important;
+    max-height: 48px !important;
+    transform: none !important;
+    font-size: clamp(16px,5cqw,21px) !important;
+  }
+  #login .login-forgot {
+    top: 61.2% !important;
+    left: 17% !important;
+    width: 66% !important;
+    transform: none !important;
+    font-size: clamp(12px,3.6cqw,15px) !important;
+  }
+  #login .login-error { top: 65.1% !important; }
+}
