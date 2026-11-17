@@ -3390,3 +3390,98 @@ img { max-width: 100%; }
 @media (min-width: 900px) {
   #welcome .welcome-art img { object-fit: contain !important; }
 }
+
+
+/* v29 — abertura mobile realmente em tela cheia e sem rolagem.
+   A arte vertical preenche o viewport; o desktop permanece intocado. */
+@media (max-width: 899px) {
+  html:has(#welcome:not([hidden])),
+  body:has(#welcome:not([hidden])) {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+  }
+  #welcome.welcome-screen {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+    display: block !important;
+    background: #100703 !important;
+  }
+  #welcome .welcome-art {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+  }
+  #welcome .welcome-art picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  #welcome .welcome-art img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+  /* Área clicável sobre o botão que já está desenhado na própria arte. */
+  #welcome .welcome-enter-button,
+  #welcome .welcome-enter-button:hover,
+  #welcome .welcome-enter-button:focus,
+  #welcome .welcome-enter-button:focus-visible,
+  #welcome .welcome-enter-button:active {
+    position: absolute !important;
+    z-index: 20 !important;
+    left: 50% !important;
+    bottom: 13.5% !important;
+    width: 92% !important;
+    height: 14% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: translateX(-50%) !important;
+    color: transparent !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    touch-action: manipulation !important;
+  }
+  #welcome .welcome-enter-button::before,
+  #welcome .welcome-enter-button::after,
+  #welcome .welcome-enter-button span,
+  #welcome .welcome-enter-button svg,
+  #welcome .welcome-enter-ornament {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+  }
+}
