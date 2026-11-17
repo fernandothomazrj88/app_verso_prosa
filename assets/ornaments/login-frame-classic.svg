@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" preserveAspectRatio="none">
+<defs>
+ <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a6"/><stop offset=".24" stop-color="#d99b2b"/><stop offset=".5" stop-color="#ffe27b"/><stop offset=".78" stop-color="#986019"/><stop offset="1" stop-color="#f6d77a"/></linearGradient>
+ <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+ <g stroke-width="5">
+  <path d="M25 95 C22 42 69 20 104 40 C132 56 123 91 98 91 C78 91 74 68 91 60 C107 55 114 72 103 79"/>
+  <path d="M27 120 C50 109 59 88 48 69 C40 55 22 56 17 72 C11 91 27 104 42 96"/>
+  <path d="M34 91 C51 100 64 116 64 136 C64 153 50 161 37 151 C25 143 28 128 40 125"/>
+  <path d="M66 39 C85 20 110 19 129 29 M46 118 C65 123 78 142 80 160" stroke-width="3"/>
+ </g>
+ <g transform="translate(1000 0) scale(-1 1)" stroke-width="5">
+  <path d="M25 95 C22 42 69 20 104 40 C132 56 123 91 98 91 C78 91 74 68 91 60 C107 55 114 72 103 79"/>
+  <path d="M27 120 C50 109 59 88 48 69 C40 55 22 56 17 72 C11 91 27 104 42 96"/>
+  <path d="M34 91 C51 100 64 116 64 136 C64 153 50 161 37 151 C25 143 28 128 40 125"/>
+  <path d="M66 39 C85 20 110 19 129 29 M46 118 C65 123 78 142 80 160" stroke-width="3"/>
+ </g>
+ <g transform="translate(0 700) scale(1 -1)" stroke-width="5">
+  <path d="M25 95 C22 42 69 20 104 40 C132 56 123 91 98 91 C78 91 74 68 91 60 C107 55 114 72 103 79"/>
+  <path d="M27 120 C50 109 59 88 48 69 C40 55 22 56 17 72 C11 91 27 104 42 96"/>
+  <path d="M34 91 C51 100 64 116 64 136 C64 153 50 161 37 151 C25 143 28 128 40 125"/>
+  <path d="M66 39 C85 20 110 19 129 29 M46 118 C65 123 78 142 80 160" stroke-width="3"/>
+ </g>
+ <g transform="translate(1000 700) scale(-1 -1)" stroke-width="5">
+  <path d="M25 95 C22 42 69 20 104 40 C132 56 123 91 98 91 C78 91 74 68 91 60 C107 55 114 72 103 79"/>
+  <path d="M27 120 C50 109 59 88 48 69 C40 55 22 56 17 72 C11 91 27 104 42 96"/>
+  <path d="M34 91 C51 100 64 116 64 136 C64 153 50 161 37 151 C25 143 28 128 40 125"/>
+  <path d="M66 39 C85 20 110 19 129 29 M46 118 C65 123 78 142 80 160" stroke-width="3"/>
+ </g>
+ <!-- refined center florals -->
+ <g stroke-width="4.5">
+  <path d="M410 78 H455 Q478 78 490 60 Q500 43 510 60 Q522 78 545 78 H590"/>
+  <path d="M438 78 C450 51 474 52 486 76 Q493 91 500 98 Q507 91 514 76 C526 52 550 51 562 78"/>
+  <path d="M474 78 Q486 100 500 108 Q514 100 526 78"/>
+  <path d="M500 45 L520 78 L500 111 L480 78 Z" fill="#4f1909" stroke-width="4"/>
+  <path d="M500 59 L510 78 L500 97 L490 78 Z" stroke-width="2.8"/>
+  <path d="M392 78H430 M570 78H608" stroke-width="2.5"/>
+  <circle cx="500" cy="78" r="3.8" fill="#fff0a6" stroke="none"/>
+ </g>
+ <g transform="translate(0 700) scale(1 -1)" stroke-width="4.5">
+  <path d="M410 78 H455 Q478 78 490 60 Q500 43 510 60 Q522 78 545 78 H590"/>
+  <path d="M438 78 C450 51 474 52 486 76 Q493 91 500 98 Q507 91 514 76 C526 52 550 51 562 78"/>
+  <path d="M474 78 Q486 100 500 108 Q514 100 526 78"/>
+  <path d="M500 45 L520 78 L500 111 L480 78 Z" fill="#4f1909" stroke-width="4"/>
+  <path d="M500 59 L510 78 L500 97 L490 78 Z" stroke-width="2.8"/>
+  <path d="M392 78H430 M570 78H608" stroke-width="2.5"/>
+ </g>
+</g></svg>
