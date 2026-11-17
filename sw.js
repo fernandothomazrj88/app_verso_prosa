@@ -1,6 +1,6 @@
-const CACHE_NAME = 'verso-prosa-login-ornament-fix-v34';
+const CACHE_NAME = 'verso-prosa-login-approved-art-v35';
 const APP_FILES = [
- './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=login-ornament-fix-v34','./app.js','./manifest.json',
+ './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=login-approved-art-v35','./app.js','./manifest.json',
  './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg','./assets/ornaments/login-brand-divider.svg','./assets/ornaments/login-frame-classic.svg',
  './assets/icons/home-classic/book-open.svg',
  './assets/icons/home-classic/book-add.svg',
@@ -10,7 +10,7 @@ const APP_FILES = [
  './assets/icons/home-classic/magnifier.svg',
  './assets/icons/home-classic/sliders.svg',
  './assets/icons/icon-192.png','./assets/icons/icon-512.png','./assets/icons/icon-192-maskable.png','./assets/icons/icon-512-maskable.png','./assets/icons/apple-touch-icon.png',
- './assets/scenes/login-library-bg-v8.webp','./assets/scenes/entrance-room.webp','./assets/scenes/lamp-books.webp','./assets/scenes/shelf-wall.webp','./assets/scenes/typewriter-desk.webp','./assets/scenes/open-book.webp','./assets/scenes/discover-authors.webp','./assets/scenes/lamp-stack.webp','./assets/scenes/welcome-approved.webp','./assets/scenes/welcome-desktop-approved.webp','./assets/scenes/welcome-mobile-responsive-v27.webp','./assets/scenes/login-library-bg.webp','./assets/scenes/login-library-bg-v5.webp','./assets/login-emblem-gold-v5.png','./assets/login-emblem-approved-v6.png','./assets/scenes/login-bottom-approved-v6.webp'
+ './assets/scenes/login-approved-master.png','./assets/scenes/login-library-bg-v8.webp','./assets/scenes/entrance-room.webp','./assets/scenes/lamp-books.webp','./assets/scenes/shelf-wall.webp','./assets/scenes/typewriter-desk.webp','./assets/scenes/open-book.webp','./assets/scenes/discover-authors.webp','./assets/scenes/lamp-stack.webp','./assets/scenes/welcome-approved.webp','./assets/scenes/welcome-desktop-approved.webp','./assets/scenes/welcome-mobile-responsive-v27.webp','./assets/scenes/login-library-bg.webp','./assets/scenes/login-library-bg-v5.webp','./assets/login-emblem-gold-v5.png','./assets/login-emblem-approved-v6.png','./assets/scenes/login-bottom-approved-v6.webp'
 ];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_FILES)));self.skipWaiting();});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('verso-prosa-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();})());});
