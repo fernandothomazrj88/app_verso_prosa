@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcome = $('#welcome');
   const login = $('#login');
   const app = $('#app');
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzIEdph3F_aJ33J3Z7IgqhvfDcOP4tmMtKzw3ENT7aC5ptzfK1OcPdlYmlsbnPlkm3F/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzcpPJkdg_ydox7tE8UnFax6R9_aJls4Ildlp_ko9zXRcFZpb1Y8TyLleBexZYtBNCk/exec';
 
   let session = null;
   let cloud = { books: [], notes: [], goal: null };
@@ -118,11 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const first = name.charAt(0).toUpperCase() || 'L';
     const identity = [session?.name, session?.nome, session?.email, session?.profile, session?.perfil]
       .filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    const isFernando = identity.includes('fernando');
-    // Este aplicativo possui duas bibliotecas pessoais: Fernando e Letícia.
-    // A conta que não for a do Fernando é tratada como a conta da Letícia,
-    // evitando depender do nome exato devolvido pelo Apps Script (ex.: Lelê).
-    const isLele = !isFernando;
+    const explicitProfile = String(session?.profile || session?.perfil || '').trim().toLowerCase();
+    // Prioriza o perfil explícito devolvido pelo novo Apps Script.
+    // Sessões antigas continuam funcionando pela identificação do nome/e-mail.
+    const isFernando = explicitProfile
+      ? explicitProfile === 'fernando'
+      : identity.includes('fernando') || identity.includes('fernandothomaz');
+    const isLele = explicitProfile
+      ? explicitProfile === 'leticia'
+      : !isFernando && (identity.includes('leticia') || identity.includes('leticiathomaz'));
 
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
@@ -290,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loginWith(email, senha) {
     const result = await api('login', { email, senha });
     if (!result.token || !result.user) throw new Error('O servidor não retornou uma sessão válida.');
-    saveSession({ token: result.token, name: result.user.name, email: result.user.email });
+    saveSession({ token: result.token, name: result.user.name, email: result.user.email, profile: result.user.profile });
     await loadCloudData();
     const migracao = await migrarDadosLocais();
     enterApp();
