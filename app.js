@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const PROFILE_BY_EMAIL = Object.freeze({
     'fernandothomaz.rj@gmail.com': Object.freeze({
       key: 'fernando', email: 'fernandothomaz.rj@gmail.com', name: 'Fernando',
-      profile: 'fernando', portrait: './assets/profiles/fernando-epoca.webp?v=43',
+      profile: 'fernando', portrait: './assets/profiles/fernando-epoca.webp?v=44',
       portraitAlt: 'Retrato de época de Fernando',
       headline: 'Seja bem-vindo,<br>caro leitor!',
       message: 'Sua biblioteca o aguarda, senhor Fernando.'
     }),
     'leticiathomaz.rj@gmail.com': Object.freeze({
       key: 'leticia', email: 'leticiathomaz.rj@gmail.com', name: 'Letícia',
-      profile: 'leticia', portrait: './assets/profiles/lele-epoca.webp?v=43',
+      profile: 'leticia', portrait: './assets/profiles/lele-epoca.webp?v=44',
       portraitAlt: 'Retrato clássico de Letícia',
       headline: 'Seja bem-vinda,<br>cara leitora!',
       message: 'Sua biblioteca a aguarda, senhora Letícia.'
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fernando: PROFILE_BY_EMAIL['fernandothomaz.rj@gmail.com'],
     leticia: PROFILE_BY_EMAIL['leticiathomaz.rj@gmail.com']
   });
-  const ACTIVE_PROFILE_KEY = 'vp_active_profile_v43';
+  const ACTIVE_PROFILE_KEY = 'vp_active_profile_v44';
   const LEGACY_SESSION_KEY = 'vp_auth_session';
 
   let session = null;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function sessionStorageKey(profileKey) {
-    return 'vp_auth_session_' + profileKey + '_v43';
+    return 'vp_auth_session_' + profileKey + '_v44';
   }
 
   function toast(message) {
@@ -183,7 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const first = identity.name.charAt(0).toUpperCase();
 
     $('#profileLabel').textContent = identity.name;
-    $('#welcomeName').textContent = identity.name;
+    // Algumas versões do layout não possuem #welcomeName; trate-o como opcional.
+    const welcomeName = $('#welcomeName');
+    if (welcomeName) welcomeName.textContent = identity.name;
     $('#profileName').textContent = identity.name;
     $('#profileAvatar').textContent = first;
     $('#sidebarName').textContent = identity.name;
