@@ -116,17 +116,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderProfile() {
     const name = String(session?.name || session?.nome || session?.email || 'Leitor').trim();
     const first = name.charAt(0).toUpperCase() || 'L';
-    const identity = [session?.name, session?.nome, session?.email, session?.profile, session?.perfil]
-      .filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const email = String(session?.email || '').trim().toLowerCase();
     const explicitProfile = String(session?.profile || session?.perfil || '').trim().toLowerCase();
-    // Prioriza o perfil explícito devolvido pelo novo Apps Script.
-    // Sessões antigas continuam funcionando pela identificação do nome/e-mail.
-    const isFernando = explicitProfile
-      ? explicitProfile === 'fernando'
-      : identity.includes('fernando') || identity.includes('fernandothomaz');
-    const isLele = explicitProfile
-      ? explicitProfile === 'leticia'
-      : !isFernando && (identity.includes('leticia') || identity.includes('leticiathomaz'));
+    const identity = [session?.name, session?.nome, session?.email]
+      .filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    // A identificação principal é pelo e-mail EXATO cadastrado no banco.
+    // O campo profile é uma segunda fonte; nome é apenas fallback legado.
+    let profile = '';
+    if (email === 'fernandothomaz.rj@gmail.com') profile = 'fernando';
+    else if (email === 'leticiathomaz.rj@gmail.com') profile = 'leticia';
+    else if (explicitProfile === 'fernando' || explicitProfile === 'leticia') profile = explicitProfile;
+    else if (identity.includes('fernando') || identity.includes('fernandothomaz')) profile = 'fernando';
+    else if (identity.includes('leticia') || identity.includes('leticiathomaz')) profile = 'leticia';
+
+    const isFernando = profile === 'fernando';
+    const isLele = profile === 'leticia';
 
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
@@ -139,18 +144,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const portrait = $('#homeCharacterAvatar');
     const greetingHeadline = $('#homeGreetingHeadline');
     const greetingMessage = $('#homeGreetingMessage');
-    const avatar = $('#homeUserAvatar');
     const heroBanner = document.querySelector('#inicio .home-hero-banner');
+
     if (heroBanner) heroBanner.classList.toggle('home-is-leticia', isLele);
 
-    if (portrait && greetingHeadline && greetingMessage && avatar) {
+    if (portrait && greetingHeadline && greetingMessage) {
       if (isFernando) {
-        portrait.src = './assets/profiles/fernando-epoca.webp?v=39';
+        portrait.src = './assets/profiles/fernando-epoca.webp?v=42';
         portrait.alt = 'Retrato de época de Fernando';
         greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
         greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
       } else if (isLele) {
-        portrait.src = './assets/profiles/lele-epoca.webp?v=39';
+        portrait.src = './assets/profiles/lele-epoca.webp?v=42';
         portrait.alt = 'Retrato clássico de Letícia';
         greetingHeadline.innerHTML = 'Seja bem-vinda,<br>cara leitora!';
         greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Letícia.';
@@ -182,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     renderProfile();
     renderHome();
+    // Cada autenticação começa no mesmo Home principal para ambos os perfis.
     openPage('inicio');
   }
 
