@@ -114,11 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderProfile() {
-    const name = session?.name || 'Leitor';
-    const first = name.trim().charAt(0).toUpperCase() || 'L';
-    const normalizedName = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    const isFernando = normalizedName.includes('fernando');
-    const isLele = normalizedName.includes('leticia') || normalizedName.includes('lele');
+    const name = String(session?.name || session?.nome || session?.email || 'Leitor').trim();
+    const first = name.charAt(0).toUpperCase() || 'L';
+    const identity = [session?.name, session?.nome, session?.email, session?.profile, session?.perfil]
+      .filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const isFernando = identity.includes('fernando');
+    // Este aplicativo possui duas bibliotecas pessoais: Fernando e Letícia.
+    // A conta que não for a do Fernando é tratada como a conta da Letícia,
+    // evitando depender do nome exato devolvido pelo Apps Script (ex.: Lelê).
+    const isLele = !isFernando;
 
     $('#profileLabel').textContent = name;
     $('#welcomeName').textContent = name;
@@ -135,20 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (portrait && greetingHeadline && greetingMessage && avatar) {
       if (isFernando) {
-        portrait.src = './assets/profiles/fernando-epoca.webp';
+        portrait.src = './assets/profiles/fernando-epoca.webp?v=39';
         portrait.alt = 'Retrato de época de Fernando';
         greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
         greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
       } else if (isLele) {
-        portrait.src = './assets/profiles/lele-epoca.webp';
+        portrait.src = './assets/profiles/lele-epoca.webp?v=39';
         portrait.alt = 'Retrato clássico de Letícia';
         greetingHeadline.innerHTML = 'Seja bem-vinda,<br>cara leitora!';
         greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Letícia.';
-      } else {
-        portrait.removeAttribute('src');
-        portrait.alt = '';
-        greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
-        greetingMessage.textContent = 'Sua biblioteca está pronta para recebê-lo.';
       }
     }
   }
