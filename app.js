@@ -6,10 +6,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = $('#app');
   const API_URL = 'https://script.google.com/macros/s/AKfycbzcpPJkdg_ydox7tE8UnFax6R9_aJls4Ildlp_ko9zXRcFZpb1Y8TyLleBexZYtBNCk/exec';
 
+  const PROFILE_BY_EMAIL = Object.freeze({
+    'fernandothomaz.rj@gmail.com': Object.freeze({
+      key: 'fernando', email: 'fernandothomaz.rj@gmail.com', name: 'Fernando',
+      profile: 'fernando', portrait: './assets/profiles/fernando-epoca.webp?v=43',
+      portraitAlt: 'Retrato de época de Fernando',
+      headline: 'Seja bem-vindo,<br>caro leitor!',
+      message: 'Sua biblioteca o aguarda, senhor Fernando.'
+    }),
+    'leticiathomaz.rj@gmail.com': Object.freeze({
+      key: 'leticia', email: 'leticiathomaz.rj@gmail.com', name: 'Letícia',
+      profile: 'leticia', portrait: './assets/profiles/lele-epoca.webp?v=43',
+      portraitAlt: 'Retrato clássico de Letícia',
+      headline: 'Seja bem-vinda,<br>cara leitora!',
+      message: 'Sua biblioteca a aguarda, senhora Letícia.'
+    })
+  });
+  const PROFILE_BY_KEY = Object.freeze({
+    fernando: PROFILE_BY_EMAIL['fernandothomaz.rj@gmail.com'],
+    leticia: PROFILE_BY_EMAIL['leticiathomaz.rj@gmail.com']
+  });
+  const ACTIVE_PROFILE_KEY = 'vp_active_profile_v43';
+  const LEGACY_SESSION_KEY = 'vp_auth_session';
+
   let session = null;
   let cloud = { books: [], notes: [], goal: null };
   let filter = 'todos';
   let selectedBook = null;
+
+  function normalizeEmail(value) {
+    return String(value || '').trim().toLowerCase();
+  }
+
+  function profileForEmail(email) {
+    return PROFILE_BY_EMAIL[normalizeEmail(email)] || null;
+  }
+
+  function sessionStorageKey(profileKey) {
+    return 'vp_auth_session_' + profileKey + '_v43';
+  }
 
   function toast(message) {
     const el = $('#toast');
@@ -108,36 +143,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function saveSession(value) {
-    session = value;
-    if (value) localStorage.setItem('vp_auth_session', JSON.stringify(value));
-    else localStorage.removeItem('vp_auth_session');
+    if (!value) {
+      const currentProfile = profileForEmail(session?.email);
+      if (currentProfile) localStorage.removeItem(sessionStorageKey(currentProfile.key));
+      if (!session || localStorage.getItem(ACTIVE_PROFILE_KEY) === (currentProfile?.key || '')) {
+        localStorage.removeItem(ACTIVE_PROFILE_KEY);
+      }
+      localStorage.removeItem(LEGACY_SESSION_KEY);
+      session = null;
+      return;
+    }
+
+    const identity = profileForEmail(value.email);
+    if (!identity) throw new Error('Não foi possível identificar a conta da biblioteca pelo e-mail.');
+
+    // Todos os campos visuais da sessão são canonicalizados pelo e-mail autorizado.
+    session = {
+      ...value,
+      email: identity.email,
+      name: identity.name,
+      profile: identity.profile
+    };
+    localStorage.setItem(sessionStorageKey(identity.key), JSON.stringify(session));
+    localStorage.setItem(ACTIVE_PROFILE_KEY, identity.key);
+    // Remove a sessão única usada pelas versões anteriores para impedir restauração cruzada.
+    localStorage.removeItem(LEGACY_SESSION_KEY);
   }
 
   function renderProfile() {
-    const name = String(session?.name || session?.nome || session?.email || 'Leitor').trim();
-    const first = name.charAt(0).toUpperCase() || 'L';
-    const email = String(session?.email || '').trim().toLowerCase();
-    const explicitProfile = String(session?.profile || session?.perfil || '').trim().toLowerCase();
-    const identity = [session?.name, session?.nome, session?.email]
-      .filter(Boolean).join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const identity = profileForEmail(session?.email);
+    if (!identity) {
+      throw new Error('A conta autenticada não corresponde a Fernando nem a Letícia. Saia e entre novamente com o e-mail correto.');
+    }
 
-    // A identificação principal é pelo e-mail EXATO cadastrado no banco.
-    // O campo profile é uma segunda fonte; nome é apenas fallback legado.
-    let profile = '';
-    if (email === 'fernandothomaz.rj@gmail.com') profile = 'fernando';
-    else if (email === 'leticiathomaz.rj@gmail.com') profile = 'leticia';
-    else if (explicitProfile === 'fernando' || explicitProfile === 'leticia') profile = explicitProfile;
-    else if (identity.includes('fernando') || identity.includes('fernandothomaz')) profile = 'fernando';
-    else if (identity.includes('leticia') || identity.includes('leticiathomaz')) profile = 'leticia';
+    // Mantém a sessão e toda a interface alinhadas à mesma identidade confirmada.
+    session.name = identity.name;
+    session.email = identity.email;
+    session.profile = identity.profile;
+    const first = identity.name.charAt(0).toUpperCase();
 
-    const isFernando = profile === 'fernando';
-    const isLele = profile === 'leticia';
-
-    $('#profileLabel').textContent = name;
-    $('#welcomeName').textContent = name;
-    $('#profileName').textContent = name;
+    $('#profileLabel').textContent = identity.name;
+    $('#welcomeName').textContent = identity.name;
+    $('#profileName').textContent = identity.name;
     $('#profileAvatar').textContent = first;
-    $('#sidebarName').textContent = name;
+    $('#sidebarName').textContent = identity.name;
     $('#sidebarAvatar').textContent = first;
     $('#profileSwitch').textContent = '↪';
 
@@ -145,22 +194,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const greetingHeadline = $('#homeGreetingHeadline');
     const greetingMessage = $('#homeGreetingMessage');
     const heroBanner = document.querySelector('#inicio .home-hero-banner');
-
-    if (heroBanner) heroBanner.classList.toggle('home-is-leticia', isLele);
-
-    if (portrait && greetingHeadline && greetingMessage) {
-      if (isFernando) {
-        portrait.src = './assets/profiles/fernando-epoca.webp?v=42';
-        portrait.alt = 'Retrato de época de Fernando';
-        greetingHeadline.innerHTML = 'Seja bem-vindo,<br>caro leitor!';
-        greetingMessage.textContent = 'Sua biblioteca o aguarda, senhor Fernando.';
-      } else if (isLele) {
-        portrait.src = './assets/profiles/lele-epoca.webp?v=42';
-        portrait.alt = 'Retrato clássico de Letícia';
-        greetingHeadline.innerHTML = 'Seja bem-vinda,<br>cara leitora!';
-        greetingMessage.textContent = 'Sua biblioteca a aguarda, senhora Letícia.';
-      }
+    if (!portrait || !greetingHeadline || !greetingMessage || !heroBanner) {
+      throw new Error('Não foi possível localizar o card de boas-vindas da Home principal.');
     }
+
+    // A variação de composição do card é mantida para acomodar as duas artes aprovadas.
+    heroBanner.classList.toggle('home-is-leticia', identity.key === 'leticia');
+    portrait.src = identity.portrait;
+    portrait.alt = identity.portraitAlt;
+    greetingHeadline.innerHTML = identity.headline;
+    greetingMessage.textContent = identity.message;
+    document.body.dataset.vpProfile = identity.key;
+    console.info('[Verso & Prosa] perfil ativo:', identity.key, identity.email);
   }
 
   function openPage(id) {
@@ -176,18 +221,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function enterApp() {
+    // Primeiro confirma a identidade; a interface não aparece se o perfil não for reconhecido.
+    renderProfile();
     document.body.classList.remove('auth-flow');
     welcome.classList.add('hidden');
     login.classList.add('hidden');
     app.classList.remove('hidden');
-    // Hard separation: the splash/login screens must never remain in the Home scroll.
     welcome.style.display = 'none';
     login.style.display = 'none';
     app.style.display = 'block';
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    renderProfile();
-    renderHome();
-    // Cada autenticação começa no mesmo Home principal para ambos os perfis.
+
+    // Força a mesma Home principal para ambos. Nunca restaura o Ateliê como página inicial.
+    history.replaceState(null, '', window.location.pathname + window.location.search);
     openPage('inicio');
   }
 
@@ -298,33 +344,108 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   async function loginWith(email, senha) {
-    const result = await api('login', { email, senha });
+    const identity = profileForEmail(email);
+    if (!identity) throw new Error('Use o e-mail cadastrado para Fernando ou Letícia.');
+
+    // Limpa os dados em memória antes de iniciar outra autenticação.
+    cloud = { books: [], notes: [], goal: null };
+    const result = await api('login', { email: identity.email, senha });
     if (!result.token || !result.user) throw new Error('O servidor não retornou uma sessão válida.');
-    saveSession({ token: result.token, name: result.user.name, email: result.user.email, profile: result.user.profile });
-    await loadCloudData();
-    const migracao = await migrarDadosLocais();
-    enterApp();
-    if (migracao.livros || migracao.anotacoes || migracao.pendencias) mensagemAposMigracao(migracao);
-    else toast('Bem-vindo(a), ' + session.name + '. Sua biblioteca está aberta.');
+
+    const serverEmail = normalizeEmail(result.user.email);
+    const serverProfile = String(result.user.profile || result.user.perfil || '').trim().toLowerCase();
+    if (serverEmail !== identity.email) {
+      throw new Error('O servidor autenticou um e-mail diferente do informado. Confira o cadastro na aba USUARIOS.');
+    }
+    if (serverProfile && serverProfile !== identity.profile) {
+      throw new Error('O perfil retornado pelo banco não corresponde ao e-mail autenticado. Confira a aba USUARIOS.');
+    }
+
+    saveSession({
+      token: result.token,
+      userId: String(result.user.id || ''),
+      email: identity.email,
+      name: identity.name,
+      profile: identity.profile
+    });
+
+    try {
+      await loadCloudData();
+      const migracao = await migrarDadosLocais();
+      enterApp();
+      if (migracao.livros || migracao.anotacoes || migracao.pendencias) mensagemAposMigracao(migracao);
+      else toast('Bem-vindo(a), ' + identity.name + '. Sua biblioteca está aberta.');
+    } catch (error) {
+      saveSession(null);
+      cloud = { books: [], notes: [], goal: null };
+      throw error;
+    }
   }
 
   async function restoreSession() {
     try {
-      const saved = JSON.parse(localStorage.getItem('vp_auth_session') || 'null');
-      if (!saved?.token) return;
-      session = saved;
+      const activeProfile = String(localStorage.getItem(ACTIVE_PROFILE_KEY) || '').trim().toLowerCase();
+      const identity = PROFILE_BY_KEY[activeProfile];
+      if (!identity) {
+        // Versões anteriores guardavam os dois usuários numa única chave; ela não é mais confiável.
+        localStorage.removeItem(LEGACY_SESSION_KEY);
+        return;
+      }
+
+      const saved = JSON.parse(localStorage.getItem(sessionStorageKey(identity.key)) || 'null');
+      if (!saved?.token || normalizeEmail(saved.email) !== identity.email) {
+        localStorage.removeItem(sessionStorageKey(identity.key));
+        localStorage.removeItem(ACTIVE_PROFILE_KEY);
+        localStorage.removeItem(LEGACY_SESSION_KEY);
+        return;
+      }
+
+      session = {
+        ...saved,
+        email: identity.email,
+        name: identity.name,
+        profile: identity.profile
+      };
       await loadCloudData();
       const migracao = await migrarDadosLocais();
       enterApp();
       mensagemAposMigracao(migracao);
-    } catch (_) {
+    } catch (error) {
       saveSession(null);
+      cloud = { books: [], notes: [], goal: null };
       document.body.classList.remove('auth-flow');
+      app.classList.add('hidden');
+      app.style.display = 'none';
       welcome.classList.remove('hidden');
+      welcome.style.display = '';
       login.classList.add('hidden');
-      showLoginError('Sua sessão expirou. Entre novamente com seu e-mail e senha.');
+      login.style.display = '';
+      showLoginError('Não foi possível restaurar esta sessão. Entre novamente com seu e-mail e senha.');
+      console.warn('[Verso & Prosa] sessão anterior descartada:', error);
     }
   }
+
+  function showWelcomeAfterExternalAccountChange() {
+    session = null;
+    cloud = { books: [], notes: [], goal: null };
+    app.classList.add('hidden');
+    app.style.display = 'none';
+    document.body.classList.remove('auth-flow');
+    login.classList.add('hidden');
+    login.style.display = '';
+    welcome.classList.remove('hidden');
+    welcome.style.display = '';
+    showLoginError('A conta ativa foi alterada em outra janela. Entre novamente para continuar.');
+  }
+
+  // Evita que duas janelas do mesmo aplicativo exibam contas diferentes sem avisar.
+  window.addEventListener('storage', event => {
+    if (event.key !== ACTIVE_PROFILE_KEY) return;
+    const nextProfile = String(event.newValue || '').trim().toLowerCase();
+    if (session && nextProfile !== String(session.profile || '').toLowerCase()) {
+      showWelcomeAfterExternalAccountChange();
+    }
+  });
 
   function logout() {
     saveSession(null);
