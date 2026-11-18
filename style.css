@@ -4925,3 +4925,244 @@ img { max-width: 100%; }
     font-size: 10.5px;
   }
 }
+
+
+/* VERSO & PROSA — HOME V45
+   Card de boas-vindas ampliado para mostrar os retratos até a cintura;
+   cabeçalho com emblema do livro e divisórias clássicas ornamentadas.
+   A estrutura e a navegação existentes são preservadas. */
+#inicio .mock-home-header {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 1px !important;
+  padding: 5px 8px 12px !important;
+  background:
+    linear-gradient(90deg, rgba(5,2,1,.10), rgba(8,3,2,.18) 50%, rgba(5,2,1,.10)),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(226,171,60,.72) !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,.62), inset 0 -1px 0 rgba(255,226,151,.18) !important;
+}
+#inicio .home-brand-emblem {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  flex: 0 0 clamp(34px, 9.7vw, 46px) !important;
+  width: clamp(34px, 9.7vw, 46px) !important;
+  height: clamp(34px, 9.7vw, 46px) !important;
+  margin: 0 auto 1px !important;
+  transform: none !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 4px rgba(255,197,75,.55)) drop-shadow(0 1px 2px #000) !important;
+}
+#inicio .mock-home-brand {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  text-align: center !important;
+  text-shadow: 0 2px 5px #000, 0 0 10px rgba(0,0,0,.85) !important;
+}
+#inicio .mock-home-brand strong {
+  font-size: clamp(23px, 6.6vw, 31px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -.4px !important;
+  color: #fff0cf !important;
+}
+#inicio .mock-home-brand span {
+  margin-top: 2px !important;
+  font-size: clamp(12px, 3.45vw, 16px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: .45px !important;
+  color: #f1c95f !important;
+}
+#inicio .home-brand-rule {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: 50% !important;
+  bottom: -10px !important;
+  width: min(84%, 430px) !important;
+  height: 22px !important;
+  transform: translateX(-50%) !important;
+  border: 0 !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+  box-shadow: none !important;
+}
+#inicio .home-brand-rule::after { content: none !important; display: none !important; }
+
+/* The larger card is shared by both logins; only portrait/text sides differ. */
+#inicio .mock-greeting.home-hero-banner {
+  flex: 0 0 clamp(238px, 31svh, 286px) !important;
+  height: clamp(238px, 31svh, 286px) !important;
+  min-height: clamp(238px, 31svh, 286px) !important;
+  max-height: clamp(238px, 31svh, 286px) !important;
+  border: 1.7px solid #e2ae42 !important;
+  border-radius: clamp(15px, 4vw, 21px) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,225,151,.25), 0 4px 10px rgba(0,0,0,.7), 0 0 9px rgba(221,157,44,.18) !important;
+}
+#inicio .home-hero-banner .mock-user-avatar {
+  width: 49% !important;
+  height: 100% !important;
+}
+#inicio .home-hero-banner .mock-user-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 48% !important;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.36) 10%, #000 31%) !important;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.36) 10%, #000 31%) !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy {
+  flex: 0 0 53% !important;
+  width: 53% !important;
+  padding: 13px 5px 13px clamp(12px, 3.6vw, 20px) !important;
+  gap: clamp(7px, 1.1svh, 11px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 {
+  width: 100% !important;
+  font-size: clamp(22px, 6.1vw, 31px) !important;
+  line-height: 1.04 !important;
+  text-align: center !important;
+  letter-spacing: -.35px !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: clamp(15px, 4.05vw, 20px) !important;
+  line-height: 1.14 !important;
+  text-align: center !important;
+}
+
+/* Letícia: portrait on the left, text on the right, with the full upper body visible. */
+#inicio .home-hero-banner.home-is-leticia {
+  background:
+    linear-gradient(90deg, rgba(20,5,2,.04) 0%, rgba(25,7,3,.02) 38%, rgba(27,8,3,.78) 52%, rgba(25,7,3,.98) 100%),
+    radial-gradient(ellipse at 75% 48%, #4b1708 0%, #210803 68%, #100301 100%) !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar {
+  left: 0 !important;
+  right: auto !important;
+  width: 49% !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar::before {
+  inset: 0 0 0 auto !important;
+  width: 25% !important;
+  background: linear-gradient(270deg, #210803 0%, rgba(33,8,3,.58) 25%, rgba(33,8,3,.08) 100%) !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar img {
+  object-position: center 48% !important;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.35) 10%, #000 32%) !important;
+  mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.35) 10%, #000 32%) !important;
+  filter: drop-shadow(3px 0 6px rgba(0,0,0,.48)) !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  flex: 0 0 52% !important;
+  width: 52% !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  padding: 13px clamp(11px, 3.2vw, 18px) 13px 4px !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+  text-align: center !important;
+}
+
+/* Ornamental separators replace plain rules with the approved gold filigree. */
+#inicio .home-hero-banner .home-hero-divider {
+  flex: 0 0 19px !important;
+  width: 94% !important;
+  height: 19px !important;
+  margin: 1px auto !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+}
+#inicio .home-hero-banner .home-hero-divider::after { content: none !important; display: none !important; }
+#inicio .home-hero-banner .home-hero-flourish {
+  flex: 0 0 19px !important;
+  width: 88% !important;
+  height: 19px !important;
+  min-height: 19px !important;
+  margin: 0 auto !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.78)) !important;
+}
+#inicio .home-hero-banner .home-hero-flourish::before,
+#inicio .home-hero-banner .home-hero-flourish::after { content: none !important; display: none !important; }
+
+/* Preserve the natural reading order: all content below the welcome card moves down. */
+@media (max-width: 600px) {
+  #inicio .mock-home-header {
+    flex: 0 0 112px !important;
+    height: 112px !important;
+    min-height: 112px !important;
+  }
+  #inicio .home-brand-emblem {
+    flex-basis: 39px !important;
+    width: 39px !important;
+    height: 39px !important;
+  }
+  #inicio .mock-home-brand strong { font-size: clamp(24px, 7vw, 31px) !important; }
+  #inicio .mock-home-brand span { font-size: clamp(12px, 3.7vw, 16px) !important; }
+  #inicio .mock-home-body {
+    gap: clamp(10px, 1.6svh, 14px) !important;
+    padding: 13px clamp(10px, 3.2vw, 15px) calc(18px + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    justify-content: flex-start !important;
+  }
+  #inicio .mock-greeting.home-hero-banner {
+    flex-basis: clamp(238px, 31svh, 286px) !important;
+    height: clamp(238px, 31svh, 286px) !important;
+    min-height: clamp(238px, 31svh, 286px) !important;
+    max-height: clamp(238px, 31svh, 286px) !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar { width: 49% !important; }
+  #inicio .home-hero-banner .mock-user-avatar img { object-position: center 48% !important; }
+  #inicio .home-hero-banner.home-is-leticia .mock-user-avatar { width: 49% !important; }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 { font-size: clamp(21px, 5.8vw, 29px) !important; }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p { font-size: clamp(14px, 3.85vw, 18px) !important; }
+  #inicio .mock-quote-card {
+    flex-basis: clamp(91px, 11svh, 112px) !important;
+    height: clamp(91px, 11svh, 112px) !important;
+    min-height: clamp(91px, 11svh, 112px) !important;
+  }
+}
+@media (max-width: 360px) {
+  #inicio .mock-home-header { flex-basis: 106px !important; height: 106px !important; min-height: 106px !important; }
+  #inicio .home-brand-emblem { width: 35px !important; height: 35px !important; flex-basis: 35px !important; }
+  #inicio .home-hero-banner .mock-greeting-copy { padding-left: 8px !important; }
+  #inicio .home-hero-banner .mock-greeting-copy h2 { font-size: 20px !important; }
+  #inicio .home-hero-banner .mock-greeting-copy p { font-size: 14px !important; }
+}
+@media (min-width: 601px) {
+  #inicio .mock-home-header {
+    flex-basis: 126px !important;
+    height: 126px !important;
+    min-height: 126px !important;
+    padding-bottom: 14px !important;
+  }
+  #inicio .home-brand-emblem { width: 48px !important; height: 48px !important; flex-basis: 48px !important; }
+  #inicio .mock-greeting.home-hero-banner {
+    height: clamp(280px, 31vw, 360px) !important;
+    min-height: clamp(280px, 31vw, 360px) !important;
+    max-height: 360px !important;
+  }
+  #inicio .home-hero-banner .mock-user-avatar img {
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
+  #inicio .home-hero-banner.home-is-leticia .mock-user-avatar img {
+    object-position: center bottom !important;
+  }
+}
