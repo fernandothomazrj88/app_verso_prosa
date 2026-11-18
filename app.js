@@ -136,6 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const greetingHeadline = $('#homeGreetingHeadline');
     const greetingMessage = $('#homeGreetingMessage');
     const avatar = $('#homeUserAvatar');
+    const heroBanner = document.querySelector('#inicio .home-hero-banner');
+    if (heroBanner) heroBanner.classList.toggle('home-is-leticia', isLele);
 
     if (portrait && greetingHeadline && greetingMessage && avatar) {
       if (isFernando) {

@@ -4846,3 +4846,82 @@ img { max-width: 100%; }
   #login .login-submit { top:51.0% !important; left:14.5% !important; width:71% !important; height:7.1% !important; }
   #login .login-forgot { top:59.0% !important; left:22% !important; width:56% !important; }
 }
+
+
+/* Home da Letícia — retrato à esquerda e saudação compacta à direita */
+#inicio .home-hero-banner.home-is-leticia {
+  background:
+    linear-gradient(90deg,
+      rgba(20, 5, 2, .02) 0%,
+      rgba(25, 7, 3, .10) 34%,
+      rgba(27, 8, 3, .78) 47%,
+      rgba(25, 7, 3, .96) 100%),
+    radial-gradient(ellipse at 74% 48%, #4b1708 0%, #210803 68%, #100301 100%);
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar {
+  left: 0;
+  right: auto;
+  width: 49%;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar::before {
+  inset: 0 0 0 auto;
+  width: 36%;
+  background: linear-gradient(270deg, #210803 0%, rgba(33,8,3,.68) 25%, rgba(33,8,3,.12) 78%, transparent 100%);
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar img {
+  object-position: 48% 10%;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 38%);
+  mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 38%);
+  filter: drop-shadow(3px 0 5px rgba(0,0,0,.48));
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  flex: 0 0 52%;
+  width: 52%;
+  margin-left: auto;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 8px clamp(9px, 3.2vw, 18px) 8px 3px;
+  gap: clamp(3px, .8vw, 6px);
+  text-align: right;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
+  width: 100%;
+  font: italic 700 clamp(14px, 4.4vw, 22px)/1.08 Georgia, "Times New Roman", serif;
+  letter-spacing: -.2px;
+  text-align: right;
+}
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider {
+  width: 88%;
+  margin: 1px 0;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+  max-width: 100%;
+  font: 600 clamp(11px, 3.2vw, 16px)/1.18 Georgia, "Times New Roman", serif;
+  text-align: right;
+}
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish {
+  width: 88%;
+  font-size: 11px;
+  text-align: right;
+}
+@media (min-width: 700px) {
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+    flex-basis: 53%;
+    width: 53%;
+    padding-right: 22px;
+  }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
+    font-size: clamp(20px, 2.2vw, 29px);
+  }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+    font-size: clamp(14px, 1.35vw, 19px);
+  }
+}
+@media (max-width: 360px) {
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
+    font-size: 13px;
+  }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+    font-size: 10.5px;
+  }
+}
