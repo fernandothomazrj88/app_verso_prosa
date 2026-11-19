@@ -5368,3 +5368,333 @@ img { max-width: 100%; }
   .page-heading { padding: 22px 22px 24px !important; }
   .page-heading .page-heading-emblem { width: 64px !important; height: 42px !important; }
 }
+
+
+/* V47 — MINHA ESTANTE: catálogo mobile compacto, fiel ao mockup aprovado */
+#estante.shelf-page {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+#estante .shelf-screen-header {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 112px;
+  margin: -8px -14px 12px;
+  padding: 8px 14px 15px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(8,3,2,.34), rgba(8,3,2,.58)),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat,
+    #100704;
+  border-bottom: 1px solid rgba(225,173,65,.75);
+  box-shadow: 0 6px 18px rgba(0,0,0,.38), inset 0 -1px rgba(255,220,138,.22);
+}
+#estante .shelf-screen-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(7,3,2,.48), transparent 27% 73%, rgba(7,3,2,.48));
+}
+#estante .shelf-screen-emblem {
+  display: block;
+  width: 66px;
+  height: 43px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.86)) drop-shadow(0 0 5px rgba(245,183,64,.36));
+}
+#estante .shelf-screen-header h2 {
+  margin: 0;
+  color: #fff0d2;
+  font: 700 clamp(25px, 6.4vw, 34px)/.98 'Cormorant Garamond', Georgia, serif;
+  text-align: center;
+  text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,.9);
+}
+#estante .shelf-screen-divider {
+  display: block;
+  width: min(88%, 390px);
+  height: 17px;
+  margin-top: 4px;
+  object-fit: fill;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.9));
+}
+#estante .shelf-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 9px;
+}
+#estante .shelf-search-icon {
+  position: absolute;
+  left: 13px;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: #f1bd36;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(239,174,36,.5));
+}
+#estante .shelf-search-wrap .search {
+  width: 100%;
+  max-width: none;
+  height: 42px;
+  margin: 0;
+  padding: 0 40px 0 39px;
+  border: 1.5px solid #d69f22;
+  border-radius: 24px;
+  outline: none;
+  background: linear-gradient(180deg, rgba(35,16,9,.97), rgba(13,6,4,.98));
+  color: #fff0d2;
+  font: 12px 'Lora', Georgia, serif;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.72), 0 2px 8px rgba(0,0,0,.4), 0 0 7px rgba(217,157,28,.12);
+}
+#estante .shelf-search-wrap .search::placeholder { color: #d5c09e; opacity: 1; }
+#estante .shelf-search-wrap .search::-webkit-search-cancel-button { filter: sepia(1) saturate(4); }
+#estante .shelf-filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 6px;
+  margin: 0 0 18px;
+  padding: 0;
+  overflow: visible;
+}
+#estante .shelf-filter-row .filter-chip {
+  min-width: 0;
+  min-height: 31px;
+  padding: 6px 4px;
+  border: 1.3px solid #d29a1d;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(30,15,9,.98), rgba(12,6,4,.98));
+  color: #f2dfbd;
+  font: 600 10px/1 'Lora', Georgia, serif;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: inset 0 1px rgba(255,235,190,.06), 0 2px 5px rgba(0,0,0,.36);
+}
+#estante .shelf-filter-row .filter-chip.active {
+  border-color: #ffd34e;
+  background: linear-gradient(180deg, #ffcf35, #d99005);
+  color: #2a1205;
+  box-shadow: inset 0 1px rgba(255,255,255,.42), 0 0 9px rgba(247,183,34,.32);
+}
+#estante .shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  align-items: start;
+  gap: 17px 10px;
+  width: 100%;
+  min-height: 170px;
+  padding: 0 2px 28px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+#estante .shelf-grid-book {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #fff0d2;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .18s ease, filter .18s ease;
+}
+#estante .shelf-grid-book:hover,
+#estante .shelf-grid-book:focus-visible {
+  transform: translateY(-3px);
+  filter: brightness(1.12);
+  outline: none;
+}
+#estante .shelf-grid-book:focus-visible .shelf-grid-cover {
+  outline: 2px solid #ffe08a;
+  outline-offset: 3px;
+}
+#estante .shelf-grid-cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: .565;
+  overflow: hidden;
+  border: 1.4px solid #e6b53c;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #73342b, #1d0b09 76%);
+  box-shadow: 3px 5px 10px rgba(0,0,0,.72), inset 0 0 0 2px rgba(255,222,133,.13);
+}
+#estante .shelf-grid-cover::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 4px;
+  border: 1px solid rgba(255,220,133,.55);
+  border-radius: 2px;
+  pointer-events: none;
+}
+#estante .shelf-grid-cover::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(90deg, rgba(0,0,0,.48), rgba(255,223,142,.18), transparent);
+  pointer-events: none;
+}
+#estante .shelf-cover-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+#estante .shelf-cover-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 34% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(8,3,2,.16) 24%, rgba(7,3,2,.92) 100%);
+  pointer-events: none;
+}
+#estante .shelf-cover-copy {
+  position: absolute;
+  z-index: 2;
+  left: 6px;
+  right: 5px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+  text-shadow: 0 1px 3px #000, 0 2px 5px #000;
+}
+#estante .shelf-cover-title {
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  color: #fff5de;
+  font: 700 clamp(9px, 2.8vw, 13px)/1.08 'Cormorant Garamond', Georgia, serif;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
+}
+#estante .shelf-cover-author {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  color: #f1d28d;
+  font: 500 clamp(7px, 2.1vw, 9px)/1.1 'Lora', Georgia, serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#estante .shelf-cover-status {
+  position: absolute;
+  z-index: 4;
+  top: 7px;
+  right: 7px;
+  max-width: calc(100% - 15px);
+  padding: 3px 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255,222,143,.52);
+  border-radius: 10px;
+  background: rgba(15,7,4,.78);
+  color: #ffe39c;
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: .3px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#estante .cover-tone-0 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 32%, rgba(222,171,76,.28), transparent 34%), linear-gradient(145deg,#263c34,#101e1c 72%); }
+#estante .cover-tone-1 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 34%, rgba(241,176,77,.24), transparent 35%), linear-gradient(145deg,#7c1625,#290b12 78%); }
+#estante .cover-tone-2 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 32%, rgba(244,194,115,.32), transparent 36%), linear-gradient(145deg,#87613b,#2e1b12 78%); }
+#estante .cover-tone-3 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 30%, rgba(105,184,205,.22), transparent 38%), linear-gradient(145deg,#164a61,#0b1b2b 78%); }
+#estante .cover-tone-4 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 30%, rgba(244,195,63,.28), transparent 38%), linear-gradient(145deg,#a04a15,#321307 78%); }
+#estante .cover-tone-5 .shelf-grid-cover.has-cover-fallback { background: radial-gradient(ellipse at 50% 32%, rgba(229,192,104,.26), transparent 36%), linear-gradient(145deg,#59421c,#1e170c 78%); }
+#estante .shelf-cover-fallback-mark {
+  position: absolute;
+  z-index: 1;
+  top: 19%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,224,151,.78);
+  font: clamp(23px,7vw,39px)/1 Georgia, serif;
+  text-shadow: 0 2px 5px #0009, 0 0 12px rgba(233,177,74,.25);
+}
+#estante .shelf-empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  min-height: 230px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 25px 18px;
+  border: 1px solid rgba(220,173,91,.48);
+  border-radius: 10px;
+  background: linear-gradient(145deg, rgba(55,25,14,.76), rgba(14,6,4,.86));
+  color: #f7e7c8;
+  text-align: center;
+  box-shadow: inset 0 0 28px rgba(0,0,0,.34), 0 7px 18px rgba(0,0,0,.34);
+}
+#estante .shelf-empty-state img { width: 64px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(220,167,64,.3)); }
+#estante .shelf-empty-state b { font: 700 20px/1.15 'Cormorant Garamond', Georgia, serif; }
+#estante .shelf-empty-state p { max-width: 310px; margin: 0; color: #d8c29c; font: 11px/1.5 'Lora', Georgia, serif; }
+#estante .shelf-empty-state .primary { margin-top: 4px; }
+#estante .shelf-clear-filter {
+  min-height: 34px;
+  padding: 7px 15px;
+  border: 1px solid #e0b34a;
+  border-radius: 18px;
+  background: linear-gradient(180deg,#7f2333,#47101c);
+  color: #ffedcc;
+  font: 11px 'Lora', Georgia, serif;
+}
+
+@media (max-width: 680px) {
+  #app:has(#estante.active) > .topbar { display: none !important; }
+  #app:has(#estante.active) .workspace { min-height: 100svh !important; }
+  #app:has(#estante.active) main {
+    width: 100% !important;
+    max-width: 520px !important;
+    padding: 0 9px 96px !important;
+    margin: 0 auto !important;
+    background: #080302 !important;
+  }
+  #estante.shelf-page { padding-top: 0; }
+  #estante .shelf-screen-header {
+    min-height: clamp(84px, 15svh, 112px);
+    margin: 0 -9px 10px;
+    padding: 5px 10px 11px;
+  }
+  #estante .shelf-screen-emblem { width: 57px; height: 36px; }
+  #estante .shelf-screen-header h2 { font-size: clamp(24px, 6.3vw, 30px); }
+  #estante .shelf-screen-divider { width: 92%; height: 15px; margin-top: 3px; }
+  #estante .shelf-search-wrap .search { height: 39px; font-size: 11px; }
+  #estante .shelf-filter-row { gap: 5px; margin-bottom: 17px; }
+  #estante .shelf-filter-row .filter-chip { min-height: 29px; padding: 6px 3px; font-size: clamp(9px, 2.55vw, 10px); }
+  #estante .shelf-grid { gap: 15px 8px; padding: 0 1px 26px; }
+  #estante .shelf-grid-cover { border-radius: 4px; }
+  #estante .shelf-cover-copy { left: 5px; right: 4px; bottom: 7px; gap: 2px; }
+  #estante .shelf-cover-title { font-size: clamp(8px, 2.6vw, 11px); }
+  #estante .shelf-cover-author { font-size: clamp(6px, 1.9vw, 8px); }
+  #estante .shelf-cover-status { top: 6px; right: 6px; padding: 2px 4px; font-size: 6px; }
+}
+@media (min-width: 681px) {
+  #estante .shelf-screen-header { min-height: 128px; margin-top: -10px; }
+  #estante .shelf-grid { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 20px 16px; }
+  #estante .shelf-grid-cover { aspect-ratio: .62; }
+}

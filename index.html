@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-v46-final">
+<link rel="stylesheet" href="./style.css?v=estante-v47">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -206,12 +206,23 @@
     <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
   </nav>
 </section>
-      <section id="estante" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">O SEU ACERVO PARTICULAR</p><h2>Minha Estante</h2><p class="muted">Cada lombada guarda uma história. Toque em um livro para abrir sua ficha de leitura.</p></div>
-        <div class="shelf-toolbar"><input class="field search" id="buscarLivro" type="search" placeholder="⌕  Procurar por título ou autor..."><button class="shelf-add" data-page="adicionar">＋ Novo exemplar</button></div>
-        <div class="filter-row"><button class="filter-chip active" data-filter="todos">Todos</button><button class="filter-chip" data-filter="lendo">Lendo</button><button class="filter-chip" data-filter="lidos">Lidos</button><button class="filter-chip" data-filter="quero-ler">Quero ler</button></div>
-        <div id="listaLivros" class="shelf-wall"><div class="empty-state"><span>▤</span><b>Suas estantes ainda aguardam os primeiros volumes</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro exemplar</button></div></div>
+      <section id="estante" class="page shelf-page" aria-label="Minha Estante">
+        <header class="shelf-screen-header">
+          <img class="shelf-screen-emblem" src="./assets/logo-livro-pena-trim.png" alt="Livro aberto e pena dourados">
+          <h2>Minha Estante</h2>
+          <img class="shelf-screen-divider" src="./assets/ornaments/home-divider-ornate.svg" alt="" aria-hidden="true">
+        </header>
+        <div class="shelf-search-wrap">
+          <svg class="shelf-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+          <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+        </div>
+        <div class="filter-row shelf-filter-row" role="group" aria-label="Filtrar livros por situação">
+          <button class="filter-chip active" data-filter="todos" aria-pressed="true">Todos</button>
+          <button class="filter-chip" data-filter="lidos" aria-pressed="false">Lidos</button>
+          <button class="filter-chip" data-filter="lendo" aria-pressed="false">Lendo</button>
+          <button class="filter-chip" data-filter="quero-ler" aria-pressed="false">Quero Ler</button>
+        </div>
+        <div id="listaLivros" class="shelf-grid" aria-live="polite"><div class="empty-state"><span>✦</span><b>Sua estante está esperando por você</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro livro</button></div></div>
       </section>
 
       <section id="adicionar" class="page">
@@ -292,7 +303,7 @@
   <button class="primary" id="detailNoteButton">Escrever no caderno sobre este livro</button>
 </dialog>
 <div id="toast" class="toast" role="status"></div>
-<script src="./app.js?v=profiles-v44-v46-final"></script>
+<script src="./app.js?v=estante-v47"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>

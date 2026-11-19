@@ -606,45 +606,83 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#logout').addEventListener('click', logout);
 
   function renderBooks() {
-    const term = ($('#buscarLivro').value || '').toLocaleLowerCase('pt-BR');
-    const books = cloud.books.map((book, index) => ({ book, index }));
-    const filtered = books.filter(({ book }) => {
-      const searchable = `${book.titulo || ''} ${book.autor || ''}`.toLocaleLowerCase('pt-BR');
+    const searchInput = $('#buscarLivro');
+    const term = (searchInput?.value || '').trim().toLocaleLowerCase('pt-BR');
+    const allBooks = cloud.books.map((book, index) => ({ book, index }));
+
+    const normalizedStatus = value => String(value || '')
+      .trim()
+      .toLocaleLowerCase('pt-BR')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    const statusKey = value => {
+      const status = normalizedStatus(value);
+      if (status === 'lendo' || status === 'estou lendo') return 'lendo';
+      if (status === 'lido' || status === 'lidos' || status === 'ja li' || status === 'concluido') return 'lidos';
+      if (status === 'quero ler' || status === 'quero-ler' || status === 'lista de leitura') return 'quero-ler';
+      return 'outros';
+    };
+
+    const filtered = allBooks.filter(({ book }) => {
+      const searchable = [book.titulo, book.autor, book.editora, book.genero, book.isbn]
+        .filter(Boolean).join(' ').toLocaleLowerCase('pt-BR');
       const matchesTerm = searchable.includes(term);
-      const normalized = String(book.status || '').toLocaleLowerCase('pt-BR');
-      const matchesStatus = filter === 'todos'
-        || (filter === 'lendo' && normalized === 'lendo')
-        || (filter === 'lidos' && normalized === 'lido')
-        || (filter === 'quero-ler' && normalized === 'quero ler');
+      const matchesStatus = filter === 'todos' || statusKey(book.status) === filter;
       return matchesTerm && matchesStatus;
     });
 
     const target = $('#listaLivros');
+    if (!target) return;
+
     if (!filtered.length) {
-      target.innerHTML = '<div class="empty-state"><span>▤</span><b>Sua estante ainda aguarda novos volumes</b><p>Adicione um livro para começar a construir sua biblioteca particular.</p><button class="primary compact" data-page="adicionar">Adicionar exemplar</button></div>';
+      const hasBooks = allBooks.length > 0;
+      const message = hasBooks
+        ? 'Nenhum livro encontrado nesta seleção.'
+        : 'Sua estante está esperando por você.';
+      const description = hasBooks
+        ? 'Tente outro título, autor ou filtro para localizar um exemplar.'
+        : 'Adicione um livro para começar a construir sua biblioteca particular.';
+      target.innerHTML = `
+        <div class="shelf-empty-state">
+          <img src="./assets/logo-livro-pena-trim.png" alt="" aria-hidden="true">
+          <b>${message}</b>
+          <p>${description}</p>
+          ${hasBooks ? '<button type="button" class="shelf-clear-filter" id="clearShelfSearch">Limpar busca e filtros</button>' : '<button type="button" class="primary compact" data-page="adicionar">Adicionar primeiro livro</button>'}
+        </div>`;
+      const clear = $('#clearShelfSearch');
+      if (clear) clear.addEventListener('click', () => {
+        searchInput.value = '';
+        filter = 'todos';
+        $$('.filter-chip').forEach(chip => {
+          const active = chip.dataset.filter === 'todos';
+          chip.classList.toggle('active', active);
+          chip.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        renderBooks();
+      });
       return;
     }
 
-    const chunks = [];
-    for (let i = 0; i < filtered.length; i += 5) chunks.push(filtered.slice(i, i + 5));
-    target.innerHTML = chunks.map((chunk, shelfIndex) => `
-      <div class="bookcase-shelf" aria-label="Prateleira ${shelfIndex + 1}">
-        <div class="shelf-books">
-          ${chunk.map(({ book, index }) => {
-            const image = safeImageUrl(book.capa);
-            const cover = image
-              ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">`
-              : `<span class="jacket-title">${escapeHtml(book.titulo || 'Sem título')}</span><span class="jacket-author">${escapeHtml(book.autor || 'ACERVO V&amp;P')}</span>`;
-            return `<button type="button" class="shelf-book" data-book-index="${index}" aria-label="Abrir ${escapeHtml(book.titulo || 'livro')}">
-              <span class="book-jacket">${cover}</span>
-              <span class="shelf-book-title">${escapeHtml(book.titulo || 'Sem título')}</span>
-              <span class="shelf-book-author">${escapeHtml(book.autor || 'Autor não informado')}</span>
-              <span class="shelf-book-status">${escapeHtml(book.status || 'No acervo')}</span>
-            </button>`;
-          }).join('')}
-        </div>
-        <div class="shelf-plank" aria-hidden="true"></div>
-      </div>`).join('');
+    target.innerHTML = filtered.map(({ book, index }, cardIndex) => {
+      const image = safeImageUrl(book.capa);
+      const title = String(book.titulo || 'Livro sem título');
+      const author = String(book.autor || 'Autor não informado');
+      const photo = image
+        ? `<img class="shelf-cover-photo" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}" loading="lazy" decoding="async">`
+        : `<span class="shelf-cover-fallback-mark" aria-hidden="true">✦</span>`;
+      return `
+        <button type="button" class="shelf-grid-book cover-tone-${cardIndex % 6}" data-book-index="${index}" aria-label="Abrir ${escapeHtml(title)} de ${escapeHtml(author)}">
+          <span class="shelf-grid-cover${image ? ' has-cover-image' : ' has-cover-fallback'}">
+            ${photo}
+            <span class="shelf-cover-shade" aria-hidden="true"></span>
+            <span class="shelf-cover-copy">
+              <b class="shelf-cover-title">${escapeHtml(title)}</b>
+              <small class="shelf-cover-author">${escapeHtml(author)}</small>
+            </span>
+          </span>
+        </button>`;
+    }).join('');
   }
 
   function openBook(book) {
@@ -730,8 +768,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#buscarLivro').addEventListener('input', renderBooks);
   $$('.filter-chip').forEach(chip => chip.addEventListener('click', () => {
-    $$('.filter-chip').forEach(item => item.classList.remove('active'));
-    chip.classList.add('active');
+    $$('.filter-chip').forEach(item => {
+      const active = item === chip;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     filter = chip.dataset.filter;
     renderBooks();
   }));
