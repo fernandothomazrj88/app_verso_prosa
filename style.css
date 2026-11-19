@@ -6085,3 +6085,174 @@ img { max-width: 100%; }
   #estante .shelf-filter-row .filter-chip { min-height: 26px !important; font-size: 9px !important; }
   #estante .shelf-grid { gap: 11px 6px !important; }
 }
+
+
+/* V52 — ESTANTE: composição mobile limpa, sem cenário antigo atrás da grade.
+   Este bloco intencionalmente fica no final para prevalecer sobre os overrides V47–V51. */
+#app:has(#estante.active) main {
+  background: linear-gradient(180deg, #100704 0%, #090403 56%, #120704 100%) !important;
+}
+#app:has(#estante.active) main::before,
+#app:has(#estante.active) main::after,
+#estante.shelf-page::before,
+#estante.shelf-page::after,
+#estante.page::before,
+#estante.page::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  background: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+#estante.shelf-page {
+  position: relative !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: 760px !important;
+  min-height: calc(100svh - 68px) !important;
+  margin: 0 auto !important;
+  padding: 0 0 24px !important;
+  overflow: visible !important;
+  background: transparent !important;
+}
+#estante .shelf-screen-header {
+  min-height: 104px !important;
+  margin: 0 -9px 14px !important;
+  padding: 3px 10px 8px !important;
+  gap: 0 !important;
+  justify-content: center !important;
+  background:
+    linear-gradient(180deg, rgba(8,3,2,.10), rgba(8,3,2,.46)),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat,
+    #100704 !important;
+  border-bottom: 1px solid rgba(225,173,65,.82) !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,.4), inset 0 -1px rgba(255,220,138,.24) !important;
+}
+#estante .shelf-screen-emblem {
+  width: 68px !important;
+  height: 43px !important;
+  margin: 0 auto 1px !important;
+}
+#estante .shelf-emblem-book {
+  width: 56px !important;
+  height: 36px !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
+#estante .shelf-emblem-quill {
+  width: 27px !important;
+  height: 39px !important;
+  top: -2px !important;
+  right: 5px !important;
+}
+#estante .shelf-screen-header h2 {
+  margin: 0 !important;
+  font-size: clamp(25px, 6.1vw, 31px) !important;
+  line-height: 1 !important;
+}
+#estante .shelf-screen-divider {
+  width: min(91%, 420px) !important;
+  height: 16px !important;
+  margin: 2px auto 0 !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+}
+#estante .shelf-search-wrap {
+  width: 92% !important;
+  max-width: 500px !important;
+  margin: 0 auto 11px !important;
+}
+#estante .shelf-search-wrap .search {
+  height: 36px !important;
+  padding: 0 36px !important;
+  border-radius: 22px !important;
+  font-size: 11px !important;
+}
+#estante .shelf-search-icon { width: 16px !important; height: 16px !important; }
+#estante .shelf-search-icon-left { left: 12px !important; }
+#estante .shelf-search-icon-right { left: auto !important; right: 12px !important; transform: scaleX(-1) !important; }
+#estante .shelf-filter-row {
+  width: 92% !important;
+  max-width: 500px !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 5px !important;
+  margin: 0 auto 19px !important;
+}
+#estante .shelf-filter-row .filter-chip {
+  min-width: 0 !important;
+  min-height: 29px !important;
+  padding: 5px 3px !important;
+  border-radius: 17px !important;
+  font-size: clamp(9px, 2.45vw, 10px) !important;
+  letter-spacing: -.1px !important;
+}
+#estante .shelf-grid {
+  display: grid !important;
+  width: 92% !important;
+  max-width: 500px !important;
+  margin: 0 auto !important;
+  grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  align-items: start !important;
+  justify-items: stretch !important;
+  gap: 13px 7px !important;
+  min-height: 0 !important;
+  padding: 0 0 30px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#estante .shelf-grid-book {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+#estante .shelf-grid-cover {
+  display: block !important;
+  width: 100% !important;
+  aspect-ratio: .50 !important;
+  border: 1.4px solid #e6b53c !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  background: #26140d !important;
+  box-shadow: 2px 4px 9px rgba(0,0,0,.74), inset 0 0 0 2px rgba(255,222,133,.16) !important;
+}
+#estante .shelf-cover-photo {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+#estante .shelf-cover-copy {
+  left: 4px !important;
+  right: 4px !important;
+  bottom: 6px !important;
+  gap: 2px !important;
+}
+#estante .shelf-cover-title { font-size: clamp(8px, 2.3vw, 10px) !important; }
+#estante .shelf-cover-author { font-size: clamp(6px, 1.8vw, 7.5px) !important; }
+#estante .shelf-empty-state {
+  grid-column: 1 / -1 !important;
+  min-height: 190px !important;
+  background: linear-gradient(145deg, rgba(42,18,10,.7), rgba(12,5,3,.85)) !important;
+}
+@media (max-width: 390px) {
+  #estante .shelf-screen-header { min-height: 100px !important; }
+  #estante .shelf-search-wrap { width: 92% !important; }
+  #estante .shelf-filter-row { width: 92% !important; gap: 4px !important; margin-bottom: 18px !important; }
+  #estante .shelf-filter-row .filter-chip { min-height: 28px !important; font-size: 9px !important; }
+  #estante .shelf-grid { width: 92% !important; gap: 12px 6px !important; }
+}
+@media (min-width: 681px) {
+  #app:has(#estante.active) main { padding: 0 22px 90px !important; }
+  #estante .shelf-grid { width: min(92%, 560px) !important; }
+  #estante .shelf-search-wrap,
+  #estante .shelf-filter-row { width: min(92%, 560px) !important; }
+}
