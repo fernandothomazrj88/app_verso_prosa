@@ -5831,3 +5831,127 @@ img { max-width: 100%; }
 .module-load-error h2{font:600 28px Georgia,serif;color:#e8c47b;margin:0 0 12px}
 .module-load-error p{font:14px/1.6 Arial,sans-serif;color:#eadcc0}
 .module-load-error button{margin-top:12px;padding:10px 22px;border:1px solid #d4a64f;border-radius:30px;background:linear-gradient(#8d1024,#4b0711);color:#fff;font-weight:700;cursor:pointer}
+
+
+/* V50 — Minha Estante: correspondência refinada com o mockup aprovado */
+#estante .shelf-screen-header {
+  min-height: clamp(94px, 14svh, 108px) !important;
+  margin: 0 -9px 9px !important;
+  padding: 3px 10px 8px !important;
+  gap: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(8,3,2,.12), rgba(8,3,2,.43)),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat,
+    #100704 !important;
+  border-bottom: 1px solid rgba(225,173,65,.82) !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,.4), inset 0 -1px rgba(255,220,138,.24) !important;
+}
+#estante .shelf-screen-emblem {
+  position: relative !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: clamp(76px, 18vw, 88px) !important;
+  height: clamp(43px, 10.8vw, 52px) !important;
+  margin: 0 auto 1px !important;
+  overflow: visible !important;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.78)) drop-shadow(0 0 5px rgba(245,183,64,.32)) !important;
+}
+#estante .shelf-emblem-book {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  display: block !important;
+  width: 72px !important;
+  height: 45px !important;
+  object-fit: contain !important;
+}
+#estante .shelf-emblem-quill {
+  position: absolute !important;
+  top: -3px !important;
+  right: 5px !important;
+  display: block !important;
+  width: 35px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+}
+#estante .shelf-screen-header h2 {
+  position: relative !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+  color: #fff0d2 !important;
+  font: 700 clamp(25px, 6.2vw, 31px)/.98 'Cormorant Garamond', Georgia, serif !important;
+  text-align: center !important;
+  text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,.9) !important;
+}
+#estante .shelf-screen-divider {
+  position: relative !important;
+  display: block !important;
+  width: min(94%, 420px) !important;
+  height: 13px !important;
+  margin: 2px auto 0 !important;
+  background: linear-gradient(90deg,
+    transparent 0%, #8c5d18 5%, #f3c85d 18%, #ffe9a0 42%,
+    transparent 48%, transparent 52%, #ffe9a0 58%, #f3c85d 82%, #8c5d18 95%, transparent 100%
+  ) center / 100% 1.5px no-repeat !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.92)) !important;
+}
+#estante .shelf-screen-divider::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 8px !important;
+  height: 8px !important;
+  transform: translate(-50%,-50%) rotate(45deg) !important;
+  border: 1px solid #ffe99b !important;
+  background: linear-gradient(135deg,#fff0b0,#d99d2d 58%,#7e4c12) !important;
+  box-shadow: 0 0 5px rgba(255,202,73,.58) !important;
+}
+#estante .shelf-search-wrap { margin: 0 0 8px !important; }
+#estante .shelf-search-wrap .search {
+  height: 40px !important;
+  border-radius: 24px !important;
+  font-size: 11px !important;
+}
+#estante .shelf-filter-row {
+  gap: 6px !important;
+  margin: 0 0 15px !important;
+}
+#estante .shelf-filter-row .filter-chip {
+  min-height: 30px !important;
+  padding: 6px 4px !important;
+  border-radius: 18px !important;
+  font: 600 10px/1 'Lora', Georgia, serif !important;
+}
+#estante .shelf-grid {
+  grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  align-items: start !important;
+  gap: 13px 8px !important;
+  padding: 0 1px 34px !important;
+}
+#estante .shelf-grid-book { width: 100% !important; }
+#estante .shelf-grid-cover {
+  aspect-ratio: .565 !important;
+  border: 1.5px solid #e6b53c !important;
+  border-radius: 5px !important;
+  box-shadow: 2px 4px 9px rgba(0,0,0,.74), inset 0 0 0 2px rgba(255,222,133,.17) !important;
+}
+#estante .shelf-cover-photo {
+  object-fit: fill !important;
+  object-position: center !important;
+}
+#estante .shelf-cover-copy { left: 4px !important; right: 4px !important; bottom: 6px !important; gap: 2px !important; }
+#estante .shelf-cover-title { font-size: clamp(8px,2.45vw,11px) !important; }
+#estante .shelf-cover-author { font-size: clamp(6px,1.9vw,8px) !important; }
+@media (max-width: 390px) {
+  #estante .shelf-screen-header { min-height: 91px !important; }
+  #estante .shelf-emblem-book { width: 66px !important; height: 42px !important; }
+  #estante .shelf-emblem-quill { width: 32px !important; height: 44px !important; }
+  #estante .shelf-filter-row { gap: 4px !important; }
+  #estante .shelf-filter-row .filter-chip { font-size: 9px !important; }
+  #estante .shelf-grid { gap: 11px 6px !important; }
+}
+@media (min-width: 681px) {
+  #estante .shelf-screen-header { min-height: 108px !important; }
+  #estante .shelf-grid { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+}
