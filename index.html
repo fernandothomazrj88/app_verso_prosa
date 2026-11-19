@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-v45">
+<link rel="stylesheet" href="./style.css?v=home-v46-final">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -131,12 +131,8 @@
   <header class="mock-home-header">
     <span class="home-header-lamp home-header-lamp-left" aria-hidden="true"></span>
     <span class="home-header-lamp home-header-lamp-right" aria-hidden="true"></span>
-    <img class="home-brand-emblem" src="./assets/logo-livro-pena-trim.png" alt="" aria-hidden="true">
-    <div class="mock-home-brand">
-      <strong>Verso &amp; Prosa</strong>
-      <span>Biblioteca Literária</span>
-    </div>
-    <div class="home-brand-rule" aria-hidden="true"></div>
+    <img class="home-brand-full-logo" src="./assets/brand/verso-prosa-home-logo.png"
+      alt="Verso &amp; Prosa — Biblioteca Literária">
   </header>
 
   <div class="mock-home-body">
@@ -162,19 +158,19 @@
 
     <nav class="mock-shortcuts" aria-label="Acessos rápidos">
       <button class="mock-shortcut" data-page="estante">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/book-open.svg" alt="" aria-hidden="true">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true">
         <span>Minha<br>Estante</span>
       </button>
       <button class="mock-shortcut" data-page="adicionar">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/book-add.svg" alt="" aria-hidden="true">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-add.png" alt="" aria-hidden="true">
         <span>Adicionar<br>Livro</span>
       </button>
       <button class="mock-shortcut" data-page="anotacoes">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/quill.svg" alt="" aria-hidden="true">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-quill.png" alt="" aria-hidden="true">
         <span>Anotações<br>e Resenhas</span>
       </button>
       <button class="mock-shortcut" data-page="calendario">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/calendar.svg" alt="" aria-hidden="true">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-calendar.png" alt="" aria-hidden="true">
         <span>Planejamento<br>de Leituras</span>
       </button>
     </nav>
@@ -203,22 +199,24 @@
   </div>
 
   <nav class="mock-bottom-nav" aria-label="Navegação principal">
-    <button class="active" data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/library-home.svg" alt="" aria-hidden="true"><span>Início</span></button>
-    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/book-open.svg" alt="" aria-hidden="true"><span>Estante</span></button>
-    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><span>＋</span></button>
-    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/magnifier.svg" alt="" aria-hidden="true"><span>Descobrir</span></button>
-    <button data-page="estudio"><img class="home-nav-icon" src="./assets/icons/home-classic/sliders.svg" alt="" aria-hidden="true"><span>Mais</span></button>
+    <button class="active" data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
   </nav>
 </section>
       <section id="estante" class="page">
-        <div class="page-heading"><p class="eyebrow">O SEU ACERVO PARTICULAR</p><h2>Minhas estantes</h2><p class="muted">Cada lombada guarda uma história. Toque em um livro para abrir sua ficha de leitura.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">O SEU ACERVO PARTICULAR</p><h2>Minha Estante</h2><p class="muted">Cada lombada guarda uma história. Toque em um livro para abrir sua ficha de leitura.</p></div>
         <div class="shelf-toolbar"><input class="field search" id="buscarLivro" type="search" placeholder="⌕  Procurar por título ou autor..."><button class="shelf-add" data-page="adicionar">＋ Novo exemplar</button></div>
         <div class="filter-row"><button class="filter-chip active" data-filter="todos">Todos</button><button class="filter-chip" data-filter="lendo">Lendo</button><button class="filter-chip" data-filter="lidos">Lidos</button><button class="filter-chip" data-filter="quero-ler">Quero ler</button></div>
         <div id="listaLivros" class="shelf-wall"><div class="empty-state"><span>▤</span><b>Suas estantes ainda aguardam os primeiros volumes</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro exemplar</button></div></div>
       </section>
 
       <section id="adicionar" class="page">
-        <div class="page-heading"><p class="eyebrow">AQUISIÇÕES DA BIBLIOTECA</p><h2>Adicionar exemplar</h2><p class="muted">Registre um novo volume no seu acervo pessoal.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">AQUISIÇÕES DA BIBLIOTECA</p><h2>Adicionar Livro</h2><p class="muted">Registre um novo volume no seu acervo pessoal.</p></div>
         <form id="bookForm" class="form-card library-form">
           <div class="form-intro"><span>✦</span><div><b>Ficha catalográfica</b><small>Os dados ajudam a organizar sua coleção.</small></div></div>
           <label>Título do livro<input class="field" name="titulo" placeholder="Ex.: Os Irmãos Karamázov" required></label>
@@ -233,13 +231,15 @@
       </section>
 
       <section id="anotacoes" class="page">
-        <div class="page-heading"><p class="eyebrow">MARGENS, IDEIAS E PASSAGENS</p><h2>Caderno de leitura</h2><p class="muted">Aquelas ideias que merecem ser guardadas entre as páginas.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">MARGENS, IDEIAS E PASSAGENS</p><h2>Anotações e Citações</h2><p class="muted">Aquelas ideias que merecem ser guardadas entre as páginas.</p></div>
         <div class="notebook-card"><div class="notebook-heading"><span>✎</span><div><b>Uma nota à margem</b><small>Registre uma impressão, uma pergunta ou um trecho.</small></div></div><label>Livro relacionado<input class="field" id="noteBook" placeholder="Título do livro"></label><label>Sua anotação<textarea class="field" id="noteText" rows="5" placeholder="O que esta leitura fez você pensar?"></textarea></label><button class="primary" id="saveNote">Guardar no caderno</button></div>
         <div class="section-heading"><div><p class="eyebrow">ARQUIVO PESSOAL</p><h3>Minhas anotações</h3></div></div><div id="notesList" class="notes-list"><p class="muted">Suas anotações aparecerão aqui.</p></div>
       </section>
 
       <section id="descobrir" class="page">
-        <div class="page-heading"><p class="eyebrow">NOVAS PRATELEIRAS, NOVOS MUNDOS</p><h2>Novas descobertas</h2><p class="muted">Percorra caminhos literários e encontre autores para sua próxima leitura.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">NOVAS PRATELEIRAS, NOVOS MUNDOS</p><h2>Descobrir</h2><p class="muted">Percorra caminhos literários e encontre autores para sua próxima leitura.</p></div>
         <div class="discover-feature"><div class="discover-ornament">❦</div><div><span class="status-label">COLEÇÃO EM DESTAQUE</span><h3>As grandes almas da literatura russa</h3><p>Dostoiévski, Tolstói, Tchékhov, Turguêniev e outros autores que investigaram a consciência humana.</p></div></div>
         <div class="section-heading"><div><p class="eyebrow">PERCURSO SUGERIDO</p><h3>Explore por coleção</h3></div></div>
         <div class="collection-list">
@@ -252,19 +252,22 @@
       </section>
 
       <section id="estudio" class="page">
-        <div class="page-heading"><p class="eyebrow">O SEU ESPAÇO DE CRIAÇÃO</p><h2>Ateliê literário</h2><p class="muted">Transforme suas leituras em resenhas, registros e publicações.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">O SEU ESPAÇO DE CRIAÇÃO</p><h2>Ateliê Literário</h2><p class="muted">Transforme suas leituras em resenhas, registros e publicações.</p></div>
         <div class="studio-intro"><span>❦</span><p>Uma boa leitura não termina na última página. Ela continua nas ideias que você compartilha.</p></div>
         <div class="studio-list"><button data-studio="Post para Instagram"><i>▧</i><span><b>Post para Instagram</b><small>Prepare uma arte e uma legenda sobre sua leitura</small></span><strong>→</strong></button><button data-studio="Carrossel literário"><i>▤</i><span><b>Carrossel literário</b><small>Organize pensamentos em páginas</small></span><strong>→</strong></button><button data-studio="Roteiro para vídeo"><i>▷</i><span><b>Roteiro para vídeo</b><small>Estruture uma resenha para Reels ou YouTube</small></span><strong>→</strong></button><button data-studio="Comentário em áudio"><i>♫</i><span><b>Comentário em áudio</b><small>Guarde uma impressão falada</small></span><strong>→</strong></button></div>
       </section>
 
       <section id="calendario" class="page">
-        <div class="page-heading"><p class="eyebrow">UM RITMO QUE É SEU</p><h2>Agenda de leitura</h2><p class="muted">Planeje seus encontros com os livros sem transformar a leitura em obrigação.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">UM RITMO QUE É SEU</p><h2>Planejamento de Leituras</h2><p class="muted">Planeje seus encontros com os livros sem transformar a leitura em obrigação.</p></div>
         <div class="notebook-card"><div class="notebook-heading"><span>▦</span><div><b>Plano de leitura</b><small>Escolha um objetivo possível para sua rotina.</small></div></div><label>Meta de leitura<input class="field" id="readingGoal" type="number" min="1" placeholder="Ex.: 20 páginas por dia"></label><label>Livro em foco<input class="field" id="goalBook" placeholder="Qual livro acompanhará sua jornada?"></label><button class="primary" id="saveGoal">Guardar planejamento</button><p class="helper" id="goalSaved"></p></div>
         <div class="reading-motto">“A leitura do mundo precede a leitura da palavra.”</div>
       </section>
 
       <section id="mais" class="page">
-        <div class="page-heading"><p class="eyebrow">A CHAVE DA SUA BIBLIOTECA</p><h2>Meu espaço</h2><p class="muted">Sua conta, suas preferências e sua jornada literária.</p></div>
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">A CHAVE DA SUA BIBLIOTECA</p><h2>Mais</h2><p class="muted">Sua conta, suas preferências e sua jornada literária.</p></div>
         <div class="profile-card"><div class="avatar" id="profileAvatar">L</div><div><b id="profileName">Leitor</b><p class="muted">Membro do Verso &amp; Prosa</p></div><button class="link-button" id="changeProfile">Trocar conta</button></div>
         <div class="collection-list"><button class="collection-card" data-page="calendario"><span class="collection-mark">▦</span><span><b>Agenda de leitura</b><small>Metas e planejamento</small></span><strong>→</strong></button><button class="collection-card" data-page="estudio"><span class="collection-mark">✎</span><span><b>Ateliê literário</b><small>Criações sobre suas leituras</small></span><strong>→</strong></button><button class="collection-card" data-page="anotacoes"><span class="collection-mark">❧</span><span><b>Caderno de leitura</b><small>Suas notas e pensamentos</small></span><strong>→</strong></button></div>
         <button class="text-button logout" id="logout">Sair da biblioteca</button>
@@ -278,7 +281,7 @@
 </section>
 
 <dialog id="bookDialog" class="book-dialog">
-  <div class="dialog-top"><span class="eyebrow">FICHA DO EXEMPLAR</span><button type="button" class="dialog-close" id="closeBookDialog" aria-label="Fechar">×</button></div>
+  <div class="dialog-top"><span class="eyebrow">DETALHES DO LIVRO</span><button type="button" class="dialog-close" id="closeBookDialog" aria-label="Fechar">×</button></div>
   <div class="book-detail">
     <div class="detail-cover" id="detailCover"><span>V&amp;P</span></div>
     <div class="detail-main"><span class="status-label" id="detailStatus">NO ACERVO</span><h2 id="detailTitle">Título do livro</h2><p id="detailAuthor" class="detail-author">Autor</p><p id="detailGenre" class="detail-genre"></p></div>
@@ -289,7 +292,7 @@
   <button class="primary" id="detailNoteButton">Escrever no caderno sobre este livro</button>
 </dialog>
 <div id="toast" class="toast" role="status"></div>
-<script src="./app.js?v=profiles-v44"></script>
+<script src="./app.js?v=profiles-v44-v46-final"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>

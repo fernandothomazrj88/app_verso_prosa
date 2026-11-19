@@ -1,7 +1,7 @@
-const CACHE_NAME = 'verso-prosa-home-v45';
+const CACHE_NAME = 'verso-prosa-home-v46';
 const APP_FILES = [
- './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-v45','./app.js?v=profiles-v44','./manifest.json',
- './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-divider-ornate.svg','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg','./assets/ornaments/login-brand-divider.svg','./assets/ornaments/login-frame-classic.svg',
+ './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=home-v46-final','./app.js?v=profiles-v44-v46-final','./manifest.json',
+ './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/brand/verso-prosa-home-logo.png','./assets/login-emblem-approved-v6.png','./assets/icons/home-classic/3d-book-open.png','./assets/icons/home-classic/3d-book-add.png','./assets/icons/home-classic/3d-quill.png','./assets/icons/home-classic/3d-calendar.png','./assets/icons/home-classic/3d-home-arch.png','./assets/icons/home-classic/3d-bookshelf.png','./assets/icons/home-classic/3d-magnifier.png','./assets/icons/home-classic/3d-plus-medallion.png','./assets/icons/home-classic/3d-sliders.png','./assets/icons/home-classic/3d-profile.png','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-divider-ornate.svg','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg','./assets/ornaments/login-brand-divider.svg','./assets/ornaments/login-frame-classic.svg',
  './assets/icons/home-classic/book-open.svg',
  './assets/icons/home-classic/book-add.svg',
  './assets/icons/home-classic/quill.svg',
