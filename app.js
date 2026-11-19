@@ -671,15 +671,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const photo = image
         ? `<img class="shelf-cover-photo" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}" loading="lazy" decoding="async">`
         : `<span class="shelf-cover-fallback-mark" aria-hidden="true">✦</span>`;
-      return `
-        <button type="button" class="shelf-grid-book cover-tone-${cardIndex % 6}" data-book-index="${index}" aria-label="Abrir ${escapeHtml(title)} de ${escapeHtml(author)}">
-          <span class="shelf-grid-cover${image ? ' has-cover-image' : ' has-cover-fallback'}">
-            ${photo}
+      const fallbackCopy = image ? '' : `
             <span class="shelf-cover-shade" aria-hidden="true"></span>
             <span class="shelf-cover-copy">
               <b class="shelf-cover-title">${escapeHtml(title)}</b>
               <small class="shelf-cover-author">${escapeHtml(author)}</small>
-            </span>
+            </span>`;
+      return `
+        <button type="button" class="shelf-grid-book cover-tone-${cardIndex % 6}" data-book-index="${index}" aria-label="Abrir ${escapeHtml(title)} de ${escapeHtml(author)}">
+          <span class="shelf-grid-cover${image ? ' has-cover-image' : ' has-cover-fallback'}">
+            ${photo}${fallbackCopy}
           </span>
         </button>`;
     }).join('');

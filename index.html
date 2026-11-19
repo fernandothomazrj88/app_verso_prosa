@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=estante-v47">
+<link rel="stylesheet" href="./style.css?v=estante-v48">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -208,13 +208,16 @@
 </section>
       <section id="estante" class="page shelf-page" aria-label="Minha Estante">
         <header class="shelf-screen-header">
+          <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
+          <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
           <img class="shelf-screen-emblem" src="./assets/logo-livro-pena-trim.png" alt="Livro aberto e pena dourados">
           <h2>Minha Estante</h2>
           <img class="shelf-screen-divider" src="./assets/ornaments/home-divider-ornate.svg" alt="" aria-hidden="true">
         </header>
         <div class="shelf-search-wrap">
-          <svg class="shelf-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+          <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
           <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+          <svg class="shelf-search-icon shelf-search-icon-right" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
         </div>
         <div class="filter-row shelf-filter-row" role="group" aria-label="Filtrar livros por situação">
           <button class="filter-chip active" data-filter="todos" aria-pressed="true">Todos</button>
@@ -287,7 +290,11 @@
   </div>
 
   <nav class="bottom-nav" aria-label="Menu principal">
-    <button class="nav-item active" data-page="inicio"><span class="nav-glyph"><svg><use href="#vp-home"/></svg></span>Início</button><button class="nav-item" data-page="estante"><span class="nav-glyph"><svg><use href="#vp-shelf"/></svg></span>Estante</button><button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><span class="nav-glyph nav-add-glyph"><svg><use href="#vp-plus"/></svg></span></button><button class="nav-item" data-page="descobrir"><span class="nav-glyph"><svg><use href="#vp-compass"/></svg></span>Descobrir</button><button class="nav-item" data-page="mais"><span class="nav-glyph"><svg><use href="#vp-settings"/></svg></span>Mais</button>
+    <button class="nav-item" data-page="inicio"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button class="nav-item active" data-page="estante"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><img class="bottom-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button class="nav-item" data-page="descobrir"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button class="nav-item" data-page="mais"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
   </nav>
 </section>
 
@@ -303,7 +310,7 @@
   <button class="primary" id="detailNoteButton">Escrever no caderno sobre este livro</button>
 </dialog>
 <div id="toast" class="toast" role="status"></div>
-<script src="./app.js?v=estante-v47"></script>
+<script src="./app.js?v=estante-v48"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>
