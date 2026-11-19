@@ -1,0 +1,22 @@
+<!-- Verso & Prosa | Módulo: Minha Estante | O conteúdo é montado pelo modules/module-loader.js -->
+<section id="estante" class="page shelf-page" aria-label="Minha Estante">
+        <header class="shelf-screen-header">
+          <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
+          <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
+          <img class="shelf-screen-emblem" src="./assets/logo-livro-pena-trim.png" alt="Livro aberto e pena dourados">
+          <h2>Minha Estante</h2>
+          <img class="shelf-screen-divider" src="./assets/ornaments/home-divider-ornate.svg" alt="" aria-hidden="true">
+        </header>
+        <div class="shelf-search-wrap">
+          <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+          <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+          <svg class="shelf-search-icon shelf-search-icon-right" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        </div>
+        <div class="filter-row shelf-filter-row" role="group" aria-label="Filtrar livros por situação">
+          <button class="filter-chip active" data-filter="todos" aria-pressed="true">Todos</button>
+          <button class="filter-chip" data-filter="lidos" aria-pressed="false">Lidos</button>
+          <button class="filter-chip" data-filter="lendo" aria-pressed="false">Lendo</button>
+          <button class="filter-chip" data-filter="quero-ler" aria-pressed="false">Quero Ler</button>
+        </div>
+        <div id="listaLivros" class="shelf-grid" aria-live="polite"><div class="empty-state"><span>✦</span><b>Sua estante está esperando por você</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro livro</button></div></div>
+      </section>

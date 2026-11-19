@@ -1,17 +1,125 @@
-const CACHE_NAME = 'verso-prosa-estante-v48';
+const CACHE_NAME = 'verso-prosa-modular-v49';
 const APP_FILES = [
- './','./index.html','./assets/profiles/lele-epoca.webp','./assets/profiles/fernando-epoca.webp','./style.css?v=estante-v48','./app.js?v=estante-v48','./manifest.json',
- './assets/brand/verso-emblema.svg','./assets/brand/verso-prosa-logo.svg','./assets/brand/verso-prosa-home-logo.png','./assets/login-emblem-approved-v6.png','./assets/icons/home-classic/3d-book-open.png','./assets/icons/home-classic/3d-book-add.png','./assets/icons/home-classic/3d-quill.png','./assets/icons/home-classic/3d-calendar.png','./assets/icons/home-classic/3d-home-arch.png','./assets/icons/home-classic/3d-bookshelf.png','./assets/icons/home-classic/3d-magnifier.png','./assets/icons/home-classic/3d-plus-medallion.png','./assets/icons/home-classic/3d-sliders.png','./assets/icons/home-classic/3d-profile.png','./assets/logo-livro-pena.png','./assets/logo-livro-pena-trim.png','./assets/ornaments/home-divider-ornate.svg','./assets/ornaments/home-parchment-real.webp','./assets/ornaments/home-header-sconce.svg','./assets/scenes/home-header-library.webp','./assets/ornaments/home-cover-placeholder.svg','./assets/ornaments/login-brand-divider.svg','./assets/ornaments/login-frame-classic.svg',
- './assets/icons/home-classic/book-open.svg',
- './assets/icons/home-classic/book-add.svg',
- './assets/icons/home-classic/quill.svg',
- './assets/icons/home-classic/calendar.svg',
- './assets/icons/home-classic/library-home.svg',
- './assets/icons/home-classic/magnifier.svg',
- './assets/icons/home-classic/sliders.svg',
- './assets/icons/icon-192.png','./assets/icons/icon-512.png','./assets/icons/icon-192-maskable.png','./assets/icons/icon-512-maskable.png','./assets/icons/apple-touch-icon.png',
- './assets/scenes/login-approved-master.png','./assets/scenes/login-library-bg-v8.webp','./assets/scenes/entrance-room.webp','./assets/scenes/lamp-books.webp','./assets/scenes/shelf-wall.webp','./assets/scenes/typewriter-desk.webp','./assets/scenes/open-book.webp','./assets/scenes/discover-authors.webp','./assets/scenes/lamp-stack.webp','./assets/scenes/welcome-approved.webp','./assets/scenes/welcome-desktop-approved.webp','./assets/scenes/welcome-mobile-responsive-v27.webp','./assets/scenes/login-library-bg.webp','./assets/scenes/login-library-bg-v5.webp','./assets/login-emblem-gold-v5.png','./assets/login-emblem-approved-v6.png','./assets/scenes/login-bottom-approved-v6.webp'
+  './',
+  './index.html',
+  './assets/profiles/lele-epoca.webp',
+  './assets/profiles/fernando-epoca.webp',
+  './manifest.json',
+  './assets/brand/verso-emblema.svg',
+  './assets/brand/verso-prosa-logo.svg',
+  './assets/brand/verso-prosa-home-logo.png',
+  './assets/login-emblem-approved-v6.png',
+  './assets/icons/home-classic/3d-book-open.png',
+  './assets/icons/home-classic/3d-book-add.png',
+  './assets/icons/home-classic/3d-quill.png',
+  './assets/icons/home-classic/3d-calendar.png',
+  './assets/icons/home-classic/3d-home-arch.png',
+  './assets/icons/home-classic/3d-bookshelf.png',
+  './assets/icons/home-classic/3d-magnifier.png',
+  './assets/icons/home-classic/3d-plus-medallion.png',
+  './assets/icons/home-classic/3d-sliders.png',
+  './assets/icons/home-classic/3d-profile.png',
+  './assets/logo-livro-pena.png',
+  './assets/logo-livro-pena-trim.png',
+  './assets/ornaments/home-divider-ornate.svg',
+  './assets/ornaments/home-parchment-real.webp',
+  './assets/ornaments/home-header-sconce.svg',
+  './assets/scenes/home-header-library.webp',
+  './assets/ornaments/home-cover-placeholder.svg',
+  './assets/ornaments/login-brand-divider.svg',
+  './assets/ornaments/login-frame-classic.svg',
+  './assets/icons/home-classic/book-open.svg',
+  './assets/icons/home-classic/book-add.svg',
+  './assets/icons/home-classic/quill.svg',
+  './assets/icons/home-classic/calendar.svg',
+  './assets/icons/home-classic/library-home.svg',
+  './assets/icons/home-classic/magnifier.svg',
+  './assets/icons/home-classic/sliders.svg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/icon-192-maskable.png',
+  './assets/icons/icon-512-maskable.png',
+  './assets/icons/apple-touch-icon.png',
+  './assets/scenes/login-approved-master.png',
+  './assets/scenes/login-library-bg-v8.webp',
+  './assets/scenes/entrance-room.webp',
+  './assets/scenes/lamp-books.webp',
+  './assets/scenes/shelf-wall.webp',
+  './assets/scenes/typewriter-desk.webp',
+  './assets/scenes/open-book.webp',
+  './assets/scenes/discover-authors.webp',
+  './assets/scenes/lamp-stack.webp',
+  './assets/scenes/welcome-approved.webp',
+  './assets/scenes/welcome-desktop-approved.webp',
+  './assets/scenes/welcome-mobile-responsive-v27.webp',
+  './assets/scenes/login-library-bg.webp',
+  './assets/scenes/login-library-bg-v5.webp',
+  './assets/login-emblem-gold-v5.png',
+  './assets/scenes/login-bottom-approved-v6.webp',
+  './style.css?v=modular-v49',
+  './app.js?v=modular-v49',
+  './modules/module-loader.js?v=modular-v49',
+  './modules/registry.json',
+  './modules/home/index.html',
+  './modules/estante/index.html',
+  './modules/adicionar-livro/index.html',
+  './modules/anotacoes/index.html',
+  './modules/descobrir/index.html',
+  './modules/atelie/index.html',
+  './modules/planejamento/index.html',
+  './modules/mais/index.html',
+  './modules/detalhes-livro/index.html'
 ];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_FILES)));self.skipWaiting();});
-self.addEventListener('activate',e=>{e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('verso-prosa-')&&k!==CACHE_NAME).map(k=>caches.delete(k)));await self.clients.claim();})());});
-self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);if(u.origin!==self.location.origin)return;const shell=r.mode==='navigate'||/\/(index\.html|app\.js|style\.css|manifest\.json|sw\.js)$/.test(u.pathname);if(shell){e.respondWith((async()=>{const c=await caches.open(CACHE_NAME);try{const fresh=await fetch(new Request(r,{cache:'no-store'}));if(fresh&&fresh.ok)await c.put(r,fresh.clone());return fresh;}catch(err){return await c.match(r)||await c.match('./index.html')||Promise.reject(err);}})());return;}e.respondWith((async()=>{const c=await caches.open(CACHE_NAME);const hit=await c.match(r);if(hit)return hit;const fresh=await fetch(r);if(fresh&&fresh.ok)await c.put(r,fresh.clone());return fresh;})());});
+
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(APP_FILES);
+    await self.skipWaiting();
+  })());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys
+      .filter(key => key.startsWith('verso-prosa-') && key !== CACHE_NAME)
+      .map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+
+  const isShell = request.mode === 'navigate' ||
+    /\/(index\.html|app\.js|style\.css|manifest\.json|sw\.js|module-loader\.js|registry\.json)$/.test(url.pathname);
+
+  if (isShell) {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      try {
+        const fresh = await fetch(new Request(request, { cache: 'no-store' }));
+        if (fresh && fresh.ok) await cache.put(request, fresh.clone());
+        return fresh;
+      } catch (error) {
+        const cached = await cache.match(request) || await cache.match('./index.html');
+        if (cached) return cached;
+        throw error;
+      }
+    })());
+    return;
+  }
+
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    const fresh = await fetch(request);
+    if (fresh && fresh.ok) await cache.put(request, fresh.clone());
+    return fresh;
+  })());
+});

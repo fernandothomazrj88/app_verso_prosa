@@ -1,0 +1,80 @@
+<!-- Verso & Prosa | Módulo: Salão principal | O conteúdo é montado pelo modules/module-loader.js -->
+<section id="inicio" class="page active home-mockup">
+  <header class="mock-home-header">
+    <span class="home-header-lamp home-header-lamp-left" aria-hidden="true"></span>
+    <span class="home-header-lamp home-header-lamp-right" aria-hidden="true"></span>
+    <img class="home-brand-full-logo" src="./assets/brand/verso-prosa-home-logo.png"
+      alt="Verso &amp; Prosa — Biblioteca Literária">
+  </header>
+
+  <div class="mock-home-body">
+    <section class="mock-greeting home-hero-banner" aria-label="Boas-vindas à biblioteca">
+      <div class="mock-greeting-copy">
+        <h2 id="homeGreetingHeadline">Seja bem-vindo,<br>caro leitor!</h2>
+        <div class="home-hero-divider" aria-hidden="true"></div>
+        <p id="homeGreetingMessage">Sua biblioteca o aguarda, senhor Fernando.</p>
+        <div class="home-hero-flourish" aria-hidden="true"></div>
+      </div>
+      <div class="mock-user-avatar" id="homeUserAvatar">
+        <img id="homeCharacterAvatar" src="./assets/profiles/fernando-epoca.webp" alt="Retrato de época de Fernando">
+      </div>
+    </section>
+
+    <section class="mock-quote-card" aria-label="Citação literária">
+      <img class="quote-scroll-art" src="./assets/ornaments/home-parchment-real.webp" alt="">
+      <div class="quote-copy">
+        <p>“Ler é habitar outros<br class="quote-mobile-break"> mundos sem sair do lugar.”</p>
+        <small>C. S. Lewis</small>
+      </div>
+    </section>
+
+    <nav class="mock-shortcuts" aria-label="Acessos rápidos">
+      <button class="mock-shortcut" data-page="estante">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true">
+        <span>Minha<br>Estante</span>
+      </button>
+      <button class="mock-shortcut" data-page="adicionar">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-add.png" alt="" aria-hidden="true">
+        <span>Adicionar<br>Livro</span>
+      </button>
+      <button class="mock-shortcut" data-page="anotacoes">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-quill.png" alt="" aria-hidden="true">
+        <span>Anotações<br>e Resenhas</span>
+      </button>
+      <button class="mock-shortcut" data-page="calendario">
+        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-calendar.png" alt="" aria-hidden="true">
+        <span>Planejamento<br>de Leituras</span>
+      </button>
+    </nav>
+
+    <section class="mock-current-reading" aria-label="Leitura atual">
+      <h3>Leitura Atual</h3>
+      <div class="mock-reading-row">
+        <div class="mock-reading-cover" id="homeReadingCover"><span class="fallback-cover-title">V&amp;P</span></div>
+        <div class="mock-reading-details">
+          <h4 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h4>
+          <p id="homeReadingAuthor">Escolha um título na sua estante.</p>
+          <div class="mock-reading-progress">
+            <div class="mock-progress-track" id="homeProgressWrap" hidden><span id="homeProgressBar"></span></div>
+            <small id="homeProgressLabel">Sua próxima leitura começa aqui.</small>
+          </div>
+          <div id="homeReadingMeta" class="mock-reading-meta" hidden></div>
+          <button id="homeReadingAction" class="mock-reading-open" data-page="adicionar">Escolher um livro</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="mock-hidden-data" aria-hidden="true">
+      <span id="statBooks">0</span><span id="statReading">0</span><span id="statFinished">0</span><span id="statWantRead">0</span>
+      <div id="homeRecentBooks"></div>
+    </div>
+  </div>
+
+  <nav class="mock-bottom-nav" aria-label="Navegação principal">
+    <button class="active" data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
+</section>

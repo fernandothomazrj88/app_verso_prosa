@@ -5824,3 +5824,10 @@ img { max-width: 100%; }
   text-align: center;
 }
 .bottom-nav .nav-item.active > span { color: #ffcf45; }
+
+
+/* V49 — estado de falha do carregador modular */
+.module-load-error{max-width:680px;margin:48px auto;padding:28px;border:1px solid rgba(212,179,122,.65);border-radius:14px;background:linear-gradient(145deg,#2a120d,#100806);color:#eadcc0;text-align:center;box-shadow:0 12px 32px #0009}
+.module-load-error h2{font:600 28px Georgia,serif;color:#e8c47b;margin:0 0 12px}
+.module-load-error p{font:14px/1.6 Arial,sans-serif;color:#eadcc0}
+.module-load-error button{margin-top:12px;padding:10px 22px;border:1px solid #d4a64f;border-radius:30px;background:linear-gradient(#8d1024,#4b0711);color:#fff;font-weight:700;cursor:pointer}

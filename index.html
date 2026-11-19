@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=estante-v48">
+<link rel="stylesheet" href="./style.css?v=modular-v49">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -127,166 +127,8 @@
     </aside>
 
     <main>
-      <section id="inicio" class="page active home-mockup">
-  <header class="mock-home-header">
-    <span class="home-header-lamp home-header-lamp-left" aria-hidden="true"></span>
-    <span class="home-header-lamp home-header-lamp-right" aria-hidden="true"></span>
-    <img class="home-brand-full-logo" src="./assets/brand/verso-prosa-home-logo.png"
-      alt="Verso &amp; Prosa — Biblioteca Literária">
-  </header>
-
-  <div class="mock-home-body">
-    <section class="mock-greeting home-hero-banner" aria-label="Boas-vindas à biblioteca">
-      <div class="mock-greeting-copy">
-        <h2 id="homeGreetingHeadline">Seja bem-vindo,<br>caro leitor!</h2>
-        <div class="home-hero-divider" aria-hidden="true"></div>
-        <p id="homeGreetingMessage">Sua biblioteca o aguarda, senhor Fernando.</p>
-        <div class="home-hero-flourish" aria-hidden="true"></div>
-      </div>
-      <div class="mock-user-avatar" id="homeUserAvatar">
-        <img id="homeCharacterAvatar" src="./assets/profiles/fernando-epoca.webp" alt="Retrato de época de Fernando">
-      </div>
-    </section>
-
-    <section class="mock-quote-card" aria-label="Citação literária">
-      <img class="quote-scroll-art" src="./assets/ornaments/home-parchment-real.webp" alt="">
-      <div class="quote-copy">
-        <p>“Ler é habitar outros<br class="quote-mobile-break"> mundos sem sair do lugar.”</p>
-        <small>C. S. Lewis</small>
-      </div>
-    </section>
-
-    <nav class="mock-shortcuts" aria-label="Acessos rápidos">
-      <button class="mock-shortcut" data-page="estante">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true">
-        <span>Minha<br>Estante</span>
-      </button>
-      <button class="mock-shortcut" data-page="adicionar">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-book-add.png" alt="" aria-hidden="true">
-        <span>Adicionar<br>Livro</span>
-      </button>
-      <button class="mock-shortcut" data-page="anotacoes">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-quill.png" alt="" aria-hidden="true">
-        <span>Anotações<br>e Resenhas</span>
-      </button>
-      <button class="mock-shortcut" data-page="calendario">
-        <img class="home-classic-icon" src="./assets/icons/home-classic/3d-calendar.png" alt="" aria-hidden="true">
-        <span>Planejamento<br>de Leituras</span>
-      </button>
-    </nav>
-
-    <section class="mock-current-reading" aria-label="Leitura atual">
-      <h3>Leitura Atual</h3>
-      <div class="mock-reading-row">
-        <div class="mock-reading-cover" id="homeReadingCover"><span class="fallback-cover-title">V&amp;P</span></div>
-        <div class="mock-reading-details">
-          <h4 id="homeReadingTitle">Ainda não há um livro sobre a mesa</h4>
-          <p id="homeReadingAuthor">Escolha um título na sua estante.</p>
-          <div class="mock-reading-progress">
-            <div class="mock-progress-track" id="homeProgressWrap" hidden><span id="homeProgressBar"></span></div>
-            <small id="homeProgressLabel">Sua próxima leitura começa aqui.</small>
-          </div>
-          <div id="homeReadingMeta" class="mock-reading-meta" hidden></div>
-          <button id="homeReadingAction" class="mock-reading-open" data-page="adicionar">Escolher um livro</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="mock-hidden-data" aria-hidden="true">
-      <span id="statBooks">0</span><span id="statReading">0</span><span id="statFinished">0</span><span id="statWantRead">0</span>
-      <div id="homeRecentBooks"></div>
-    </div>
-  </div>
-
-  <nav class="mock-bottom-nav" aria-label="Navegação principal">
-    <button class="active" data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
-    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
-    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
-    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
-    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
-  </nav>
-</section>
-      <section id="estante" class="page shelf-page" aria-label="Minha Estante">
-        <header class="shelf-screen-header">
-          <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
-          <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
-          <img class="shelf-screen-emblem" src="./assets/logo-livro-pena-trim.png" alt="Livro aberto e pena dourados">
-          <h2>Minha Estante</h2>
-          <img class="shelf-screen-divider" src="./assets/ornaments/home-divider-ornate.svg" alt="" aria-hidden="true">
-        </header>
-        <div class="shelf-search-wrap">
-          <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-          <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
-          <svg class="shelf-search-icon shelf-search-icon-right" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-        </div>
-        <div class="filter-row shelf-filter-row" role="group" aria-label="Filtrar livros por situação">
-          <button class="filter-chip active" data-filter="todos" aria-pressed="true">Todos</button>
-          <button class="filter-chip" data-filter="lidos" aria-pressed="false">Lidos</button>
-          <button class="filter-chip" data-filter="lendo" aria-pressed="false">Lendo</button>
-          <button class="filter-chip" data-filter="quero-ler" aria-pressed="false">Quero Ler</button>
-        </div>
-        <div id="listaLivros" class="shelf-grid" aria-live="polite"><div class="empty-state"><span>✦</span><b>Sua estante está esperando por você</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro livro</button></div></div>
-      </section>
-
-      <section id="adicionar" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">AQUISIÇÕES DA BIBLIOTECA</p><h2>Adicionar Livro</h2><p class="muted">Registre um novo volume no seu acervo pessoal.</p></div>
-        <form id="bookForm" class="form-card library-form">
-          <div class="form-intro"><span>✦</span><div><b>Ficha catalográfica</b><small>Os dados ajudam a organizar sua coleção.</small></div></div>
-          <label>Título do livro<input class="field" name="titulo" placeholder="Ex.: Os Irmãos Karamázov" required></label>
-          <label>Autor<input class="field" name="autor" placeholder="Nome do autor"></label>
-          <div class="form-two"><label>Editora<input class="field" name="editora" placeholder="Editora"></label><label>Gênero<input class="field" name="genero" placeholder="Romance, filosofia..."></label></div>
-          <div class="form-two"><label>Número de páginas<input class="field" name="paginas" type="number" min="1" placeholder="Nº de páginas"></label><label>ISBN<input class="field" name="isbn" placeholder="ISBN"></label></div>
-          <label>Endereço da capa (opcional)<input class="field" name="capa" type="url" placeholder="https://..."></label>
-          <label>Em qual estante ficará?<select class="field" name="status"><option value="Quero ler">Quero ler</option><option value="Lendo">Estou lendo</option><option value="Lido">Já li</option></select></label>
-          <button class="primary" type="submit">Guardar na biblioteca</button>
-          <p class="helper">Seu exemplar será associado à sua conta. O acervo de Fernando e o de Letícia permanecem separados.</p>
-        </form>
-      </section>
-
-      <section id="anotacoes" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">MARGENS, IDEIAS E PASSAGENS</p><h2>Anotações e Citações</h2><p class="muted">Aquelas ideias que merecem ser guardadas entre as páginas.</p></div>
-        <div class="notebook-card"><div class="notebook-heading"><span>✎</span><div><b>Uma nota à margem</b><small>Registre uma impressão, uma pergunta ou um trecho.</small></div></div><label>Livro relacionado<input class="field" id="noteBook" placeholder="Título do livro"></label><label>Sua anotação<textarea class="field" id="noteText" rows="5" placeholder="O que esta leitura fez você pensar?"></textarea></label><button class="primary" id="saveNote">Guardar no caderno</button></div>
-        <div class="section-heading"><div><p class="eyebrow">ARQUIVO PESSOAL</p><h3>Minhas anotações</h3></div></div><div id="notesList" class="notes-list"><p class="muted">Suas anotações aparecerão aqui.</p></div>
-      </section>
-
-      <section id="descobrir" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">NOVAS PRATELEIRAS, NOVOS MUNDOS</p><h2>Descobrir</h2><p class="muted">Percorra caminhos literários e encontre autores para sua próxima leitura.</p></div>
-        <div class="discover-feature"><div class="discover-ornament">❦</div><div><span class="status-label">COLEÇÃO EM DESTAQUE</span><h3>As grandes almas da literatura russa</h3><p>Dostoiévski, Tolstói, Tchékhov, Turguêniev e outros autores que investigaram a consciência humana.</p></div></div>
-        <div class="section-heading"><div><p class="eyebrow">PERCURSO SUGERIDO</p><h3>Explore por coleção</h3></div></div>
-        <div class="collection-list">
-          <button class="collection-card" data-collection="Literatura russa"><span class="collection-mark">А</span><span><b>Literatura russa</b><small>Dostoiévski · Tolstói · Tchékhov</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Romance clássico"><span class="collection-mark">❧</span><span><b>Romance clássico</b><small>Austen · Brontë · Flaubert</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Filosofia e pensamento"><span class="collection-mark">Φ</span><span><b>Filosofia e pensamento</b><small>Ética · existência · condição humana</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Fantasia e mundos épicos"><span class="collection-mark">✧</span><span><b>Fantasia e mundos épicos</b><small>Tolkien · mitologia · mundos imaginários</small></span><strong>→</strong></button>
-        </div>
-        <p class="helper">As coleções são caminhos de exploração; o catálogo de recomendações será ampliado em uma etapa própria.</p>
-      </section>
-
-      <section id="estudio" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">O SEU ESPAÇO DE CRIAÇÃO</p><h2>Ateliê Literário</h2><p class="muted">Transforme suas leituras em resenhas, registros e publicações.</p></div>
-        <div class="studio-intro"><span>❦</span><p>Uma boa leitura não termina na última página. Ela continua nas ideias que você compartilha.</p></div>
-        <div class="studio-list"><button data-studio="Post para Instagram"><i>▧</i><span><b>Post para Instagram</b><small>Prepare uma arte e uma legenda sobre sua leitura</small></span><strong>→</strong></button><button data-studio="Carrossel literário"><i>▤</i><span><b>Carrossel literário</b><small>Organize pensamentos em páginas</small></span><strong>→</strong></button><button data-studio="Roteiro para vídeo"><i>▷</i><span><b>Roteiro para vídeo</b><small>Estruture uma resenha para Reels ou YouTube</small></span><strong>→</strong></button><button data-studio="Comentário em áudio"><i>♫</i><span><b>Comentário em áudio</b><small>Guarde uma impressão falada</small></span><strong>→</strong></button></div>
-      </section>
-
-      <section id="calendario" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">UM RITMO QUE É SEU</p><h2>Planejamento de Leituras</h2><p class="muted">Planeje seus encontros com os livros sem transformar a leitura em obrigação.</p></div>
-        <div class="notebook-card"><div class="notebook-heading"><span>▦</span><div><b>Plano de leitura</b><small>Escolha um objetivo possível para sua rotina.</small></div></div><label>Meta de leitura<input class="field" id="readingGoal" type="number" min="1" placeholder="Ex.: 20 páginas por dia"></label><label>Livro em foco<input class="field" id="goalBook" placeholder="Qual livro acompanhará sua jornada?"></label><button class="primary" id="saveGoal">Guardar planejamento</button><p class="helper" id="goalSaved"></p></div>
-        <div class="reading-motto">“A leitura do mundo precede a leitura da palavra.”</div>
-      </section>
-
-      <section id="mais" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">A CHAVE DA SUA BIBLIOTECA</p><h2>Mais</h2><p class="muted">Sua conta, suas preferências e sua jornada literária.</p></div>
-        <div class="profile-card"><div class="avatar" id="profileAvatar">L</div><div><b id="profileName">Leitor</b><p class="muted">Membro do Verso &amp; Prosa</p></div><button class="link-button" id="changeProfile">Trocar conta</button></div>
-        <div class="collection-list"><button class="collection-card" data-page="calendario"><span class="collection-mark">▦</span><span><b>Agenda de leitura</b><small>Metas e planejamento</small></span><strong>→</strong></button><button class="collection-card" data-page="estudio"><span class="collection-mark">✎</span><span><b>Ateliê literário</b><small>Criações sobre suas leituras</small></span><strong>→</strong></button><button class="collection-card" data-page="anotacoes"><span class="collection-mark">❧</span><span><b>Caderno de leitura</b><small>Suas notas e pensamentos</small></span><strong>→</strong></button></div>
-        <button class="text-button logout" id="logout">Sair da biblioteca</button>
-      </section>
-    </main>
+      <div id="moduleHost" class="module-host" aria-live="polite"></div>
+      </main>
   </div>
 
   <nav class="bottom-nav" aria-label="Menu principal">
@@ -298,19 +140,10 @@
   </nav>
 </section>
 
-<dialog id="bookDialog" class="book-dialog">
-  <div class="dialog-top"><span class="eyebrow">DETALHES DO LIVRO</span><button type="button" class="dialog-close" id="closeBookDialog" aria-label="Fechar">×</button></div>
-  <div class="book-detail">
-    <div class="detail-cover" id="detailCover"><span>V&amp;P</span></div>
-    <div class="detail-main"><span class="status-label" id="detailStatus">NO ACERVO</span><h2 id="detailTitle">Título do livro</h2><p id="detailAuthor" class="detail-author">Autor</p><p id="detailGenre" class="detail-genre"></p></div>
-  </div>
-  <div class="detail-rule"></div>
-  <div class="detail-meta" id="detailMeta"></div>
-  <p class="detail-note">Este exemplar faz parte da sua biblioteca particular. Abra o caderno para registrar impressões, perguntas e passagens marcantes.</p>
-  <button class="primary" id="detailNoteButton">Escrever no caderno sobre este livro</button>
-</dialog>
+<div id="overlayModuleHost"></div>
 <div id="toast" class="toast" role="status"></div>
-<script src="./app.js?v=estante-v48"></script>
+<script src="./modules/module-loader.js?v=modular-v49"></script>
+<script src="./app.js?v=modular-v49"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>

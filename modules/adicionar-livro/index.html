@@ -1,0 +1,16 @@
+<!-- Verso & Prosa | Módulo: Adicionar Livro | O conteúdo é montado pelo modules/module-loader.js -->
+<section id="adicionar" class="page">
+        <div class="page-heading">
+          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">AQUISIÇÕES DA BIBLIOTECA</p><h2>Adicionar Livro</h2><p class="muted">Registre um novo volume no seu acervo pessoal.</p></div>
+        <form id="bookForm" class="form-card library-form">
+          <div class="form-intro"><span>✦</span><div><b>Ficha catalográfica</b><small>Os dados ajudam a organizar sua coleção.</small></div></div>
+          <label>Título do livro<input class="field" name="titulo" placeholder="Ex.: Os Irmãos Karamázov" required></label>
+          <label>Autor<input class="field" name="autor" placeholder="Nome do autor"></label>
+          <div class="form-two"><label>Editora<input class="field" name="editora" placeholder="Editora"></label><label>Gênero<input class="field" name="genero" placeholder="Romance, filosofia..."></label></div>
+          <div class="form-two"><label>Número de páginas<input class="field" name="paginas" type="number" min="1" placeholder="Nº de páginas"></label><label>ISBN<input class="field" name="isbn" placeholder="ISBN"></label></div>
+          <label>Endereço da capa (opcional)<input class="field" name="capa" type="url" placeholder="https://..."></label>
+          <label>Em qual estante ficará?<select class="field" name="status"><option value="Quero ler">Quero ler</option><option value="Lendo">Estou lendo</option><option value="Lido">Já li</option></select></label>
+          <button class="primary" type="submit">Guardar na biblioteca</button>
+          <p class="helper">Seu exemplar será associado à sua conta. O acervo de Fernando e o de Letícia permanecem separados.</p>
+        </form>
+      </section>

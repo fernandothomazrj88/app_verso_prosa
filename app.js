@@ -1,4 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await window.VP_MODULES_READY;
+  } catch (moduleError) {
+    console.error('[Verso & Prosa] inicialização cancelada:', moduleError);
+    return;
+  }
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
   const welcome = $('#welcome');
