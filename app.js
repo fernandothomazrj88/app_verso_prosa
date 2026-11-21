@@ -805,6 +805,154 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Módulo Adicionar Livro — alternância entre cadastro manual e pesquisa externa.
+  const addManualMode = $('#addModeManual');
+  const addSearchMode = $('#addModeSearch');
+  const addManualPanel = $('#bookManualPanel');
+  const addSearchPanel = $('#bookSearchPanel');
+  const bookSearchCache = [];
+
+  function setAddBookMode(mode) {
+    const manual = mode !== 'search';
+    if (addManualMode) {
+      addManualMode.classList.toggle('active', manual);
+      addManualMode.setAttribute('aria-selected', String(manual));
+    }
+    if (addSearchMode) {
+      addSearchMode.classList.toggle('active', !manual);
+      addSearchMode.setAttribute('aria-selected', String(!manual));
+    }
+    if (addManualPanel) addManualPanel.hidden = !manual;
+    if (addSearchPanel) addSearchPanel.hidden = manual;
+    if (!manual) $('#bookSearchQuery')?.focus({ preventScroll: true });
+  }
+
+  addManualMode?.addEventListener('click', () => setAddBookMode('manual'));
+  addSearchMode?.addEventListener('click', () => setAddBookMode('search'));
+  $('#backToManualEntry')?.addEventListener('click', () => setAddBookMode('manual'));
+
+  function refreshAddBookCoverPreview() {
+    const input = $('#addBookCoverUrl');
+    const image = $('#addCoverPreviewImage');
+    const mark = $('#addCoverPreviewMark');
+    if (!input || !image || !mark) return;
+    const url = safeImageUrl(input.value);
+    if (!url) {
+      image.removeAttribute('src');
+      image.hidden = true;
+      mark.hidden = false;
+      return;
+    }
+    image.src = url;
+    image.hidden = false;
+    mark.hidden = true;
+  }
+
+  $('#addCoverAction')?.addEventListener('click', () => {
+    const details = $('#adicionar .add-extra-details');
+    if (details) details.open = true;
+    $('#addBookCoverUrl')?.focus({ preventScroll: true });
+    $('#addBookCoverUrl')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  $('#addBookCoverUrl')?.addEventListener('input', refreshAddBookCoverPreview);
+  $('#addCoverPreviewImage')?.addEventListener('error', () => {
+    const image = $('#addCoverPreviewImage');
+    const mark = $('#addCoverPreviewMark');
+    if (image) image.hidden = true;
+    if (mark) mark.hidden = false;
+  });
+  $('#bookForm')?.addEventListener('reset', () => setTimeout(refreshAddBookCoverPreview, 0));
+
+  function coverFromGoogleBooks(volumeInfo) {
+    const links = volumeInfo?.imageLinks || {};
+    const candidate = links.thumbnail || links.smallThumbnail || '';
+    return String(candidate).replace(/^http:/i, 'https:');
+  }
+
+  function renderBookSearchResults(items) {
+    const target = $('#bookSearchResults');
+    if (!target) return;
+    if (!items.length) {
+      target.innerHTML = '';
+      return;
+    }
+    target.innerHTML = items.map((item, index) => {
+      const info = item.volumeInfo || {};
+      const title = String(info.title || 'Título não informado');
+      const author = Array.isArray(info.authors) ? info.authors.join(', ') : 'Autor não informado';
+      const publisher = [info.publisher, info.publishedDate].filter(Boolean).join(' · ');
+      const cover = safeImageUrl(coverFromGoogleBooks(info));
+      const coverMarkup = cover
+        ? `<img class="add-search-result-cover" src="${escapeHtml(cover)}" alt="Capa de ${escapeHtml(title)}" loading="lazy">`
+        : '<span class="add-search-result-cover add-search-no-cover" aria-hidden="true">✦</span>';
+      return `<article class="add-search-result">
+        ${coverMarkup}
+        <div class="add-search-result-copy"><h3 class="add-search-result-title">${escapeHtml(title)}</h3>
+          <p class="add-search-result-meta">${escapeHtml(author)}${publisher ? `<br>${escapeHtml(publisher)}` : ''}</p></div>
+        <button class="add-search-select" type="button" data-book-search-index="${index}">Usar</button>
+      </article>`;
+    }).join('');
+  }
+
+  async function searchBooksOnline(query) {
+    const feedback = $('#bookSearchFeedback');
+    const target = $('#bookSearchResults');
+    const term = String(query || '').trim();
+    if (!term) {
+      if (feedback) feedback.textContent = 'Digite um título, autor ou ISBN para pesquisar.';
+      $('#bookSearchQuery')?.focus();
+      return;
+    }
+    if (feedback) feedback.textContent = 'Consultando o catálogo de livros…';
+    if (target) target.innerHTML = '';
+    const button = $('#bookSearchForm button[type="submit"]');
+    if (button) { button.disabled = true; button.textContent = 'Pesquisando…'; }
+    try {
+      const url = 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(term) + '&maxResults=12&printType=books&langRestrict=pt';
+      const response = await fetch(url, { method: 'GET', mode: 'cors', headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error('O catálogo respondeu com o código ' + response.status + '.');
+      const data = await response.json();
+      bookSearchCache.length = 0;
+      if (Array.isArray(data.items)) bookSearchCache.push(...data.items);
+      renderBookSearchResults(bookSearchCache);
+      if (feedback) feedback.textContent = bookSearchCache.length
+        ? `${bookSearchCache.length} resultado(s) encontrado(s). Escolha um título para preencher a ficha.`
+        : 'Não encontramos resultados. Tente pesquisar pelo título ou nome do autor.';
+    } catch (error) {
+      console.warn('[Verso & Prosa] pesquisa de livros indisponível:', error);
+      if (feedback) feedback.textContent = 'Não foi possível consultar o catálogo agora. Você pode registrar o livro manualmente.';
+      if (target) target.innerHTML = '';
+    } finally {
+      if (button) { button.disabled = false; button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg> Pesquisar'; }
+    }
+  }
+
+  $('#bookSearchForm')?.addEventListener('submit', event => {
+    event.preventDefault();
+    searchBooksOnline($('#bookSearchQuery')?.value || '');
+  });
+  $('#bookSearchResults')?.addEventListener('click', event => {
+    const button = event.target.closest('[data-book-search-index]');
+    if (!button) return;
+    const item = bookSearchCache[Number(button.dataset.bookSearchIndex)];
+    if (!item) return;
+    const info = item.volumeInfo || {};
+    const identifier = Array.isArray(info.industryIdentifiers)
+      ? (info.industryIdentifiers.find(value => value.type === 'ISBN_13') || info.industryIdentifiers[0])
+      : null;
+    $('#addBookTitle').value = info.title || '';
+    $('#addBookAuthor').value = Array.isArray(info.authors) ? info.authors.join(', ') : '';
+    $('#addBookGenre').value = Array.isArray(info.categories) ? info.categories.join(' / ') : '';
+    $('#bookForm [name="editora"]').value = info.publisher || '';
+    $('#bookForm [name="paginas"]').value = info.pageCount || '';
+    $('#bookForm [name="isbn"]').value = identifier?.identifier || '';
+    $('#addBookCoverUrl').value = coverFromGoogleBooks(info);
+    refreshAddBookCoverPreview();
+    setAddBookMode('manual');
+    toast('Dados encontrados. Confira a ficha e salve o livro.');
+    $('#addBookTitle')?.focus({ preventScroll: true });
+  });
+
   $('#buscarLivro').addEventListener('input', renderBooks);
 
   $('#shelfFilterToggle')?.addEventListener('click', () => {

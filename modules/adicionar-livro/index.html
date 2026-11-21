@@ -1,16 +1,116 @@
-<!-- Verso & Prosa | Módulo: Adicionar Livro | O conteúdo é montado pelo modules/module-loader.js -->
-<section id="adicionar" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">AQUISIÇÕES DA BIBLIOTECA</p><h2>Adicionar Livro</h2><p class="muted">Registre um novo volume no seu acervo pessoal.</p></div>
-        <form id="bookForm" class="form-card library-form">
-          <div class="form-intro"><span>✦</span><div><b>Ficha catalográfica</b><small>Os dados ajudam a organizar sua coleção.</small></div></div>
-          <label>Título do livro<input class="field" name="titulo" placeholder="Ex.: Os Irmãos Karamázov" required></label>
-          <label>Autor<input class="field" name="autor" placeholder="Nome do autor"></label>
-          <div class="form-two"><label>Editora<input class="field" name="editora" placeholder="Editora"></label><label>Gênero<input class="field" name="genero" placeholder="Romance, filosofia..."></label></div>
-          <div class="form-two"><label>Número de páginas<input class="field" name="paginas" type="number" min="1" placeholder="Nº de páginas"></label><label>ISBN<input class="field" name="isbn" placeholder="ISBN"></label></div>
-          <label>Endereço da capa (opcional)<input class="field" name="capa" type="url" placeholder="https://..."></label>
-          <label>Em qual estante ficará?<select class="field" name="status"><option value="Quero ler">Quero ler</option><option value="Lendo">Estou lendo</option><option value="Lido">Já li</option></select></label>
-          <button class="primary" type="submit">Guardar na biblioteca</button>
-          <p class="helper">Seu exemplar será associado à sua conta. O acervo de Fernando e o de Letícia permanecem separados.</p>
-        </form>
-      </section>
+<!-- Verso & Prosa | Módulo: Adicionar Livro | Cabeçalho e navegação no padrão oficial da Home -->
+<section id="adicionar" class="page add-book-page" aria-label="Adicionar Livro">
+  <header class="add-module-header" aria-label="Adicionar Livro">
+    <span class="add-header-lamp add-header-lamp-left" aria-hidden="true"></span>
+    <span class="add-header-lamp add-header-lamp-right" aria-hidden="true"></span>
+    <img class="add-module-emblem" src="./assets/brand/verso-prosa-home-emblem.png" alt="" aria-hidden="true">
+    <h1>Adicionar Livro</h1>
+    <span class="add-module-divider" aria-hidden="true"></span>
+  </header>
+
+  <div class="add-book-content">
+    <div class="add-mode-switch" role="tablist" aria-label="Modo de adicionar livro">
+      <button id="addModeManual" class="add-mode-button active" type="button" role="tab" aria-selected="true" aria-controls="bookManualPanel">
+        <span class="add-mode-icon" aria-hidden="true">✎</span> Registrar Manualmente
+      </button>
+      <button id="addModeSearch" class="add-mode-button" type="button" role="tab" aria-selected="false" aria-controls="bookSearchPanel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg> Pesquisar Livro
+      </button>
+    </div>
+
+    <section id="bookManualPanel" class="add-panel" role="tabpanel" aria-labelledby="addModeManual">
+      <form id="bookForm" class="add-book-form">
+        <div class="add-form-intro">
+          <span class="add-intro-ornament" aria-hidden="true">✦</span>
+          <div>
+            <h2>Ficha do Livro</h2>
+            <p>Preencha os dados para guardar este título na sua biblioteca.</p>
+          </div>
+        </div>
+
+        <div class="add-primary-fields">
+          <button id="addCoverAction" class="add-cover-action" type="button" aria-label="Adicionar endereço da capa">
+            <span class="add-cover-preview" id="addCoverPreview">
+              <img id="addCoverPreviewImage" src="./assets/ornaments/home-cover-placeholder.svg" alt="Prévia da capa" hidden>
+              <span id="addCoverPreviewMark" aria-hidden="true">＋</span>
+            </span>
+            <span>Adicionar Capa</span>
+          </button>
+
+          <div class="add-title-author-fields">
+            <label class="add-field-label">Título do livro <span>*</span>
+              <input class="field add-field" name="titulo" id="addBookTitle" type="text" placeholder="Digite o título..." autocomplete="off" required maxlength="180">
+            </label>
+            <label class="add-field-label">Autor(a)
+              <input class="field add-field" name="autor" id="addBookAuthor" type="text" placeholder="Digite o autor(a)..." autocomplete="off" maxlength="140">
+            </label>
+          </div>
+        </div>
+
+        <div class="add-form-grid">
+          <label class="add-field-label">Gênero
+            <input class="field add-field" name="genero" id="addBookGenre" type="text" placeholder="Ex.: Romance, fantasia..." list="bookGenreOptions" maxlength="100">
+            <datalist id="bookGenreOptions">
+              <option value="Romance"></option><option value="Romance clássico"></option><option value="Literatura russa"></option>
+              <option value="Fantasia"></option><option value="Ficção"></option><option value="Ficção cristã"></option>
+              <option value="Filosofia"></option><option value="Teologia"></option><option value="Estudo bíblico"></option>
+              <option value="Biografia"></option><option value="História"></option>
+            </datalist>
+          </label>
+          <label class="add-field-label">Status da leitura
+            <select class="field add-field" name="status" id="addBookStatus">
+              <option value="Quero ler">Quero Ler</option>
+              <option value="Lendo">Lendo</option>
+              <option value="Lido">Lido</option>
+            </select>
+          </label>
+        </div>
+
+        <details class="add-extra-details">
+          <summary>Informações complementares</summary>
+          <div class="add-form-grid add-extra-grid">
+            <label class="add-field-label">Editora
+              <input class="field add-field" name="editora" type="text" placeholder="Nome da editora" maxlength="120">
+            </label>
+            <label class="add-field-label">Número de páginas
+              <input class="field add-field" name="paginas" type="number" min="1" max="100000" placeholder="Ex.: 320">
+            </label>
+            <label class="add-field-label">ISBN
+              <input class="field add-field" name="isbn" type="text" placeholder="ISBN do livro" maxlength="30">
+            </label>
+            <label class="add-field-label add-cover-url-field">Endereço da capa
+              <input class="field add-field" name="capa" id="addBookCoverUrl" type="url" placeholder="https://...">
+            </label>
+          </div>
+          <p class="add-detail-hint">A capa pode ser preenchida automaticamente ao pesquisar o livro ou por um endereço de imagem.</p>
+        </details>
+
+        <button class="add-save-button" type="submit"><span aria-hidden="true">＋</span> Salvar Livro</button>
+        <p class="add-private-note">Este livro será salvo somente na biblioteca da conta que está conectada.</p>
+      </form>
+    </section>
+
+    <section id="bookSearchPanel" class="add-panel add-search-panel" role="tabpanel" aria-labelledby="addModeSearch" hidden>
+      <div class="add-search-intro">
+        <span class="add-intro-ornament" aria-hidden="true">⌕</span>
+        <div><h2>Pesquisar Livro</h2><p>Encontre um título e aproveite os dados disponíveis para preencher a ficha.</p></div>
+      </div>
+      <form id="bookSearchForm" class="add-search-form" role="search">
+        <label class="sr-only" for="bookSearchQuery">Título ou autor</label>
+        <input id="bookSearchQuery" class="field add-field" type="search" placeholder="Digite o título ou autor..." autocomplete="off">
+        <button class="add-search-submit" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg> Pesquisar</button>
+      </form>
+      <div id="bookSearchFeedback" class="add-search-feedback" role="status" aria-live="polite">Pesquise por título, autor ou ISBN.</div>
+      <div id="bookSearchResults" class="add-search-results" aria-live="polite"></div>
+      <button id="backToManualEntry" class="add-back-manual" type="button">← Voltar ao cadastro manual</button>
+    </section>
+  </div>
+
+  <nav class="mock-bottom-nav add-bottom-nav" aria-label="Navegação principal">
+    <button data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
+</section>
