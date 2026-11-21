@@ -6256,3 +6256,204 @@ img { max-width: 100%; }
   #estante .shelf-search-wrap,
   #estante .shelf-filter-row { width: min(92%, 560px) !important; }
 }
+
+
+/* V53 — Minha Estante: composição fiel ao mockup aprovado (sem painel Leitura Atual). */
+#estante.shelf-page {
+  padding-bottom: 28px !important;
+  min-height: calc(100svh - 64px) !important;
+}
+
+/* Cabeçalho maior: emblema livro+pena, título e arabesco central. */
+#estante .shelf-screen-header {
+  min-height: clamp(122px, 17.5svh, 142px) !important;
+  margin: 0 -9px 12px !important;
+  padding: 5px 10px 9px !important;
+  gap: 0 !important;
+  justify-content: center !important;
+  background:
+    linear-gradient(180deg, rgba(8,3,2,.08), rgba(8,3,2,.42)),
+    url("./assets/scenes/home-header-library.webp") center 43% / cover no-repeat,
+    #100704 !important;
+}
+#estante .shelf-screen-emblem {
+  width: 104px !important;
+  height: 64px !important;
+  margin: 0 auto 1px !important;
+}
+#estante .shelf-emblem-book {
+  width: 83px !important;
+  height: 54px !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
+#estante .shelf-emblem-quill {
+  width: 43px !important;
+  height: 62px !important;
+  top: -2px !important;
+  right: 4px !important;
+}
+#estante .shelf-screen-header h2 {
+  margin: 0 !important;
+  font-size: clamp(29px, 6.8vw, 35px) !important;
+  line-height: .98 !important;
+}
+#estante .shelf-screen-divider {
+  width: min(91%, 440px) !important;
+  height: 18px !important;
+  margin: 3px auto 0 !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+}
+
+/* Busca e filtros com a mesma largura, escala e acabamento do mockup. */
+#estante .shelf-search-wrap {
+  width: 89% !important;
+  max-width: 540px !important;
+  margin: 0 auto 11px !important;
+}
+#estante .shelf-search-wrap .search {
+  height: 40px !important;
+  padding: 0 40px !important;
+  border-width: 1.7px !important;
+  border-radius: 24px !important;
+  font-size: 12px !important;
+}
+#estante .shelf-search-icon { width: 18px !important; height: 18px !important; }
+#estante .shelf-search-icon-left { left: 13px !important; }
+#estante .shelf-search-icon-right { right: 13px !important; }
+#estante .shelf-filter-row {
+  width: 89% !important;
+  max-width: 540px !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 7px !important;
+  margin: 0 auto 20px !important;
+}
+#estante .shelf-filter-row .filter-chip {
+  min-width: 0 !important;
+  min-height: 36px !important;
+  padding: 7px 4px !important;
+  border-width: 1.6px !important;
+  border-radius: 22px !important;
+  font-size: clamp(10px, 2.7vw, 12px) !important;
+  line-height: 1 !important;
+}
+
+/* Grade compacta de três colunas; sem prateleira antiga e sem Leitura Atual. */
+#estante .shelf-grid {
+  display: grid !important;
+  width: 86% !important;
+  max-width: 540px !important;
+  margin: 0 auto !important;
+  padding: 0 0 28px !important;
+  grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  align-items: start !important;
+  justify-items: stretch !important;
+  gap: 17px 13px !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#estante .shelf-grid-book {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+#estante .shelf-grid-cover {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: .84 !important;
+  overflow: hidden !important;
+  border: 2px solid #e6b53c !important;
+  border-radius: 10px !important;
+  background: linear-gradient(145deg,#58331b,#100805 80%) !important;
+  box-shadow: 0 0 7px rgba(239,176,39,.34), 2px 5px 11px rgba(0,0,0,.72), inset 0 0 0 2px rgba(255,222,133,.18) !important;
+}
+#estante .shelf-grid-cover::before {
+  inset: 4px !important;
+  border: 1px solid rgba(255,220,133,.66) !important;
+  border-radius: 6px !important;
+}
+#estante .shelf-grid-cover::after {
+  width: 4px !important;
+  opacity: .8 !important;
+}
+#estante .shelf-cover-photo {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 18% !important;
+}
+#estante .shelf-cover-shade {
+  inset: 48% 0 0 !important;
+  background: linear-gradient(180deg,transparent 0%,rgba(5,2,1,.26) 24%,rgba(5,2,1,.94) 100%) !important;
+}
+#estante .shelf-cover-copy {
+  left: 6px !important;
+  right: 6px !important;
+  bottom: 9px !important;
+  gap: 3px !important;
+}
+#estante .shelf-cover-title {
+  font-size: clamp(10px, 2.75vw, 13px) !important;
+  line-height: 1.08 !important;
+  -webkit-line-clamp: 3 !important;
+}
+#estante .shelf-cover-author {
+  font-size: clamp(8px, 2.05vw, 10px) !important;
+  line-height: 1.1 !important;
+}
+#estante .shelf-cover-fallback-mark {
+  top: 18% !important;
+  font-size: clamp(30px, 8vw, 46px) !important;
+}
+#estante .shelf-empty-state {
+  grid-column: 1 / -1 !important;
+  margin: 4px 0 0 !important;
+}
+
+/* Navegação inferior um pouco mais presente, sem mudar sua estrutura. */
+#app:has(#estante.active) .bottom-nav {
+  min-height: 76px !important;
+  padding: 7px 8px calc(7px + env(safe-area-inset-bottom)) !important;
+  border-radius: 15px 15px 0 0 !important;
+  background: linear-gradient(180deg,rgba(48,24,12,.98),rgba(12,5,3,.99)) !important;
+  border-top: 1.5px solid rgba(229,174,54,.86) !important;
+}
+#app:has(#estante.active) .bottom-nav .nav-item {
+  min-height: 62px !important;
+  gap: 2px !important;
+  font-size: 11px !important;
+}
+#app:has(#estante.active) .bottom-nav .bottom-nav-icon {
+  width: clamp(25px, 6.3vw, 33px) !important;
+  height: clamp(25px, 6.3vw, 33px) !important;
+}
+#app:has(#estante.active) .bottom-nav .bottom-nav-plus-icon {
+  width: clamp(47px, 11.5vw, 57px) !important;
+  height: clamp(47px, 11.5vw, 57px) !important;
+}
+#app:has(#estante.active) .bottom-nav .nav-item.active > span {
+  color: #ffd84f !important;
+  text-shadow: 0 0 6px rgba(255,196,43,.54) !important;
+}
+
+@media (max-width: 390px) {
+  #estante .shelf-screen-header { min-height: 122px !important; }
+  #estante .shelf-screen-emblem { width: 96px !important; height: 60px !important; }
+  #estante .shelf-emblem-book { width: 77px !important; height: 50px !important; }
+  #estante .shelf-emblem-quill { width: 40px !important; height: 58px !important; }
+  #estante .shelf-screen-header h2 { font-size: 28px !important; }
+  #estante .shelf-search-wrap,
+  #estante .shelf-filter-row { width: 89% !important; }
+  #estante .shelf-filter-row { gap: 5px !important; margin-bottom: 18px !important; }
+  #estante .shelf-filter-row .filter-chip { min-height: 33px !important; font-size: 9.5px !important; }
+  #estante .shelf-grid { width: 86% !important; gap: 14px 9px !important; }
+}
