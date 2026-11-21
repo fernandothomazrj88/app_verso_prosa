@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-estante-v56-layout-alvo';
+const CACHE_NAME = 'verso-prosa-estante-v57';
 const APP_FILES = [
   './',
   './index.html',
@@ -55,13 +55,13 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=modular-v56',
-  './app.js?v=modular-v56',
-  './modules/module-loader.js?v=modular-v56',
+  './style.css?v=modular-v57',
+  './modules/estante/estante.css?v=57',
+  './app.js?v=modular-v57',
+  './modules/module-loader.js?v=modular-v57',
   './modules/registry.json',
   './modules/home/index.html',
   './modules/estante/index.html',
-  './modules/estante/estante.css?v=vp-v56',
   './modules/adicionar-livro/index.html',
   './modules/anotacoes/index.html',
   './modules/descobrir/index.html',

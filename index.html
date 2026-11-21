@@ -16,8 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=modular-v56">
-  <link rel="stylesheet" href="./modules/estante/estante.css?v=vp-v56">
+<link rel="stylesheet" href="./style.css?v=modular-v57">
+<link rel="stylesheet" href="./modules/estante/estante.css?v=57">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -35,7 +35,6 @@
   <symbol id="vp-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z"/></symbol>
   <symbol id="vp-quote" viewBox="0 0 24 24"><path d="M9 11H4a5 5 0 0 1 5-5v5Zm11 0h-5a5 5 0 0 1 5-5v5ZM4 11v7h5v-7m6 0v7h5v-7"/></symbol>
   <symbol id="vp-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
-  <symbol id="vp-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
 </svg>
 <section id="welcome" class="welcome-screen" aria-label="Entrada do Verso & Prosa">
   <div class="welcome-art" aria-hidden="true">
@@ -134,18 +133,18 @@
   </div>
 
   <nav class="bottom-nav" aria-label="Menu principal">
-    <button class="nav-item" data-page="inicio"><svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#vp-home"></use></svg><span>Início</span></button>
-    <button class="nav-item active" data-page="estante"><svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#vp-book"></use></svg><span>Estante</span></button>
-    <button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><span class="nav-add-medallion" aria-hidden="true"><svg class="bottom-nav-plus-icon" viewBox="0 0 24 24"><use href="#vp-plus"></use></svg></span></button>
-    <button class="nav-item" data-page="descobrir"><svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#vp-search"></use></svg><span>Descobrir</span></button>
-    <button class="nav-item" data-page="mais"><svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#vp-menu"></use></svg><span>Mais</span></button>
+    <button class="nav-item" data-page="inicio"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button class="nav-item active" data-page="estante"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><img class="bottom-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button class="nav-item" data-page="descobrir"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button class="nav-item" data-page="mais"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
   </nav>
 </section>
 
 <div id="overlayModuleHost"></div>
 <div id="toast" class="toast" role="status"></div>
-<script src="./modules/module-loader.js?v=modular-v56"></script>
-<script src="./app.js?v=modular-v56"></script>
+<script src="./modules/module-loader.js?v=modular-v57"></script>
+<script src="./app.js?v=modular-v57"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>

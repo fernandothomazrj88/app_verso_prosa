@@ -1,40 +1,62 @@
-<!-- Verso & Prosa | Módulo: Minha Estante V56 -->
+<!-- Verso & Prosa | Módulo Minha Estante | V57 -->
 <section id="estante" class="page shelf-page" aria-label="Minha Estante">
-  <header class="shelf-screen-header">
+  <!-- Cabeçalho com a mesma biblioteca iluminada da Home; somente o título muda. -->
+  <header class="shelf-module-header" aria-label="Minha Estante">
     <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
     <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
-    <span class="shelf-screen-emblem" aria-hidden="true">
+    <span class="shelf-module-emblem" aria-hidden="true">
       <img class="shelf-emblem-book" src="./assets/icons/home-classic/3d-book-open.png" alt="">
       <img class="shelf-emblem-quill" src="./assets/icons/home-classic/3d-quill.png" alt="">
     </span>
-    <h2>Minha Estante</h2>
-    <span class="shelf-screen-divider" aria-hidden="true"></span>
+    <h1>Minha Estante</h1>
+    <span class="shelf-module-divider" aria-hidden="true"></span>
   </header>
 
-  <div class="shelf-controls-row">
-    <div class="shelf-search-wrap">
-      <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-      <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+  <div class="shelf-main-content">
+    <div class="shelf-controls-row">
+      <div class="shelf-search-wrap">
+        <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+      </div>
+      <button class="shelf-tool-button" id="shelfFilterToggle" type="button" aria-label="Mostrar ou ocultar filtros" aria-pressed="false" title="Mostrar ou ocultar filtros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7Z"></path></svg>
+      </button>
+      <button class="shelf-tool-button" id="shelfViewToggle" type="button" aria-label="Alternar visualização em lista" aria-pressed="false" title="Alternar entre grade e lista">
+        <svg class="shelf-view-grid-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+        <svg class="shelf-view-list-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h12M9 12h12M9 19h12"></path><rect x="3" y="3" width="3" height="4" rx=".5"></rect><rect x="3" y="10" width="3" height="4" rx=".5"></rect><rect x="3" y="17" width="3" height="4" rx=".5"></rect></svg>
+      </button>
     </div>
-    <button class="shelf-tool-button" id="shelfFilterToggle" type="button" aria-label="Mostrar ou ocultar filtros" aria-pressed="false" title="Mostrar ou ocultar filtros">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7Z"/></svg>
-    </button>
-    <button class="shelf-tool-button" id="shelfViewToggle" type="button" aria-label="Alternar visualização em lista" aria-pressed="false" title="Alternar entre grade e lista">
-      <svg class="shelf-view-grid-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      <svg class="shelf-view-list-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h12M9 12h12M9 19h12"/><rect x="3" y="3" width="3" height="4" rx=".5"/><rect x="3" y="10" width="3" height="4" rx=".5"/><rect x="3" y="17" width="3" height="4" rx=".5"/></svg>
+
+    <div class="filter-row shelf-filter-row" id="shelfFilterRow" role="group" aria-label="Filtrar livros por situação">
+      <button class="filter-chip active" data-filter="todos" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"></path><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"></path></svg><span>Todos</span><small data-count="todos">(0)</small>
+      </button>
+      <button class="filter-chip" data-filter="lidos" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"></path><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"></path></svg><span>Lidos</span><small data-count="lidos">(0)</small>
+      </button>
+      <button class="filter-chip" data-filter="lendo" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"></path></svg><span>Lendo</span><small data-count="lendo">(0)</small>
+      </button>
+      <button class="filter-chip" data-filter="quero-ler" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 6h4v13h-4z"></path></svg><span>Quero Ler</span><small data-count="quero-ler">(0)</small>
+      </button>
+    </div>
+
+    <!-- A grade recebe exclusivamente os livros reais do perfil autenticado. -->
+    <div id="listaLivros" class="shelf-grid" aria-live="polite"></div>
+
+    <button type="button" class="shelf-add-cta" data-page="adicionar">
+      <span class="shelf-add-cta-plus" aria-hidden="true">+</span>
+      <span>Adicionar Livro</span>
     </button>
   </div>
 
-  <div class="filter-row shelf-filter-row" id="shelfFilterRow" role="group" aria-label="Filtrar livros por situação">
-    <button class="filter-chip active" data-filter="todos" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"/><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"/></svg><span>Todos</span><small data-count="todos">(0)</small></button>
-    <button class="filter-chip" data-filter="lidos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"/><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"/></svg><span>Lidos</span><small data-count="lidos">(0)</small></button>
-    <button class="filter-chip" data-filter="lendo" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"/></svg><span>Lendo</span><small data-count="lendo">(0)</small></button>
-    <button class="filter-chip" data-filter="quero-ler" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 6h4v13h-4z"/></svg><span>Quero Ler</span><small data-count="quero-ler">(0)</small></button>
-  </div>
-
-  <div id="listaLivros" class="shelf-grid" aria-live="polite"></div>
-  <button type="button" class="shelf-add-cta" data-page="adicionar">
-    <span class="shelf-add-cta-plus" aria-hidden="true">+</span>
-    <span>Adicionar Livro</span>
-  </button>
+  <!-- Mesma navegação visual da Home; apenas Estante fica selecionada. -->
+  <nav class="mock-bottom-nav shelf-bottom-nav" aria-label="Navegação principal">
+    <button data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button class="active" data-page="estante" aria-current="page"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
 </section>

@@ -1,0 +1,68 @@
+{
+  "version": "57",
+  "modules": [
+    {
+      "id": "inicio",
+      "folder": "home",
+      "title": "Salão principal",
+      "file": "./modules/home/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "estante",
+      "folder": "estante",
+      "title": "Minha Estante",
+      "file": "./modules/estante/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "adicionar",
+      "folder": "adicionar-livro",
+      "title": "Adicionar Livro",
+      "file": "./modules/adicionar-livro/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "anotacoes",
+      "folder": "anotacoes",
+      "title": "Anotações e Citações",
+      "file": "./modules/anotacoes/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "descobrir",
+      "folder": "descobrir",
+      "title": "Descobrir",
+      "file": "./modules/descobrir/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "estudio",
+      "folder": "atelie",
+      "title": "Ateliê Literário",
+      "file": "./modules/atelie/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "calendario",
+      "folder": "planejamento",
+      "title": "Planejamento de Leituras",
+      "file": "./modules/planejamento/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "mais",
+      "folder": "mais",
+      "title": "Mais",
+      "file": "./modules/mais/index.html",
+      "target": "moduleHost"
+    },
+    {
+      "id": "detalhes-livro",
+      "folder": "detalhes-livro",
+      "title": "Detalhes do Livro",
+      "file": "./modules/detalhes-livro/index.html",
+      "target": "overlayModuleHost"
+    }
+  ]
+}
