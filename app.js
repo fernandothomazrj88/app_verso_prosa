@@ -615,80 +615,78 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = $('#buscarLivro');
     const term = (searchInput?.value || '').trim().toLocaleLowerCase('pt-BR');
     const allBooks = cloud.books.map((book, index) => ({ book, index }));
-
-    const normalizedStatus = value => String(value || '')
-      .trim()
-      .toLocaleLowerCase('pt-BR')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-
+    const normalize = value => String(value || '')
+      .trim().toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const statusKey = value => {
-      const status = normalizedStatus(value);
-      if (status === 'lendo' || status === 'estou lendo') return 'lendo';
-      if (status === 'lido' || status === 'lidos' || status === 'ja li' || status === 'concluido') return 'lidos';
-      if (status === 'quero ler' || status === 'quero-ler' || status === 'lista de leitura') return 'quero-ler';
+      const status = normalize(value);
+      if (['lendo', 'estou lendo', 'em leitura'].includes(status)) return 'lendo';
+      if (['lido', 'lidos', 'ja li', 'concluido', 'concluida', 'finalizado'].includes(status)) return 'lidos';
+      if (['quero ler', 'quero-ler', 'lista de leitura', 'desejo ler'].includes(status)) return 'quero-ler';
       return 'outros';
     };
+
+    const counts = {
+      todos: allBooks.length,
+      lidos: allBooks.filter(({ book }) => statusKey(book.status) === 'lidos').length,
+      lendo: allBooks.filter(({ book }) => statusKey(book.status) === 'lendo').length,
+      'quero-ler': allBooks.filter(({ book }) => statusKey(book.status) === 'quero-ler').length
+    };
+    Object.entries(counts).forEach(([key, value]) => {
+      const count = document.querySelector(`[data-count="${key}"]`);
+      if (count) count.textContent = `(${value})`;
+    });
 
     const filtered = allBooks.filter(({ book }) => {
       const searchable = [book.titulo, book.autor, book.editora, book.genero, book.isbn]
         .filter(Boolean).join(' ').toLocaleLowerCase('pt-BR');
-      const matchesTerm = searchable.includes(term);
-      const matchesStatus = filter === 'todos' || statusKey(book.status) === filter;
-      return matchesTerm && matchesStatus;
+      return searchable.includes(term) && (filter === 'todos' || statusKey(book.status) === filter);
     });
 
     const target = $('#listaLivros');
+    const empty = $('#shelfEmptyState');
     if (!target) return;
 
     if (!filtered.length) {
-      const hasBooks = allBooks.length > 0;
-      const message = hasBooks
-        ? 'Nenhum livro encontrado nesta seleção.'
-        : 'Sua estante está esperando por você.';
-      const description = hasBooks
-        ? 'Tente outro título, autor ou filtro para localizar um exemplar.'
-        : 'Adicione um livro para começar a construir sua biblioteca particular.';
-      target.innerHTML = `
-        <div class="shelf-empty-state">
-          <img src="./assets/logo-livro-pena-trim.png" alt="" aria-hidden="true">
-          <b>${message}</b>
-          <p>${description}</p>
-          ${hasBooks ? '<button type="button" class="shelf-clear-filter" id="clearShelfSearch">Limpar busca e filtros</button>' : '<button type="button" class="primary compact" data-page="adicionar">Adicionar primeiro livro</button>'}
-        </div>`;
-      const clear = $('#clearShelfSearch');
-      if (clear) clear.addEventListener('click', () => {
-        searchInput.value = '';
-        filter = 'todos';
-        $$('.filter-chip').forEach(chip => {
-          const active = chip.dataset.filter === 'todos';
-          chip.classList.toggle('active', active);
-          chip.setAttribute('aria-pressed', active ? 'true' : 'false');
-        });
-        renderBooks();
-      });
+      target.innerHTML = '';
+      target.hidden = true;
+      if (empty) {
+        empty.hidden = false;
+        const hasBooks = allBooks.length > 0;
+        empty.querySelector('b').textContent = hasBooks ? 'Nenhum livro encontrado.' : 'Sua estante está esperando por você.';
+        empty.querySelector('p').textContent = hasBooks
+          ? 'Tente outro título ou selecione outro filtro.'
+          : 'Adicione seu primeiro livro para começar a organizar sua biblioteca particular.';
+      }
       return;
     }
 
+    if (empty) empty.hidden = true;
+    target.hidden = false;
     target.innerHTML = filtered.map(({ book, index }, cardIndex) => {
       const image = safeImageUrl(book.capa);
       const title = String(book.titulo || 'Livro sem título');
       const author = String(book.autor || 'Autor não informado');
+      const status = statusKey(book.status);
+      const statusLabel = status === 'lidos' ? 'Lido' : status === 'lendo' ? 'Lendo' : status === 'quero-ler' ? 'Quero Ler' : (book.status || 'No acervo');
+      const statusClass = status === 'lidos' ? 'is-read' : status === 'lendo' ? 'is-reading' : status === 'quero-ler' ? 'is-want' : 'is-other';
+      const ratingRaw = Number(book.avaliacao || book.rating || book.estrelas || 0);
+      const rating = Number.isFinite(ratingRaw) ? Math.max(0, Math.min(5, Math.round(ratingRaw))) : 0;
+      const stars = Array.from({ length: 5 }, (_, i) => `<span class="${i < rating ? 'is-filled' : ''}">★</span>`).join('');
       const photo = image
         ? `<img class="shelf-cover-photo" src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(title)}" loading="lazy" decoding="async">`
-        : `<span class="shelf-cover-fallback-mark" aria-hidden="true">✦</span>`;
-      const coverCopy = `
-            <span class="shelf-cover-shade" aria-hidden="true"></span>
-            <span class="shelf-cover-copy">
-              <b class="shelf-cover-title">${escapeHtml(title)}</b>
-              <small class="shelf-cover-author">${escapeHtml(author)}</small>
-            </span>`;
+        : `<span class="shelf-cover-fallback-mark" aria-hidden="true">✦</span>
+           <span class="shelf-cover-shade" aria-hidden="true"></span>
+           <span class="shelf-cover-copy"><b class="shelf-cover-title">${escapeHtml(title)}</b><small class="shelf-cover-author">${escapeHtml(author)}</small></span>`;
       return `
-        <button type="button" class="shelf-grid-book cover-tone-${cardIndex % 6}" data-book-index="${index}" aria-label="Abrir ${escapeHtml(title)} de ${escapeHtml(author)}">
-          <span class="shelf-grid-cover${image ? ' has-cover-image' : ' has-cover-fallback'}">
-            ${photo}${coverCopy}
-          </span>
-        </button>`;
+        <article class="shelf-book-card cover-tone-${cardIndex % 6}">
+          <button type="button" class="shelf-grid-book" data-book-index="${index}" aria-label="Abrir ${escapeHtml(title)} de ${escapeHtml(author)}">
+            <span class="shelf-grid-cover${image ? ' has-cover-image' : ' has-cover-fallback'}">
+              ${photo}
+            </span>
+          </button>
+          <span class="shelf-book-status ${statusClass}">${status === 'lidos' ? '✓ ' : status === 'lendo' ? '◷ ' : status === 'quero-ler' ? '▣ ' : ''}${escapeHtml(statusLabel)}</span>
+          <span class="shelf-book-rating" title="${rating ? `${rating} de 5 estrelas` : 'Ainda sem avaliação'}" aria-label="${rating ? `${rating} de 5 estrelas` : 'Ainda sem avaliação'}">${stars}</span>
+        </article>`;
     }).join('');
   }
 
@@ -774,6 +772,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   $('#buscarLivro').addEventListener('input', renderBooks);
+
+  $('#shelfFilterToggle')?.addEventListener('click', () => {
+    const row = $('#shelfFilterRow');
+    if (!row) return;
+    const hidden = row.classList.toggle('is-collapsed');
+    $('#shelfFilterToggle').setAttribute('aria-pressed', String(!hidden));
+  });
+
+  $('#shelfViewToggle')?.addEventListener('click', () => {
+    const grid = $('#listaLivros');
+    if (!grid) return;
+    const listMode = grid.classList.toggle('is-list-view');
+    $('#shelfViewToggle').setAttribute('aria-pressed', String(listMode));
+    $('#shelfViewToggle').setAttribute('aria-label', listMode ? 'Alternar visualização em grade' : 'Alternar visualização em lista');
+    $('#shelfViewToggle').setAttribute('title', listMode ? 'Visualização em grade' : 'Visualização em lista');
+  });
   $$('.filter-chip').forEach(chip => chip.addEventListener('click', () => {
     $$('.filter-chip').forEach(item => {
       const active = item === chip;

@@ -1,25 +1,45 @@
-<!-- Verso & Prosa | Módulo: Minha Estante V53 | O conteúdo é montado pelo modules/module-loader.js -->
+<!-- Verso & Prosa | Módulo: Minha Estante V54 -->
 <section id="estante" class="page shelf-page" aria-label="Minha Estante">
-        <header class="shelf-screen-header">
-          <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
-          <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
-          <span class="shelf-screen-emblem" aria-hidden="true">
-            <img class="shelf-emblem-book" src="./assets/icons/home-classic/3d-book-open.png" alt="">
-            <img class="shelf-emblem-quill" src="./assets/icons/home-classic/3d-quill.png" alt="">
-          </span>
-          <h2>Minha Estante</h2>
-          <span class="shelf-screen-divider" aria-hidden="true"></span>
-        </header>
-        <div class="shelf-search-wrap">
-          <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-          <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
-          <svg class="shelf-search-icon shelf-search-icon-right" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
-        </div>
-        <div class="filter-row shelf-filter-row" role="group" aria-label="Filtrar livros por situação">
-          <button class="filter-chip active" data-filter="todos" aria-pressed="true">Todos</button>
-          <button class="filter-chip" data-filter="lidos" aria-pressed="false">Lidos</button>
-          <button class="filter-chip" data-filter="lendo" aria-pressed="false">Lendo</button>
-          <button class="filter-chip" data-filter="quero-ler" aria-pressed="false">Quero Ler</button>
-        </div>
-        <div id="listaLivros" class="shelf-grid" aria-live="polite"><div class="empty-state"><span>✦</span><b>Sua estante está esperando por você</b><p>Adicione um livro para começar a construir sua biblioteca.</p><button class="primary compact" data-page="adicionar">Adicionar primeiro livro</button></div></div>
-      </section>
+  <header class="shelf-screen-header">
+    <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
+    <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
+    <span class="shelf-screen-emblem" aria-hidden="true">
+      <img class="shelf-emblem-book" src="./assets/icons/home-classic/3d-book-open.png" alt="">
+      <img class="shelf-emblem-quill" src="./assets/icons/home-classic/3d-quill.png" alt="">
+    </span>
+    <h2>Minha Estante</h2>
+    <span class="shelf-screen-divider" aria-hidden="true"></span>
+  </header>
+
+  <div class="shelf-controls-row">
+    <div class="shelf-search-wrap">
+      <svg class="shelf-search-icon shelf-search-icon-left" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+      <input class="field search" id="buscarLivro" type="search" placeholder="Buscar na minha estante..." aria-label="Buscar na minha estante">
+    </div>
+    <button class="shelf-tool-button" id="shelfFilterToggle" type="button" aria-label="Mostrar ou ocultar filtros" aria-pressed="false" title="Mostrar ou ocultar filtros">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7Z"/></svg>
+    </button>
+    <button class="shelf-tool-button" id="shelfViewToggle" type="button" aria-label="Alternar visualização em lista" aria-pressed="false" title="Alternar entre grade e lista">
+      <svg class="shelf-view-grid-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <svg class="shelf-view-list-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h12M9 12h12M9 19h12"/><rect x="3" y="3" width="3" height="4" rx=".5"/><rect x="3" y="10" width="3" height="4" rx=".5"/><rect x="3" y="17" width="3" height="4" rx=".5"/></svg>
+    </button>
+  </div>
+
+  <div class="filter-row shelf-filter-row" id="shelfFilterRow" role="group" aria-label="Filtrar livros por situação">
+    <button class="filter-chip active" data-filter="todos" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"/><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"/></svg><span>Todos</span><small data-count="todos">(0)</small></button>
+    <button class="filter-chip" data-filter="lidos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5c3-1 6-.5 9 2v13c-3-2.5-6-3-9-2Z"/><path d="M21 5c-3-1-6-.5-9 2v13c3-2.5 6-3 9-2Z"/></svg><span>Lidos</span><small data-count="lidos">(0)</small></button>
+    <button class="filter-chip" data-filter="lendo" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"/></svg><span>Lendo</span><small data-count="lendo">(0)</small></button>
+    <button class="filter-chip" data-filter="quero-ler" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v14H4zM10 3h4v16h-4zM16 6h4v13h-4z"/></svg><span>Quero Ler</span><small data-count="quero-ler">(0)</small></button>
+  </div>
+
+  <div id="listaLivros" class="shelf-grid" aria-live="polite"></div>
+  <div class="shelf-empty-state" id="shelfEmptyState" hidden>
+    <span class="shelf-empty-emblem" aria-hidden="true">✦</span>
+    <b>Sua estante está esperando por você.</b>
+    <p>Adicione seu primeiro livro para começar a organizar sua biblioteca particular.</p>
+  </div>
+  <button type="button" class="shelf-add-cta" data-page="adicionar">
+    <span class="shelf-add-cta-plus" aria-hidden="true">+</span>
+    <span>Adicionar Livro</span>
+  </button>
+</section>
