@@ -614,22 +614,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderBooks() {
     const searchInput = $('#buscarLivro');
     const term = (searchInput?.value || '').trim().toLocaleLowerCase('pt-BR');
-    const allBooks = cloud.books.map((book, index) => ({ book, index }));
+    const allBooks = (Array.isArray(cloud.books) ? cloud.books : []).map((book, index) => ({ book, index }));
     const normalize = value => String(value || '')
       .trim().toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const statusKey = value => {
-      const status = normalize(value);
-      if (['lendo', 'estou lendo', 'em leitura'].includes(status)) return 'lendo';
-      if (['lido', 'lidos', 'ja li', 'concluido', 'concluida', 'finalizado'].includes(status)) return 'lidos';
-      if (['quero ler', 'quero-ler', 'lista de leitura', 'desejo ler'].includes(status)) return 'quero-ler';
+      const status = normalize(value).replace(/[_-]+/g, ' ').replace(/\s+/g, ' ');
+      if (['lendo', 'estou lendo', 'em leitura', 'em andamento'].includes(status)) return 'lendo';
+      if (['lido', 'lidos', 'ja li', 'concluido', 'concluida', 'finalizado', 'finalizada'].includes(status)) return 'lidos';
+      if (['quero ler', 'lista de leitura', 'desejo ler', 'nao lido', 'nao iniciada'].includes(status)) return 'quero-ler';
       return 'outros';
     };
 
     const counts = {
       todos: allBooks.length,
-      lidos: allBooks.filter(({ book }) => statusKey(book.status) === 'lidos').length,
-      lendo: allBooks.filter(({ book }) => statusKey(book.status) === 'lendo').length,
-      'quero-ler': allBooks.filter(({ book }) => statusKey(book.status) === 'quero-ler').length
+      lidos: allBooks.filter(({ book }) => statusKey(book.status || book.situacao) === 'lidos').length,
+      lendo: allBooks.filter(({ book }) => statusKey(book.status || book.situacao) === 'lendo').length,
+      'quero-ler': allBooks.filter(({ book }) => statusKey(book.status || book.situacao) === 'quero-ler').length
     };
     Object.entries(counts).forEach(([key, value]) => {
       const count = document.querySelector(`[data-count="${key}"]`);
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const filtered = allBooks.filter(({ book }) => {
       const searchable = [book.titulo, book.autor, book.editora, book.genero, book.isbn]
         .filter(Boolean).join(' ').toLocaleLowerCase('pt-BR');
-      return searchable.includes(term) && (filter === 'todos' || statusKey(book.status) === filter);
+      return searchable.includes(term) && (filter === 'todos' || statusKey(book.status || book.situacao) === filter);
     });
 
     const target = $('#listaLivros');
@@ -652,10 +652,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (empty) {
         empty.hidden = false;
         const hasBooks = allBooks.length > 0;
-        empty.querySelector('b').textContent = hasBooks ? 'Nenhum livro encontrado.' : 'Sua estante está esperando por você.';
-        empty.querySelector('p').textContent = hasBooks
-          ? 'Tente outro título ou selecione outro filtro.'
-          : 'Adicione seu primeiro livro para começar a organizar sua biblioteca particular.';
+        const heading = empty.querySelector('b');
+        const detail = empty.querySelector('p');
+        if (heading) heading.textContent = hasBooks ? 'Nenhum livro encontrado.' : 'Sua estante está esperando por você.';
+        if (detail) detail.textContent = hasBooks
+          ? 'Tente outro título ou escolha outro filtro.'
+          : 'Adicione seu primeiro livro para começar a construir sua biblioteca.';
       }
       return;
     }
@@ -663,13 +665,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (empty) empty.hidden = true;
     target.hidden = false;
     target.innerHTML = filtered.map(({ book, index }, cardIndex) => {
-      const image = safeImageUrl(book.capa);
-      const title = String(book.titulo || 'Livro sem título');
-      const author = String(book.autor || 'Autor não informado');
-      const status = statusKey(book.status);
-      const statusLabel = status === 'lidos' ? 'Lido' : status === 'lendo' ? 'Lendo' : status === 'quero-ler' ? 'Quero Ler' : (book.status || 'No acervo');
+      const image = safeImageUrl(book.capa || book.cover || book.url_capa);
+      const title = String(book.titulo || book.titulo_livro || 'Livro sem título');
+      const author = String(book.autor || book.nome_autor || 'Autor não informado');
+      const status = statusKey(book.status || book.situacao);
+      const statusLabel = status === 'lidos' ? 'Lido' : status === 'lendo' ? 'Lendo' : status === 'quero-ler' ? 'Quero Ler' : String(book.status || book.situacao || 'No acervo');
       const statusClass = status === 'lidos' ? 'is-read' : status === 'lendo' ? 'is-reading' : status === 'quero-ler' ? 'is-want' : 'is-other';
-      const ratingRaw = Number(book.avaliacao || book.rating || book.estrelas || 0);
+      const ratingRaw = Number(book.avaliacao || book.rating || book.estrelas || book.nota || 0);
       const rating = Number.isFinite(ratingRaw) ? Math.max(0, Math.min(5, Math.round(ratingRaw))) : 0;
       const stars = Array.from({ length: 5 }, (_, i) => `<span class="${i < rating ? 'is-filled' : ''}">★</span>`).join('');
       const photo = image
@@ -688,6 +690,38 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span class="shelf-book-rating" title="${rating ? `${rating} de 5 estrelas` : 'Ainda sem avaliação'}" aria-label="${rating ? `${rating} de 5 estrelas` : 'Ainda sem avaliação'}">${stars}</span>
         </article>`;
     }).join('');
+
+    // Se a capa externa falhar, mostra a versão tipográfica da capa em vez de um espaço quebrado.
+    target.querySelectorAll('.shelf-cover-photo').forEach(img => {
+      img.addEventListener('error', () => {
+        const cover = img.closest('.shelf-grid-cover');
+        const card = img.closest('.shelf-book-card');
+        const bookButton = img.closest('.shelf-grid-book');
+        const index = Number(bookButton?.dataset.bookIndex);
+        const book = Number.isInteger(index) ? cloud.books[index] : null;
+        if (!cover || !book) return;
+        cover.classList.remove('has-cover-image');
+        cover.classList.add('has-cover-fallback');
+        img.remove();
+        const mark = document.createElement('span');
+        mark.className = 'shelf-cover-fallback-mark';
+        mark.setAttribute('aria-hidden', 'true');
+        mark.textContent = '✦';
+        const shade = document.createElement('span');
+        shade.className = 'shelf-cover-shade';
+        shade.setAttribute('aria-hidden', 'true');
+        const copy = document.createElement('span');
+        copy.className = 'shelf-cover-copy';
+        const title = document.createElement('b');
+        title.className = 'shelf-cover-title';
+        title.textContent = book.titulo || 'Livro sem título';
+        const author = document.createElement('small');
+        author.className = 'shelf-cover-author';
+        author.textContent = book.autor || 'Autor não informado';
+        copy.append(title, author);
+        cover.append(mark, shade, copy);
+      }, { once: true });
+    });
   }
 
   function openBook(book) {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-estante-v54';
+const CACHE_NAME = 'verso-prosa-estante-v55';
 const APP_FILES = [
   './',
   './index.html',
@@ -55,9 +55,9 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=modular-v54',
-  './app.js?v=modular-v54',
-  './modules/module-loader.js?v=modular-v54',
+  './style.css?v=modular-v55',
+  './app.js?v=modular-v55',
+  './modules/module-loader.js?v=modular-v55',
   './modules/registry.json',
   './modules/home/index.html',
   './modules/estante/index.html',
