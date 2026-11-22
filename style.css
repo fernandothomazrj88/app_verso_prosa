@@ -7144,3 +7144,23 @@ img { max-width: 100%; }
   #app:has(#estante.active) main { padding: 0 0 112px !important; }
   #estante .shelf-grid { width: min(94%, 900px) !important; }
 }
+
+
+/* V60 — VISIBILIDADE DOS MÓDULOS
+   Alguns estilos antigos da Estante definem display:flex!important.
+   Esta regra garante que somente o módulo ativo fique visível, para que
+   Adicionar Livro e os demais módulos realmente substituam a tela anterior. */
+#moduleHost > .page:not(.active),
+#overlayModuleHost > .page:not(.active) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+#moduleHost > .page.active,
+#overlayModuleHost > .page.active {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+#moduleHost > #estante.page.active {
+  display: flex !important;
+}

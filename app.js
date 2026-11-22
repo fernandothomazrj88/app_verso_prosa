@@ -217,15 +217,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function openPage(id) {
-    if (!$('#' + id)) return;
-    $$('.page').forEach(page => page.classList.toggle('active', page.id === id));
+    const targetPage = document.getElementById(String(id || ''));
+    if (!targetPage || !targetPage.classList.contains('page')) {
+      console.error('[Verso & Prosa] módulo não encontrado:', id);
+      toast('Não foi possível abrir esta tela. Atualize o aplicativo e tente novamente.');
+      return false;
+    }
+
+    // Apenas a tela selecionada permanece ativa no contêiner modular.
+    $$('#moduleHost > .page, #overlayModuleHost > .page').forEach(page => {
+      const active = page === targetPage;
+      page.classList.toggle('active', active);
+      page.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
     $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === id));
     $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === id));
+    document.body.dataset.vpPage = id;
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (id === 'inicio') renderHome();
     if (id === 'estante') renderBooks();
     if (id === 'anotacoes') renderNotes();
     if (id === 'calendario') renderGoal();
+    return true;
   }
 
   function enterApp() {
