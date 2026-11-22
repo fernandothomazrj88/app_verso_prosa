@@ -7278,3 +7278,40 @@ img { max-width: 100%; }
     font-size: clamp(16px, 1.45vw, 19px) !important;
   }
 }
+
+
+/* ==========================================================
+   V62 — HOME: SOMBRA BORDÔ LOCALIZADA ATRÁS DA SAUDAÇÃO
+   A fotografia da biblioteca permanece visível no card inteiro.
+   A sombra é aplicada somente ao bloco do texto: à esquerda no
+   perfil Fernando e à direita no perfil Letícia (pela posição
+   natural de .mock-greeting-copy em cada composição).
+   ========================================================== */
+#inicio .mock-greeting.home-hero-banner,
+#inicio .mock-greeting.home-hero-banner.home-is-leticia {
+  background:
+    linear-gradient(0deg, rgba(10, 3, 1, .10), rgba(10, 3, 1, .10)),
+    url("./assets/scenes/entrance-room.webp") center 48% / cover no-repeat !important;
+}
+
+#inicio .home-hero-banner .mock-greeting-copy {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+#inicio .home-hero-banner .mock-greeting-copy::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: -14px -22px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(27, 6, 5, .76) 0%,
+    rgba(34, 8, 6, .59) 46%,
+    rgba(37, 10, 7, .27) 72%,
+    rgba(37, 10, 7, 0) 100%
+  ) !important;
+  filter: blur(11px) !important;
+  pointer-events: none !important;
+}
