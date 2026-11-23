@@ -7567,3 +7567,103 @@ img { max-width: 100%; }
     min-height: 7px !important;
   }
 }
+
+/* ==========================================================
+   V68 — PADRÃO ÚNICO PARA AS BOAS-VINDAS DOS DOIS PERFIS
+   Mesma escala de texto, mesma hierarquia e dois ornamentos dourados.
+   A área é posicionada no centro do círculo de cada arte.
+   ========================================================== */
+#inicio .home-hero-banner .mock-greeting-copy {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  top: 46.2% !important;
+  left: 15.95% !important;
+  right: auto !important;
+  width: 37.5% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 78% !important;
+  margin: 0 !important;
+  padding: 6px 4px !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  flex: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  overflow: visible !important;
+  text-align: center !important;
+  z-index: 5 !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  left: 42.35% !important;
+  right: auto !important;
+  width: 37.5% !important;
+  top: 45.7% !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff4df !important;
+  font: italic 700 clamp(17px, 4.1vw, 20.5px)/1.06 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.3px !important;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: normal !important;
+  text-wrap: balance !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.82) !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff3df !important;
+  font: 600 clamp(12px, 3vw, 14px)/1.13 Georgia, "Times New Roman", serif !important;
+  text-align: center !important;
+  overflow-wrap: normal !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.85) !important;
+}
+#inicio .home-hero-banner .home-hero-divider,
+#inicio .home-hero-banner .home-hero-flourish {
+  display: block !important;
+  box-sizing: border-box !important;
+  flex: 0 0 15px !important;
+  width: 76% !important;
+  height: 15px !important;
+  min-height: 15px !important;
+  max-height: 15px !important;
+  margin: 1px auto !important;
+  opacity: .98 !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.8)) !important;
+}
+@media (max-width: 380px) {
+  #inicio .home-hero-banner .mock-greeting-copy {
+    gap: 3px !important;
+    padding: 5px 3px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2 {
+    font-size: clamp(15px, 4.2vw, 17px) !important;
+    line-height: 1.04 !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p {
+    font-size: clamp(11px, 3.05vw, 12.5px) !important;
+    line-height: 1.1 !important;
+  }
+  #inicio .home-hero-banner .home-hero-divider,
+  #inicio .home-hero-banner .home-hero-flourish {
+    flex-basis: 12px !important;
+    height: 12px !important;
+    min-height: 12px !important;
+    max-height: 12px !important;
+  }
+}

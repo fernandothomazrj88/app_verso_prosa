@@ -35,3 +35,11 @@ A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo n
 - O texto de Fernando e Letícia foi reposicionado e dimensionado para permanecer dentro da área interna do círculo bordô dos respectivos cards aprovados.
 - As duas artes, os módulos, o backend, as credenciais e as demais telas foram preservados.
 - O cache e a referência da folha de estilos foram atualizados para v67.
+
+
+## Padronização dos cards de boas-vindas (v68)
+
+- Fernando e Letícia usam a mesma escala tipográfica, a mesma estrutura de texto e os mesmos dois ornamentos dourados.
+- O texto ocupa uma área proporcional ao círculo, com altura automática para evitar cortes na saudação ou na mensagem.
+- A arte da Letícia foi recomposta com o medalhão bordô ligeiramente menor e deslocado para a direita, criando espaço visível entre a personagem e o círculo.
+- O cache do aplicativo e a referência da folha de estilos foram atualizados para v68.
