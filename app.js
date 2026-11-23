@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const image = safeImageUrl(reading.capa);
       cover.innerHTML = image
         ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(reading.titulo || 'livro')}">`
-        : `<span class="fallback-cover-title">${escapeHtml(reading.titulo || 'V&amp;N')}</span>`;
+        : `<span class="fallback-cover-title">${escapeHtml(reading.titulo || 'V&amp;P')}</span>`;
       title.textContent = reading.titulo || 'Livro em leitura';
       author.textContent = reading.autor || 'Autor não informado';
       const pages = Number(reading.paginas || 0);
@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       action.dataset.openCurrentBook = 'true';
       action.dataset.page = '';
     } else {
-      cover.innerHTML = '<span class="fallback-cover-title">V&amp;N</span>';
+      cover.innerHTML = '<span class="fallback-cover-title">V&amp;P</span>';
       title.textContent = 'Escolha o próximo volume';
       author.textContent = 'Sua biblioteca está pronta para a próxima jornada.';
       meta.innerHTML = books.length
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const image = safeImageUrl(book.capa);
           const coverHtml = image
             ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}" loading="lazy">`
-            : `<span>${escapeHtml(book.titulo || 'V&amp;N')}</span>`;
+            : `<span>${escapeHtml(book.titulo || 'V&amp;P')}</span>`;
           return `<button type="button" class="acquisition-book" data-home-book-index="${originalIndex}" aria-label="Abrir ${escapeHtml(book.titulo || 'livro')}">
             <span class="acquisition-cover">${coverHtml}</span>
             <span class="acquisition-title">${escapeHtml(book.titulo || 'Sem título')}</span>
@@ -742,7 +742,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     selectedBook = book;
     const image = safeImageUrl(book.capa);
     const cover = $('#detailCover');
-    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">` : '<span>V&amp;N</span>';
+    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">` : '<span>V&amp;P</span>';
     $('#detailTitle').textContent = book.titulo || 'Sem título';
     $('#detailAuthor').textContent = book.autor || 'Autor não informado';
     $('#detailGenre').textContent = book.genero || 'Gênero não informado';

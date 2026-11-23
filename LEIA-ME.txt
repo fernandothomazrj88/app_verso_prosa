@@ -1,0 +1,19 @@
+VERSOS & NARRATIVAS — TROCA DE NOME (SEM REDESIGN)
+
+Este pacote faz somente a substituição da assinatura 'Verso & Prosa' por 'Versos & Narrativas'.
+O layout, cores, navegação, personagens, estrutura dos módulos e integração permanecem iguais.
+As imagens existentes que continham o nome antigo foram atualizadas apenas no lettering.
+
+FRONTEND: copie os arquivos e pastas deste pacote para a raiz do repositório GitHub,
+mantendo a estrutura de pastas. O ZIP contém somente os arquivos alterados.
+
+APPS SCRIPT: em apps-script/Code.gs está o código com a troca dos textos de marca.
+Substitua o conteúdo de Código.gs, salve e publique uma nova versão da implantação
+da Web, caso o endpoint esteja em uso. NÃO execute a função de inicialização do banco.
+Os identificadores internos e o protocolo vp-api-response foram preservados.
+
+GOOGLE SHEETS / APPS SCRIPT: altere manualmente apenas os títulos dos projetos para
+'Versos & Narrativas — Banco de Dados' e 'Versos & Narrativas — Backend V1'.
+Não altere o ID da planilha, abas, cabeçalhos, usuários, permissões ou URL da implantação.
+
+O cache do Service Worker foi incrementado para v64 para carregar a marca atualizada.
