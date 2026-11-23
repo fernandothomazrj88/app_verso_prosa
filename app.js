@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     await window.VP_MODULES_READY;
   } catch (moduleError) {
-    console.error('[Verso & Prosa] inicialização cancelada:', moduleError);
+    console.error('[Versos & Narrativas] inicialização cancelada:', moduleError);
     return;
   }
   const $ = (selector) => document.querySelector(selector);
@@ -213,13 +213,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     greetingHeadline.innerHTML = identity.headline;
     greetingMessage.textContent = identity.message;
     document.body.dataset.vpProfile = identity.key;
-    console.info('[Verso & Prosa] perfil ativo:', identity.key, identity.email);
+    console.info('[Versos & Narrativas] perfil ativo:', identity.key, identity.email);
   }
 
   function openPage(id) {
     const targetPage = document.getElementById(String(id || ''));
     if (!targetPage || !targetPage.classList.contains('page')) {
-      console.error('[Verso & Prosa] módulo não encontrado:', id);
+      console.error('[Versos & Narrativas] módulo não encontrado:', id);
       toast('Não foi possível abrir esta tela. Atualize o aplicativo e tente novamente.');
       return false;
     }
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       login.classList.add('hidden');
       login.style.display = '';
       showLoginError('Não foi possível restaurar esta sessão. Entre novamente com seu e-mail e senha.');
-      console.warn('[Verso & Prosa] sessão anterior descartada:', error);
+      console.warn('[Versos & Narrativas] sessão anterior descartada:', error);
     }
   }
 
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const image = safeImageUrl(reading.capa);
       cover.innerHTML = image
         ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(reading.titulo || 'livro')}">`
-        : `<span class="fallback-cover-title">${escapeHtml(reading.titulo || 'V&amp;P')}</span>`;
+        : `<span class="fallback-cover-title">${escapeHtml(reading.titulo || 'V&amp;N')}</span>`;
       title.textContent = reading.titulo || 'Livro em leitura';
       author.textContent = reading.autor || 'Autor não informado';
       const pages = Number(reading.paginas || 0);
@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       action.dataset.openCurrentBook = 'true';
       action.dataset.page = '';
     } else {
-      cover.innerHTML = '<span class="fallback-cover-title">V&amp;P</span>';
+      cover.innerHTML = '<span class="fallback-cover-title">V&amp;N</span>';
       title.textContent = 'Escolha o próximo volume';
       author.textContent = 'Sua biblioteca está pronta para a próxima jornada.';
       meta.innerHTML = books.length
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           const image = safeImageUrl(book.capa);
           const coverHtml = image
             ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}" loading="lazy">`
-            : `<span>${escapeHtml(book.titulo || 'V&amp;P')}</span>`;
+            : `<span>${escapeHtml(book.titulo || 'V&amp;N')}</span>`;
           return `<button type="button" class="acquisition-book" data-home-book-index="${originalIndex}" aria-label="Abrir ${escapeHtml(book.titulo || 'livro')}">
             <span class="acquisition-cover">${coverHtml}</span>
             <span class="acquisition-title">${escapeHtml(book.titulo || 'Sem título')}</span>
@@ -742,7 +742,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     selectedBook = book;
     const image = safeImageUrl(book.capa);
     const cover = $('#detailCover');
-    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">` : '<span>V&amp;P</span>';
+    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">` : '<span>V&amp;N</span>';
     $('#detailTitle').textContent = book.titulo || 'Sem título';
     $('#detailAuthor').textContent = book.autor || 'Autor não informado';
     $('#detailGenre').textContent = book.genero || 'Gênero não informado';
@@ -932,7 +932,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ? `${bookSearchCache.length} resultado(s) encontrado(s). Escolha um título para preencher a ficha.`
         : 'Não encontramos resultados. Tente pesquisar pelo título ou nome do autor.';
     } catch (error) {
-      console.warn('[Verso & Prosa] pesquisa de livros indisponível:', error);
+      console.warn('[Versos & Narrativas] pesquisa de livros indisponível:', error);
       if (feedback) feedback.textContent = 'Não foi possível consultar o catálogo agora. Você pode registrar o livro manualmente.';
       if (target) target.innerHTML = '';
     } finally {

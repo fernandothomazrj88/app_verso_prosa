@@ -7,16 +7,16 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Verso & Prosa">
+<meta name="apple-mobile-web-app-title" content="Versos & Narrativas">
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
 <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
-<meta name="description" content="Verso & Prosa — uma biblioteca particular para duas jornadas de leitura.">
-<title>Verso &amp; Prosa — Biblioteca Literária</title>
+<meta name="description" content="Versos & Narrativas — uma biblioteca particular para duas jornadas de leitura.">
+<title>Versos &amp; Narrativas — Biblioteca Literária</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-v63">
+<link rel="stylesheet" href="./style.css?v=home-v64">
 <link rel="stylesheet" href="./modules/estante/estante.css?v=58">
 <link rel="stylesheet" href="./modules/adicionar-livro/adicionar-livro.css?v=60">
 </head>
@@ -37,12 +37,18 @@
   <symbol id="vp-quote" viewBox="0 0 24 24"><path d="M9 11H4a5 5 0 0 1 5-5v5Zm11 0h-5a5 5 0 0 1 5-5v5ZM4 11v7h5v-7m6 0v7h5v-7"/></symbol>
   <symbol id="vp-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
 </svg>
-<section id="welcome" class="welcome-screen" aria-label="Entrada do Verso & Prosa">
+<section id="welcome" class="welcome-screen" aria-label="Entrada de Versos & Narrativas">
   <div class="welcome-art" aria-hidden="true">
     <picture>
       <source media="(min-width: 900px)" srcset="./assets/scenes/welcome-desktop-approved.webp">
       <img src="./assets/scenes/welcome-mobile-responsive-v27.webp" alt="">
     </picture>
+    <div class="welcome-brand-overlay" aria-label="Versos &amp; Narrativas — Biblioteca Literária">
+      <img src="./assets/brand/versos-narrativas-emblem.svg" alt="" aria-hidden="true">
+      <h1>Versos &amp; Narrativas</h1>
+      <p>Biblioteca Literária</p>
+      <span class="welcome-brand-ornament" aria-hidden="true"></span>
+    </div>
   </div>
   <button class="welcome-enter-button" id="enterLibrary" type="button"
     aria-label="Entrar na Biblioteca">
@@ -64,15 +70,21 @@
     </svg>
   </span>
 </section>
-<section id="login" class="login-screen hidden" aria-label="Entrar na biblioteca Verso & Prosa">
+<section id="login" class="login-screen hidden" aria-label="Entrar na biblioteca Versos & Narrativas">
   <div class="login-layout" role="region" aria-label="Acesso à biblioteca">
     <div class="login-canvas">
       <img class="login-approved-master" src="./assets/scenes/login-approved-master.png" alt="" aria-hidden="true">
+      <div class="login-brand-overlay" aria-label="Versos &amp; Narrativas — Biblioteca Literária">
+        <img src="./assets/brand/versos-narrativas-emblem.svg" alt="" aria-hidden="true">
+        <h1>Versos &amp; Narrativas</h1>
+        <p>Biblioteca Literária</p>
+        <span aria-hidden="true"></span>
+      </div>
       <div class="login-library-atmosphere" aria-hidden="true"></div>
       <div class="login-bottom-scene" aria-hidden="true"></div>
       <header class="login-brand">
         <img class="login-brand-mark" src="./assets/login-emblem-gold-v5.png" alt="Livro aberto e pena dourados">
-        <h1>Verso &amp; Prosa</h1>
+        <h1>Versos &amp; Narrativas</h1>
         <p>Biblioteca Literária</p>
         <img class="login-brand-ornament login-brand-ornament-classic" src="./assets/ornaments/login-brand-divider.svg" alt="" aria-hidden="true">
       </header>
@@ -106,8 +118,8 @@
 <section id="app" class="app-shell hidden">
   <header class="topbar">
     <div class="brand-small">
-      <span class="brand-seal"><img src="./assets/brand/verso-emblema.svg" alt=""></span>
-      <span class="brand-name">Verso <b>&amp;</b> Prosa <small>Biblioteca Literária</small></span>
+      <span class="brand-seal"><img src="./assets/brand/versos-narrativas-emblem.svg" alt=""></span>
+      <span class="brand-name">Versos <b>&amp;</b> Narrativas <small>Biblioteca Literária</small></span>
     </div>
     <div class="top-actions"><span class="online-mark" aria-hidden="true"></span><span id="profileLabel">Leitor</span><button class="round-btn" id="profileSwitch" aria-label="Sair e trocar de conta">↪</button></div>
   </header>

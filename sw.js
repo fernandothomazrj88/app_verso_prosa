@@ -1,14 +1,13 @@
-const CACHE_NAME = 'verso-prosa-home-v63';
+const CACHE_NAME = 'versos-narrativas-home-v64';
 const APP_FILES = [
   './',
   './index.html',
   './assets/profiles/lele-epoca.webp',
   './assets/profiles/fernando-epoca.webp',
   './manifest.json',
-  './assets/brand/verso-emblema.svg',
-  './assets/brand/verso-prosa-logo.svg',
-  './assets/brand/verso-prosa-home-logo.png',
-  './assets/brand/verso-prosa-home-emblem.png',
+  './assets/brand/versos-narrativas-emblem.svg',
+  './assets/brand/versos-narrativas-logo.svg',
+  './assets/brand/versos-narrativas-emblem.png',
   './assets/login-emblem-approved-v6.png',
   './assets/icons/home-classic/3d-book-open.png',
   './assets/icons/home-classic/3d-book-add.png',
@@ -56,7 +55,7 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=home-v63',
+  './style.css?v=home-v64',
   './modules/estante/estante.css?v=58',
   './modules/adicionar-livro/adicionar-livro.css?v=60',
   './app.js?v=modular-v60',
@@ -85,7 +84,7 @@ self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
     await Promise.all(keys
-      .filter(key => key.startsWith('verso-prosa-') && key !== CACHE_NAME)
+      .filter(key => (key.startsWith('verso-prosa-') || key.startsWith('versos-narrativas-')) && key !== CACHE_NAME)
       .map(key => caches.delete(key)));
     await self.clients.claim();
   })());

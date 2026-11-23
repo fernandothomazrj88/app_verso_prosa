@@ -1,5 +1,5 @@
 /*
- * VERSO & PROSA — MODULE LOADER V49
+ * VERSOS & NARRATIVAS — MODULE LOADER V49
  * Loads each screen from its own modules/<module>/index.html file.
  * The shared app shell, authentication and backend controller remain centralized.
  */
@@ -41,7 +41,7 @@
   }
 
   window.VP_MODULES_READY = mountModules().catch(error => {
-    console.error('[Verso & Prosa] falha ao montar módulos:', error);
+    console.error('[Versos & Narrativas] falha ao montar módulos:', error);
     const host = document.getElementById('moduleHost');
     if (host) {
       host.innerHTML = '<section class="module-load-error"><h2>Não foi possível abrir a biblioteca</h2><p>' +

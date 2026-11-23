@@ -1153,7 +1153,7 @@ body.auth-flow {
 
 
 
-/* VERSO & PROSA — HOME RECONSTRUÍDA A PARTIR DO MOCKUP APROVADO */
+/* VERSOS & NARRATIVAS — HOME RECONSTRUÍDA A PARTIR DO MOCKUP APROVADO */
 :root {
   --vp-bg: #080302;
   --vp-ink: #160603;
@@ -1702,7 +1702,7 @@ body.auth-flow {
   #inicio .mock-bottom-nav {flex-basis:66px;height:66px;}
 }
 
-/* VERSO & PROSA — HOME v15: ajustes cirúrgicos a partir da captura do usuário */
+/* VERSOS & NARRATIVAS — HOME v15: ajustes cirúrgicos a partir da captura do usuário */
 :root{
   --vp-home-bg:#080302;
   --vp-home-gold:#e5ac34;
@@ -3213,7 +3213,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA — ABERTURA DESKTOP RESPONSIVA
+/* VERSOS & NARRATIVAS — ABERTURA DESKTOP RESPONSIVA
    Arte panorâmica exclusiva para telas largas; celular/tablet preservam a arte vertical.
    O botão permanece HTML e clicável, alinhado à placa da arte desktop. */
 @media (min-width: 900px) {
@@ -3313,7 +3313,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v27 — a mesma abertura desktop adaptada à proporção mobile.
+/* VERSOS & NARRATIVAS v27 — a mesma abertura desktop adaptada à proporção mobile.
    A arte vertical recompõe os mesmos elementos sem cortar portas, poltrona ou botão.
    O botão HTML permanece transparente e clicável sobre o botão desenhado na arte. */
 @media (max-width: 899px) {
@@ -3485,7 +3485,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v31 — login responsivo reconstruído a partir do modelo padrão.
+/* VERSOS & NARRATIVAS v31 — login responsivo reconstruído a partir do modelo padrão.
    A composição muda por breakpoint; os campos e ações continuam HTML reais. */
 
 /* Estrutura comum: sem moldura de telefone, sem largura fixa de celular. */
@@ -3845,7 +3845,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v32 — painel do login elevado, mais leve e separado da cena inferior. */
+/* VERSOS & NARRATIVAS v32 — painel do login elevado, mais leve e separado da cena inferior. */
 #login .login-form-frame {
   top: 34.2% !important;
   bottom: 29% !important;
@@ -3964,7 +3964,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v33 — layout final da tela de login baseado no mockup oficial.
+/* VERSOS & NARRATIVAS v33 — layout final da tela de login baseado no mockup oficial.
    Desktop/tablet usam um palco 2:3 centralizado; mobile reorganiza a mesma composição
    para a proporção estreita do telefone, mantendo a cena inferior sem recorte. */
 #login.login-screen:not(.hidden) {
@@ -4323,7 +4323,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v34 — acabamento fiel ao mockup, sem faixa sobre a luminária. */
+/* VERSOS & NARRATIVAS v34 — acabamento fiel ao mockup, sem faixa sobre a luminária. */
 
 /* O SVG agora desenha a moldura completa. Retiramos o contorno CSS duplicado. */
 #login .login-form-frame {
@@ -4494,7 +4494,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v35 — arte oficial do login como composição integral.
+/* VERSOS & NARRATIVAS v35 — arte oficial do login como composição integral.
    Os elementos funcionais ficam sobre as áreas correspondentes da arte,
    sem redesenhar ou recortar ornamentos, livros e luminária. */
 #login.login-screen:not(.hidden) {
@@ -4687,7 +4687,7 @@ img { max-width: 100%; }
 #login .login-eye { right:3.5% !important; }
 
 
-/* VERSO & PROSA v36 — campos realmente nítidos e funcionais.
+/* VERSOS & NARRATIVAS v36 — campos realmente nítidos e funcionais.
    A arte de fundo agora contém apenas a moldura vazia; nenhum texto/controle duplicado. */
 #login.login-screen:not(.hidden) {
   display:flex !important; align-items:center !important; justify-content:center !important;
@@ -4770,7 +4770,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA v37 — correção definitiva de sobreposição dos controles do login.
+/* VERSOS & NARRATIVAS v37 — correção definitiva de sobreposição dos controles do login.
    Os campos ficam em uma camada própria, com fundo opaco e tipografia legível.
    A arte aprovada permanece intacta como cenário. */
 #login .login-form { z-index: 5 !important; pointer-events:none !important; }
@@ -4925,7 +4925,7 @@ img { max-width: 100%; }
 }
 
 
-/* VERSO & PROSA — HOME V45
+/* VERSOS & NARRATIVAS — HOME V45
    Card de boas-vindas ampliado para mostrar os retratos até a cintura;
    cabeçalho com emblema do livro e divisórias clássicas ornamentadas.
    A estrutura e a navegação existentes são preservadas. */
@@ -5167,7 +5167,7 @@ img { max-width: 100%; }
 
 
 /* ==========================================================
-   VERSO & PROSA — V46 FINAL
+   VERSOS & NARRATIVAS — V46 FINAL
    Marca principal nas Homes; títulos de seção nas demais telas.
    Ícones dourados 3D fornecidos e aprovados pelo usuário.
    ========================================================== */
@@ -7326,4 +7326,134 @@ img { max-width: 100%; }
    automaticamente à direita no Home da Letícia. */
 #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy::before {
   inset: -18px -24px !important;
+}
+
+
+/* VERSOS & NARRATIVAS — nova assinatura sobre as artes aprovadas.
+   A máscara escura cobre somente a antiga assinatura incorporada às imagens;
+   o cenário, as proporções e as áreas clicáveis permanecem iguais. */
+.welcome-brand-overlay {
+  position: absolute !important;
+  z-index: 6 !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(88%, 1080px) !important;
+  height: 34% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  padding: 10px 12px 14px !important;
+  color: #fff3dc !important;
+  text-align: center !important;
+  pointer-events: none !important;
+  background: radial-gradient(ellipse 69% 125% at 50% 43%, rgba(7,3,2,.995) 0%, rgba(7,3,2,.985) 57%, rgba(7,3,2,.86) 76%, rgba(7,3,2,0) 100%) !important;
+}
+.welcome-brand-overlay img {
+  display: block !important;
+  width: clamp(58px, 7.5vw, 102px) !important;
+  height: clamp(58px, 7.5vw, 102px) !important;
+  object-fit: contain !important;
+  margin: 0 0 2px !important;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,.88)) !important;
+}
+.welcome-brand-overlay h1 {
+  margin: 0 !important;
+  color: #fff3dc !important;
+  font: 600 clamp(34px, 4.5vw, 64px)/.92 'Cormorant Garamond', Georgia, serif !important;
+  letter-spacing: -.9px !important;
+  white-space: nowrap !important;
+  text-shadow: 0 2px 5px #050201, 0 0 15px rgba(218,170,86,.24) !important;
+}
+.welcome-brand-overlay p {
+  margin: 6px 0 0 !important;
+  color: #e6c36f !important;
+  font: 600 clamp(11px, 1.55vw, 20px)/1.05 'Cormorant Garamond', Georgia, serif !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 4px #050201 !important;
+}
+.welcome-brand-ornament {
+  display: block !important;
+  width: min(52%, 420px) !important;
+  height: 2px !important;
+  margin-top: 10px !important;
+  background: linear-gradient(90deg, transparent, #d5a64c 22%, #f0d28b 50%, #d5a64c 78%, transparent) !important;
+  box-shadow: 0 0 5px rgba(224,177,84,.42) !important;
+}
+.welcome-brand-ornament::after {
+  content: '' !important;
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  margin: -4px auto 0 !important;
+  transform: rotate(45deg) !important;
+  border: 1px solid #e4bf70 !important;
+  background: #170906 !important;
+}
+#welcome .welcome-enter-button { z-index: 8 !important; }
+
+#login .login-brand-overlay {
+  position: absolute !important;
+  z-index: 1 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 29.5% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 5% 12px !important;
+  text-align: center !important;
+  pointer-events: none !important;
+  background: radial-gradient(ellipse 77% 130% at 50% 44%, rgba(8,3,2,.995) 0%, rgba(8,3,2,.985) 61%, rgba(8,3,2,.78) 81%, rgba(8,3,2,0) 100%) !important;
+}
+#login .login-brand-overlay img {
+  display: block !important;
+  width: clamp(72px, 14%, 116px) !important;
+  height: auto !important;
+  max-height: 46% !important;
+  object-fit: contain !important;
+  margin: 0 0 2px !important;
+  filter: drop-shadow(0 2px 5px #000) !important;
+}
+#login .login-brand-overlay h1 {
+  margin: 0 !important;
+  color: #fff2dc !important;
+  font: 600 clamp(27px, 5.2vw, 50px)/.94 'Cormorant Garamond', Georgia, serif !important;
+  letter-spacing: -.75px !important;
+  white-space: nowrap !important;
+  text-shadow: 0 2px 5px #050201, 0 0 12px rgba(220,172,89,.22) !important;
+}
+#login .login-brand-overlay p {
+  margin: 5px 0 0 !important;
+  color: #e5c477 !important;
+  font: 600 clamp(11px, 2.8vw, 18px)/1.05 'Cormorant Garamond', Georgia, serif !important;
+  letter-spacing: .13em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 4px #050201 !important;
+}
+#login .login-brand-overlay span {
+  display: block !important;
+  width: 58% !important;
+  height: 1px !important;
+  margin-top: 9px !important;
+  background: linear-gradient(90deg, transparent, #d6a74e 20%, #f0d58e 50%, #d6a74e 80%, transparent) !important;
+}
+@media (max-width: 899px) {
+  .welcome-brand-overlay { height: 29% !important; width: 94% !important; padding-top: 3.5% !important; }
+  .welcome-brand-overlay img { width: clamp(56px, 17vw, 88px) !important; height: clamp(56px, 17vw, 88px) !important; }
+  .welcome-brand-overlay h1 { font-size: clamp(28px, 7.5vw, 49px) !important; letter-spacing: -.7px !important; }
+  .welcome-brand-overlay p { font-size: clamp(10px, 2.8vw, 16px) !important; }
+  .welcome-brand-ornament { width: 56% !important; margin-top: 8px !important; }
+  #login .login-brand-overlay { height: 29.5% !important; }
+  #login .login-brand-overlay img { width: clamp(68px, 19vw, 102px) !important; }
+  #login .login-brand-overlay h1 { font-size: clamp(26px, 7vw, 42px) !important; }
+}
+@media (max-width: 360px) {
+  .welcome-brand-overlay h1 { font-size: clamp(25px, 7vw, 29px) !important; }
+  #login .login-brand-overlay h1 { font-size: clamp(23px, 6.5vw, 27px) !important; }
 }
