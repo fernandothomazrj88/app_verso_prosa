@@ -7488,3 +7488,82 @@ img { max-width: 100%; }
   }
   #inicio .home-brand-lockup-subtitle { font-size: 14px !important; }
 }
+
+/* V67 — textos de boas-vindas inteiramente dentro dos círculos dos cards aprovados.
+   A área segura respeita a geometria diferente de cada arte, sem mexer nas imagens. */
+#inicio .home-hero-banner .mock-greeting-copy {
+  box-sizing: border-box !important;
+  top: 46.5% !important;
+  left: 18% !important;
+  width: 33.4% !important;
+  height: 52% !important;
+  max-height: 52% !important;
+  padding: 4px 3px !important;
+  margin: 0 !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  flex: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(1px, .45vw, 3px) !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  left: 42.7% !important;
+  right: auto !important;
+  width: 33.4% !important;
+  height: 52% !important;
+  max-height: 52% !important;
+  padding: 4px 3px !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  font: italic 700 clamp(13px, 3.7vw, 18.5px)/1.04 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.25px !important;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  text-wrap: balance !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  font: 600 clamp(10px, 2.7vw, 13.5px)/1.1 Georgia, "Times New Roman", serif !important;
+  text-align: center !important;
+  overflow-wrap: normal !important;
+}
+#inicio .home-hero-banner .home-hero-divider,
+#inicio .home-hero-banner .home-hero-flourish {
+  flex: 0 0 clamp(7px, 1.7vw, 9px) !important;
+  width: 68% !important;
+  height: clamp(7px, 1.7vw, 9px) !important;
+  min-height: clamp(7px, 1.7vw, 9px) !important;
+  margin: 0 auto !important;
+}
+@media (max-width: 380px) {
+  #inicio .home-hero-banner .mock-greeting-copy {
+    padding: 2px 1px !important;
+    gap: 1px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2 {
+    font-size: clamp(12px, 3.55vw, 13.5px) !important;
+    line-height: 1.02 !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p {
+    font-size: clamp(9px, 2.65vw, 10px) !important;
+    line-height: 1.08 !important;
+  }
+  #inicio .home-hero-banner .home-hero-divider,
+  #inicio .home-hero-banner .home-hero-flourish {
+    flex-basis: 7px !important;
+    height: 7px !important;
+    min-height: 7px !important;
+  }
+}

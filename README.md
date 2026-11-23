@@ -28,3 +28,10 @@ A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo n
 - O cache do aplicativo foi atualizado para v66 para evitar que o navegador reutilize a versão visual anterior.
 
 **Publicação:** envie a pasta `app_verso_prosa-main` completa para a raiz do repositório do GitHub Pages, mantendo todas as subpastas de `assets` e `modules`. Depois da publicação, faça uma atualização forçada com `Ctrl+Shift+R`. Caso o nome antigo continue apenas no atalho instalado como aplicativo do Windows, remova o atalho antigo e instale novamente pelo site atualizado.
+
+
+## Ajuste de boas-vindas nos dois perfis (v67)
+
+- O texto de Fernando e Letícia foi reposicionado e dimensionado para permanecer dentro da área interna do círculo bordô dos respectivos cards aprovados.
+- As duas artes, os módulos, o backend, as credenciais e as demais telas foram preservados.
+- O cache e a referência da folha de estilos foram atualizados para v67.
