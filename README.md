@@ -1,4 +1,4 @@
-# Versos & Narrativas — Mockup Fiel v4
+# Versos & Narrativas — Biblioteca Literária
 
 Pacote de frontend construído sobre o mockup enviado por Fernando. As imagens de cenário foram recortadas da prancha visual aprovada e incluídas localmente em `assets/scenes`; não há dependência de imagens externas.
 
@@ -19,3 +19,12 @@ Os cenários são recortes de ambiente da imagem de referência do usuário, usa
 
 ## Login v3 (11/11/2026)
 A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo não é mais usado como interface. Marca, campos, ícones, botão, ornamentos e moldura são componentes independentes; a imagem `assets/scenes/lamp-books.webp` é usada apenas como detalhe decorativo inferior. A autenticação e a chamada atual ao Apps Script foram preservadas.
+
+## Ajustes de identidade visual — Versos & Narrativas (v66)
+- As telas de abertura e login usam as artes atualizadas com o nome **Versos & Narrativas**.
+- A assinatura da Home foi refeita como texto real em tipografia serifada Georgia, mantendo a proporção clássica do nome e sem comprimir o título para caber.
+- Os cards aprovados de Fernando e Letícia são usados diretamente em `assets/profiles/home-card-fernando-approved.png` e `assets/profiles/home-card-leticia-approved.png`.
+- O card muda automaticamente conforme o perfil autenticado; os textos permanecem como conteúdo real do aplicativo.
+- O cache do aplicativo foi atualizado para v66 para evitar que o navegador reutilize a versão visual anterior.
+
+**Publicação:** envie a pasta `app_verso_prosa-main` completa para a raiz do repositório do GitHub Pages, mantendo todas as subpastas de `assets` e `modules`. Depois da publicação, faça uma atualização forçada com `Ctrl+Shift+R`. Caso o nome antigo continue apenas no atalho instalado como aplicativo do Windows, remova o atalho antigo e instale novamente pelo site atualizado.

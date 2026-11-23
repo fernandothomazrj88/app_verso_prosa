@@ -7327,3 +7327,164 @@ img { max-width: 100%; }
 #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy::before {
   inset: -18px -24px !important;
 }
+
+
+/* V65 — troca fiel da assinatura e uso das duas artes de card aprovadas.
+   Não altera a estrutura, os atalhos, a navegação ou os demais módulos. */
+#inicio .mock-greeting.home-hero-banner {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 1670 / 942 !important;
+  background: url("./assets/profiles/home-card-fernando-approved.png") center / 100% 100% no-repeat !important;
+}
+#inicio .mock-greeting.home-hero-banner.home-is-leticia {
+  background: url("./assets/profiles/home-card-leticia-approved.png") center / 100% 100% no-repeat !important;
+}
+#inicio .home-hero-banner .mock-user-avatar {
+  display: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy {
+  position: absolute !important;
+  top: 49% !important;
+  left: 11.5% !important;
+  width: 46% !important;
+  max-height: 86% !important;
+  flex: none !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 5px 8px !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(3px, 1vw, 7px) !important;
+  text-align: center !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  left: 35.5% !important;
+  right: auto !important;
+  width: 48% !important;
+  margin: 0 !important;
+  padding: 5px 8px !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy::before {
+  display: none !important;
+  content: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 {
+  width: 100% !important;
+  margin: 0 !important;
+  color: #fff4df !important;
+  font: italic 700 clamp(16px, 4.8vw, 23px)/1.06 Georgia, "Times New Roman", serif !important;
+  letter-spacing: -.35px !important;
+  text-align: center !important;
+  white-space: normal !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.78) !important;
+}
+#inicio .home-hero-banner .home-hero-divider,
+#inicio .home-hero-banner .home-hero-flourish {
+  flex: 0 0 14px !important;
+  width: 72% !important;
+  height: 14px !important;
+  min-height: 14px !important;
+  margin: 0 auto !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.7)) !important;
+}
+#inicio .home-hero-banner .home-hero-divider::after,
+#inicio .home-hero-banner .home-hero-flourish::before,
+#inicio .home-hero-banner .home-hero-flourish::after {
+  display: none !important;
+  content: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  color: #fff3df !important;
+  font: 600 clamp(11.5px, 3.35vw, 16px)/1.15 Georgia, "Times New Roman", serif !important;
+  text-align: center !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.82) !important;
+}
+@media (max-width: 360px) {
+  #inicio .home-hero-banner .mock-greeting-copy { left: 10.5% !important; width: 48% !important; }
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy { left: 34% !important; width: 50% !important; }
+  #inicio .home-hero-banner .mock-greeting-copy h2 { font-size: 15.5px !important; }
+  #inicio .home-hero-banner .mock-greeting-copy p { font-size: 11px !important; }
+}
+
+
+/* V66 — assinatura da Home: mantém a tipografia clássica e o tamanho do
+   nome anterior, sem reduzir as letras para acomodar “Narrativas”. */
+#inicio .home-brand-lockup {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  flex: 0 1 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 4px !important;
+  text-align: center !important;
+  overflow: visible !important;
+}
+#inicio .home-brand-lockup-emblem {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: clamp(144px, 47vw, 190px) !important;
+  height: auto !important;
+  max-height: 85px !important;
+  margin: 0 auto -3px !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.78)) drop-shadow(0 0 5px rgba(245,184,61,.28)) !important;
+}
+#inicio .home-brand-lockup-title {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff0cf !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(25px, 9.3vw, 38px) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: .94 !important;
+  letter-spacing: -.7px !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  text-shadow: 0 2px 5px #000, 0 0 10px rgba(0,0,0,.85) !important;
+}
+#inicio .home-brand-lockup-subtitle {
+  display: block !important;
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+  color: #f1c95f !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(14px, 4.6vw, 19px) !important;
+  font-weight: 600 !important;
+  line-height: 1.02 !important;
+  letter-spacing: .1px !important;
+  text-align: center !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,.9) !important;
+}
+@media (max-width: 320px) {
+  #inicio .home-brand-lockup-emblem {
+    width: 138px !important;
+    max-height: 72px !important;
+  }
+  #inicio .home-brand-lockup-title {
+    font-size: 24px !important;
+    letter-spacing: -.8px !important;
+  }
+  #inicio .home-brand-lockup-subtitle { font-size: 14px !important; }
+}
