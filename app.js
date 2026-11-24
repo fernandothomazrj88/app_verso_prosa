@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const PROFILE_BY_EMAIL = Object.freeze({
     'fernandothomaz.rj@gmail.com': Object.freeze({
       key: 'fernando', email: 'fernandothomaz.rj@gmail.com', name: 'Fernando',
-      profile: 'fernando', portrait: './assets/profiles/fernando-epoca.webp?v=44',
+      profile: 'fernando', portrait: './assets/profiles/fernando-approved-portrait.webp?v=70',
       portraitAlt: 'Retrato de época de Fernando',
-      headline: 'Seja bem-vindo,<br>caro leitor!',
+      headline: '<span>Seja bem-vindo,</span><br><span>caro leitor!</span>',
       message: 'Sua biblioteca o aguarda, senhor Fernando.'
     }),
     'leticiathomaz.rj@gmail.com': Object.freeze({
       key: 'leticia', email: 'leticiathomaz.rj@gmail.com', name: 'Letícia',
-      profile: 'leticia', portrait: './assets/profiles/lele-epoca.webp?v=44',
+      profile: 'leticia', portrait: './assets/profiles/leticia-approved-portrait.webp?v=70',
       portraitAlt: 'Retrato clássico de Letícia',
-      headline: 'Seja bem-vinda,<br>cara leitora!',
+      headline: '<span>Seja bem-vinda,</span><br><span>cara leitora!</span>',
       message: 'Sua biblioteca a aguarda, senhora Letícia.'
     })
   });

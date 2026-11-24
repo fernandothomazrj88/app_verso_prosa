@@ -1,11 +1,9 @@
-const CACHE_NAME = 'verso-prosa-home-v68';
+const CACHE_NAME = 'verso-prosa-home-v70';
 const APP_FILES = [
   './',
   './index.html',
-  './assets/profiles/lele-epoca.webp',
-  './assets/profiles/fernando-epoca.webp',
-  './assets/profiles/home-card-fernando-approved.png',
-  './assets/profiles/home-card-leticia-approved.png',
+  './assets/profiles/leticia-approved-portrait.webp?v=70',
+  './assets/profiles/fernando-approved-portrait.webp?v=70',
   './manifest.json',
   './assets/brand/verso-emblema.svg',
   './assets/brand/verso-prosa-logo.svg',
@@ -58,10 +56,10 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=home-v68',
+  './style.css?v=home-v70',
   './modules/estante/estante.css?v=58',
   './modules/adicionar-livro/adicionar-livro.css?v=60',
-  './app.js?v=modular-v60',
+  './app.js?v=modular-v70',
   './modules/module-loader.js?v=modular-v60',
   './modules/registry.json',
   './modules/home/index.html',

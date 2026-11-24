@@ -7489,120 +7489,45 @@ img { max-width: 100%; }
   #inicio .home-brand-lockup-subtitle { font-size: 14px !important; }
 }
 
-/* V67 — textos de boas-vindas inteiramente dentro dos círculos dos cards aprovados.
-   A área segura respeita a geometria diferente de cada arte, sem mexer nas imagens. */
-#inicio .home-hero-banner .mock-greeting-copy {
-  box-sizing: border-box !important;
-  top: 46.5% !important;
-  left: 18% !important;
-  width: 33.4% !important;
-  height: 52% !important;
-  max-height: 52% !important;
-  padding: 4px 3px !important;
-  margin: 0 !important;
-  transform: translateY(-50%) !important;
-  display: flex !important;
-  flex: none !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: clamp(1px, .45vw, 3px) !important;
-  overflow: hidden !important;
-  text-align: center !important;
-}
-#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
-  left: 42.7% !important;
-  right: auto !important;
-  width: 33.4% !important;
-  height: 52% !important;
-  max-height: 52% !important;
-  padding: 4px 3px !important;
-}
-#inicio .home-hero-banner .mock-greeting-copy h2 {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  font: italic 700 clamp(13px, 3.7vw, 18.5px)/1.04 Georgia, "Times New Roman", serif !important;
-  letter-spacing: -.25px !important;
-  text-align: center !important;
-  white-space: normal !important;
-  overflow-wrap: normal !important;
-  text-wrap: balance !important;
-}
-#inicio .home-hero-banner .mock-greeting-copy p {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  font: 600 clamp(10px, 2.7vw, 13.5px)/1.1 Georgia, "Times New Roman", serif !important;
-  text-align: center !important;
-  overflow-wrap: normal !important;
-}
-#inicio .home-hero-banner .home-hero-divider,
-#inicio .home-hero-banner .home-hero-flourish {
-  flex: 0 0 clamp(7px, 1.7vw, 9px) !important;
-  width: 68% !important;
-  height: clamp(7px, 1.7vw, 9px) !important;
-  min-height: clamp(7px, 1.7vw, 9px) !important;
-  margin: 0 auto !important;
-}
-@media (max-width: 380px) {
-  #inicio .home-hero-banner .mock-greeting-copy {
-    padding: 2px 1px !important;
-    gap: 1px !important;
-  }
-  #inicio .home-hero-banner .mock-greeting-copy h2 {
-    font-size: clamp(12px, 3.55vw, 13.5px) !important;
-    line-height: 1.02 !important;
-  }
-  #inicio .home-hero-banner .mock-greeting-copy p {
-    font-size: clamp(9px, 2.65vw, 10px) !important;
-    line-height: 1.08 !important;
-  }
-  #inicio .home-hero-banner .home-hero-divider,
-  #inicio .home-hero-banner .home-hero-flourish {
-    flex-basis: 7px !important;
-    height: 7px !important;
-    min-height: 7px !important;
-  }
-}
-
 /* ==========================================================
-   V68 — PADRÃO ÚNICO PARA AS BOAS-VINDAS DOS DOIS PERFIS
-   Mesma escala de texto, mesma hierarquia e dois ornamentos dourados.
-   A área é posicionada no centro do círculo de cada arte.
+   V69 — PADRÃO DEFINITIVO DOS DOIS CARDS DE BOAS-VINDAS
+   Uma única composição tipográfica para Fernando e Letícia.
+   As posições só acompanham o centro do medalhão em cada arte.
    ========================================================== */
-#inicio .home-hero-banner .mock-greeting-copy {
+#inicio .mock-greeting.home-hero-banner {
+  container-type: inline-size !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
   box-sizing: border-box !important;
   position: absolute !important;
-  top: 46.2% !important;
-  left: 15.95% !important;
+  top: 46% !important;
+  left: 14.45% !important;
   right: auto !important;
-  width: 37.5% !important;
+  bottom: auto !important;
+  width: 40.5% !important;
   height: auto !important;
   min-height: 0 !important;
-  max-height: 78% !important;
+  max-height: none !important;
   margin: 0 !important;
-  padding: 6px 4px !important;
+  padding: 3px 3px !important;
   transform: translateY(-50%) !important;
   display: flex !important;
   flex: none !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 4px !important;
+  gap: 3px !important;
   overflow: visible !important;
   text-align: center !important;
   z-index: 5 !important;
 }
 #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
-  left: 42.35% !important;
+  left: 39.95% !important;
   right: auto !important;
-  width: 37.5% !important;
-  top: 45.7% !important;
 }
-#inicio .home-hero-banner .mock-greeting-copy h2 {
+#inicio .home-hero-banner .mock-greeting-copy h2,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
   box-sizing: border-box !important;
   display: block !important;
   width: 100% !important;
@@ -7610,16 +7535,26 @@ img { max-width: 100%; }
   margin: 0 !important;
   padding: 0 !important;
   color: #fff4df !important;
-  font: italic 700 clamp(17px, 4.1vw, 20.5px)/1.06 Georgia, "Times New Roman", serif !important;
-  letter-spacing: -.3px !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(14.5px, 4.1vw, 21px) !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.25px !important;
   text-align: center !important;
   white-space: normal !important;
   overflow: visible !important;
   overflow-wrap: normal !important;
   text-wrap: balance !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,.82) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.84) !important;
 }
-#inicio .home-hero-banner .mock-greeting-copy p {
+#inicio .home-hero-banner .mock-greeting-copy h2 > span,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 > span {
+  display: block !important;
+  white-space: nowrap !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
   box-sizing: border-box !important;
   display: block !important;
   width: 100% !important;
@@ -7627,43 +7562,273 @@ img { max-width: 100%; }
   margin: 0 !important;
   padding: 0 !important;
   color: #fff3df !important;
-  font: 600 clamp(12px, 3vw, 14px)/1.13 Georgia, "Times New Roman", serif !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(11px, 3.15vw, 15.5px) !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  line-height: 1.14 !important;
   text-align: center !important;
+  white-space: normal !important;
   overflow-wrap: normal !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,.85) !important;
+  text-wrap: balance !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.86) !important;
 }
 #inicio .home-hero-banner .home-hero-divider,
-#inicio .home-hero-banner .home-hero-flourish {
-  display: block !important;
+#inicio .home-hero-banner .home-hero-flourish,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish {
   box-sizing: border-box !important;
-  flex: 0 0 15px !important;
-  width: 76% !important;
-  height: 15px !important;
-  min-height: 15px !important;
-  max-height: 15px !important;
+  display: block !important;
+  flex: 0 0 18px !important;
+  width: 88% !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
   margin: 1px auto !important;
-  opacity: .98 !important;
+  padding: 0 !important;
+  opacity: 1 !important;
   background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.8)) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.84)) !important;
+}
+#inicio .home-hero-banner .home-hero-divider::before,
+#inicio .home-hero-banner .home-hero-divider::after,
+#inicio .home-hero-banner .home-hero-flourish::before,
+#inicio .home-hero-banner .home-hero-flourish::after,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider::before,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider::after,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish::before,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish::after {
+  content: none !important;
+  display: none !important;
 }
 @media (max-width: 380px) {
-  #inicio .home-hero-banner .mock-greeting-copy {
-    gap: 3px !important;
-    padding: 5px 3px !important;
-  }
-  #inicio .home-hero-banner .mock-greeting-copy h2 {
-    font-size: clamp(15px, 4.2vw, 17px) !important;
-    line-height: 1.04 !important;
-  }
-  #inicio .home-hero-banner .mock-greeting-copy p {
-    font-size: clamp(11px, 3.05vw, 12.5px) !important;
-    line-height: 1.1 !important;
+  #inicio .home-hero-banner .mock-greeting-copy,
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+    gap: 2px !important;
+    padding: 2px !important;
   }
   #inicio .home-hero-banner .home-hero-divider,
-  #inicio .home-hero-banner .home-hero-flourish {
-    flex-basis: 12px !important;
-    height: 12px !important;
-    min-height: 12px !important;
-    max-height: 12px !important;
+  #inicio .home-hero-banner .home-hero-flourish,
+  #inicio .home-hero-banner.home-is-leticia .home-hero-divider,
+  #inicio .home-hero-banner.home-is-leticia .home-hero-flourish {
+    flex-basis: 15px !important;
+    height: 15px !important;
+    min-height: 15px !important;
+    max-height: 15px !important;
+  }
+}
+
+
+/* ==========================================================
+   V70 — HOME: RETIRA OS MEDALHÕES BORDÔ DOS CARDS
+   O texto recebe somente sombra tipográfica suave; as duas contas
+   compartilham fonte, escala, ornamentos e espaçamento.
+   Os retratos são recortes das artes aprovadas, sem o círculo.
+   ========================================================== */
+#inicio .mock-greeting.home-hero-banner,
+#inicio .mock-greeting.home-hero-banner.home-is-leticia {
+  position: relative !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 1670 / 942 !important;
+  overflow: hidden !important;
+  border: 1.5px solid #d99a28 !important;
+  border-radius: clamp(10px, 3.5vw, 17px) !important;
+  background:
+    linear-gradient(90deg, rgba(17, 5, 2, .20), rgba(17, 5, 2, .12)),
+    url("./assets/scenes/home-header-library.webp") center / 100% 100% no-repeat !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 220, 132, .25), 0 3px 8px rgba(0, 0, 0, .66) !important;
+}
+
+/* Character on the right for Fernando. */
+#inicio .home-hero-banner .mock-user-avatar,
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  display: block !important;
+  width: 55% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#inicio .home-hero-banner .mock-user-avatar::before,
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar::before {
+  content: none !important;
+  display: none !important;
+}
+#inicio .home-hero-banner .mock-user-avatar img,
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 8% !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 12%, #000 34%) !important;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 12%, #000 34%) !important;
+  filter: drop-shadow(-4px 0 8px rgba(0,0,0,.56)) !important;
+}
+
+/* The same greeting block, mirrored to the right for Leticia. */
+#inicio .home-hero-banner .mock-greeting-copy,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  z-index: 4 !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 4% !important;
+  display: flex !important;
+  flex: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 47% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 5px 7px !important;
+  gap: clamp(3px, 1vw, 7px) !important;
+  overflow: visible !important;
+  transform: translateY(-50%) !important;
+  text-align: center !important;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.88)) !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+  right: 4% !important;
+  left: auto !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy::before,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy::before {
+  content: none !important;
+  display: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff4df !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(15px, 4.6vw, 25px) !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.35px !important;
+  text-align: center !important;
+  white-space: normal !important;
+  text-wrap: balance !important;
+  text-shadow: 0 2px 3px rgba(0,0,0,.98), 0 0 8px rgba(0,0,0,.92), 0 0 15px rgba(0,0,0,.72) !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 br,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 br {
+  display: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy h2 span,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 span {
+  display: block !important;
+  white-space: nowrap !important;
+}
+#inicio .home-hero-banner .home-hero-divider,
+#inicio .home-hero-banner .home-hero-flourish,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish {
+  display: block !important;
+  box-sizing: border-box !important;
+  flex: 0 0 16px !important;
+  width: 78% !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+  background: url("./assets/ornaments/home-divider-ornate.svg") center / 100% 100% no-repeat !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.9)) !important;
+}
+#inicio .home-hero-banner .home-hero-divider::before,
+#inicio .home-hero-banner .home-hero-divider::after,
+#inicio .home-hero-banner .home-hero-flourish::before,
+#inicio .home-hero-banner .home-hero-flourish::after,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider::before,
+#inicio .home-hero-banner.home-is-leticia .home-hero-divider::after,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish::before,
+#inicio .home-hero-banner.home-is-leticia .home-hero-flourish::after {
+  content: none !important;
+  display: none !important;
+}
+#inicio .home-hero-banner .mock-greeting-copy p,
+#inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff3df !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(12px, 3.35vw, 17px) !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  line-height: 1.16 !important;
+  text-align: center !important;
+  white-space: normal !important;
+  text-wrap: balance !important;
+  text-shadow: 0 2px 3px rgba(0,0,0,.98), 0 0 8px rgba(0,0,0,.92), 0 0 15px rgba(0,0,0,.72) !important;
+}
+
+/* Mirror the portrait and its soft edge into the text side for Leticia. */
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar {
+  right: auto !important;
+  left: 0 !important;
+}
+#inicio .home-hero-banner.home-is-leticia .mock-user-avatar img {
+  object-position: center 8% !important;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.35) 12%, #000 34%) !important;
+  mask-image: linear-gradient(270deg, transparent 0%, rgba(0,0,0,.35) 12%, #000 34%) !important;
+  filter: drop-shadow(4px 0 8px rgba(0,0,0,.56)) !important;
+}
+
+@media (max-width: 380px) {
+  #inicio .home-hero-banner .mock-greeting-copy,
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy {
+    gap: 2px !important;
+    padding: 3px 4px !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy h2,
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy h2 {
+    font-size: clamp(15px, 4.9vw, 19px) !important;
+  }
+  #inicio .home-hero-banner .mock-greeting-copy p,
+  #inicio .home-hero-banner.home-is-leticia .mock-greeting-copy p {
+    font-size: clamp(12px, 3.35vw, 13px) !important;
+  }
+  #inicio .home-hero-banner .home-hero-divider,
+  #inicio .home-hero-banner .home-hero-flourish,
+  #inicio .home-hero-banner.home-is-leticia .home-hero-divider,
+  #inicio .home-hero-banner.home-is-leticia .home-hero-flourish {
+    flex-basis: 13px !important;
+    height: 13px !important;
+    min-height: 13px !important;
+    max-height: 13px !important;
   }
 }
