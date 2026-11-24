@@ -7832,3 +7832,29 @@ img { max-width: 100%; }
     max-height: 13px !important;
   }
 }
+
+
+/* ==========================================================
+   V71 — CABEÇALHOS MOBILE: ESTANTES E LUMINÁRIAS MAIS VISÍVEIS
+   Enquadramento especial para telas estreitas; desktop preservado.
+   ========================================================== */
+@media (max-width: 600px) {
+  #inicio .mock-home-header::before {
+    background-image: url("./assets/scenes/home-header-library-mobile.webp") !important;
+    background-position: center center !important;
+    background-size: 100% 100% !important;
+  }
+  #inicio .mock-home-header {
+    background-image: url("./assets/scenes/home-header-library-mobile.webp") !important;
+    background-position: center center !important;
+    background-size: 100% 100% !important;
+  }
+  #inicio .home-header-lamp {
+    top: 3px !important;
+    width: clamp(24px, 8vw, 34px) !important;
+    height: clamp(34px, 12vw, 48px) !important;
+    opacity: 1 !important;
+  }
+  #inicio .home-header-lamp-left { left: 16% !important; }
+  #inicio .home-header-lamp-right { right: 16% !important; }
+}
