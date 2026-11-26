@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-home-v71';
+const CACHE_NAME = 'verso-prosa-home-v72';
 const APP_FILES = [
   './',
   './index.html',
@@ -58,10 +58,11 @@ const APP_FILES = [
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
   './style.css?v=home-v71',
+  './modules/descobrir/descobrir.css?v=72',
   './modules/estante/estante.css?v=59',
   './modules/adicionar-livro/adicionar-livro.css?v=61',
-  './app.js?v=modular-v70',
-  './modules/module-loader.js?v=modular-v60',
+  './app.js?v=modular-v72',
+  './modules/module-loader.js?v=modular-v72',
   './modules/registry.json',
   './modules/home/index.html',
   './modules/estante/index.html',

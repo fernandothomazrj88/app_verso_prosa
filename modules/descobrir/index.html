@@ -1,14 +1,101 @@
-<!-- Versos & Narrativas | Módulo: Descobrir | O conteúdo é montado pelo modules/module-loader.js -->
-<section id="descobrir" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">NOVAS PRATELEIRAS, NOVOS MUNDOS</p><h2>Descobrir</h2><p class="muted">Percorra caminhos literários e encontre autores para sua próxima leitura.</p></div>
-        <div class="discover-feature"><div class="discover-ornament">❦</div><div><span class="status-label">COLEÇÃO EM DESTAQUE</span><h3>As grandes almas da literatura russa</h3><p>Dostoiévski, Tolstói, Tchékhov, Turguêniev e outros autores que investigaram a consciência humana.</p></div></div>
-        <div class="section-heading"><div><p class="eyebrow">PERCURSO SUGERIDO</p><h3>Explore por coleção</h3></div></div>
-        <div class="collection-list">
-          <button class="collection-card" data-collection="Literatura russa"><span class="collection-mark">А</span><span><b>Literatura russa</b><small>Dostoiévski · Tolstói · Tchékhov</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Romance clássico"><span class="collection-mark">❧</span><span><b>Romance clássico</b><small>Austen · Brontë · Flaubert</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Filosofia e pensamento"><span class="collection-mark">Φ</span><span><b>Filosofia e pensamento</b><small>Ética · existência · condição humana</small></span><strong>→</strong></button>
-          <button class="collection-card" data-collection="Fantasia e mundos épicos"><span class="collection-mark">✧</span><span><b>Fantasia e mundos épicos</b><small>Tolkien · mitologia · mundos imaginários</small></span><strong>→</strong></button>
-        </div>
-        <p class="helper">As coleções são caminhos de exploração; o catálogo de recomendações será ampliado em uma etapa própria.</p>
-      </section>
+<!-- Versos & Narrativas | Módulo Descobrir | Conteúdo central do mockup aprovado -->
+<section id="descobrir" class="page discover-page" aria-label="Descobrir livros, autores e temas">
+  <header class="discover-module-header" aria-label="Descobrir">
+    <span class="discover-header-lamp discover-header-lamp-left" aria-hidden="true"></span>
+    <span class="discover-header-lamp discover-header-lamp-right" aria-hidden="true"></span>
+    <img class="discover-module-emblem" src="./assets/brand/verso-prosa-home-emblem.png" alt="" aria-hidden="true">
+    <h1>Descobrir</h1>
+    <span class="discover-module-divider" aria-hidden="true"></span>
+  </header>
+
+  <div class="discover-main-content">
+    <form class="discover-search-row" id="discoverSearchForm" role="search">
+      <div class="discover-search-box">
+        <button class="discover-search-submit" type="submit" aria-label="Pesquisar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        </button>
+        <input id="discoverSearchInput" type="search" placeholder="Buscar livros, autores ou temas..." aria-label="Buscar livros, autores ou temas">
+      </div>
+      <button class="discover-filter-toggle" id="discoverFilterToggle" type="button" aria-label="Abrir filtros" aria-expanded="false" title="Filtros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7Z"></path></svg>
+      </button>
+    </form>
+
+    <div class="discover-filter-panel" id="discoverFilterPanel" hidden>
+      <span class="discover-filter-label">Explore por tema</span>
+      <button type="button" data-discover-query="literatura clássica">Clássicos</button>
+      <button type="button" data-discover-query="literatura russa">Literatura russa</button>
+      <button type="button" data-discover-query="romance clássico">Romance</button>
+      <button type="button" data-discover-query="fantasia épica">Fantasia</button>
+      <button type="button" data-discover-query="filosofia">Filosofia</button>
+    </div>
+
+    <nav class="discover-shortcuts" aria-label="Categorias de descoberta">
+      <button type="button" class="discover-shortcut active" data-discover-view="explorar" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m15.5 8.5-2 5-5 2 2-5Z"></path></svg><span>Explorar</span>
+      </button>
+      <button type="button" class="discover-shortcut" data-discover-view="generos" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5c4-1 7 0 8 2v13c-2-2-5-3-8-2Zm16 0c-4-1-7 0-8 2v13c2-2 5-3 8-2Z"></path><path d="M6 8h3m-3 3h3m6-3h3m-3 3h3"></path></svg><span>Gêneros</span>
+      </button>
+      <button type="button" class="discover-shortcut" data-discover-view="autores" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"></circle><path d="M3 21c.5-4.5 3.5-7 9-7s8.5 2.5 9 7Z"></path></svg><span>Autores</span>
+      </button>
+      <button type="button" class="discover-shortcut" data-discover-view="listas" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.7 6.2L21 11l-6.3 2.7L12 20l-2.7-6.3L3 11l6.3-2.8Z"></path><path d="m19 2 .9 2.1L22 5l-2.1.9L19 8l-.9-2.1L16 5l2.1-.9Z"></path></svg><span>Listas</span>
+      </button>
+      <button type="button" class="discover-shortcut" data-discover-view="novidades" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.2 6.1L20 5l-3.1 5.8L23 13l-6.1 2.2L20 21l-5.8-3.1L12 24l-2.2-6.1L4 21l3.1-5.8L1 13l6.1-2.2L4 5l5.8 3.1Z"></path></svg><span>Novidades</span>
+      </button>
+    </nav>
+
+    <div class="discover-author-choices" id="discoverAuthorChoices" hidden aria-label="Escolha um autor">
+      <span>Autores em destaque</span>
+      <button type="button" data-discover-author-query="inauthor:Dostoevsky" data-author-name="Fiódor Dostoiévski">Dostoiévski</button>
+      <button type="button" data-discover-author-query="inauthor:Tolstoy" data-author-name="Liev Tolstói">Tolstói</button>
+      <button type="button" data-discover-author-query="inauthor:Austen" data-author-name="Jane Austen">Jane Austen</button>
+      <button type="button" data-discover-author-query="inauthor:Tolkien" data-author-name="J. R. R. Tolkien">J. R. R. Tolkien</button>
+    </div>
+
+    <section class="discover-section discover-suggestions" aria-labelledby="discoverSuggestionsTitle">
+      <div class="discover-section-heading">
+        <h2 id="discoverSuggestionsTitle"><span class="discover-heading-icon" aria-hidden="true">▤</span> <span id="discoverSuggestionsText">Sugestões para você</span></h2>
+        <button type="button" id="discoverSeeMore" class="discover-see-more">Ver mais <span aria-hidden="true">›</span></button>
+      </div>
+      <p class="discover-feedback" id="discoverFeedback" role="status" aria-live="polite"></p>
+      <div class="discover-book-grid" id="discoverBookGrid" aria-live="polite">
+        <div class="discover-loading"><span>✦</span> Preparando novas leituras...</div>
+      </div>
+    </section>
+
+    <section class="discover-section discover-featured-section" aria-labelledby="discoverFeaturedTitle">
+      <h2 class="discover-section-title"><span aria-hidden="true">♨</span> Em destaque</h2>
+      <button type="button" class="discover-featured-banner" data-discover-query="literatura russa clássica">
+        <span class="discover-featured-art" aria-hidden="true"></span>
+        <span class="discover-featured-copy">
+          <strong id="discoverFeaturedTitle">Grandes Clássicos<br>da Literatura Russa</strong>
+          <small>Dostoiévski · Tolstói · Tchékhov · Turguêniev</small>
+        </span>
+        <span class="discover-featured-action">Explorar <b aria-hidden="true">›</b></span>
+      </button>
+    </section>
+
+    <section class="discover-section discover-themes-section" id="discoverThemes" aria-labelledby="discoverThemesTitle">
+      <h2 class="discover-section-title"><span aria-hidden="true">▰</span> <span id="discoverThemesTitle">Por tema</span></h2>
+      <div class="discover-theme-grid">
+        <button type="button" class="discover-theme-card" data-discover-query="literatura clássica"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16M6 4v16m4-16v16m4-16v16m4-16v16M3 20h18"></path></svg><span>Clássicos</span></button>
+        <button type="button" class="discover-theme-card" data-discover-query="literatura cristã"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M5 8h14"></path></svg><span>Literatura<br>Cristã</span></button>
+        <button type="button" class="discover-theme-card" data-discover-query="filosofia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-5 0-8 3-8 7s3 7 8 7 8-3 8-7-3-7-8-7Z"></path><path d="M12 17v4M8 21h8"></path></svg><span>Filosofia</span></button>
+        <button type="button" class="discover-theme-card" data-discover-query="teologia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4 8c3-2 5-2 8 0 3-2 5-2 8 0v12c-3-2-5-2-8 0-3-2-5-2-8 0Z"></path></svg><span>Teologia</span></button>
+        <button type="button" class="discover-theme-card" data-discover-query="romance clássico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5-8.8 11-8.8 11s-8.8-6-8.8-11A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.2Z"></path></svg><span>Romance</span></button>
+      </div>
+    </section>
+  </div>
+
+  <nav class="mock-bottom-nav" aria-label="Navegação principal">
+    <button data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button class="active" data-page="descobrir" aria-current="page"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
+</section>

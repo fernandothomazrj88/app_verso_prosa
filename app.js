@@ -236,6 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (id === 'inicio') renderHome();
     if (id === 'estante') renderBooks();
+    if (id === 'descobrir') renderDiscover();
     if (id === 'anotacoes') renderNotes();
     if (id === 'calendario') renderGoal();
     return true;
@@ -1040,6 +1041,251 @@ document.addEventListener('DOMContentLoaded', async () => {
     $('#goalSaved').textContent = 'Planejamento carregado da sua conta.';
   }
   $('#saveGoal').addEventListener('click', saveGoal);
+
+  // Módulo Descobrir — recomendações, temas e pesquisa no Google Books.
+  const discoverSeeds = [
+    { titulo: 'Anna Kariênina', autor: 'Liev Tolstói', query: 'intitle:Anna Karenina inauthor:Tolstoy', theme: 'anna', genero: 'Romance clássico' },
+    { titulo: 'Os Demônios', autor: 'Fiódor Dostoiévski', query: 'intitle:The Demons inauthor:Dostoevsky', theme: 'demons', genero: 'Literatura russa' },
+    { titulo: 'Persuasão', autor: 'Jane Austen', query: 'intitle:Persuasion inauthor:Austen', theme: 'persuasion', genero: 'Romance clássico' },
+    { titulo: 'O Hobbit', autor: 'J. R. R. Tolkien', query: 'intitle:The Hobbit inauthor:Tolkien', theme: 'hobbit', genero: 'Fantasia' }
+  ];
+  const discoverState = { loaded: false, loading: false, requestId: 0, query: '', orderBy: 'relevance', startIndex: 0, books: [], mode: 'explorar' };
+
+  function updateDiscoverHeading(label) {
+    const heading = $('#discoverSuggestionsText');
+    if (heading) heading.textContent = label;
+  }
+
+  function mapGoogleBook(item, fallback = {}) {
+    const info = item?.volumeInfo || {};
+    const identifiers = Array.isArray(info.industryIdentifiers) ? info.industryIdentifiers : [];
+    const isbn = (identifiers.find(value => value.type === 'ISBN_13') || identifiers[0] || {}).identifier || '';
+    return {
+      titulo: String(info.title || fallback.titulo || 'Título não informado'),
+      autor: Array.isArray(info.authors) ? info.authors.join(', ') : String(fallback.autor || 'Autor não informado'),
+      genero: Array.isArray(info.categories) ? info.categories.join(', ') : String(fallback.genero || ''),
+      capa: coverFromGoogleBooks(info) || String(fallback.capa || ''),
+      rating: info.averageRating != null && Number.isFinite(Number(info.averageRating)) ? Number(info.averageRating) : null,
+      preview: String(info.previewLink || ''),
+      isbn,
+      theme: fallback.theme || 'classic',
+      publishedDate: String(info.publishedDate || '')
+    };
+  }
+
+  function renderDiscoverBooks(items, append = false) {
+    const target = $('#discoverBookGrid');
+    if (!target) return;
+    if (!append) discoverState.books = [];
+    const normalized = (items || []).map(item => item && item.volumeInfo ? mapGoogleBook(item) : item);
+    if (append) discoverState.books.push(...normalized);
+    else discoverState.books = normalized;
+
+    if (!discoverState.books.length) {
+      target.innerHTML = '<div class="discover-empty"><span>✧</span> Não encontramos livros com esses termos. Tente outro título, autor ou tema.</div>';
+      return;
+    }
+    target.innerHTML = discoverState.books.map((book, index) => {
+      const title = escapeHtml(book.titulo || 'Título não informado');
+      const author = escapeHtml(book.autor || 'Autor não informado');
+      const cover = safeImageUrl(book.capa);
+      const coverMarkup = cover ? `<img src="${escapeHtml(cover)}" alt="Capa de ${title}" loading="lazy" referrerpolicy="no-referrer">` : '';
+      const placeholderClass = cover ? '' : `is-placeholder theme-${escapeHtml(book.theme || 'classic')}`;
+      const rating = Number.isFinite(Number(book.rating)) && book.rating !== null
+        ? `<span class="discover-rating" aria-label="Avaliação ${Number(book.rating).toFixed(1)} de 5">${'★'.repeat(Math.max(0, Math.min(5, Math.round(Number(book.rating)))))}${'☆'.repeat(5 - Math.max(0, Math.min(5, Math.round(Number(book.rating)))))}</span>`
+        : '<span class="discover-rating" aria-hidden="true"></span>';
+      return `<article class="discover-book-card">
+        <button type="button" class="discover-book-cover ${placeholderClass}" data-discover-add="${index}" aria-label="Adicionar ${title} à estante">
+          ${coverMarkup}<span class="discover-cover-title">${title}</span><span class="discover-cover-author">${author}</span>
+        </button>
+        ${rating}
+        </article>`;
+    }).join('');
+  }
+
+  async function fetchDiscoverBooks(query, options = {}) {
+    const feedback = $('#discoverFeedback');
+    const target = $('#discoverBookGrid');
+    const append = Boolean(options.append);
+    const startIndex = append ? discoverState.startIndex : 0;
+    if (!query) return;
+    const requestId = ++discoverState.requestId;
+    discoverState.query = query;
+    discoverState.orderBy = options.orderBy || 'relevance';
+    if (!append) {
+      discoverState.startIndex = 0;
+      discoverState.books = [];
+      if (target) target.innerHTML = '<div class="discover-loading"><span>✦</span> Procurando novas leituras...</div>';
+      if (feedback) feedback.textContent = 'Consultando o catálogo de livros...';
+    }
+    const params = new URLSearchParams({ q: query, maxResults: '8', startIndex: String(startIndex), printType: 'books', langRestrict: 'pt', orderBy: discoverState.orderBy });
+    try {
+      const response = await fetch('https://www.googleapis.com/books/v1/volumes?' + params.toString(), {
+        method: 'GET', mode: 'cors', headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error('Catálogo indisponível (' + response.status + ').');
+      const data = await response.json();
+      if (requestId !== discoverState.requestId) return;
+      const items = Array.isArray(data.items) ? data.items : [];
+      const mapped = items.map(item => mapGoogleBook(item));
+      renderDiscoverBooks(mapped, append);
+      discoverState.startIndex = startIndex + items.length;
+      if (feedback) feedback.textContent = items.length ? `${data.totalItems || items.length} resultado(s) no catálogo.` : 'Nenhum resultado encontrado. Experimente outro termo.';
+    } catch (error) {
+      if (requestId !== discoverState.requestId) return;
+      console.warn('[Versos & Narrativas] Descobrir:', error);
+      if (!append && !discoverState.books.length && target) {
+        target.innerHTML = '<div class="discover-empty"><span>✧</span> Não foi possível consultar o catálogo agora. Tente novamente ou escolha um tema abaixo.</div>';
+      }
+      if (feedback) feedback.textContent = 'A pesquisa online está temporariamente indisponível.';
+    }
+  }
+
+  async function loadDiscoverSuggestions() {
+    const target = $('#discoverBookGrid');
+    const feedback = $('#discoverFeedback');
+    if (!target) return;
+    if (discoverState.loading) return;
+    discoverState.loading = true;
+    const requestId = ++discoverState.requestId;
+    discoverState.mode = 'explorar';
+    updateDiscoverHeading('Sugestões para você');
+    if (feedback) feedback.textContent = '';
+    // Primeiro apresenta os títulos escolhidos no mockup; as capas reais chegam do catálogo.
+    renderDiscoverBooks(discoverSeeds.map(seed => ({ ...seed, capa: '', rating: null })));
+    try {
+      const enriched = await Promise.all(discoverSeeds.map(async seed => {
+        try {
+          const params = new URLSearchParams({ q: seed.query, maxResults: '4', printType: 'books', langRestrict: 'pt' });
+          const response = await fetch('https://www.googleapis.com/books/v1/volumes?' + params.toString(), { headers: { Accept: 'application/json' } });
+          if (!response.ok) return { ...seed, capa: '', rating: null };
+          const data = await response.json();
+          const items = Array.isArray(data.items) ? data.items : [];
+          const normalized = items.map(item => mapGoogleBook(item, seed));
+          const exact = normalized.find(book => book.titulo.toLocaleLowerCase('pt-BR').includes(seed.titulo.toLocaleLowerCase('pt-BR').slice(0, 6))) || normalized[0];
+          return exact ? { ...seed, ...exact, titulo: seed.titulo, autor: seed.autor } : { ...seed, capa: '', rating: null };
+        } catch (_) { return { ...seed, capa: '', rating: null }; }
+      }));
+      if (requestId !== discoverState.requestId) return;
+      renderDiscoverBooks(enriched);
+      discoverState.query = '';
+      discoverState.startIndex = 0;
+      discoverState.loaded = true;
+    } finally {
+      discoverState.loading = false;
+    }
+  }
+
+  function renderDiscover() {
+    const input = $('#discoverSearchInput');
+    if (!discoverState.loaded && !discoverState.loading) loadDiscoverSuggestions();
+    if (input && discoverState.mode === 'explorar' && !discoverState.query) input.value = '';
+  }
+
+  function setDiscoverView(view) {
+    const buttons = $$('.discover-shortcut');
+    buttons.forEach(button => {
+      const active = button.dataset.discoverView === view;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    discoverState.mode = view;
+    const authorChoices = $('#discoverAuthorChoices');
+    if (authorChoices) authorChoices.hidden = view !== 'autores';
+    if (view === 'explorar') {
+      if ($('#discoverSearchInput')) $('#discoverSearchInput').value = '';
+      discoverState.loaded = true;
+      loadDiscoverSuggestions();
+      return;
+    }
+    if (view === 'generos') {
+      updateDiscoverHeading('Explore por gênero');
+      $('#discoverThemes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if ($('#discoverFeedback')) $('#discoverFeedback').textContent = 'Escolha um tema na seção abaixo para ver livros relacionados.';
+      return;
+    }
+    if (view === 'autores') {
+      updateDiscoverHeading('Escolha um autor');
+      if ($('#discoverFeedback')) $('#discoverFeedback').textContent = 'Selecione um nome para encontrar suas obras.';
+      return;
+    }
+    const views = {
+      listas: { title: 'Listas para explorar', query: 'subject:classics', orderBy: 'relevance' },
+      novidades: { title: 'Novidades para você', query: 'subject:fiction', orderBy: 'newest' }
+    };
+    const config = views[view];
+    if (config) {
+      updateDiscoverHeading(config.title);
+      fetchDiscoverBooks(config.query, { orderBy: config.orderBy });
+    }
+  }
+
+  function searchDiscover(query, heading = 'Resultados da busca', activeView = 'explorar') {
+    const term = String(query || '').trim();
+    if (!term) {
+      toast('Digite um livro, autor ou tema para pesquisar.');
+      $('#discoverSearchInput')?.focus();
+      return;
+    }
+    $$('.discover-shortcut').forEach(button => {
+      const active = button.dataset.discoverView === activeView;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    const authorChoices = $('#discoverAuthorChoices');
+    if (authorChoices) authorChoices.hidden = true;
+    discoverState.mode = 'search';
+    updateDiscoverHeading(heading);
+    fetchDiscoverBooks(term, { orderBy: 'relevance' });
+  }
+
+  $('#discoverSearchForm')?.addEventListener('submit', event => {
+    event.preventDefault();
+    searchDiscover($('#discoverSearchInput')?.value || '');
+  });
+  $('#discoverFilterToggle')?.addEventListener('click', () => {
+    const panel = $('#discoverFilterPanel');
+    if (!panel) return;
+    const expanded = $('#discoverFilterToggle').getAttribute('aria-expanded') === 'true';
+    $('#discoverFilterToggle').setAttribute('aria-expanded', String(!expanded));
+    panel.hidden = expanded;
+  });
+  $$('.discover-shortcut').forEach(button => button.addEventListener('click', () => setDiscoverView(button.dataset.discoverView)));
+  $$('[data-discover-author-query]').forEach(button => button.addEventListener('click', () => {
+    const author = button.dataset.authorName || 'autor selecionado';
+    searchDiscover(button.dataset.discoverAuthorQuery, 'Obras de ' + author, 'autores');
+  }));
+  $$('[data-discover-query]').forEach(button => button.addEventListener('click', () => {
+    const query = button.dataset.discoverQuery || '';
+    if ($('#discoverSearchInput')) $('#discoverSearchInput').value = query;
+    $('#discoverFilterPanel').hidden = true;
+    $('#discoverFilterToggle').setAttribute('aria-expanded', 'false');
+    const isTheme = Boolean(button.closest('.discover-theme-grid, .discover-filter-panel'));
+    searchDiscover(query, query.toLocaleLowerCase('pt-BR').includes('russa') ? 'Grandes clássicos da literatura russa' : 'Livros por tema', isTheme ? 'generos' : 'explorar');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }));
+  $('#discoverSeeMore')?.addEventListener('click', () => {
+    if (!discoverState.query) {
+      searchDiscover('subject:classics', 'Mais sugestões literárias');
+      return;
+    }
+    fetchDiscoverBooks(discoverState.query, { append: true, orderBy: discoverState.orderBy });
+  });
+  $('#discoverBookGrid')?.addEventListener('click', event => {
+    const button = event.target.closest('[data-discover-add]');
+    if (!button) return;
+    const book = discoverState.books[Number(button.dataset.discoverAdd)];
+    if (!book) return;
+    openPage('adicionar');
+    setAddBookMode('manual');
+    $('#addBookTitle').value = book.titulo || '';
+    $('#addBookAuthor').value = book.autor || '';
+    $('#addBookGenre').value = book.genero || '';
+    $('#addBookStatus').value = 'Quero ler';
+    $('#addBookCoverUrl').value = book.capa || '';
+    refreshAddBookCoverPreview();
+    toast('Confira os dados e salve o livro na sua estante.');
+  });
 
   $$('[data-collection]').forEach(button => button.addEventListener('click', () => {
     $('#buscarLivro').value = '';

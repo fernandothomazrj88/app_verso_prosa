@@ -11,7 +11,7 @@ Pacote de frontend construído sobre o mockup enviado por Fernando. As imagens d
 6. Aguarde o Pages publicar e atualize com Ctrl+Shift+R.
 
 ## Preservação funcional
-`app.js` foi mantido sem alterações; URL do Apps Script, fluxo de login, dados, formulários e sincronização permanecem como na versão funcional anterior. `sw.js`, manifest, ícones e CSS foram atualizados.
+`app.js` mantém a URL do Apps Script, o fluxo de login, os dados, os formulários e a sincronização existentes. As mudanças de cada etapa foram isoladas nos módulos e nos estilos correspondentes; `sw.js` atualiza o cache para distribuir os novos arquivos.
 
 ## Nota sobre a referência
 Os cenários são recortes de ambiente da imagem de referência do usuário, usados como fundos decorativos. Capas cadastradas e componentes interativos continuam sendo HTML real e clicável.
@@ -52,3 +52,15 @@ A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo n
 - Fernando e Letícia usam a mesma escala de fonte, alinhamento, espaçamento e ornamentos dourados; a composição é espelhada para manter a personagem no lado oposto ao texto.
 - Os retratos foram recortados das artes aprovadas para preservar as personagens originais sem o medalhão.
 - O cache do aplicativo foi atualizado para v70.
+
+
+## Módulo Descobrir (v72)
+
+- O cabeçalho usa a mesma biblioteca, emblema, luminárias e divisor de Minha Estante; somente o título muda para **Descobrir**.
+- O menu inferior é o mesmo menu clássico já aprovado: Início, Estante, Adicionar, Descobrir e Mais. Nenhuma cor ou ícone do menu foi redesenhado.
+- O conteúdo central segue o mockup: busca, filtro, atalhos Explorar/Gêneros/Autores/Listas/Novidades, sugestões de livros, faixa em destaque e atalhos por tema.
+- A pesquisa e as recomendações consultam o catálogo público Google Books. Quando uma capa ou avaliação não estiver disponível, o cartão usa um acabamento local sem inventar avaliação.
+- A ação em um livro abre Adicionar Livro com título, autor, gênero e capa preenchidos para conferência; nada é gravado automaticamente.
+- Nenhuma alteração foi feita no Apps Script, na planilha, nas credenciais ou nos dados já existentes.
+
+**Publicação v72:** envie a pasta `app_verso_prosa-main` completa para o repositório GitHub Pages e atualize com `Ctrl+Shift+R` após a publicação.

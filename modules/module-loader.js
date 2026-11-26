@@ -1,5 +1,5 @@
 /*
- * VERSOS & NARRATIVAS — MODULE LOADER V49
+ * VERSOS & NARRATIVAS — MODULE LOADER V72
  * Loads each screen from its own modules/<module>/index.html file.
  * The shared app shell, authentication and backend controller remain centralized.
  */

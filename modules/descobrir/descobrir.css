@@ -1,0 +1,223 @@
+/* V72 — Descobrir: mantém o cabeçalho e o menu aprovados; substitui somente o conteúdo central. */
+#app:has(#descobrir.active) > .topbar,
+#app:has(#descobrir.active) .library-sidebar,
+#app:has(#descobrir.active) > .bottom-nav { display:none !important; }
+#app:has(#descobrir.active) .workspace {
+  display:block !important; width:100% !important; min-height:100svh !important;
+  margin:0 !important; padding:0 !important; background:#100704 !important;
+}
+#app:has(#descobrir.active) main {
+  display:block !important; width:100% !important; max-width:520px !important; min-width:0 !important;
+  min-height:100svh !important; margin:0 auto !important; padding:0 !important;
+  background:linear-gradient(180deg,#100704 0%,#090403 58%,#160804 100%) !important;
+}
+#descobrir.discover-page {
+  display:flex !important; flex-direction:column !important; width:100% !important; max-width:520px !important;
+  min-height:100svh !important; margin:0 auto !important; padding:0 !important; overflow:visible !important;
+  background:radial-gradient(ellipse at 50% 34%,rgba(88,36,13,.18),transparent 58%),#100704 !important;
+  color:#f6e8ce !important;
+}
+/* Mesmo cabeçalho da Minha Estante e de Adicionar Livro. */
+#descobrir .discover-module-header {
+  position:relative !important; isolation:isolate !important; display:flex !important; flex:0 0 clamp(132px,20svh,150px) !important;
+  flex-direction:column !important; align-items:center !important; justify-content:flex-end !important;
+  width:100% !important; height:clamp(132px,20svh,150px) !important; min-height:clamp(132px,20svh,150px) !important;
+  max-height:150px !important; margin:0 !important; padding:4px 10px 12px !important; overflow:visible !important;
+  border:0 !important; border-bottom:1px solid rgba(226,171,60,.78) !important;
+  background:linear-gradient(90deg,rgba(5,2,1,.10),rgba(8,3,2,.20) 50%,rgba(5,2,1,.10)),
+    url("../../assets/scenes/home-header-library.webp") center 43%/cover no-repeat !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.62),inset 0 -1px 0 rgba(255,226,151,.18) !important;
+}
+#descobrir .discover-module-header::after {
+  content:"" !important; display:block !important; position:absolute !important; z-index:5 !important; left:50% !important;
+  bottom:-9px !important; width:min(86%,440px) !important; height:18px !important; transform:translateX(-50%) !important;
+  background:url("../../assets/ornaments/home-divider-ornate.svg") center/100% 100% no-repeat !important; pointer-events:none !important;
+}
+#descobrir .discover-header-lamp {
+  position:absolute !important; z-index:1 !important; top:2px !important; display:block !important;
+  width:clamp(18px,6.6vw,32px) !important; height:clamp(26px,9.2vw,44px) !important;
+  background:url("../../assets/ornaments/home-header-sconce.svg") center/contain no-repeat !important;
+  filter:drop-shadow(0 0 6px rgba(255,165,45,.48)) !important; opacity:.95 !important; pointer-events:none !important;
+}
+#descobrir .discover-header-lamp-left { left:5.5% !important; }
+#descobrir .discover-header-lamp-right { right:5.5% !important; transform:scaleX(-1) !important; }
+#descobrir .discover-module-emblem {
+  position:relative !important; z-index:3 !important; display:block !important; flex:0 0 76px !important;
+  width:min(46vw,150px) !important; height:76px !important; margin:0 auto !important;
+  object-fit:contain !important; object-position:center !important;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.78)) drop-shadow(0 0 5px rgba(245,184,61,.24)) !important;
+}
+#descobrir .discover-module-header h1 {
+  position:relative !important; z-index:2 !important; margin:-1px 0 0 !important; padding:0 !important;
+  color:#fff0cf !important; font:700 clamp(30px,7.2vw,36px)/.98 'Cormorant Garamond',Georgia,serif !important;
+  letter-spacing:.1px !important; text-align:center !important;
+  text-shadow:0 2px 5px #000,0 0 10px rgba(0,0,0,.85) !important;
+}
+@media(max-width:600px){
+  #descobrir .discover-module-header { background:linear-gradient(90deg,rgba(5,2,1,.08),rgba(8,3,2,.12) 50%,rgba(5,2,1,.08)),url("../../assets/scenes/home-header-library-mobile.webp") center center/100% 100% no-repeat !important; }
+  #descobrir .discover-header-lamp { top:3px !important; width:clamp(24px,8vw,34px) !important; height:clamp(34px,12vw,48px) !important; opacity:1 !important; }
+  #descobrir .discover-header-lamp-left { left:16% !important; }
+  #descobrir .discover-header-lamp-right { right:16% !important; }
+  #descobrir .discover-module-emblem { width:min(46vw,150px) !important; height:76px !important; flex-basis:76px !important; }
+}
+
+/* Área central — paleta e linguagem visual do restante do aplicativo. */
+#descobrir .discover-main-content {
+  display:flex !important; flex:1 0 auto !important; flex-direction:column !important; width:100% !important; min-width:0 !important;
+  padding:17px 14px 24px !important; background:radial-gradient(ellipse at 50% 0%,rgba(87,35,12,.14),transparent 54%) !important;
+}
+#descobrir .discover-search-row { display:grid !important; grid-template-columns:minmax(0,1fr) 44px !important; gap:9px !important; width:100% !important; margin:0 0 13px !important; }
+#descobrir .discover-search-box {
+  position:relative !important; display:flex !important; align-items:center !important; gap:9px !important; min-width:0 !important;
+  height:45px !important; padding:0 12px !important; border:1.5px solid #d6a51d !important; border-radius:24px !important;
+  background:linear-gradient(145deg,#251307,#0c0503) !important; box-shadow:inset 0 2px 5px #0009,0 3px 9px #0007 !important;
+}
+#descobrir .discover-search-submit { display:grid !important; place-items:center !important; flex:0 0 21px !important; width:21px !important; height:25px !important; padding:0 !important; border:0 !important; background:transparent !important; color:#edbd25 !important; }
+#descobrir .discover-search-submit svg { width:21px !important; height:21px !important; fill:none !important; stroke:currentColor !important; stroke-width:2 !important; stroke-linecap:round !important; stroke-linejoin:round !important; }
+#descobrir .discover-search-box input { width:100% !important; min-width:0 !important; height:100% !important; padding:0 !important; border:0 !important; outline:0 !important; background:transparent !important; color:#f7e8ca !important; font:12px 'Lora',Georgia,serif !important; box-shadow:none !important; }
+#descobrir .discover-search-box input::placeholder { color:#c8ad7e !important; opacity:1 !important; }
+#descobrir .discover-filter-toggle {
+  display:grid !important; place-items:center !important; width:44px !important; height:45px !important; padding:0 !important;
+  border:1.5px solid #e1ad16 !important; border-radius:13px !important; background:linear-gradient(145deg,#2c160b,#0b0503) !important;
+  color:#f2c423 !important; box-shadow:inset 0 1px #fff2,0 3px 9px #0008 !important;
+}
+#descobrir .discover-filter-toggle svg { width:23px !important; height:23px !important; fill:none !important; stroke:currentColor !important; stroke-width:2.2 !important; stroke-linecap:round !important; stroke-linejoin:round !important; }
+#descobrir .discover-filter-toggle[aria-expanded="true"] { background:linear-gradient(180deg,#9f1730,#5f1022) !important; color:#ffdf65 !important; }
+#descobrir .discover-filter-panel { display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:7px !important; margin:-3px 0 13px !important; padding:10px !important; border:1px solid rgba(218,169,74,.48) !important; border-radius:12px !important; background:linear-gradient(145deg,#2d170c,#120805) !important; }
+#descobrir .discover-filter-panel[hidden] { display:none !important; }
+#descobrir .discover-filter-label { width:100% !important; color:#e5bf65 !important; font:700 10px 'Lora',Georgia,serif !important; }
+#descobrir .discover-filter-panel button { min-height:29px !important; padding:5px 10px !important; border:1px solid #b8891d !important; border-radius:18px !important; background:#160b06 !important; color:#f0dfbe !important; font:10px 'Lora',Georgia,serif !important; }
+
+#descobrir .discover-shortcuts { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:8px !important; width:100% !important; margin:0 0 21px !important; }
+#descobrir .discover-shortcut {
+  display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:5px !important;
+  min-width:0 !important; min-height:88px !important; padding:8px 3px 7px !important; border:1.7px solid #d9a914 !important;
+  border-radius:17px !important; background:linear-gradient(145deg,#241309,#0c0503) !important; color:#f7ead4 !important;
+  font:clamp(10px,2.8vw,13px)/1.08 'Lora',Georgia,serif !important; text-align:center !important;
+  box-shadow:inset 0 1px #fff2,0 4px 10px #0008 !important;
+}
+#descobrir .discover-shortcut svg { display:block !important; width:34px !important; height:34px !important; fill:none !important; stroke:#ffcf16 !important; stroke-width:2 !important; stroke-linecap:round !important; stroke-linejoin:round !important; filter:drop-shadow(0 0 4px rgba(255,195,20,.35)) !important; }
+#descobrir .discover-shortcut.active { border-color:#ffdc45 !important; background:linear-gradient(180deg,#b31332,#720b25) !important; box-shadow:0 0 11px rgba(255,180,20,.47),inset 0 1px #fff5,0 4px 10px #0008 !important; }
+#descobrir .discover-shortcut.active svg { stroke:#ffdf39 !important; }
+#descobrir .discover-author-choices { display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:7px !important; margin:-7px 0 15px !important; padding:10px !important; border:1px solid rgba(218,169,74,.48) !important; border-radius:12px !important; background:linear-gradient(145deg,#2d170c,#120805) !important; }
+#descobrir .discover-author-choices[hidden] { display:none !important; }
+#descobrir .discover-author-choices > span { width:100% !important; color:#e5bf65 !important; font:700 10px 'Lora',Georgia,serif !important; }
+#descobrir .discover-author-choices button { min-height:30px !important; padding:5px 10px !important; border:1px solid #b8891d !important; border-radius:18px !important; background:#160b06 !important; color:#f0dfbe !important; font:10px 'Lora',Georgia,serif !important; }
+
+#descobrir .discover-section { width:100% !important; min-width:0 !important; margin:0 0 20px !important; }
+#descobrir .discover-section-heading { display:flex !important; align-items:center !important; justify-content:space-between !important; gap:9px !important; margin:0 0 12px !important; }
+#descobrir .discover-section-heading h2,
+#descobrir .discover-section-title { margin:0 !important; color:#fff0d4 !important; font:700 clamp(19px,5.2vw,24px)/1.05 'Cormorant Garamond',Georgia,serif !important; text-shadow:0 2px 4px #0009 !important; }
+#descobrir .discover-heading-icon { display:inline-block !important; margin-right:5px !important; color:#ffd324 !important; font:700 25px/1 Georgia,serif !important; vertical-align:-2px !important; text-shadow:0 0 7px #d58e17 !important; }
+#descobrir .discover-see-more { display:flex !important; align-items:center !important; gap:4px !important; flex:0 0 auto !important; padding:3px 0 3px 5px !important; border:0 !important; background:transparent !important; color:#f5e9d2 !important; font:12px 'Lora',Georgia,serif !important; white-space:nowrap !important; }
+#descobrir .discover-see-more span { color:#ffd322 !important; font:28px/15px Georgia,serif !important; }
+#descobrir .discover-feedback { min-height:0 !important; margin:0 !important; color:#d9c49f !important; font:10px/1.35 'Lora',Georgia,serif !important; }
+#descobrir .discover-feedback:empty { display:none !important; }
+#descobrir .discover-book-grid { display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:9px !important; width:100% !important; align-items:start !important; }
+#descobrir .discover-book-card { min-width:0 !important; display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:5px !important; }
+#descobrir .discover-book-cover {
+  position:relative !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:space-between !important;
+  width:100% !important; aspect-ratio:.66 !important; min-height:126px !important; overflow:hidden !important; padding:10px 6px 8px !important;
+  border:2px solid #e3ad18 !important; border-radius:13px !important; background:#241309 !important; color:#fff0d4 !important;
+  box-shadow:0 4px 11px #0009,inset 0 0 0 2px rgba(255,220,95,.12) !important; text-align:center !important;
+}
+#descobrir .discover-book-cover::before { content:"" !important; position:absolute !important; inset:5px !important; border:1px solid rgba(242,206,112,.35) !important; border-radius:8px !important; pointer-events:none !important; }
+#descobrir .discover-book-cover img { position:absolute !important; inset:0 !important; z-index:0 !important; width:100% !important; height:100% !important; object-fit:cover !important; display:block !important; }
+#descobrir .discover-book-cover::after { content:"" !important; position:absolute !important; z-index:1 !important; inset:0 !important; background:linear-gradient(180deg,rgba(5,3,2,.65),rgba(5,3,2,.04) 44%,rgba(5,3,2,.70)) !important; pointer-events:none !important; }
+#descobrir .discover-book-cover.is-placeholder::after { display:none !important; }
+#descobrir .discover-book-cover.is-placeholder.theme-anna { background:radial-gradient(ellipse at 50% 68%,#9e8971 0,#34302d 36%,#111316 80%) !important; }
+#descobrir .discover-book-cover.is-placeholder.theme-demons { background:radial-gradient(ellipse at 50% 66%,#ed7b24 0,#9d271a 34%,#310e0d 82%) !important; }
+#descobrir .discover-book-cover.is-placeholder.theme-persuasion { background:radial-gradient(ellipse at 55% 66%,#8ba5ac 0,#354e59 39%,#10191e 82%) !important; }
+#descobrir .discover-book-cover.is-placeholder.theme-hobbit { background:radial-gradient(ellipse at 50% 68%,#7c9a59 0,#26402d 42%,#081410 85%) !important; }
+#descobrir .discover-cover-title,
+#descobrir .discover-cover-author { position:relative !important; z-index:2 !important; display:block !important; width:100% !important; text-shadow:0 2px 4px #000,0 1px 8px #000 !important; }
+#descobrir .discover-cover-title { font:700 clamp(11px,3.15vw,17px)/1.02 'Cormorant Garamond',Georgia,serif !important; }
+#descobrir .discover-cover-author { font:clamp(8px,2.25vw,11px)/1.08 'Lora',Georgia,serif !important; }
+#descobrir .discover-book-card .discover-rating { min-height:16px !important; text-align:center !important; color:#ffcc18 !important; font:15px/1 Arial,sans-serif !important; letter-spacing:-1px !important; text-shadow:0 1px 4px #a65c00 !important; }
+#descobrir .discover-book-card .discover-rating:empty { display:none !important; }
+#descobrir .discover-book-add { align-self:center !important; padding:4px 7px !important; border:1px solid rgba(222,174,54,.65) !important; border-radius:14px !important; background:rgba(92,13,30,.88) !important; color:#ffe6b1 !important; font:9px 'Lora',Georgia,serif !important; }
+#descobrir .discover-loading,
+#descobrir .discover-empty { grid-column:1/-1 !important; display:flex !important; align-items:center !important; justify-content:center !important; gap:9px !important; min-height:120px !important; padding:15px !important; border:1px solid rgba(218,169,74,.35) !important; background:linear-gradient(145deg,#28150b,#0e0604) !important; color:#e8d5b3 !important; font:12px 'Lora',Georgia,serif !important; text-align:center !important; }
+#descobrir .discover-loading span { color:#f8ce35 !important; font-size:22px !important; }
+
+#descobrir .discover-featured-section { margin-bottom:20px !important; }
+#descobrir .discover-section-title { display:flex !important; align-items:center !important; gap:8px !important; margin-bottom:11px !important; }
+#descobrir .discover-section-title > span { color:#ffca1e !important; font:700 28px/1 Georgia,serif !important; text-shadow:0 0 7px rgba(255,176,13,.38) !important; }
+#descobrir .discover-featured-banner {
+  position:relative !important; display:grid !important; grid-template-columns:30% minmax(0,1fr) auto !important; align-items:center !important; gap:10px !important;
+  width:100% !important; min-height:116px !important; overflow:hidden !important; padding:0 10px 0 0 !important;
+  border:1.7px solid #dca91b !important; border-radius:16px !important;
+  background:linear-gradient(90deg,rgba(27,10,6,.16),rgba(22,8,5,.97) 31%,rgba(50,13,10,.95)) !important;
+  color:#fff0d4 !important; box-shadow:0 5px 13px #0009,inset 0 1px #fff2 !important; text-align:left !important;
+}
+#descobrir .discover-featured-art { display:block !important; align-self:stretch !important; min-height:116px !important; border-right:1px solid rgba(226,177,70,.62) !important; background:linear-gradient(90deg,rgba(9,4,2,.02),rgba(9,4,2,.12)),url("../../assets/scenes/entrance-room.webp") 50% 55%/cover no-repeat !important; }
+#descobrir .discover-featured-copy { display:block !important; min-width:0 !important; padding:8px 0 !important; }
+#descobrir .discover-featured-copy strong { display:block !important; color:#fff0d2 !important; font:700 clamp(16px,4.5vw,22px)/1.05 'Cormorant Garamond',Georgia,serif !important; }
+#descobrir .discover-featured-copy small { display:block !important; margin-top:8px !important; color:#e0c89d !important; font:clamp(8px,2.3vw,10px)/1.25 'Lora',Georgia,serif !important; }
+#descobrir .discover-featured-action { display:flex !important; align-items:center !important; gap:3px !important; white-space:nowrap !important; padding:8px 10px !important; border:1.5px solid #edbb23 !important; border-radius:22px !important; background:linear-gradient(180deg,#a81932,#620d22) !important; color:#fff0d4 !important; font:clamp(9px,2.6vw,12px) 'Lora',Georgia,serif !important; box-shadow:0 2px 6px #0008 !important; }
+#descobrir .discover-featured-action b { color:#ffdf39 !important; font:22px/10px Georgia,serif !important; }
+
+#descobrir .discover-theme-grid { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:8px !important; }
+#descobrir .discover-theme-card {
+  display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:8px !important;
+  min-width:0 !important; min-height:91px !important; padding:9px 4px !important; border:1.6px solid #d9a914 !important; border-radius:15px !important;
+  background:linear-gradient(145deg,#241309,#0c0503) !important; color:#f7ead4 !important;
+  box-shadow:inset 0 1px #fff2,0 4px 10px #0008 !important; font:clamp(9px,2.7vw,12px)/1.1 'Lora',Georgia,serif !important; text-align:center !important;
+}
+#descobrir .discover-theme-card svg { width:31px !important; height:31px !important; fill:none !important; stroke:#ffcf16 !important; stroke-width:2 !important; stroke-linecap:round !important; stroke-linejoin:round !important; filter:drop-shadow(0 0 4px rgba(255,195,20,.3)) !important; }
+
+/* Menu inferior idêntico ao da Estante: só Descobrir fica selecionado. */
+#descobrir .mock-bottom-nav {
+  position:sticky !important; z-index:30 !important; bottom:0 !important; left:auto !important; right:auto !important;
+  display:grid !important; flex:0 0 clamp(37px,12.8vw,66px) !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  align-items:center !important; width:100% !important; height:clamp(37px,12.8vw,66px) !important; margin:auto 0 0 !important;
+  padding:2px 4px max(2px,env(safe-area-inset-bottom)) !important; border:1px solid rgba(207,133,35,.75) !important;
+  border-bottom:0 !important; border-radius:18px 18px 0 0 !important;
+  background:linear-gradient(180deg,#3f0a08 0%,#180302 72%,#080201 100%) !important;
+  box-shadow:0 -3px 10px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,212,112,.25) !important;
+}
+#descobrir .mock-bottom-nav button {
+  display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:1px !important;
+  min-width:0 !important; height:100% !important; padding:0 !important; border:0 !important; background:transparent !important;
+  color:#eadcc5 !important; font:clamp(8px,2.9vw,13px)/1 Georgia,'Times New Roman',serif !important; cursor:pointer !important;
+}
+#descobrir .mock-bottom-nav button .home-nav-icon {
+  display:block !important; width:clamp(24px,7vw,32px) !important; height:clamp(24px,7vw,32px) !important; object-fit:contain !important;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.82)) drop-shadow(0 0 3px rgba(255,190,50,.34)) !important;
+}
+#descobrir .mock-bottom-nav button.active { color:#ffce45 !important; text-shadow:0 0 6px rgba(255,190,40,.38) !important; }
+#descobrir .mock-bottom-nav button.active .home-nav-icon { filter:drop-shadow(0 0 4px rgba(255,194,52,.8)) drop-shadow(0 1px 2px #000) !important; }
+#descobrir .mock-bottom-nav .mock-add-main {
+  display:flex !important; align-items:center !important; justify-content:center !important; width:clamp(48px,13vw,58px) !important;
+  height:clamp(48px,13vw,58px) !important; justify-self:center !important; align-self:center !important; border:0 !important;
+  border-radius:50% !important; background:transparent !important; box-shadow:0 0 8px rgba(244,184,54,.38) !important;
+}
+#descobrir .mock-bottom-nav .mock-add-main .home-nav-plus-icon { display:block !important; width:100% !important; height:100% !important; object-fit:contain !important; filter:drop-shadow(0 1px 2px rgba(0,0,0,.78)) drop-shadow(0 0 4px rgba(255,194,52,.4)) !important; }
+@media(max-width:420px){
+  #descobrir .discover-main-content { padding:14px 10px 18px !important; }
+  #descobrir .discover-search-row { grid-template-columns:minmax(0,1fr) 40px !important; gap:7px !important; }
+  #descobrir .discover-filter-toggle { width:40px !important; }
+  #descobrir .discover-shortcuts { gap:5px !important; margin-bottom:18px !important; }
+  #descobrir .discover-shortcut { min-height:78px !important; border-radius:13px !important; font-size:9px !important; }
+  #descobrir .discover-shortcut svg { width:29px !important; height:29px !important; }
+  #descobrir .discover-book-grid { display:flex !important; gap:8px !important; overflow-x:auto !important; padding:0 1px 7px !important; scroll-snap-type:x mandatory !important; scrollbar-width:thin !important; scrollbar-color:#9e731a #170b05 !important; }
+  #descobrir .discover-book-card { flex:0 0 29% !important; scroll-snap-align:start !important; }
+  #descobrir .discover-book-cover { min-height:116px !important; border-radius:10px !important; padding:8px 4px 7px !important; }
+  #descobrir .discover-cover-title { font-size:11px !important; }
+  #descobrir .discover-cover-author { font-size:8px !important; }
+  #descobrir .discover-book-card .discover-rating { font-size:13px !important; }
+  #descobrir .discover-featured-banner { grid-template-columns:27% minmax(0,1fr) auto !important; gap:7px !important; min-height:102px !important; padding-right:6px !important; }
+  #descobrir .discover-featured-art { min-height:102px !important; }
+  #descobrir .discover-featured-copy strong { font-size:15px !important; }
+  #descobrir .discover-featured-copy small { font-size:7px !important; margin-top:5px !important; }
+  #descobrir .discover-featured-action { padding:6px 7px !important; font-size:8px !important; }
+  #descobrir .discover-theme-grid { gap:5px !important; }
+  #descobrir .discover-theme-card { min-height:82px !important; border-radius:12px !important; font-size:8px !important; }
+  #descobrir .discover-theme-card svg { width:27px !important; height:27px !important; }
+  #descobrir .mock-bottom-nav button .home-nav-icon { width:25px !important; height:25px !important; }
+  #descobrir .mock-bottom-nav .mock-add-main { width:52px !important; height:52px !important; }
+}
+@media(min-width:601px){
+  #app:has(#descobrir.active) main { padding:0 0 112px !important; }
+  #descobrir .discover-main-content { padding:22px 18px 28px !important; }
+}
