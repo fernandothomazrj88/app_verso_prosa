@@ -3393,8 +3393,8 @@ img { max-width: 100%; }
 /* v29 — abertura mobile realmente em tela cheia e sem rolagem.
    A arte vertical preenche o viewport; o desktop permanece intocado. */
 @media (max-width: 899px) {
-  html:has(#welcome:not([hidden])),
-  body:has(#welcome:not([hidden])) {
+  html:has(#welcome.welcome-screen:not(.hidden)),
+  body:has(#welcome.welcome-screen:not(.hidden)) {
     width: 100% !important;
     height: 100% !important;
     min-height: 100% !important;
@@ -7857,4 +7857,13 @@ img { max-width: 100%; }
   }
   #inicio .home-header-lamp-left { left: 16% !important; }
   #inicio .home-header-lamp-right { right: 16% !important; }
+}
+
+
+/* V75 — A tela de abertura usa a classe .hidden; não deve continuar
+   ocupando o viewport depois que a biblioteca é aberta. */
+#welcome.welcome-screen.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

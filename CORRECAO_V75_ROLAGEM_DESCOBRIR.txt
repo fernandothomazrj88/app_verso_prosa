@@ -1,0 +1,9 @@
+VERSOS & NARRATIVAS — V75
+
+Correção do módulo Descobrir para telas móveis.
+
+A tela agora usa três faixas independentes: cabeçalho fixo, área central com rolagem vertical própria (overflow-y:auto) e menu inferior fixo. A rolagem não depende do body nem do viewport.
+
+Também foi corrigido o seletor antigo da tela de abertura, que considerava a tela visível mesmo depois de receber a classe .hidden.
+
+Publicação: substituir a pasta app_verso_prosa-main no repositório GitHub pelo conteúdo desta pasta. Não alterar a planilha nem o Apps Script. O cache do PWA foi atualizado para v75.

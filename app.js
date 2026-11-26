@@ -233,7 +233,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === id));
     $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === id));
     document.body.dataset.vpPage = id;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // O módulo Descobrir usa um scrollport próprio para não depender da
+    // rolagem do documento em WebViews/PWAs. A classe é removida ao sair.
+    const discoverActive = id === 'descobrir';
+    document.documentElement.classList.toggle('vp-discover-active', discoverActive);
+    document.body.classList.toggle('vp-discover-active', discoverActive);
+    app.classList.toggle('discover-scroll-mode', discoverActive);
+    if (discoverActive) {
+      const discoverScroller = targetPage.querySelector('.discover-main-content');
+      if (discoverScroller) discoverScroller.scrollTop = 0;
+    }
+    window.scrollTo({ top: 0, behavior: discoverActive ? 'auto' : 'smooth' });
     if (id === 'inicio') renderHome();
     if (id === 'estante') renderBooks();
     if (id === 'descobrir') renderDiscover();
