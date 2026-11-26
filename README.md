@@ -64,3 +64,23 @@ A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo n
 - Nenhuma alteração foi feita no Apps Script, na planilha, nas credenciais ou nos dados já existentes.
 
 **Publicação v72:** envie a pasta `app_verso_prosa-main` completa para o repositório GitHub Pages e atualize com `Ctrl+Shift+R` após a publicação.
+
+
+## Feed personalizado do Descobrir (v76)
+
+- O feed inicial consulta o catálogo Google Books usando autores e gêneros identificados na estante da conta autenticada.
+- As sugestões são deduplicadas e os livros que já pertencem à estante são retirados do feed de recomendações. Nas buscas livres, itens já cadastrados ficam desabilitados para evitar duplicação.
+- Os resultados mostram a origem da recomendação (autor, gênero, tema ou autor relacionado).
+- “Ver mais” pagina os grupos de consulta para buscar novos resultados sem repetir os livros já exibidos.
+- Ao selecionar uma sugestão, título, autor, editora, páginas, ISBN, gênero e capa são preenchidos no formulário Adicionar Livro; só são salvos depois da confirmação do usuário.
+- Para evitar bloqueios de CORS em WebViews, o frontend consulta o Google Books por meio da ação autenticada `discoverBooks` no Apps Script. O backend usa `UrlFetchApp` e cache de seis horas.
+
+### Publicação obrigatória do backend v76
+
+1. No projeto do Apps Script, substitua o conteúdo de `Code.gs` pelo arquivo `Code_Versos_Narrativas_FEED_PERSONALIZADO.gs` que acompanha o pacote.
+2. No editor do Apps Script, selecione e execute `autorizarConsultaGoogleBooks` uma única vez e conceda a nova permissão de consulta externa.
+3. Se o `appsscript.json` do projeto define `oauthScopes` explicitamente, inclua `https://www.googleapis.com/auth/script.external_request` na lista existente, sem apagar os outros escopos. Se não houver lista explícita, o Apps Script detecta o escopo automaticamente.
+4. Em **Implantar → Gerenciar implantações**, edite a implantação do Aplicativo da Web, selecione **Nova versão** e preserve as opções atuais de execução e acesso. A URL da implantação deve continuar a mesma usada em `app.js`.
+5. Publique o frontend substituindo a pasta `app_verso_prosa-main` no GitHub Pages.
+
+O proxy do catálogo valida a sessão antes de consultar; ele não grava os resultados do Google Books na planilha. Nenhuma tabela, senha ou dado pessoal foi alterado.

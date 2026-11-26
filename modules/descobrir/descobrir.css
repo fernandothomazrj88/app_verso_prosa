@@ -364,3 +364,13 @@
     margin-bottom: 8px !important;
   }
 }
+
+
+/* V76 — identificação da origem das recomendações personalizadas. */
+#descobrir .discover-book-reason {
+  display:block !important; max-width:100% !important; margin:2px auto 0 !important; padding:3px 5px !important;
+  border:1px solid rgba(213,166,59,.34) !important; border-radius:10px !important;
+  background:rgba(48,22,10,.72) !important; color:#e6c77d !important;
+  font:8px/1.15 'Lora',Georgia,serif !important; text-align:center !important;
+}
+#descobrir .discover-book-cover:disabled { opacity:.62 !important; cursor:not-allowed !important; filter:saturate(.68) !important; }
