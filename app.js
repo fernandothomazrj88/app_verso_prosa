@@ -1056,6 +1056,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (heading) heading.textContent = label;
   }
 
+  function scrollDiscoverToTop() {
+    const scroller = $('#descobrir .discover-main-content');
+    if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   function mapGoogleBook(item, fallback = {}) {
     const info = item?.volumeInfo || {};
     const identifiers = Array.isArray(info.industryIdentifiers) ? info.industryIdentifiers : [];
@@ -1200,7 +1205,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (view === 'generos') {
       updateDiscoverHeading('Explore por gênero');
-      $('#discoverThemes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const scroller = $('#descobrir .discover-main-content');
+      const themes = $('#discoverThemes');
+      if (scroller && themes) {
+        const top = themes.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
+        scroller.scrollTo({ top: Math.max(0, top - 12), behavior: 'smooth' });
+      }
       if ($('#discoverFeedback')) $('#discoverFeedback').textContent = 'Escolha um tema na seção abaixo para ver livros relacionados.';
       return;
     }
@@ -1262,7 +1272,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     $('#discoverFilterToggle').setAttribute('aria-expanded', 'false');
     const isTheme = Boolean(button.closest('.discover-theme-grid, .discover-filter-panel'));
     searchDiscover(query, query.toLocaleLowerCase('pt-BR').includes('russa') ? 'Grandes clássicos da literatura russa' : 'Livros por tema', isTheme ? 'generos' : 'explorar');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollDiscoverToTop();
   }));
   $('#discoverSeeMore')?.addEventListener('click', () => {
     if (!discoverState.query) {
