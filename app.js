@@ -1057,8 +1057,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function scrollDiscoverToTop() {
-    const scroller = $('#descobrir .discover-main-content');
-    if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+    // V74 usa a rolagem natural do documento em telas móveis.
+    // Em desktop, preserve a posição da janela de forma consistente.
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function mapGoogleBook(item, fallback = {}) {
@@ -1205,11 +1206,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (view === 'generos') {
       updateDiscoverHeading('Explore por gênero');
-      const scroller = $('#descobrir .discover-main-content');
       const themes = $('#discoverThemes');
-      if (scroller && themes) {
-        const top = themes.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
-        scroller.scrollTo({ top: Math.max(0, top - 12), behavior: 'smooth' });
+      if (themes) {
+        const header = $('#descobrir .discover-module-header');
+        const stickyOffset = header ? header.getBoundingClientRect().height + 12 : 12;
+        const top = themes.getBoundingClientRect().top + window.scrollY - stickyOffset;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
       }
       if ($('#discoverFeedback')) $('#discoverFeedback').textContent = 'Escolha um tema na seção abaixo para ver livros relacionados.';
       return;
