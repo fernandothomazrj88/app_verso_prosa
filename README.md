@@ -1,86 +1,12 @@
-# Versos & Narrativas — Biblioteca Literária
+# Versos & Narrativas — V79
 
-Pacote de frontend construído sobre o mockup enviado por Fernando. As imagens de cenário foram recortadas da prancha visual aprovada e incluídas localmente em `assets/scenes`; não há dependência de imagens externas.
+Aplicativo da Biblioteca Literária com módulo Planejamento de Leituras.
 
-## Atualização
-1. Faça backup do repositório GitHub.
-2. Extraia o ZIP e abra `app_verso_prosa-main`.
-3. Envie o conteúdo dessa pasta para a raiz do repositório `app_verso_prosa`, substituindo os arquivos correspondentes.
-4. Mantenha a pasta `assets` completa.
-5. Não envie `Code.gs` ao GitHub: o Apps Script permanece no projeto Google.
-6. Aguarde o Pages publicar e atualize com Ctrl+Shift+R.
+## Publicação
 
-## Preservação funcional
-`app.js` mantém a URL do Apps Script, o fluxo de login, os dados, os formulários e a sincronização existentes. As mudanças de cada etapa foram isoladas nos módulos e nos estilos correspondentes; `sw.js` atualiza o cache para distribuir os novos arquivos.
+1. Publique esta pasta `app_verso_prosa-main` no GitHub Pages.
+2. No Apps Script `Versos & Narrativas — Backend V1`, substitua somente `Código.gs` pelo arquivo `BACKEND_APPS_SCRIPT/Code.gs` que acompanha o pacote.
+3. Salve e publique uma nova versão da implantação atual, mantendo executar como proprietário e acesso para qualquer pessoa.
+4. Não execute a função de inicialização do banco. A aba `PLANOS_LEITURA` é criada automaticamente.
 
-## Nota sobre a referência
-Os cenários são recortes de ambiente da imagem de referência do usuário, usados como fundos decorativos. Capas cadastradas e componentes interativos continuam sendo HTML real e clicável.
-
-
-## Login v3 (11/11/2026)
-A tela de login foi reconstruída com HTML e CSS. O arquivo de mockup completo não é mais usado como interface. Marca, campos, ícones, botão, ornamentos e moldura são componentes independentes; a imagem `assets/scenes/lamp-books.webp` é usada apenas como detalhe decorativo inferior. A autenticação e a chamada atual ao Apps Script foram preservadas.
-
-## Ajustes de identidade visual — Versos & Narrativas (v66)
-- As telas de abertura e login usam as artes atualizadas com o nome **Versos & Narrativas**.
-- A assinatura da Home foi refeita como texto real em tipografia serifada Georgia, mantendo a proporção clássica do nome e sem comprimir o título para caber.
-- Os cards aprovados de Fernando e Letícia são usados diretamente em `assets/profiles/home-card-fernando-approved.png` e `assets/profiles/home-card-leticia-approved.png`.
-- O card muda automaticamente conforme o perfil autenticado; os textos permanecem como conteúdo real do aplicativo.
-- O cache do aplicativo foi atualizado para v66 para evitar que o navegador reutilize a versão visual anterior.
-
-**Publicação:** envie a pasta `app_verso_prosa-main` completa para a raiz do repositório do GitHub Pages, mantendo todas as subpastas de `assets` e `modules`. Depois da publicação, faça uma atualização forçada com `Ctrl+Shift+R`. Caso o nome antigo continue apenas no atalho instalado como aplicativo do Windows, remova o atalho antigo e instale novamente pelo site atualizado.
-
-
-## Ajuste de boas-vindas nos dois perfis (v67)
-
-- O texto de Fernando e Letícia foi reposicionado e dimensionado para permanecer dentro da área interna do círculo bordô dos respectivos cards aprovados.
-- As duas artes, os módulos, o backend, as credenciais e as demais telas foram preservados.
-- O cache e a referência da folha de estilos foram atualizados para v67.
-
-
-## Padronização dos cards de boas-vindas (v68)
-
-- Fernando e Letícia usam a mesma escala tipográfica, a mesma estrutura de texto e os mesmos dois ornamentos dourados.
-- O texto ocupa uma área proporcional ao círculo, com altura automática para evitar cortes na saudação ou na mensagem.
-- A arte da Letícia foi recomposta com o medalhão bordô ligeiramente menor e deslocado para a direita, criando espaço visível entre a personagem e o círculo.
-- O cache do aplicativo e a referência da folha de estilos foram atualizados para v68.
-
-
-## Padrão final dos cards de boas-vindas (v70)
-
-- Os medalhões/círculos bordô foram removidos das duas composições.
-- A leitura recebe apenas sombra tipográfica suave para contraste, sem placa ou fundo circular atrás do texto.
-- Fernando e Letícia usam a mesma escala de fonte, alinhamento, espaçamento e ornamentos dourados; a composição é espelhada para manter a personagem no lado oposto ao texto.
-- Os retratos foram recortados das artes aprovadas para preservar as personagens originais sem o medalhão.
-- O cache do aplicativo foi atualizado para v70.
-
-
-## Módulo Descobrir (v72)
-
-- O cabeçalho usa a mesma biblioteca, emblema, luminárias e divisor de Minha Estante; somente o título muda para **Descobrir**.
-- O menu inferior é o mesmo menu clássico já aprovado: Início, Estante, Adicionar, Descobrir e Mais. Nenhuma cor ou ícone do menu foi redesenhado.
-- O conteúdo central segue o mockup: busca, filtro, atalhos Explorar/Gêneros/Autores/Listas/Novidades, sugestões de livros, faixa em destaque e atalhos por tema.
-- A pesquisa e as recomendações consultam o catálogo público Google Books. Quando uma capa ou avaliação não estiver disponível, o cartão usa um acabamento local sem inventar avaliação.
-- A ação em um livro abre Adicionar Livro com título, autor, gênero e capa preenchidos para conferência; nada é gravado automaticamente.
-- Nenhuma alteração foi feita no Apps Script, na planilha, nas credenciais ou nos dados já existentes.
-
-**Publicação v72:** envie a pasta `app_verso_prosa-main` completa para o repositório GitHub Pages e atualize com `Ctrl+Shift+R` após a publicação.
-
-
-## Feed personalizado do Descobrir (v76)
-
-- O feed inicial consulta o catálogo Google Books usando autores e gêneros identificados na estante da conta autenticada.
-- As sugestões são deduplicadas e os livros que já pertencem à estante são retirados do feed de recomendações. Nas buscas livres, itens já cadastrados ficam desabilitados para evitar duplicação.
-- Os resultados mostram a origem da recomendação (autor, gênero, tema ou autor relacionado).
-- “Ver mais” pagina os grupos de consulta para buscar novos resultados sem repetir os livros já exibidos.
-- Ao selecionar uma sugestão, título, autor, editora, páginas, ISBN, gênero e capa são preenchidos no formulário Adicionar Livro; só são salvos depois da confirmação do usuário.
-- Para evitar bloqueios de CORS em WebViews, o frontend consulta o Google Books por meio da ação autenticada `discoverBooks` no Apps Script. O backend usa `UrlFetchApp` e cache de seis horas.
-
-### Publicação obrigatória do backend v76
-
-1. No projeto do Apps Script, substitua o conteúdo de `Code.gs` pelo arquivo `Code_Versos_Narrativas_FEED_PERSONALIZADO.gs` que acompanha o pacote.
-2. No editor do Apps Script, selecione e execute `autorizarConsultaGoogleBooks` uma única vez e conceda a nova permissão de consulta externa.
-3. Se o `appsscript.json` do projeto define `oauthScopes` explicitamente, inclua `https://www.googleapis.com/auth/script.external_request` na lista existente, sem apagar os outros escopos. Se não houver lista explícita, o Apps Script detecta o escopo automaticamente.
-4. Em **Implantar → Gerenciar implantações**, edite a implantação do Aplicativo da Web, selecione **Nova versão** e preserve as opções atuais de execução e acesso. A URL da implantação deve continuar a mesma usada em `app.js`.
-5. Publique o frontend substituindo a pasta `app_verso_prosa-main` no GitHub Pages.
-
-O proxy do catálogo valida a sessão antes de consultar; ele não grava os resultados do Google Books na planilha. Nenhuma tabela, senha ou dado pessoal foi alterado.
+O módulo Planejamento usa os livros reais do perfil autenticado e armazena plano, metas e cronograma na aba `PLANOS_LEITURA`, isolados por usuário.

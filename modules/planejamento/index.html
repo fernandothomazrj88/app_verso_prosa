@@ -1,7 +1,103 @@
-<!-- Versos & Narrativas | Módulo: Planejamento de Leituras | O conteúdo é montado pelo modules/module-loader.js -->
-<section id="calendario" class="page">
-        <div class="page-heading">
-          <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true"><p class="eyebrow">UM RITMO QUE É SEU</p><h2>Planejamento de Leituras</h2><p class="muted">Planeje seus encontros com os livros sem transformar a leitura em obrigação.</p></div>
-        <div class="notebook-card"><div class="notebook-heading"><span>▦</span><div><b>Plano de leitura</b><small>Escolha um objetivo possível para sua rotina.</small></div></div><label>Meta de leitura<input class="field" id="readingGoal" type="number" min="1" placeholder="Ex.: 20 páginas por dia"></label><label>Livro em foco<input class="field" id="goalBook" placeholder="Qual livro acompanhará sua jornada?"></label><button class="primary" id="saveGoal">Guardar planejamento</button><p class="helper" id="goalSaved"></p></div>
-        <div class="reading-motto">“A leitura do mundo precede a leitura da palavra.”</div>
-      </section>
+<!-- Versos & Narrativas | Módulo: Planejamento de Leituras | V79 -->
+<section id="calendario" class="page planning-page" aria-label="Planejamento de Leituras">
+  <header class="shelf-module-header planning-module-header" aria-label="Planejamento de Leituras">
+    <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
+    <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
+    <img class="shelf-module-home-emblem" src="./assets/brand/verso-prosa-home-emblem.png" alt="" aria-hidden="true">
+    <h1>Planejamento de Leituras</h1>
+    <span class="shelf-module-divider" aria-hidden="true"></span>
+  </header>
+
+  <div class="planning-main-content">
+    <nav class="planning-tabs" id="planningTabs" aria-label="Seções do planejamento">
+      <button type="button" class="planning-tab active" data-plan-tab="meu-plano" aria-selected="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="m14.5 9.5 5-5"/><path d="M16 4h3.5v3.5"/></svg><span>Meu Plano</span>
+      </button>
+      <button type="button" class="planning-tab" data-plan-tab="metas" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h13M8 12h13M8 19h13"/><circle cx="3.5" cy="5" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="19" r="1"/></svg><span>Metas</span>
+      </button>
+      <button type="button" class="planning-tab" data-plan-tab="cronograma" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M8 14h3m2 0h3m-8 3h3"/></svg><span>Cronograma</span>
+      </button>
+      <button type="button" class="planning-tab" data-plan-tab="progresso" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V12h4v8m4 0V5h4v15m4 0V9h4v11"/><path d="M2 21h21"/></svg><span>Progresso</span>
+      </button>
+    </nav>
+
+    <section class="planning-panel active" data-plan-panel="meu-plano" aria-label="Meu plano de leitura">
+      <div class="planning-section-heading">
+        <h2><span aria-hidden="true">▥</span> Plano Atual</h2>
+        <button type="button" id="planEditButton" class="plan-edit-button"><span aria-hidden="true">✎</span> Editar Plano</button>
+      </div>
+      <article id="planSummary" class="plan-summary-card" aria-live="polite"></article>
+
+      <div class="planning-section-heading plan-books-heading">
+        <h2><span aria-hidden="true">▥</span> Livros do Plano <small id="planBooksCount">(0)</small></h2>
+      </div>
+      <div id="planBooksList" class="plan-books-list" aria-live="polite"></div>
+      <button type="button" id="planAddBookButton" class="plan-add-button"><span aria-hidden="true">＋</span> Adicionar ao Plano</button>
+      <p id="planBooksHint" class="plan-hint">Escolha livros da sua estante para começar a montar seu plano.</p>
+    </section>
+
+    <section class="planning-panel" data-plan-panel="metas" aria-label="Metas de leitura" hidden>
+      <div class="planning-section-heading"><h2><span aria-hidden="true">◎</span> Minhas Metas</h2></div>
+      <p class="plan-intro">Defina um ritmo possível para sua rotina. Você pode ajustar suas metas sempre que precisar.</p>
+      <div class="plan-goal-grid">
+        <label class="plan-setting-card"><span class="plan-setting-icon">▥</span><span class="plan-setting-label">Livros no plano</span><input id="planGoalBooks" type="number" min="0" max="500" inputmode="numeric" placeholder="Ex.: 6"><small>Quantidade de livros que deseja concluir</small></label>
+        <label class="plan-setting-card"><span class="plan-setting-icon">▤</span><span class="plan-setting-label">Páginas por dia</span><input id="planPagesPerDay" type="number" min="0" max="5000" inputmode="numeric" placeholder="Ex.: 20"><small>Deixe em branco se não quiser uma meta diária</small></label>
+        <label class="plan-setting-card"><span class="plan-setting-icon">◷</span><span class="plan-setting-label">Minutos por dia</span><input id="planMinutesPerDay" type="number" min="0" max="1440" inputmode="numeric" placeholder="Ex.: 30"><small>Tempo reservado para a leitura</small></label>
+      </div>
+      <button type="button" id="planSaveGoals" class="plan-save-button">Salvar Minhas Metas</button>
+      <p id="planGoalsFeedback" class="plan-feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="planning-panel" data-plan-panel="cronograma" aria-label="Cronograma de leitura" hidden>
+      <div class="planning-section-heading"><h2><span aria-hidden="true">▦</span> Cronograma</h2></div>
+      <p class="plan-intro">Escolha uma data desejada para concluir cada livro. As datas são pessoais e podem ser alteradas.</p>
+      <div id="planScheduleList" class="plan-schedule-list"></div>
+      <button type="button" id="planSaveSchedule" class="plan-save-button">Salvar Cronograma</button>
+      <p id="planScheduleFeedback" class="plan-feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="planning-panel" data-plan-panel="progresso" aria-label="Progresso de leitura" hidden>
+      <div class="planning-section-heading"><h2><span aria-hidden="true">▥</span> Meu Progresso</h2></div>
+      <article id="planProgressHero" class="plan-progress-hero"></article>
+      <div id="planProgressStats" class="plan-progress-stats"></div>
+      <div class="plan-progress-detail">
+        <h3>Livros da jornada</h3>
+        <div id="planProgressList"></div>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="planEditDialog" class="planning-dialog">
+    <form id="planEditForm" method="dialog">
+      <div class="planning-dialog-heading"><div><small>SEU PLANEJAMENTO</small><h2>Editar Plano</h2></div><button type="button" class="planning-dialog-close" data-dialog-close="planEditDialog" aria-label="Fechar">×</button></div>
+      <label class="plan-dialog-field">Nome do plano<input id="planTitleInput" type="text" maxlength="100" placeholder="Ex.: Clássicos da Literatura" required></label>
+      <div class="plan-dialog-two">
+        <label class="plan-dialog-field">Início<input id="planStartDateInput" type="date"></label>
+        <label class="plan-dialog-field">Data final<input id="planEndDateInput" type="date"></label>
+      </div>
+      <button type="submit" class="plan-save-button">Salvar Plano</button>
+    </form>
+  </dialog>
+
+  <dialog id="planBookDialog" class="planning-dialog">
+    <div class="planning-dialog-heading"><div><small>SUA BIBLIOTECA</small><h2>Adicionar livros</h2></div><button type="button" class="planning-dialog-close" data-dialog-close="planBookDialog" aria-label="Fechar">×</button></div>
+    <p class="plan-intro">Selecione os livros que deseja incluir neste plano.</p>
+    <div id="planBookChoices" class="plan-book-choices"></div>
+    <button type="button" id="planConfirmAddBooks" class="plan-save-button">Adicionar Selecionados</button>
+    <p id="planBookPickerFeedback" class="plan-feedback" role="status" aria-live="polite"></p>
+  </dialog>
+
+  <!-- Mantém os campos antigos de planejamento disponíveis para migração compatível. -->
+  <div hidden aria-hidden="true"><input id="readingGoal"><input id="goalBook"><button id="saveGoal" type="button"></button><p id="goalSaved"></p></div>
+
+  <nav class="mock-bottom-nav planning-bottom-nav" aria-label="Navegação principal">
+    <button data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
+</section>

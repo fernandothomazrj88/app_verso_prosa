@@ -1,4 +1,4 @@
-const CACHE_NAME = 'verso-prosa-home-v76';
+const CACHE_NAME = 'versos-narrativas-v79';
 const APP_FILES = [
   './',
   './index.html',
@@ -57,12 +57,13 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=home-v76',
-  './modules/descobrir/descobrir.css?v=76',
-  './modules/estante/estante.css?v=59',
-  './modules/adicionar-livro/adicionar-livro.css?v=61',
-  './app.js?v=modular-v76',
-  './modules/module-loader.js?v=modular-v76',
+  './style.css?v=home-v79',
+  './modules/descobrir/descobrir.css?v=79',
+  './modules/estante/estante.css?v=79',
+  './modules/adicionar-livro/adicionar-livro.css?v=79',
+  './modules/planejamento/planejamento.css?v=79',
+  './app.js?v=modular-v79',
+  './modules/module-loader.js?v=modular-v79',
   './modules/registry.json',
   './modules/home/index.html',
   './modules/estante/index.html',
@@ -87,7 +88,7 @@ self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
     await Promise.all(keys
-      .filter(key => key.startsWith('verso-prosa-') && key !== CACHE_NAME)
+      .filter(key => (/^(versos-narrativas-|verso-prosa-)/).test(key) && key !== CACHE_NAME)
       .map(key => caches.delete(key)));
     await self.clients.claim();
   })());

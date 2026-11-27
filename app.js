@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const LEGACY_SESSION_KEY = 'vp_auth_session';
 
   let session = null;
-  let cloud = { books: [], notes: [], goal: null };
+  let cloud = { books: [], notes: [], goal: null, readingPlan: null };
   let filter = 'todos';
   let selectedBook = null;
 
@@ -275,7 +275,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     cloud = {
       books: Array.isArray(data.books) ? data.books : [],
       notes: Array.isArray(data.notes) ? data.notes : [],
-      goal: data.goal || null
+      goal: data.goal || null,
+      readingPlan: data.readingPlan || null
     };
   }
 
@@ -380,7 +381,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!identity) throw new Error('Use o e-mail cadastrado para Fernando ou Letícia.');
 
     // Limpa os dados em memória antes de iniciar outra autenticação.
-    cloud = { books: [], notes: [], goal: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null };
     const result = await api('login', { email: identity.email, senha });
     if (!result.token || !result.user) throw new Error('O servidor não retornou uma sessão válida.');
 
@@ -409,7 +410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       else toast('Bem-vindo(a), ' + identity.name + '. Sua biblioteca está aberta.');
     } catch (error) {
       saveSession(null);
-      cloud = { books: [], notes: [], goal: null };
+      cloud = { books: [], notes: [], goal: null, readingPlan: null };
       throw error;
     }
   }
@@ -444,7 +445,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       mensagemAposMigracao(migracao);
     } catch (error) {
       saveSession(null);
-      cloud = { books: [], notes: [], goal: null };
+      cloud = { books: [], notes: [], goal: null, readingPlan: null };
       document.body.classList.remove('auth-flow');
       app.classList.add('hidden');
       app.style.display = 'none';
@@ -459,7 +460,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function showWelcomeAfterExternalAccountChange() {
     session = null;
-    cloud = { books: [], notes: [], goal: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null };
     app.classList.add('hidden');
     app.style.display = 'none';
     document.body.classList.remove('auth-flow');
@@ -481,7 +482,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function logout() {
     saveSession(null);
-    cloud = { books: [], notes: [], goal: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null };
     app.classList.add('hidden');
     app.style.display = 'none';
     document.body.classList.remove('auth-flow');
@@ -1029,29 +1030,284 @@ document.addEventListener('DOMContentLoaded', async () => {
       : '<p class="muted">Seu caderno ainda está em branco. A primeira anotação pode começar aqui.</p>';
   }
 
-  async function saveGoal() {
-    const goal = $('#readingGoal').value;
-    const book = $('#goalBook').value.trim();
-    if (!goal && !book) { toast('Informe uma meta ou um livro para seu planejamento.'); return; }
-    if (!session?.token) { toast('Entre na sua conta antes de guardar o planejamento.'); return; }
-    const button = $('#saveGoal');
-    button.disabled = true;
+  // Planejamento de Leituras — plano, metas, cronograma e progresso por perfil.
+  function emptyReadingPlan() {
+    return { title: 'Meu plano de leitura', startDate: '', endDate: '', goalBooks: 0, pagesPerDay: 0, minutesPerDay: 0, bookIds: [], schedule: {} };
+  }
+
+  function activeReadingPlan() {
+    const saved = cloud.readingPlan || {};
+    return {
+      ...emptyReadingPlan(),
+      ...saved,
+      bookIds: Array.isArray(saved.bookIds) ? saved.bookIds.map(String) : [],
+      schedule: saved.schedule && typeof saved.schedule === 'object' ? saved.schedule : {}
+    };
+  }
+
+  function readingPlanBooks(plan = activeReadingPlan()) {
+    const byId = new Map(cloud.books.map(book => [String(book.id), book]));
+    return plan.bookIds.map(id => byId.get(String(id))).filter(Boolean);
+  }
+
+  function formatPlanDate(value) {
+    const text = String(value || '');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return '';
+    const [year, month, day] = text.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  function planStatusKey(status) {
+    const normalized = String(status || '').toLowerCase();
+    if (normalized === 'lido' || normalized === 'lidos') return 'read';
+    if (normalized === 'lendo') return 'reading';
+    return 'next';
+  }
+
+  function planStatusLabel(status) {
+    const key = planStatusKey(status);
+    return key === 'read' ? '✓ Lido' : key === 'reading' ? '▣ Lendo' : '◷ Próximo';
+  }
+
+  function planProgressData(plan = activeReadingPlan()) {
+    const books = readingPlanBooks(plan);
+    const read = books.filter(book => planStatusKey(book.status) === 'read').length;
+    const reading = books.filter(book => planStatusKey(book.status) === 'reading').length;
+    const next = Math.max(0, books.length - read - reading);
+    const percent = books.length ? Math.round((read / books.length) * 100) : 0;
+    return { books, read, reading, next, percent };
+  }
+
+  function renderPlanSummary() {
+    const target = $('#planSummary');
+    if (!target) return;
+    const plan = activeReadingPlan();
+    const progress = planProgressData(plan);
+    const dueText = formatPlanDate(plan.endDate);
+    const metaText = plan.goalBooks ? `Meta: ${plan.goalBooks} livros` : 'Monte seu ritmo de leitura';
+    target.innerHTML = `
+      <div class="plan-summary-icon" aria-hidden="true">▤</div>
+      <div class="plan-summary-copy">
+        <h3>${escapeHtml(plan.title || 'Meu plano de leitura')}</h3>
+        <p>${progress.books.length} ${progress.books.length === 1 ? 'livro' : 'livros'} · ${dueText ? `Até ${dueText}` : metaText}</p>
+        <div class="plan-progress-track" aria-label="${progress.percent}% concluído"><span style="width:${progress.percent}%"></span></div>
+      </div>
+      <strong class="plan-progress-percent">${progress.percent}%</strong>`;
+  }
+
+  function renderPlanBooks() {
+    const target = $('#planBooksList');
+    if (!target) return;
+    const plan = activeReadingPlan();
+    const books = readingPlanBooks(plan);
+    $('#planBooksCount').textContent = `(${books.length})`;
+    if (!books.length) {
+      target.innerHTML = '<div class="plan-empty">Seu plano ainda não tem livros. Adicione títulos da sua estante para começar sua jornada.</div>';
+      return;
+    }
+    target.innerHTML = books.map(book => {
+      const cover = safeImageUrl(book.capa);
+      const key = planStatusKey(book.status);
+      return `<article class="plan-book-row" data-plan-book-card="${escapeHtml(book.id)}">
+        ${cover ? `<img class="plan-book-cover" src="${escapeHtml(cover)}" alt="Capa de ${escapeHtml(book.titulo)}" loading="lazy">` : '<span class="plan-book-cover-fallback" aria-hidden="true">❧</span>'}
+        <div class="plan-book-info"><h3>${escapeHtml(book.titulo || 'Livro sem título')}</h3><p>${escapeHtml(book.autor || 'Autor não informado')}</p></div>
+        <div class="plan-book-actions">
+          <select class="plan-book-status is-${key}" data-plan-status="${escapeHtml(book.id)}" aria-label="Situação de ${escapeHtml(book.titulo)}">
+            <option value="Quero ler" ${key === 'next' ? 'selected' : ''}>◷ Próximo</option>
+            <option value="Lendo" ${key === 'reading' ? 'selected' : ''}>▣ Lendo</option>
+            <option value="Lido" ${key === 'read' ? 'selected' : ''}>✓ Lido</option>
+          </select>
+          <button type="button" class="plan-book-remove" data-plan-remove="${escapeHtml(book.id)}" aria-label="Retirar ${escapeHtml(book.titulo)} do plano" title="Retirar do plano">⋮</button>
+        </div>
+      </article>`;
+    }).join('');
+  }
+
+  function renderPlanGoals() {
+    const plan = activeReadingPlan();
+    if ($('#planGoalBooks')) $('#planGoalBooks').value = plan.goalBooks || '';
+    if ($('#planPagesPerDay')) $('#planPagesPerDay').value = plan.pagesPerDay || '';
+    if ($('#planMinutesPerDay')) $('#planMinutesPerDay').value = plan.minutesPerDay || '';
+  }
+
+  function renderPlanSchedule() {
+    const target = $('#planScheduleList');
+    if (!target) return;
+    const plan = activeReadingPlan();
+    const books = readingPlanBooks(plan);
+    if (!books.length) {
+      target.innerHTML = '<div class="plan-empty">Adicione livros ao seu plano para organizar as datas de leitura.</div>';
+      return;
+    }
+    target.innerHTML = books.map((book, index) => {
+      const value = String(plan.schedule[book.id] || '');
+      return `<label class="plan-schedule-row"><span><b>${index + 1}. ${escapeHtml(book.titulo)}</b><small>${escapeHtml(book.autor || 'Autor não informado')}</small></span><input type="date" data-plan-date="${escapeHtml(book.id)}" value="${escapeHtml(value)}" aria-label="Data desejada para concluir ${escapeHtml(book.titulo)}"></label>`;
+    }).join('');
+  }
+
+  function renderPlanProgress() {
+    const plan = activeReadingPlan();
+    const progress = planProgressData(plan);
+    const hero = $('#planProgressHero');
+    const stats = $('#planProgressStats');
+    const list = $('#planProgressList');
+    if (hero) hero.innerHTML = `<strong>${progress.percent}%</strong><span>${progress.read} de ${progress.books.length} ${progress.books.length === 1 ? 'livro concluído' : 'livros concluídos'}</span><div class="plan-progress-track"><span style="width:${progress.percent}%"></span></div>`;
+    if (stats) stats.innerHTML = `
+      <div class="plan-progress-stat"><b>${progress.read}</b><span>Lidos</span></div>
+      <div class="plan-progress-stat"><b>${progress.reading}</b><span>Lendo</span></div>
+      <div class="plan-progress-stat"><b>${progress.next}</b><span>Próximos</span></div>`;
+    if (list) list.innerHTML = progress.books.length ? progress.books.map(book => `<div class="plan-progress-line"><span>${escapeHtml(book.titulo)}</span><b>${escapeHtml(planStatusLabel(book.status))}</b></div>`).join('') : '<p class="plan-hint">Seu progresso aparecerá aqui quando você adicionar livros ao plano.</p>';
+  }
+
+  function renderReadingPlan() {
+    renderPlanSummary();
+    renderPlanBooks();
+    renderPlanGoals();
+    renderPlanSchedule();
+    renderPlanProgress();
+  }
+
+  async function persistReadingPlan(plan, message = 'Planejamento atualizado.') {
+    if (!session?.token) { toast('Entre na sua conta para salvar seu planejamento.'); return false; }
+    const result = await api('saveReadingPlan', { token: session.token, plan });
+    cloud.readingPlan = result.plan || plan;
+    renderReadingPlan();
+    toast(message);
+    return true;
+  }
+
+  async function updatePlanBookStatus(bookId, status, control) {
+    const book = cloud.books.find(item => String(item.id) === String(bookId));
+    if (!book) { toast('Este livro não foi encontrado na sua estante.'); return; }
+    if (control) control.disabled = true;
     try {
-      const result = await api('saveGoal', { token: session.token, goal: { goal, book } });
-      cloud.goal = result.goal;
-      $('#goalSaved').textContent = 'Seu planejamento foi guardado na biblioteca.';
-      toast('Planejamento guardado.');
-    } catch (error) { toast(error.message); }
-    finally { button.disabled = false; }
+      const result = await api('saveBook', { token: session.token, book: {
+        id: book.id, titulo: book.titulo, autor: book.autor, editora: book.editora,
+        genero: book.genero, paginas: book.paginas, isbn: book.isbn, capa: book.capa, status
+      }});
+      const index = cloud.books.findIndex(item => String(item.id) === String(bookId));
+      if (index >= 0) cloud.books[index] = result.book;
+      renderReadingPlan();
+      toast('Situação de leitura atualizada.');
+    } catch (error) {
+      toast(error.message || 'Não foi possível atualizar a situação.');
+      renderReadingPlan();
+    } finally { if (control) control.disabled = false; }
+  }
+
+  function setPlanTab(tab) {
+    $$('#planningTabs [data-plan-tab]').forEach(button => {
+      const active = button.dataset.planTab === tab;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', String(active));
+    });
+    $$('#calendario [data-plan-panel]').forEach(panel => {
+      const active = panel.dataset.planPanel === tab;
+      panel.hidden = !active;
+      panel.classList.toggle('active', active);
+    });
+    if (tab === 'cronograma') renderPlanSchedule();
+    if (tab === 'progresso') renderPlanProgress();
+  }
+
+  function openPlanEditor() {
+    const plan = activeReadingPlan();
+    $('#planTitleInput').value = plan.title || 'Meu plano de leitura';
+    $('#planStartDateInput').value = plan.startDate || '';
+    $('#planEndDateInput').value = plan.endDate || '';
+    $('#planEditDialog').showModal();
+  }
+
+  function openPlanBookPicker() {
+    const plan = activeReadingPlan();
+    const selected = new Set(plan.bookIds);
+    const choices = cloud.books.filter(book => !selected.has(String(book.id)));
+    const target = $('#planBookChoices');
+    if (!choices.length) {
+      target.innerHTML = cloud.books.length
+        ? '<div class="plan-empty">Todos os livros da sua estante já estão neste plano.</div>'
+        : '<div class="plan-empty">Sua estante ainda está vazia. Adicione um livro primeiro para incluí-lo no planejamento.</div>';
+    } else {
+      target.innerHTML = choices.map(book => `<label class="plan-book-choice"><input type="checkbox" value="${escapeHtml(book.id)}"><span><b>${escapeHtml(book.titulo)}</b><br><small>${escapeHtml(book.autor || 'Autor não informado')}</small></span></label>`).join('');
+    }
+    $('#planBookPickerFeedback').textContent = '';
+    $('#planBookDialog').showModal();
   }
 
   function renderGoal() {
-    if (!cloud.goal) return;
-    $('#readingGoal').value = cloud.goal.goal || '';
-    $('#goalBook').value = cloud.goal.book || '';
-    $('#goalSaved').textContent = 'Planejamento carregado da sua conta.';
+    if (cloud.goal) {
+      const oldGoal = $('#readingGoal');
+      const oldBook = $('#goalBook');
+      if (oldGoal) oldGoal.value = cloud.goal.goal || '';
+      if (oldBook) oldBook.value = cloud.goal.book || '';
+    }
+    renderReadingPlan();
   }
-  $('#saveGoal').addEventListener('click', saveGoal);
+
+  $('#planningTabs').addEventListener('click', event => {
+    const button = event.target.closest('[data-plan-tab]');
+    if (button) setPlanTab(button.dataset.planTab);
+  });
+  $('#planEditButton').addEventListener('click', openPlanEditor);
+  $('#planAddBookButton').addEventListener('click', openPlanBookPicker);
+  $('#planEditForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const plan = activeReadingPlan();
+    plan.title = $('#planTitleInput').value.trim() || 'Meu plano de leitura';
+    plan.startDate = $('#planStartDateInput').value || '';
+    plan.endDate = $('#planEndDateInput').value || '';
+    try {
+      if (await persistReadingPlan(plan, 'Plano salvo com sucesso.')) $('#planEditDialog').close();
+    } catch (error) { toast(error.message || 'Não foi possível salvar o plano.'); }
+  });
+  $('#planSaveGoals').addEventListener('click', async () => {
+    const plan = activeReadingPlan();
+    plan.goalBooks = Number($('#planGoalBooks').value) || 0;
+    plan.pagesPerDay = Number($('#planPagesPerDay').value) || 0;
+    plan.minutesPerDay = Number($('#planMinutesPerDay').value) || 0;
+    try {
+      await persistReadingPlan(plan, 'Metas de leitura salvas.');
+      $('#planGoalsFeedback').textContent = 'Suas metas foram guardadas na sua conta.';
+    } catch (error) { $('#planGoalsFeedback').textContent = error.message || 'Não foi possível salvar suas metas.'; }
+  });
+  $('#planSaveSchedule').addEventListener('click', async () => {
+    const plan = activeReadingPlan();
+    const schedule = {};
+    $$('[data-plan-date]').forEach(input => { if (input.value) schedule[input.dataset.planDate] = input.value; });
+    plan.schedule = schedule;
+    try {
+      await persistReadingPlan(plan, 'Cronograma salvo.');
+      $('#planScheduleFeedback').textContent = 'As datas do seu cronograma foram salvas.';
+    } catch (error) { $('#planScheduleFeedback').textContent = error.message || 'Não foi possível salvar o cronograma.'; }
+  });
+  $('#planConfirmAddBooks').addEventListener('click', async () => {
+    const chosen = $$('#planBookChoices input[type="checkbox"]:checked').map(input => input.value);
+    if (!chosen.length) { $('#planBookPickerFeedback').textContent = 'Selecione pelo menos um livro.'; return; }
+    const plan = activeReadingPlan();
+    plan.bookIds = [...new Set([...plan.bookIds, ...chosen])];
+    try {
+      if (await persistReadingPlan(plan, `${chosen.length} livro(s) adicionado(s) ao plano.`)) $('#planBookDialog').close();
+    } catch (error) { $('#planBookPickerFeedback').textContent = error.message || 'Não foi possível adicionar os livros.'; }
+  });
+  $('#planBooksList').addEventListener('change', event => {
+    const control = event.target.closest('[data-plan-status]');
+    if (control) updatePlanBookStatus(control.dataset.planStatus, control.value, control);
+  });
+  $('#planBooksList').addEventListener('click', async event => {
+    const button = event.target.closest('[data-plan-remove]');
+    if (!button) return;
+    const bookId = button.dataset.planRemove;
+    const plan = activeReadingPlan();
+    plan.bookIds = plan.bookIds.filter(id => String(id) !== String(bookId));
+    delete plan.schedule[bookId];
+    try { await persistReadingPlan(plan, 'Livro retirado do plano.'); }
+    catch (error) { toast(error.message || 'Não foi possível retirar o livro.'); }
+  });
+  $$('[data-dialog-close]').forEach(button => button.addEventListener('click', () => {
+    const dialog = document.getElementById(button.dataset.dialogClose);
+    if (dialog) dialog.close();
+  }));
+  $('#saveGoal').addEventListener('click', () => {});
 
   // Módulo Descobrir — feed personalizado por perfil, usando o catálogo público Google Books.
   const discoverState = {
@@ -1303,7 +1559,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const target = $('#discoverBookGrid');
     const append = Boolean(options.append);
     const startIndex = append ? discoverState.startIndex : 0;
-    if (!query) return;
+    if (!query || discoverState.loading) return;
+
+    discoverState.loading = true;
     const requestId = ++discoverState.requestId;
     discoverState.query = query;
     discoverState.orderBy = options.orderBy || 'relevance';
@@ -1332,8 +1590,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
       if (requestId !== discoverState.requestId) return;
       console.warn('[Versos & Narrativas] Descobrir:', error);
-      if (!append && target) target.innerHTML = '<div class="discover-empty"><span>✧</span> Não foi possível consultar o catálogo agora. Confira a atualização do Apps Script e tente novamente.</div>';
+      if (!append && target) target.innerHTML = '<div class="discover-empty"><span>✧</span> Não foi possível consultar o catálogo agora. Tente novamente em instantes.</div>';
       if (feedback) feedback.textContent = error.message || 'A pesquisa online está temporariamente indisponível.';
+    } finally {
+      discoverState.loading = false;
     }
   }
 
@@ -1341,58 +1601,64 @@ document.addEventListener('DOMContentLoaded', async () => {
     const target = $('#discoverBookGrid');
     const feedback = $('#discoverFeedback');
     if (!target || discoverState.loading) return;
+
     discoverState.loading = true;
     const requestId = ++discoverState.requestId;
     discoverState.mode = 'explorar';
     discoverState.query = '';
     discoverState.startIndex = 0;
+    discoverState.books = [];
     updateDiscoverHeading('Sugestões para você');
     if (feedback) feedback.textContent = 'Analisando os autores e gêneros da sua estante...';
     target.innerHTML = '<div class="discover-loading"><span>✦</span> Preparando recomendações para sua biblioteca...</div>';
+
     const plan = buildPersonalizedDiscoverPlan();
     discoverState.recommendationQueries = plan;
     discoverState.recommendationOffsets = plan.map(() => 0);
     discoverState.recommendationTotals = plan.map(() => 0);
     discoverState.recommendationFinished = plan.map(() => false);
     discoverState.recommendationCursor = 0;
+
     try {
-      const results = await Promise.allSettled(plan.map(item => requestDiscoverCatalog(item.query, { maxResults: 8, startIndex: 0, orderBy: 'relevance' })));
+      if (!plan.length) throw new Error('Adicione alguns livros à sua estante para personalizar as recomendações.');
+
+      // Carrega apenas uma consulta ao abrir o feed. As demais são feitas
+      // individualmente quando a pessoa toca em "Ver mais".
+      const index = 0;
+      const planItem = plan[index];
+      const data = await requestDiscoverCatalog(planItem.query, {
+        maxResults: 8, startIndex: 0, orderBy: 'relevance'
+      });
       if (requestId !== discoverState.requestId) return;
-      const candidates = [];
-      let successfulQueries = 0;
-      let totalItems = 0;
-      results.forEach((result, index) => {
-        if (result.status !== 'fulfilled') {
-          discoverState.recommendationFinished[index] = true;
-          return;
-        }
-        successfulQueries++;
-        const data = result.value || {};
-        const items = Array.isArray(data.items) ? data.items : [];
-        totalItems += Number(data.totalItems || items.length);
-        discoverState.recommendationOffsets[index] = items.length;
-        discoverState.recommendationTotals[index] = Number(data.totalItems || items.length);
-        discoverState.recommendationFinished[index] = items.length === 0 || items.length >= Number(data.totalItems || items.length);
-        items.forEach(item => {
-          const book = mapGoogleBook(item);
-          book.recommendationLabel = plan[index].label;
-          book.recommendationKind = plan[index].kind;
-          candidates.push(book);
-        });
+
+      const items = Array.isArray(data.items) ? data.items : [];
+      discoverState.recommendationOffsets[index] = items.length;
+      discoverState.recommendationTotals[index] = Number(data.totalItems || items.length);
+      discoverState.recommendationFinished[index] = !items.length || items.length >= Number(data.totalItems || items.length);
+      discoverState.recommendationCursor = plan.length > 1 ? 1 : 0;
+
+      const candidates = items.map(item => {
+        const book = mapGoogleBook(item);
+        book.recommendationLabel = planItem.label;
+        book.recommendationKind = planItem.kind;
+        return book;
       });
       const unique = uniqueRecommendedBooks(candidates);
       renderDiscoverBooks(unique);
       discoverState.loaded = true;
+
       const shelfCount = Array.isArray(cloud.books) ? cloud.books.length : 0;
       if (feedback) {
-        if (!successfulQueries) feedback.textContent = 'Não foi possível consultar o Google Books. Confira a implantação e a autorização do Apps Script.';
-        else if (shelfCount) feedback.textContent = `${unique.length} sugestão(ões) selecionadas a partir de ${shelfCount} livro(s) da sua estante. Os resultados são separados por autor e gênero.`;
-        else feedback.textContent = `${unique.length} sugestões para começar a explorar. Adicione livros à estante para personalizar o feed.`;
+        if (shelfCount) {
+          feedback.textContent = `${unique.length} sugestão(ões) encontradas a partir da sua estante. Toque em "Ver mais" para consultar outro autor ou gênero.`;
+        } else {
+          feedback.textContent = `${unique.length} sugestões para começar. Adicione livros à estante para personalizar as próximas recomendações.`;
+        }
       }
     } catch (error) {
       if (requestId !== discoverState.requestId) return;
       console.warn('[Versos & Narrativas] Recomendações:', error);
-      target.innerHTML = '<div class="discover-empty"><span>✧</span> Não foi possível consultar o catálogo. Atualize o Apps Script com a integração Google Books e tente novamente.</div>';
+      target.innerHTML = '<div class="discover-empty"><span>✧</span> Não foi possível consultar o catálogo agora. Tente novamente em instantes.</div>';
       if (feedback) feedback.textContent = error.message || 'Falha ao carregar recomendações.';
     } finally {
       discoverState.loading = false;
@@ -1403,40 +1669,60 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (discoverState.loading) return;
     const queries = discoverState.recommendationQueries || [];
     if (!queries.length) { await loadDiscoverSuggestions(); return; }
+
+    // Pick one unfinished query, without issuing network requests in a loop.
+    let selectedIndex = -1;
+    for (let step = 0; step < queries.length; step++) {
+      const index = (discoverState.recommendationCursor + step) % queries.length;
+      if (!discoverState.recommendationFinished[index]) {
+        selectedIndex = index;
+        break;
+      }
+    }
+    if (selectedIndex < 0) {
+      const feedbackDone = $('#discoverFeedback');
+      if (feedbackDone) feedbackDone.textContent = 'Você explorou todas as recomendações desta seleção. Pesquise outro tema ou autor para continuar descobrindo.';
+      return;
+    }
+
     discoverState.loading = true;
     const button = $('#discoverSeeMore');
     const originalLabel = button?.innerHTML || 'Ver mais ›';
     if (button) { button.disabled = true; button.textContent = 'Buscando...'; }
     const feedback = $('#discoverFeedback');
     const requestId = ++discoverState.requestId;
-    let appended = 0;
+    const planItem = queries[selectedIndex];
+    const startIndex = discoverState.recommendationOffsets[selectedIndex] || 0;
+
     try {
-      for (let attempt = 0; attempt < queries.length * 2 && appended === 0; attempt++) {
-        const index = discoverState.recommendationCursor % queries.length;
-        discoverState.recommendationCursor++;
-        if (discoverState.recommendationFinished[index]) continue;
-        const planItem = queries[index];
-        const startIndex = discoverState.recommendationOffsets[index] || 0;
-        const data = await requestDiscoverCatalog(planItem.query, { maxResults: 8, startIndex, orderBy: 'relevance' });
-        if (requestId !== discoverState.requestId) return;
-        const items = Array.isArray(data.items) ? data.items : [];
-        discoverState.recommendationOffsets[index] = startIndex + items.length;
-        discoverState.recommendationTotals[index] = Number(data.totalItems || items.length);
-        discoverState.recommendationFinished[index] = !items.length || discoverState.recommendationOffsets[index] >= discoverState.recommendationTotals[index];
-        const mapped = items.map(item => {
-          const book = mapGoogleBook(item);
-          book.recommendationLabel = planItem.label;
-          book.recommendationKind = planItem.kind;
-          return book;
-        });
-        const unique = uniqueRecommendedBooks(mapped, discoverState.books);
-        if (unique.length) {
-          renderDiscoverBooks(unique, true);
-          appended = unique.length;
-          if (feedback) feedback.textContent = `Mais ${unique.length} sugestão(ões): ${planItem.label}.`;
-        }
+      // Uma chamada por toque. O próximo autor/gênero só é consultado
+      // quando o usuário pedir mais resultados novamente.
+      const data = await requestDiscoverCatalog(planItem.query, {
+        maxResults: 8, startIndex, orderBy: 'relevance'
+      });
+      if (requestId !== discoverState.requestId) return;
+
+      const items = Array.isArray(data.items) ? data.items : [];
+      discoverState.recommendationOffsets[selectedIndex] = startIndex + items.length;
+      discoverState.recommendationTotals[selectedIndex] = Number(data.totalItems || items.length);
+      discoverState.recommendationFinished[selectedIndex] = !items.length || discoverState.recommendationOffsets[selectedIndex] >= discoverState.recommendationTotals[selectedIndex];
+      discoverState.recommendationCursor = (selectedIndex + 1) % queries.length;
+
+      const mapped = items.map(item => {
+        const book = mapGoogleBook(item);
+        book.recommendationLabel = planItem.label;
+        book.recommendationKind = planItem.kind;
+        return book;
+      });
+      const unique = uniqueRecommendedBooks(mapped, discoverState.books);
+      if (unique.length) {
+        renderDiscoverBooks(unique, true);
+        if (feedback) feedback.textContent = `Mais ${unique.length} sugestão(ões): ${planItem.label}.`;
+      } else if (feedback) {
+        feedback.textContent = items.length
+          ? `Esta página de ${planItem.label} não trouxe livros novos. Toque em "Ver mais" para consultar o próximo tema.`
+          : `Não há mais resultados para ${planItem.label}. Toque em "Ver mais" para consultar o próximo tema.`;
       }
-      if (!appended && feedback) feedback.textContent = 'Não há mais resultados novos nessas recomendações. Experimente outro tema ou faça uma busca.';
     } catch (error) {
       if (feedback) feedback.textContent = error.message || 'Não foi possível carregar mais sugestões.';
     } finally {
