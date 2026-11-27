@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       page.classList.toggle('active', active);
       page.setAttribute('aria-hidden', active ? 'false' : 'true');
     });
-    const navPage = id === 'detalhes-livro' ? detailsReturnPage : id;
+    const navPage = id === 'detalhes-livro' ? detailsReturnPage : (id === 'modulos' ? 'mais' : id);
     $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === navPage));
     $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === navPage));
     document.body.dataset.vpPage = id;
@@ -629,11 +629,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (nav) {
       event.preventDefault();
       if (nav.dataset.openCurrentBook === 'true') {
-        const current = cloud.books.find(book => String(book.status || '').toLowerCase() === 'lendo');
-        if (current) openBook(current); else openPage('estante');
+        const current = cloud.books.find(book => String(book.status || '').toLowerCase() === 'lendo') || cloud.books[0];
+        if (current) openBook(current, nav.dataset.detailTab || 'sobre');
+        else { openPage('estante'); toast('Adicione um livro à sua estante para registrar uma resenha ou citação.'); }
         return;
       }
       openPage(nav.dataset.page);
+      if (nav.dataset.openPlanTab) {
+        const planTab = document.querySelector(`#planningTabs [data-plan-tab="${nav.dataset.openPlanTab}"]`);
+        if (planTab) planTab.click();
+      }
+      if (nav.dataset.estanteFilter) {
+        filter = nav.dataset.estanteFilter;
+        $$('.filter-chip').forEach(chip => {
+          const active = chip.dataset.filter === filter;
+          chip.classList.toggle('active', active);
+          chip.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        renderBooks();
+      }
       document.body.classList.remove('library-menu-open');
     }
   });
@@ -641,6 +655,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   $('#profileSwitch').addEventListener('click', logout);
   $('#changeProfile').addEventListener('click', logout);
   $('#logout').addEventListener('click', logout);
+
+  document.addEventListener('click', event => {
+    const action = event.target.closest('[data-settings-action]');
+    if (!action) return;
+    if (action.dataset.settingsAction === 'about') {
+      const dialog = $('#configAboutDialog');
+      if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+      else toast('Versos & Narrativas — uma biblioteca particular para duas jornadas de leitura.');
+    } else if (action.dataset.settingsAction === 'account') {
+      toast('Esta é a conta ativa. Para alternar entre Fernando e Letícia, use “Trocar conta”.');
+    } else {
+      toast('Este recurso está previsto para uma próxima etapa do aplicativo.');
+    }
+  });
+  document.addEventListener('click', event => {
+    if (event.target.closest('[data-config-close]')) {
+      const dialog = $('#configAboutDialog');
+      if (dialog && dialog.open) dialog.close();
+    }
+  });
 
   function renderBooks() {
     const searchInput = $('#buscarLivro');
@@ -872,12 +906,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (tab) setBookDetailTab(tab);
   }
 
-  function openBook(book) {
+  function openBook(book, initialTab = 'sobre') {
     if (!book) return;
     const currentPage = String(document.body.dataset.vpPage || 'estante');
     if (currentPage !== 'detalhes-livro') detailsReturnPage = ['inicio', 'estante'].includes(currentPage) ? currentPage : 'estante';
     selectedBook = book;
-    activeBookDetailTab = 'sobre';
+    activeBookDetailTab = initialTab || 'sobre';
     openPage('detalhes-livro');
   }
 

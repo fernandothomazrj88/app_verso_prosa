@@ -1,5 +1,5 @@
 {
-  "version": "80",
+  "version": "81",
   "modules": [
     {
       "id": "inicio",
@@ -53,7 +53,7 @@
     {
       "id": "mais",
       "folder": "mais",
-      "title": "Mais",
+      "title": "Configurações",
       "file": "./modules/mais/index.html",
       "target": "moduleHost"
     },
@@ -63,6 +63,13 @@
       "title": "Detalhes do Livro",
       "file": "./modules/detalhes-livro/index.html",
       "target": "overlayModuleHost"
+    },
+    {
+      "id": "modulos",
+      "folder": "modulos",
+      "title": "Módulos",
+      "file": "./modules/modulos/index.html",
+      "target": "moduleHost"
     }
   ]
 }

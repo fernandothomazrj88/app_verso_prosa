@@ -16,12 +16,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=home-v80">
-<link rel="stylesheet" href="./modules/estante/estante.css?v=80">
-<link rel="stylesheet" href="./modules/adicionar-livro/adicionar-livro.css?v=80">
-<link rel="stylesheet" href="./modules/descobrir/descobrir.css?v=80">
- <link rel="stylesheet" href="./modules/planejamento/planejamento.css?v=80">
- <link rel="stylesheet" href="./modules/detalhes-livro/detalhes-livro.css?v=80">
+<link rel="stylesheet" href="./style.css?v=home-v81">
+<link rel="stylesheet" href="./modules/estante/estante.css?v=81">
+<link rel="stylesheet" href="./modules/adicionar-livro/adicionar-livro.css?v=81">
+<link rel="stylesheet" href="./modules/descobrir/descobrir.css?v=81">
+ <link rel="stylesheet" href="./modules/planejamento/planejamento.css?v=81">
+ <link rel="stylesheet" href="./modules/detalhes-livro/detalhes-livro.css?v=81">
+<link rel="stylesheet" href="./modules/configuracoes/configuracoes.css?v=81">
+<link rel="stylesheet" href="./modules/configuracoes/configuracoes.css?v=81">
 </head>
 <body>
 <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -126,6 +128,8 @@
         <button class="nav-item" data-page="descobrir"><span class="nav-glyph"><svg><use href="#vp-compass"/></svg></span>Novas descobertas</button>
         <button class="nav-item" data-page="estudio"><span class="nav-glyph"><svg><use href="#vp-feather"/></svg></span>Ateliê literário</button>
         <button class="nav-item" data-page="calendario"><span class="nav-glyph"><svg><use href="#vp-calendar"/></svg></span>Agenda de leitura</button>
+        <button class="nav-item" data-page="mais"><span class="nav-glyph"><svg><use href="#vp-settings"/></svg></span>Configurações</button>
+        <button class="nav-item" data-page="mais"><span class="nav-glyph"><svg><use href="#vp-settings"/></svg></span>Configurações</button>
       </nav>
       <div class="sidebar-quote"><span>“</span><p>Um livro é um sonho que seguramos nas mãos.</p><small>— Neil Gaiman</small></div>
       <div class="sidebar-profile"><div class="avatar" id="sidebarAvatar">L</div><div><b id="sidebarName">Leitor</b><small>Acervo pessoal</small></div></div>
@@ -141,14 +145,14 @@
     <button class="nav-item active" data-page="estante"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-book-open.png" alt="" aria-hidden="true"><span>Estante</span></button>
     <button class="nav-item nav-add" data-page="adicionar" aria-label="Adicionar livro"><img class="bottom-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
     <button class="nav-item" data-page="descobrir"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
-    <button class="nav-item" data-page="mais"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+    <button class="nav-item" data-page="mais"><img class="bottom-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Config</span></button>
   </nav>
 </section>
 
 <div id="overlayModuleHost"></div>
 <div id="toast" class="toast" role="status"></div>
-<script src="./modules/module-loader.js?v=modular-v80"></script>
-<script src="./app.js?v=modular-v80"></script>
+<script src="./modules/module-loader.js?v=modular-v81"></script>
+<script src="./app.js?v=modular-v81"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.error));}</script>
 </body>
 </html>
