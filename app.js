@@ -36,9 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const LEGACY_SESSION_KEY = 'vp_auth_session';
 
   let session = null;
-  let cloud = { books: [], notes: [], goal: null, readingPlan: null };
+  let cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
   let filter = 'todos';
   let selectedBook = null;
+  let detailsReturnPage = 'estante';
+  let activeBookDetailTab = 'sobre';
 
   function normalizeEmail(value) {
     return String(value || '').trim().toLowerCase();
@@ -230,8 +232,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       page.classList.toggle('active', active);
       page.setAttribute('aria-hidden', active ? 'false' : 'true');
     });
-    $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === id));
-    $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === id));
+    const navPage = id === 'detalhes-livro' ? detailsReturnPage : id;
+    $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.page === navPage));
+    $$('.mock-bottom-nav button[data-page]').forEach(button => button.classList.toggle('active', button.dataset.page === navPage));
     document.body.dataset.vpPage = id;
     // O módulo Descobrir usa um scrollport próprio para não depender da
     // rolagem do documento em WebViews/PWAs. A classe é removida ao sair.
@@ -249,6 +252,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (id === 'descobrir') renderDiscover();
     if (id === 'anotacoes') renderNotes();
     if (id === 'calendario') renderGoal();
+    if (id === 'detalhes-livro') renderBookDetails(activeBookDetailTab);
     return true;
   }
 
@@ -276,7 +280,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       books: Array.isArray(data.books) ? data.books : [],
       notes: Array.isArray(data.notes) ? data.notes : [],
       goal: data.goal || null,
-      readingPlan: data.readingPlan || null
+      readingPlan: data.readingPlan || null,
+      bookDetails: Array.isArray(data.bookDetails) ? data.bookDetails : [],
+      bookEntries: Array.isArray(data.bookEntries) ? data.bookEntries : []
     };
   }
 
@@ -381,7 +387,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!identity) throw new Error('Use o e-mail cadastrado para Fernando ou Letícia.');
 
     // Limpa os dados em memória antes de iniciar outra autenticação.
-    cloud = { books: [], notes: [], goal: null, readingPlan: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
     const result = await api('login', { email: identity.email, senha });
     if (!result.token || !result.user) throw new Error('O servidor não retornou uma sessão válida.');
 
@@ -410,7 +416,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       else toast('Bem-vindo(a), ' + identity.name + '. Sua biblioteca está aberta.');
     } catch (error) {
       saveSession(null);
-      cloud = { books: [], notes: [], goal: null, readingPlan: null };
+      cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
       throw error;
     }
   }
@@ -445,7 +451,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       mensagemAposMigracao(migracao);
     } catch (error) {
       saveSession(null);
-      cloud = { books: [], notes: [], goal: null, readingPlan: null };
+      cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
       document.body.classList.remove('auth-flow');
       app.classList.add('hidden');
       app.style.display = 'none';
@@ -460,7 +466,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function showWelcomeAfterExternalAccountChange() {
     session = null;
-    cloud = { books: [], notes: [], goal: null, readingPlan: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
     app.classList.add('hidden');
     app.style.display = 'none';
     document.body.classList.remove('auth-flow');
@@ -482,7 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function logout() {
     saveSession(null);
-    cloud = { books: [], notes: [], goal: null, readingPlan: null };
+    cloud = { books: [], notes: [], goal: null, readingPlan: null, bookDetails: [], bookEntries: [] };
     app.classList.add('hidden');
     app.style.display = 'none';
     document.body.classList.remove('auth-flow');
@@ -696,7 +702,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       const status = statusKey(book.status || book.situacao);
       const statusLabel = status === 'lidos' ? 'Lido' : status === 'lendo' ? 'Lendo' : status === 'quero-ler' ? 'Quero Ler' : String(book.status || book.situacao || 'No acervo');
       const statusClass = status === 'lidos' ? 'is-read' : status === 'lendo' ? 'is-reading' : status === 'quero-ler' ? 'is-want' : 'is-other';
-      const ratingRaw = Number(book.avaliacao || book.rating || book.estrelas || book.nota || 0);
+      const savedBookDetails = cloud.bookDetails.find(item => String(item.bookId) === String(book.id));
+      const ratingRaw = Number(book.avaliacao || book.rating || book.estrelas || book.nota || savedBookDetails?.rating || 0);
       const rating = Number.isFinite(ratingRaw) ? Math.max(0, Math.min(5, Math.round(ratingRaw))) : 0;
       const stars = Array.from({ length: 5 }, (_, i) => `<span class="${i < rating ? 'is-filled' : ''}">★</span>`).join('');
       const photo = image
@@ -749,51 +756,289 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  function openBook(book) {
-    if (!book) return;
-    selectedBook = book;
-    const image = safeImageUrl(book.capa);
-    const cover = $('#detailCover');
-    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(book.titulo || 'livro')}">` : '<span>V&amp;P</span>';
-    $('#detailTitle').textContent = book.titulo || 'Sem título';
-    $('#detailAuthor').textContent = book.autor || 'Autor não informado';
-    $('#detailGenre').textContent = book.genero || 'Gênero não informado';
-    $('#detailStatus').textContent = String(book.status || 'No acervo').toLocaleUpperCase('pt-BR');
-    const fields = [
-      ['EDITORA', book.editora || 'Não informada'],
-      ['PÁGINAS', book.paginas || 'Não informado'],
-      ['ISBN', book.isbn || 'Não informado'],
-      ['GÊNERO', book.genero || 'Não informado']
-    ];
-    $('#detailMeta').innerHTML = fields.map(([label, value]) => `<div class="meta-item"><small>${label}</small><b>${escapeHtml(value)}</b></div>`).join('');
-    const dialog = $('#bookDialog');
-    if (typeof dialog.showModal === 'function') dialog.showModal();
-    else dialog.setAttribute('open', 'open');
-  }
-
-  $('#homeRecentBooks').addEventListener('click', event => {
-    const button = event.target.closest('[data-home-book-index]');
-    if (!button) return;
-    const index = Number(button.dataset.homeBookIndex);
-    openBook(Number.isInteger(index) ? cloud.books[index] : null);
-  });
-
+  // Abre a ficha completa ao tocar na capa de qualquer livro da Estante.
+  // O índice aponta para cloud.books (não para a lista filtrada), evitando
+  // abrir o exemplar errado quando há busca ou filtros ativos.
   $('#listaLivros').addEventListener('click', event => {
-    const button = event.target.closest('[data-book-index]');
+    const button = event.target.closest('.shelf-grid-book[data-book-index]');
     if (!button) return;
     const index = Number(button.dataset.bookIndex);
-    openBook(Number.isInteger(index) ? cloud.books[index] : null);
+    if (!Number.isInteger(index) || index < 0 || index >= cloud.books.length) return;
+    openBook(cloud.books[index]);
   });
 
-  $('#closeBookDialog').addEventListener('click', () => $('#bookDialog').close());
-  $('#bookDialog').addEventListener('click', event => {
-    if (event.target === $('#bookDialog')) $('#bookDialog').close();
+  function selectedBookDetails() {
+    if (!selectedBook) return {};
+    return cloud.bookDetails.find(item => String(item.bookId) === String(selectedBook.id)) || {};
+  }
+
+  function selectedBookEntries(type) {
+    if (!selectedBook) return [];
+    return cloud.bookEntries.filter(item => String(item.bookId) === String(selectedBook.id) && (!type || item.type === type));
+  }
+
+  function formatBookDate(value) {
+    const text = String(value || '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return text || 'Não registrada';
+    const [year, month, day] = text.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  function renderBookDetailHero() {
+    if (!selectedBook) return;
+    const details = selectedBookDetails();
+    const image = safeImageUrl(selectedBook.capa || selectedBook.cover || '');
+    const cover = $('#detailCover');
+    cover.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="Capa de ${escapeHtml(selectedBook.titulo || 'livro')}">` : '<span>V&amp;N</span>';
+    const imageEl = cover.querySelector('img');
+    if (imageEl) imageEl.addEventListener('error', () => { cover.innerHTML = '<span>V&amp;N</span>'; }, { once: true });
+    $('#detailTitle').textContent = selectedBook.titulo || 'Sem título';
+    $('#detailAuthor').textContent = selectedBook.autor || 'Autor não informado';
+    const status = String(selectedBook.status || 'Quero ler');
+    const statusEl = $('#detailStatus');
+    statusEl.textContent = status.toLocaleUpperCase('pt-BR');
+    statusEl.classList.toggle('is-reading', /lendo|em leitura|andamento/i.test(status));
+    statusEl.classList.toggle('is-want', /quero/i.test(status));
+    const rating = Math.max(0, Math.min(5, Number(details.rating) || 0));
+    $('#detailRating').innerHTML = Array.from({ length: 5 }, (_, index) => {
+      const value = index + 1;
+      return `<button type="button" data-book-rating="${value}" class="${value <= rating ? 'is-filled' : ''}" aria-label="Avaliar com ${value} estrela${value > 1 ? 's' : ''}" title="${value} estrela${value > 1 ? 's' : ''}">${value <= rating ? '★' : '☆'}</button>`;
+    }).join('');
+  }
+
+  function renderBookDetailAbout() {
+    const book = selectedBook || {};
+    const details = selectedBookDetails();
+    const description = String(details.description || book.descricao || book.description || '').trim();
+    $('#detailDescription').textContent = description || 'Ainda não há uma descrição registrada para este exemplar. Você pode acrescentar uma sinopse ou suas próprias observações em Editar livro.';
+    const fields = [
+      ['▣', 'Gênero', book.genero || 'Não informado'],
+      ['▦', 'Concluído em', formatBookDate(details.completedDate)],
+      ['▤', 'Páginas', book.paginas || 'Não informado'],
+      ['▥', 'Editora', book.editora || 'Não informada'],
+      ['◎', 'Idioma', details.language || book.idioma || 'Não informado'],
+      ['◉', 'ISBN', book.isbn || 'Não informado']
+    ];
+    $('#detailMetadata').innerHTML = fields.map(([icon, label, value]) => `
+      <div class="detail-meta-row"><span class="detail-meta-icon" aria-hidden="true">${icon}</span>
+        <div class="detail-meta-copy"><b>${escapeHtml(label)}:</b><span>${escapeHtml(String(value))}</span></div>
+      </div>`).join('');
+  }
+
+  function renderBookDetailEntries() {
+    const notes = selectedBookEntries('anotacao');
+    const quotes = selectedBookEntries('citacao');
+    const renderCards = (items, type) => items.length ? items.map(item => `
+      <article class="detail-entry-card">
+        <button type="button" class="entry-delete" data-entry-delete="${escapeHtml(item.id)}" aria-label="Excluir registro">Excluir ×</button>
+        <small>${type === 'citacao' && item.page ? `Página ${escapeHtml(item.page)} · ` : ''}${escapeHtml(item.date || 'Registro pessoal')}</small>
+        <p>${escapeHtml(item.text || '')}</p>
+      </article>`).join('') : `<div class="detail-empty">${type === 'anotacao' ? 'Você ainda não registrou anotações para este livro.' : 'Nenhuma citação foi guardada para este livro.'}</div>`;
+    $('#bookDetailNotesList').innerHTML = renderCards(notes, 'anotacao');
+    $('#bookDetailQuotesList').innerHTML = renderCards(quotes, 'citacao');
+    const review = selectedBookEntries('resenha')[0];
+    const reviewInput = $('#bookDetailReviewText');
+    if (reviewInput && document.activeElement !== reviewInput) reviewInput.value = review?.text || '';
+    $('#bookDetailReviewFeedback').textContent = review ? `Última atualização: ${review.date || 'registro pessoal'}.` : 'Sua resenha ficará salva somente na sua conta.';
+  }
+
+  function setBookDetailTab(tab) {
+    const allowed = ['sobre', 'anotacoes', 'citacoes', 'resenha'];
+    activeBookDetailTab = allowed.includes(tab) ? tab : 'sobre';
+    $$('#bookDetailTabs [data-book-tab]').forEach(button => {
+      const active = button.dataset.bookTab === activeBookDetailTab;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', String(active));
+    });
+    $$('#detalhes-livro [data-book-panel]').forEach(panel => {
+      const active = panel.dataset.bookPanel === activeBookDetailTab;
+      panel.classList.toggle('active', active);
+      panel.hidden = !active;
+    });
+    const scroller = $('#detalhes-livro .book-details-main');
+    if (scroller) scroller.scrollTop = 0;
+    if (activeBookDetailTab === 'anotacoes' || activeBookDetailTab === 'citacoes' || activeBookDetailTab === 'resenha') renderBookDetailEntries();
+  }
+
+  function renderBookDetails(tab) {
+    if (!selectedBook) {
+      toast('Selecione um livro da sua estante para abrir os detalhes.');
+      openPage(detailsReturnPage || 'estante');
+      return;
+    }
+    renderBookDetailHero();
+    renderBookDetailAbout();
+    renderBookDetailEntries();
+    if (tab) setBookDetailTab(tab);
+  }
+
+  function openBook(book) {
+    if (!book) return;
+    const currentPage = String(document.body.dataset.vpPage || 'estante');
+    if (currentPage !== 'detalhes-livro') detailsReturnPage = ['inicio', 'estante'].includes(currentPage) ? currentPage : 'estante';
+    selectedBook = book;
+    activeBookDetailTab = 'sobre';
+    openPage('detalhes-livro');
+  }
+
+  $('#detailBackButton').addEventListener('click', () => openPage(detailsReturnPage || 'estante'));
+  $('#detailEditButton').addEventListener('click', () => {
+    if (!selectedBook) return;
+    const details = selectedBookDetails();
+    $('#detailEditTitle').value = selectedBook.titulo || '';
+    $('#detailEditAuthor').value = selectedBook.autor || '';
+    $('#detailEditGenre').value = selectedBook.genero || '';
+    $('#detailEditStatus').value = selectedBook.status || 'Quero ler';
+    $('#detailEditPublisher').value = selectedBook.editora || '';
+    $('#detailEditPages').value = selectedBook.paginas || '';
+    $('#detailEditLanguage').value = details.language || '';
+    $('#detailEditCompleted').value = details.completedDate || '';
+    $('#detailEditIsbn').value = selectedBook.isbn || '';
+    $('#detailEditCover').value = selectedBook.capa || '';
+    $('#detailEditDescription').value = details.description || '';
+    $('#detailEditFeedback').textContent = '';
+    $('#detailEditDialog').showModal();
   });
-  $('#detailNoteButton').addEventListener('click', () => {
-    if (selectedBook) $('#noteBook').value = selectedBook.titulo || '';
-    $('#bookDialog').close();
-    openPage('anotacoes');
-    $('#noteText').focus();
+  $('#detailEditForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!selectedBook || !session?.token) return;
+    const button = event.currentTarget.querySelector('button[type="submit"]');
+    button.disabled = true;
+    const details = {
+      description: $('#detailEditDescription').value.trim(),
+      language: $('#detailEditLanguage').value.trim(),
+      completedDate: $('#detailEditCompleted').value,
+      rating: Number(selectedBookDetails().rating) || 0
+    };
+    const updatedBook = {
+      id: selectedBook.id,
+      titulo: $('#detailEditTitle').value.trim(),
+      autor: $('#detailEditAuthor').value.trim(),
+      genero: $('#detailEditGenre').value.trim(),
+      status: $('#detailEditStatus').value,
+      editora: $('#detailEditPublisher').value.trim(),
+      paginas: $('#detailEditPages').value,
+      idioma: details.language,
+      isbn: $('#detailEditIsbn').value.trim(),
+      capa: $('#detailEditCover').value.trim()
+    };
+    try {
+      const saved = await api('saveBook', { token: session.token, book: updatedBook, details });
+      cloud.books = cloud.books.map(book => String(book.id) === String(saved.book.id) ? saved.book : book);
+      cloud.bookDetails = cloud.bookDetails.filter(item => String(item.bookId) !== String(saved.book.id));
+      if (saved.details) cloud.bookDetails.push(saved.details);
+      selectedBook = saved.book;
+      $('#detailEditDialog').close();
+      renderBookDetails(activeBookDetailTab);
+      renderBooks();
+      renderHome();
+      toast('Ficha do livro atualizada.');
+    } catch (error) {
+      $('#detailEditFeedback').textContent = error.message || 'Não foi possível salvar as alterações.';
+    } finally { button.disabled = false; }
+  });
+
+  $('#bookDetailTabs').addEventListener('click', event => {
+    const button = event.target.closest('[data-book-tab]');
+    if (button) setBookDetailTab(button.dataset.bookTab);
+  });
+
+  async function saveCurrentBookEntry(type, text, extra = {}) {
+    if (!selectedBook || !session?.token) throw new Error('Entre novamente para guardar este registro.');
+    const result = await api('saveBookEntry', { token: session.token, entry: {
+      bookId: selectedBook.id, type, text, page: extra.page || ''
+    }});
+    if (type === 'resenha') {
+      cloud.bookEntries = cloud.bookEntries.filter(item => !(String(item.bookId) === String(selectedBook.id) && item.type === 'resenha'));
+    }
+    cloud.bookEntries.unshift(result.entry);
+    renderBookDetailEntries();
+    return result.entry;
+  }
+
+  $('#bookDetailNoteForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const textarea = $('#bookDetailNoteText');
+    const text = textarea.value.trim();
+    if (!text) return;
+    const button = event.currentTarget.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      await saveCurrentBookEntry('anotacao', text);
+      textarea.value = '';
+      toast('Anotação guardada na ficha deste livro.');
+      renderNotes();
+    } catch (error) { toast(error.message || 'Não foi possível guardar a anotação.'); }
+    finally { button.disabled = false; }
+  });
+
+  $('#bookDetailQuoteForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const textarea = $('#bookDetailQuoteText');
+    const text = textarea.value.trim();
+    if (!text) return;
+    const button = event.currentTarget.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      await saveCurrentBookEntry('citacao', text, { page: $('#bookDetailQuotePage').value.trim() });
+      textarea.value = '';
+      $('#bookDetailQuotePage').value = '';
+      toast('Citação guardada na ficha deste livro.');
+    } catch (error) { toast(error.message || 'Não foi possível guardar a citação.'); }
+    finally { button.disabled = false; }
+  });
+
+  $('#bookDetailReviewForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const text = $('#bookDetailReviewText').value.trim();
+    if (!text) return;
+    const button = event.currentTarget.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      await saveCurrentBookEntry('resenha', text);
+      $('#bookDetailReviewFeedback').textContent = 'Resenha salva na sua biblioteca pessoal.';
+      toast('Resenha guardada.');
+    } catch (error) { $('#bookDetailReviewFeedback').textContent = error.message || 'Não foi possível salvar a resenha.'; }
+    finally { button.disabled = false; }
+  });
+
+  $('#detailRating').addEventListener('click', async event => {
+    const button = event.target.closest('[data-book-rating]');
+    if (!button || !selectedBook || !session?.token) return;
+    const rating = Number(button.dataset.bookRating);
+    const current = selectedBookDetails();
+    try {
+      const result = await api('saveBookDetails', { token: session.token, bookId: selectedBook.id, details: {
+        description: current.description || '', language: current.language || '', completedDate: current.completedDate || '', rating
+      }});
+      cloud.bookDetails = cloud.bookDetails.filter(item => String(item.bookId) !== String(selectedBook.id));
+      cloud.bookDetails.push(result.details);
+      renderBookDetailHero();
+      toast(`Avaliação registrada: ${rating} de 5 estrelas.`);
+    } catch (error) { toast(error.message || 'Não foi possível salvar a avaliação.'); }
+  });
+
+  $('#detalhes-livro').addEventListener('click', async event => {
+    const button = event.target.closest('[data-entry-delete]');
+    if (!button || !session?.token) return;
+    const id = button.dataset.entryDelete;
+    button.disabled = true;
+    try {
+      await api('deleteBookEntry', { token: session.token, entryId: id });
+      cloud.bookEntries = cloud.bookEntries.filter(item => String(item.id) !== String(id));
+      renderBookDetailEntries();
+      renderNotes();
+      toast('Registro removido.');
+    } catch (error) { toast(error.message || 'Não foi possível remover o registro.'); }
+    finally { button.disabled = false; }
+  });
+
+  $$('[data-dialog-close]').forEach(button => button.addEventListener('click', () => {
+    const dialog = document.getElementById(button.dataset.dialogClose);
+    if (dialog) dialog.close();
+  }));
+  $('#detailEditDialog').addEventListener('click', event => {
+    if (event.target === $('#detailEditDialog')) $('#detailEditDialog').close();
   });
 
   $('#bookForm').addEventListener('submit', async event => {
@@ -813,11 +1058,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       capa: String(values.get('capa') || '').trim(),
       status: String(values.get('status') || 'Quero ler')
     };
+    const bookDescription = String(values.get('descricao') || '').trim();
+    const bookLanguage = String(values.get('idioma') || '').trim();
     button.disabled = true;
     button.textContent = 'Guardando exemplar…';
     try {
-      const result = await api('saveBook', { token: session.token, book });
+      const result = await api('saveBook', {
+        token: session.token, book,
+        details: (bookDescription || bookLanguage) ? { description: bookDescription, language: bookLanguage, completedDate: '', rating: 0 } : null
+      });
       cloud.books.unshift(result.book);
+      if (result.details) cloud.bookDetails.push(result.details);
       if (typeof discoverState !== 'undefined') discoverState.loaded = false;
       form.reset();
       renderHome();
@@ -973,6 +1224,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     $('#bookForm [name="paginas"]').value = info.pageCount || '';
     $('#bookForm [name="isbn"]').value = identifier?.identifier || '';
     $('#addBookCoverUrl').value = coverFromGoogleBooks(info);
+    $('#addBookDescription').value = info.description || '';
+    $('#addBookLanguage').value = info.language || '';
     refreshAddBookCoverPreview();
     setAddBookMode('manual');
     toast('Dados encontrados. Confira a ficha e salve o livro.');
@@ -1025,8 +1278,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function renderNotes() {
     const target = $('#notesList');
-    target.innerHTML = cloud.notes.length
-      ? cloud.notes.map(note => `<article class="note-item"><b>${escapeHtml(note.book || 'Anotação livre')}</b><small> · ${escapeHtml(note.date || 'Registro pessoal')}</small><p>${escapeHtml(note.text || '')}</p></article>`).join('')
+    const bookNotes = (cloud.bookEntries || []).filter(entry => entry.type === 'anotacao');
+    const allNotes = [
+      ...cloud.notes.map(note => ({ book: note.book, date: note.date, text: note.text })),
+      ...bookNotes.map(note => ({ book: note.bookTitle, date: note.date, text: note.text }))
+    ].sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    target.innerHTML = allNotes.length
+      ? allNotes.map(note => `<article class="note-item"><b>${escapeHtml(note.book || 'Anotação livre')}</b><small> · ${escapeHtml(note.date || 'Registro pessoal')}</small><p>${escapeHtml(note.text || '')}</p></article>`).join('')
       : '<p class="muted">Seu caderno ainda está em branco. A primeira anotação pode começar aqui.</p>';
   }
 

@@ -1,12 +1,104 @@
-<!-- Versos & Narrativas | Módulo: Detalhes do Livro -->
-<dialog id="bookDialog" class="book-dialog">
-  <div class="dialog-top"><span class="eyebrow">DETALHES DO LIVRO</span><button type="button" class="dialog-close" id="closeBookDialog" aria-label="Fechar">×</button></div>
-  <div class="book-detail">
-    <div class="detail-cover" id="detailCover"><span>V&amp;P</span></div>
-    <div class="detail-main"><span class="status-label" id="detailStatus">NO ACERVO</span><h2 id="detailTitle">Título do livro</h2><p id="detailAuthor" class="detail-author">Autor</p><p id="detailGenre" class="detail-genre"></p></div>
-  </div>
-  <div class="detail-rule"></div>
-  <div class="detail-meta" id="detailMeta"></div>
-  <p class="detail-note">Este exemplar faz parte da sua biblioteca particular. Abra o caderno para registrar impressões, perguntas e passagens marcantes.</p>
-  <button class="primary" id="detailNoteButton">Escrever no caderno sobre este livro</button>
+<!-- VERSOS & NARRATIVAS | Módulo Detalhes do Livro | v80 -->
+<section id="detalhes-livro" class="page book-details-page" aria-label="Detalhes do Livro">
+  <header class="shelf-module-header details-module-header" aria-label="Detalhes do Livro">
+    <span class="shelf-header-lamp shelf-header-lamp-left" aria-hidden="true"></span>
+    <span class="shelf-header-lamp shelf-header-lamp-right" aria-hidden="true"></span>
+    <img class="shelf-module-home-emblem" src="./assets/brand/verso-prosa-home-emblem.png" alt="" aria-hidden="true">
+    <h1>Detalhes do Livro</h1>
+    <span class="shelf-module-divider" aria-hidden="true"></span>
+  </header>
+
+  <main class="book-details-main">
+    <div class="book-detail-toolbar">
+      <button type="button" id="detailBackButton" class="detail-back-button" aria-label="Voltar para a biblioteca" title="Voltar">‹</button>
+      <span>FICHA DO EXEMPLAR</span>
+      <button type="button" id="detailEditButton" class="detail-edit-button" aria-label="Editar livro" title="Editar livro">✎</button>
+    </div>
+
+    <section class="book-detail-hero" aria-label="Identificação do livro">
+      <div class="book-detail-cover" id="detailCover"><span>V&amp;N</span></div>
+      <div class="book-detail-summary">
+        <h2 id="detailTitle">Título do livro</h2>
+        <p id="detailAuthor" class="book-detail-author">Autor</p>
+        <span id="detailStatus" class="book-detail-status">QUERO LER</span>
+        <div id="detailRating" class="book-detail-rating" role="group" aria-label="Avaliação do livro"></div>
+      </div>
+    </section>
+
+    <nav class="book-detail-tabs" id="bookDetailTabs" role="tablist" aria-label="Seções da ficha do livro">
+      <button type="button" class="active" data-book-tab="sobre" role="tab" aria-selected="true">Sobre</button>
+      <button type="button" data-book-tab="anotacoes" role="tab" aria-selected="false">Anotações</button>
+      <button type="button" data-book-tab="citacoes" role="tab" aria-selected="false">Citações</button>
+      <button type="button" data-book-tab="resenha" role="tab" aria-selected="false">Resenha</button>
+    </nav>
+
+    <div class="book-detail-panels">
+      <section class="book-detail-panel active" data-book-panel="sobre" role="tabpanel" aria-label="Sobre o livro">
+        <p id="detailDescription" class="book-detail-description">As informações deste exemplar aparecerão aqui.</p>
+        <div class="detail-ornament-rule" aria-hidden="true"></div>
+        <div id="detailMetadata" class="book-detail-metadata"></div>
+      </section>
+
+      <section class="book-detail-panel" data-book-panel="anotacoes" role="tabpanel" aria-label="Anotações do livro" hidden>
+        <div class="detail-section-intro"><h3>Minhas anotações</h3><p>Registre ideias, impressões e perguntas relacionadas a esta leitura.</p></div>
+        <form id="bookDetailNoteForm" class="detail-entry-form">
+          <label for="bookDetailNoteText">Nova anotação</label>
+          <textarea id="bookDetailNoteText" rows="4" maxlength="4000" placeholder="O que esta passagem fez você pensar?" required></textarea>
+          <button type="submit" class="detail-primary-button">＋ Guardar anotação</button>
+        </form>
+        <div id="bookDetailNotesList" class="detail-entry-list" aria-live="polite"></div>
+      </section>
+
+      <section class="book-detail-panel" data-book-panel="citacoes" role="tabpanel" aria-label="Citações do livro" hidden>
+        <div class="detail-section-intro"><h3>Passagens marcantes</h3><p>Guarde trechos importantes e, quando possível, indique a página.</p></div>
+        <form id="bookDetailQuoteForm" class="detail-entry-form">
+          <label for="bookDetailQuoteText">Citação</label>
+          <textarea id="bookDetailQuoteText" rows="4" maxlength="4000" placeholder="Escreva ou transcreva a passagem..." required></textarea>
+          <label for="bookDetailQuotePage">Página (opcional)</label>
+          <input id="bookDetailQuotePage" type="text" maxlength="40" placeholder="Ex.: 125">
+          <button type="submit" class="detail-primary-button">＋ Guardar citação</button>
+        </form>
+        <div id="bookDetailQuotesList" class="detail-entry-list" aria-live="polite"></div>
+      </section>
+
+      <section class="book-detail-panel" data-book-panel="resenha" role="tabpanel" aria-label="Resenha do livro" hidden>
+        <div class="detail-section-intro"><h3>Minha resenha</h3><p>Escreva sua avaliação pessoal sobre a obra. O texto fica privado na sua biblioteca.</p></div>
+        <form id="bookDetailReviewForm" class="detail-entry-form">
+          <label for="bookDetailReviewText">Sua resenha</label>
+          <textarea id="bookDetailReviewText" rows="10" maxlength="20000" placeholder="O que você pensa sobre este livro? Que ideias, temas e personagens marcaram sua leitura?" required></textarea>
+          <button type="submit" class="detail-primary-button">Salvar resenha</button>
+          <p id="bookDetailReviewFeedback" class="detail-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <nav class="mock-bottom-nav book-detail-bottom-nav" aria-label="Navegação principal">
+    <button data-page="inicio"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-home-arch.png" alt="" aria-hidden="true"><span>Início</span></button>
+    <button data-page="estante"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-bookshelf.png" alt="" aria-hidden="true"><span>Estante</span></button>
+    <button class="mock-add-main" data-page="adicionar" aria-label="Adicionar livro"><img class="home-nav-plus-icon" src="./assets/icons/home-classic/3d-plus-medallion.png" alt="" aria-hidden="true"></button>
+    <button data-page="descobrir"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-magnifier.png" alt="" aria-hidden="true"><span>Descobrir</span></button>
+    <button data-page="mais"><img class="home-nav-icon" src="./assets/icons/home-classic/3d-sliders.png" alt="" aria-hidden="true"><span>Mais</span></button>
+  </nav>
+</section>
+
+<dialog id="detailEditDialog" class="book-edit-dialog">
+  <form id="detailEditForm" method="dialog">
+    <div class="detail-edit-heading"><div><small>FICHA DO EXEMPLAR</small><h2>Editar livro</h2></div><button type="button" class="detail-dialog-close" data-dialog-close="detailEditDialog" aria-label="Fechar">×</button></div>
+    <label>Título<input id="detailEditTitle" maxlength="180" required></label>
+    <label>Autor(a)<input id="detailEditAuthor" maxlength="140"></label>
+    <div class="detail-edit-grid">
+      <label>Gênero<input id="detailEditGenre" maxlength="100"></label>
+      <label>Status<select id="detailEditStatus"><option>Quero ler</option><option>Lendo</option><option>Lido</option></select></label>
+      <label>Editora<input id="detailEditPublisher" maxlength="120"></label>
+      <label>Páginas<input id="detailEditPages" type="number" min="1" max="100000"></label>
+      <label>Idioma<input id="detailEditLanguage" maxlength="80" placeholder="Ex.: Português"></label>
+      <label>Concluído em<input id="detailEditCompleted" type="date"></label>
+    </div>
+    <label>ISBN<input id="detailEditIsbn" maxlength="30"></label>
+    <label>Endereço da capa<input id="detailEditCover" type="url" placeholder="https://..."></label>
+    <label>Descrição<textarea id="detailEditDescription" rows="4" maxlength="6000" placeholder="Sinopse ou descrição da obra..."></textarea></label>
+    <button type="submit" class="detail-primary-button">Salvar alterações</button>
+    <p id="detailEditFeedback" class="detail-feedback" role="status" aria-live="polite"></p>
+  </form>
 </dialog>
