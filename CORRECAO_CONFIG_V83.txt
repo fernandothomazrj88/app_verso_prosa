@@ -1,0 +1,11 @@
+VERSOS & NARRATIVAS — V83
+
+Ajuste visual do módulo Configurações a partir da referência fornecida pelo usuário.
+
+- Cabeçalho full-width com a mesma cena de biblioteca, emblema de livro e pena, luminárias e ornamento dos módulos Home/Minha Estante.
+- Menu inferior próprio com os mesmos ícones, dimensões e cores da Minha Estante; Config é o item ativo.
+- Remove a barra interna de perfil e a sidebar/topbar quando Config está aberto.
+- Cartões em quatro colunas, com fundo escuro, contorno dourado luminoso, ícones maiores e títulos de seção serifados.
+- Preserva as cinco seções e o botão Módulos.
+- Nenhuma alteração no backend, planilha, autenticação ou Descobrir.
+- Cache e registro de módulos atualizados para V83.
