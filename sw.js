@@ -1,4 +1,4 @@
-const CACHE_NAME = 'versos-narrativas-v83';
+const CACHE_NAME = 'versos-narrativas-v84';
 const APP_FILES = [
   './',
   './index.html',
@@ -57,14 +57,14 @@ const APP_FILES = [
   './assets/scenes/login-library-bg-v5.webp',
   './assets/login-emblem-gold-v5.png',
   './assets/scenes/login-bottom-approved-v6.webp',
-  './style.css?v=home-v83',
+  './style.css?v=home-v84',
   './modules/descobrir/descobrir.css?v=80',
   './modules/estante/estante.css?v=80',
   './modules/adicionar-livro/adicionar-livro.css?v=80',
   './modules/planejamento/planejamento.css?v=80',
   './modules/detalhes-livro/detalhes-livro.css?v=80',
-  './app.js?v=modular-v83',
-  './modules/module-loader.js?v=modular-v83',
+  './app.js?v=modular-v84',
+  './modules/module-loader.js?v=modular-v84',
   './modules/registry.json',
   './modules/home/index.html',
   './modules/estante/index.html',
@@ -76,7 +76,7 @@ const APP_FILES = [
   './modules/mais/index.html',
   './modules/detalhes-livro/index.html',
   './modules/modulos/index.html',
-  './modules/configuracoes/configuracoes.css?v=83'
+  './modules/configuracoes/configuracoes.css?v=84'
 ];
 
 self.addEventListener('install', event => {

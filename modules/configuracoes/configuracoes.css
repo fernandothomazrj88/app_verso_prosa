@@ -200,3 +200,22 @@
   #mais .config-tile-icon { width:30px !important; height:30px !important; }
   #mais .config-section h3 { font-size:18px !important; }
 }
+
+/* V84 — Dock da Config fixo na base da janela, sem faixa vazia abaixo. */
+#app.app-shell:has(#mais.active) {
+  padding-bottom: 0 !important;
+  min-height: 100svh !important;
+}
+#app:has(#mais.active) #mais .mock-bottom-nav {
+  position: fixed !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 0 !important;
+  transform: translateX(-50%) !important;
+  width: min(100%, 520px) !important;
+  margin: 0 !important;
+  z-index: 120 !important;
+}
+#mais .config-main-content {
+  padding-bottom: calc(92px + env(safe-area-inset-bottom)) !important;
+}
