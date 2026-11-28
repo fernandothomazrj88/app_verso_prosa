@@ -71,3 +71,26 @@
   .config-tile { min-height:108px; font-size:11px; }
   .available-module-card { padding:9px; }
 }
+
+
+/* V82 — fidelidade ao mockup aprovado: grade de quatro colunas e cabeçalho limpo */
+#mais .config-page-heading .eyebrow,
+#mais .config-page-heading .muted { display:none !important; }
+#mais .config-page-heading { margin:0 0 20px !important; }
+#mais .config-profile-card { display:none !important; }
+#mais .config-section { margin:20px 0 24px !important; }
+#mais .config-section h3 { font-size:clamp(19px,4.8vw,27px) !important; margin-bottom:10px !important; }
+#mais .config-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:9px !important; }
+#mais .config-tile { min-height:112px !important; padding:9px 4px 11px !important; border-width:2px !important; border-radius:16px !important; font-size:clamp(10px,2.5vw,14px) !important; gap:6px !important; }
+#mais .config-tile-icon { width:35px !important; height:35px !important; }
+#mais .config-tile-icon svg { width:33px !important; height:33px !important; }
+#mais .config-modules-entry { margin:18px 0 30px !important; }
+#mais .modules-launch-card { min-height:66px !important; margin:0 !important; border-radius:18px !important; }
+@media (max-width:680px) {
+  #mais .config-grid { grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:7px !important; }
+  #mais .config-tile { min-height:100px !important; padding:8px 3px 9px !important; font-size:10px !important; border-radius:14px !important; }
+  #mais .config-tile-icon { width:31px !important; height:31px !important; }
+  #mais .config-tile-icon svg { width:29px !important; height:29px !important; }
+  #mais .config-section { margin:18px 0 21px !important; }
+  #mais .config-section h3 { font-size:18px !important; }
+}

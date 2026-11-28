@@ -2,9 +2,7 @@
 <section id="mais" class="page config-page" aria-label="Configurações">
   <header class="page-heading config-page-heading">
     <img class="page-heading-emblem" src="./assets/login-emblem-approved-v6.png" alt="" aria-hidden="true">
-    <p class="eyebrow">A CHAVE DA SUA BIBLIOTECA</p>
     <h2>Configurações</h2>
-    <p class="muted">Sua conta, sua biblioteca e suas preferências.</p>
   </header>
 
   <section class="config-profile-card" aria-label="Conta atual">
@@ -16,13 +14,7 @@
     <button type="button" class="config-link-button" id="changeProfile">Trocar conta</button>
   </section>
 
-  <button type="button" class="modules-launch-card" data-page="modulos">
-    <span class="modules-launch-icon" aria-hidden="true">
-      <svg viewBox="0 0 48 48"><rect x="4" y="4" width="17" height="17" rx="2"/><rect x="27" y="4" width="17" height="17" rx="2"/><rect x="4" y="27" width="17" height="17" rx="2"/><rect x="27" y="27" width="17" height="17" rx="2"/></svg>
-    </span>
-    <span class="modules-launch-copy"><b>Módulos</b><small>Todos os módulos disponíveis na sua biblioteca</small></span>
-    <span class="modules-launch-arrow" aria-hidden="true">›</span>
-  </button>
+
 
   <section class="config-section" aria-labelledby="config-account-title">
     <h3 id="config-account-title"><span class="config-section-symbol">⚙</span> Minha Conta</h3>
@@ -72,6 +64,16 @@
       <button type="button" class="config-tile is-upcoming" data-settings-action="soon"><span class="config-tile-icon"><svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6Z"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span>Privacidade<br>e Dados</span><small class="config-soon">Em breve</small></button>
       <button type="button" class="config-tile config-logout-tile" id="logout"><span class="config-tile-icon"><svg viewBox="0 0 24 24"><path d="M10 4H4v16h6M14 8l5 4-5 4m5-4H8"/></svg></span><span>Sair da<br>Conta</span></button>
     </div>
+  </section>
+
+  <section class="config-modules-entry" aria-label="Diretório de módulos">
+  <button type="button" class="modules-launch-card" data-page="modulos">
+    <span class="modules-launch-icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48"><rect x="4" y="4" width="17" height="17" rx="2"/><rect x="27" y="4" width="17" height="17" rx="2"/><rect x="4" y="27" width="17" height="17" rx="2"/><rect x="27" y="27" width="17" height="17" rx="2"/></svg>
+    </span>
+    <span class="modules-launch-copy"><b>Módulos</b><small>Todos os módulos disponíveis na sua biblioteca</small></span>
+    <span class="modules-launch-arrow" aria-hidden="true">›</span>
+  </button>
   </section>
 
   <dialog id="configAboutDialog" class="config-dialog">
